@@ -3,7 +3,7 @@ const bioData = {
     name: "Nhật Huy",
     bio: "ung dung.",
     avatar: "images/Huy.png",
-    shareUrl: ""
+    shareUrl: "window.location.href"
   },
   tabs: {
     social: [
