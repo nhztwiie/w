@@ -1,493 +1,378 @@
 <!DOCTYPE html>
-<html lang="vi" class="light">
+<html lang="vi" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nhật Huy | Bio Links</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts: Be Vietnam Pro for clean Vietnamese typography -->
+    <title>Bio Link - Nhật Huy</title>
+    <!-- Font chữ Inter thanh lịch -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Be Vietnam Pro"', 'sans-serif'],
-                    },
-                    colors: {
-                        pastel: {
-                            pink: '#FDE2E4',
-                            blue: '#E2ECE9',
-                            purple: '#E8E8E4',
-                            lavender: '#E2E2FF',
-                            softYellow: '#FFF1E6',
-                            cardBg: 'rgba(255, 255, 255, 0.85)',
-                            darkBg: '#0f172a',
-                            darkCard: 'rgba(30, 41, 59, 0.7)',
-                        }
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                        'bounce-subtle': 'bounceSubtle 2s infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0', transform: 'translateY(15px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        bounceSubtle: {
-                            '0%, 100%': { transform: 'translateY(-3%)' },
-                            '50%': { transform: 'translateY(0)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Thư viện QRCodeJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
     <style>
-        /* Custom background gradient animations */
+        :root[data-theme="light"] {
+            --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 50%, #f3e8ff 100%);
+            --card-bg: rgba(255, 255, 255, 0.75);
+            --card-border: rgba(255, 255, 255, 0.8);
+            --text-color: #2d3748;
+            --text-sub: #718096;
+            --btn-bg: rgba(255, 255, 255, 0.85);
+            --btn-hover-bg: #ffffff;
+            --btn-border: rgba(226, 232, 240, 0.8);
+            --shadow-color: rgba(148, 163, 184, 0.12);
+            --shadow-hover: rgba(148, 163, 184, 0.25);
+            --modal-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        :root[data-theme="dark"] {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #1e293b 100%);
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-color: #f8fafc;
+            --text-sub: #94a3b8;
+            --btn-bg: rgba(30, 41, 59, 0.8);
+            --btn-hover-bg: rgba(51, 65, 85, 0.9);
+            --btn-border: rgba(255, 255, 255, 0.08);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --shadow-hover: rgba(0, 0, 0, 0.5);
+            --modal-bg: rgba(30, 41, 59, 0.95);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
         body {
-            font-family: 'Be Vietnam Pro', sans-serif;
-            transition: background-color 0.4s ease, color 0.4s ease;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--text-color);
         }
 
-        .bg-pastel-gradient {
-            background: linear-[#fbcfe8]/20, #e0e7ff/30;
-            background-image: radial-gradient(at 0% 0%, rgba(254, 205, 211, 0.6) 0px, transparent 50%),
-                              radial-gradient(at 100% 0%, rgba(224, 231, 255, 0.8) 0px, transparent 50%),
-                              radial-gradient(at 100% 100%, rgba(243, 232, 255, 0.7) 0px, transparent 50%),
-                              radial-gradient(at 0% 100%, rgba(207, 250, 254, 0.6) 0px, transparent 50%);
+        /* Container Chính */
+        .container {
+            width: 100%;
+            max-width: 420px;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 28px;
+            padding: 32px 24px;
+            box-shadow: 0 20px 40px var(--shadow-color);
+            position: relative;
+            animation: fadeIn 0.8s ease-out;
         }
 
-        .dark .bg-pastel-gradient {
-            background-color: #0f172a;
-            background-image: radial-gradient(at 0% 0%, rgba(30, 41, 59, 0.8) 0px, transparent 50%),
-                              radial-gradient(at 100% 0%, rgba(15, 23, 42, 0.9) 0px, transparent 50%),
-                              radial-gradient(at 50% 50%, rgba(51, 65, 85, 0.4) 0px, transparent 50%);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .glass-card {
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        /* Thanh Công Cụ Nút Bấm Top */
+        .top-tools {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
         }
 
-        /* Hover card interactive transform */
+        .tool-btn {
+            background: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            color: var(--text-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px var(--shadow-color);
+        }
+
+        .tool-btn:hover {
+            transform: scale(1.08);
+            background: var(--btn-hover-bg);
+        }
+
+        /* Avatar & Profile */
+        .profile {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 28px;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 16px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--btn-hover-bg);
+            box-shadow: 0 8px 20px var(--shadow-color);
+        }
+
+        .profile-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            margin-bottom: 4px;
+        }
+
+        .profile-bio {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            font-weight: 400;
+        }
+
+        /* Danh Sách Khung Nút Bấm Link */
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
         .link-card {
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            align-items: center;
+            padding: 12px 18px;
+            background: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            border-radius: 50px; /* Bo tròn hoàn toàn các góc */
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            position: relative;
+            overflow: hidden;
         }
-        
+
         .link-card:hover {
-            transform: translateY(-4px) scale(1.015);
+            transform: translateY(-3px);
+            background: var(--btn-hover-bg);
+            box-shadow: 0 8px 20px var(--shadow-hover);
         }
 
-        /* Custom Toast Notification */
-        #toast {
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        .app-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background: #fff;
+            padding: 2px;
         }
 
-        /* Modal backdrop transition */
+        .link-title {
+            flex: 1;
+        }
+
+        .arrow-icon {
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-right: 4px;
+        }
+
+        .link-card:hover .arrow-icon {
+            opacity: 1;
+            transform: translateX(3px);
+        }
+
+        /* Pop-up Modal QR Code */
         .modal {
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: var(--modal-bg);
+            border: 1px solid var(--card-border);
+            padding: 28px;
+            border-radius: 24px;
+            text-align: center;
+            max-width: 320px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--text-sub);
+            cursor: pointer;
+        }
+
+        #qrcode {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            padding: 12px;
+            background: #ffffff;
+            border-radius: 16px;
+        }
+
+        .footer-text {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-sub);
         }
     </style>
 </head>
+<body>
 
-<body class="bg-pastel-gradient min-h-screen text-slate-800 dark:text-slate-100 flex flex-col items-center justify-between p-4 sm:p-6 relative selection:bg-pink-300 selection:text-slate-800">
-
-    <header class="w-full max-w-md flex justify-between items-center py-2 px-1 z-10 animate-fade-in">
-        <div class="text-xs font-semibold px-3 py-1.5 rounded-full bg-white/60 dark:bg-slate-800/60 glass-card border border-white/40 dark:border-slate-700/50 shadow-sm text-slate-600 dark:text-slate-300 flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span>Welcome to my Bio</span>
-        </div>
-
-        <div class="flex items-center gap-2">
-            <!-- Image Customizer Trigger Button -->
-            <button onclick="openImageModal()" title="Thay đổi hình ảnh" class="w-10 h-10 rounded-full bg-white/70 dark:bg-slate-800/70 glass-card border border-white/50 dark:border-slate-700/50 shadow-sm flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-pink-500 hover:scale-110 active:scale-95 transition-all">
-                <i class="fa-solid fa-image text-sm"></i>
+    <div class="container">
+        <!-- Nút Công Cụ Top -->
+        <div class="top-tools">
+            <button class="tool-btn" id="qrBtn" title="Chia sẻ Mã QR">
+                <i class="fa-solid fa-qrcode"></i>
             </button>
-
-            <!-- QR Code Button -->
-            <button onclick="openQrModal()" title="Mã QR trang web" class="w-10 h-10 rounded-full bg-white/70 dark:bg-slate-800/70 glass-card border border-white/50 dark:border-slate-700/50 shadow-sm flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-indigo-500 hover:scale-110 active:scale-95 transition-all">
-                <i class="fa-solid fa-qrcode text-sm"></i>
-            </button>
-
-            <!-- Light/Dark Mode Switcher -->
-            <button id="themeToggle" title="Chuyển chế độ Sáng/Tối" class="w-10 h-10 rounded-full bg-white/70 dark:bg-slate-800/70 glass-card border border-white/50 dark:border-slate-700/50 shadow-sm flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-amber-500 hover:scale-110 active:scale-95 transition-all">
-                <i id="themeIcon" class="fa-solid fa-sun text-sm"></i>
-            </button>
-        </div>
-    </header>
-
-    <main class="w-full max-w-md my-auto flex flex-col items-center py-6 z-10">
-        
-        <!-- Profile Avatar Container -->
-        <div class="relative group mb-4 animate-fade-in" style="animation-delay: 0.1s;">
-            <!-- Subtle glowing pastel ring behind avatar -->
-            <div class="absolute -inset-1.5 rounded-full bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300 dark:from-pink-600 dark:via-purple-600 dark:to-indigo-600 opacity-70 blur-md group-hover:opacity-100 transition duration-500"></div>
-            
-            <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden p-1 bg-white dark:bg-slate-800 shadow-md">
-                <img id="profileAvatar" 
-                     src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" 
-                     alt="Nhật Huy Avatar" 
-                     class="w-full h-full object-cover rounded-full transform group-hover:scale-105 transition duration-500"
-                     onerror="this.src='https://placehold.co/200x200/FDE2E4/333333?text=Nhat+Huy'">
-            </div>
-            
-            <!-- Quick update tooltip icon -->
-            <button onclick="openImageModal()" class="absolute bottom-1 right-1 bg-white dark:bg-slate-700 p-2 rounded-full shadow-md text-xs text-slate-600 dark:text-slate-200 hover:text-pink-500 transition-colors" title="Đổi ảnh đại diện">
-                <i class="fa-solid fa-camera"></i>
+            <button class="tool-btn" id="themeToggleBtn" title="Đổi giao diện">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
             </button>
         </div>
 
-        <!-- Name & Bio Title -->
-        <div class="text-center mb-8 animate-fade-in" style="animation-delay: 0.2s;">
-            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-800 dark:text-white flex items-center justify-center gap-2">
-                Nhật Huy
-            </h1>
-            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1 font-medium max-w-xs mx-auto">
-                Connect with me on social media
-            </p>
+        <!-- Khung Profile -->
+        <div class="profile">
+            <div class="avatar-wrapper">
+                <img id="userAvatar" class="avatar" src="" alt="Avatar">
+            </div>
+            <h1 id="userName" class="profile-name"></h1>
+            <p id="userBio" class="profile-bio"></p>
         </div>
 
-        <div class="w-full space-y-3.5 px-2">
+        <!-- Danh sách liên kết -->
+        <div class="links-list" id="linksContainer"></div>
 
-            <!-- ZALO ITEM -->
-            <a href="https://zalo.me/0398476794" target="_blank" rel="noopener noreferrer" 
-               class="link-card animate-fade-in block w-full p-3.5 rounded-2xl bg-white/80 dark:bg-slate-800/70 glass-card border border-white/60 dark:border-slate-700/60 shadow-sm hover:shadow-md hover:border-blue-300 dark:hover:border-blue-500/50 group"
-               style="animation-delay: 0.3s;">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-3.5">
-                        <div class="w-11 h-11 rounded-full overflow-hidden flex items-center justify-center bg-blue-50 dark:bg-slate-700 flex-shrink-0 border border-slate-100 dark:border-slate-600">
-                            <img id="iconZalo" src="https://stc-zaloprofile.zdn.vn/pc/v1/images/zalo_sharelogo.png" alt="Zalo Logo" class="w-full h-full object-cover rounded-full" onerror="this.onerror=null; this.src='https://placehold.co/100x100/0068FF/FFFFFF?text=Zalo';">
-                        </div>
-                        <span class="font-semibold text-slate-700 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                            Zalo
-                        </span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right text-xs text-slate-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all pr-2"></i>
-                </div>
-            </a>
-
-            <!-- FACEBOOK ITEM -->
-            <a href="https://www.facebook.com/nhzt.wiie" target="_blank" rel="noopener noreferrer" 
-               class="link-card animate-fade-in block w-full p-3.5 rounded-2xl bg-white/80 dark:bg-slate-800/70 glass-card border border-white/60 dark:border-slate-700/60 shadow-sm hover:shadow-md hover:border-blue-400 dark:hover:border-blue-500/50 group"
-               style="animation-delay: 0.4s;">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-3.5">
-                        <div class="w-11 h-11 rounded-full overflow-hidden flex items-center justify-center bg-blue-50 dark:bg-slate-700 flex-shrink-0 border border-slate-100 dark:border-slate-600">
-                            <img id="iconFacebook" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1200px-Facebook_Logo_%282019%29.png" alt="Facebook Logo" class="w-full h-full object-cover rounded-full" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1877F2/FFFFFF?text=FB';">
-                        </div>
-                        <span class="font-semibold text-slate-700 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                            Facebook
-                        </span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right text-xs text-slate-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all pr-2"></i>
-                </div>
-            </a>
-
-            <!-- TIKTOK ITEM -->
-            <a href="https://www.tiktok.com/@nhzt.wiie" target="_blank" rel="noopener noreferrer" 
-               class="link-card animate-fade-in block w-full p-3.5 rounded-2xl bg-white/80 dark:bg-slate-800/70 glass-card border border-white/60 dark:border-slate-700/60 shadow-sm hover:shadow-md hover:border-slate-400 dark:hover:border-slate-500/50 group"
-               style="animation-delay: 0.5s;">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-3.5">
-                        <div class="w-11 h-11 rounded-full overflow-hidden flex items-center justify-center bg-slate-900 flex-shrink-0 border border-slate-800">
-                            <img id="iconTiktok" src="https://sf-tb-sg.ibytedtos.com/obj/eden-sg/uag_31_uag_10915_uag/tiktok_icon.png" alt="Tiktok Logo" class="w-full h-full object-cover rounded-full" onerror="this.onerror=null; this.src='https://placehold.co/100x100/000000/FFFFFF?text=TikTok';">
-                        </div>
-                        <span class="font-semibold text-slate-700 dark:text-slate-200 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                            Tiktok
-                        </span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right text-xs text-slate-400 group-hover:text-slate-800 dark:group-hover:text-white group-hover:translate-x-1 transition-all pr-2"></i>
-                </div>
-            </a>
-
-            <!-- INSTAGRAM ITEM -->
-            <a href="https://www.instagram.com/nhzt.wiie" target="_blank" rel="noopener noreferrer" 
-               class="link-card animate-fade-in block w-full p-3.5 rounded-2xl bg-white/80 dark:bg-slate-800/70 glass-card border border-white/60 dark:border-slate-700/60 shadow-sm hover:shadow-md hover:border-pink-300 dark:hover:border-pink-500/50 group"
-               style="animation-delay: 0.6s;">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-3.5">
-                        <div class="w-11 h-11 rounded-full overflow-hidden flex items-center justify-center bg-pink-50 dark:bg-slate-700 flex-shrink-0 border border-slate-100 dark:border-slate-600">
-                            <img id="iconInstagram" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" alt="Instagram Logo" class="w-full h-full object-cover rounded-full" onerror="this.onerror=null; this.src='https://placehold.co/100x100/E4405F/FFFFFF?text=IG';">
-                        </div>
-                        <span class="font-semibold text-slate-700 dark:text-slate-200 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">
-                            Instagram
-                        </span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right text-xs text-slate-400 group-hover:text-pink-500 group-hover:translate-x-1 transition-all pr-2"></i>
-                </div>
-            </a>
-
-            <!-- EMAIL ITEM -->
-            <a href="mailto:lnh.quii@gmail.com" 
-               class="link-card animate-fade-in block w-full p-3.5 rounded-2xl bg-white/80 dark:bg-slate-800/70 glass-card border border-white/60 dark:border-slate-700/60 shadow-sm hover:shadow-md hover:border-red-300 dark:hover:border-red-500/50 group"
-               style="animation-delay: 0.7s;">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-3.5">
-                        <div class="w-11 h-11 rounded-full overflow-hidden flex items-center justify-center bg-red-50 dark:bg-slate-700 flex-shrink-0 border border-slate-100 dark:border-slate-600">
-                            <img id="iconEmail" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/2560px-Gmail_icon_%282020%29.svg.png" alt="Email Logo" class="w-full h-full object-cover rounded-full" onerror="this.onerror=null; this.src='https://placehold.co/100x100/EA4335/FFFFFF?text=Mail';">
-                        </div>
-                        <span class="font-semibold text-slate-700 dark:text-slate-200 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors">
-                            E-mail
-                        </span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right text-xs text-slate-400 group-hover:text-red-500 group-hover:translate-x-1 transition-all pr-2"></i>
-                </div>
-            </a>
-
-        </div>
-    </main>
-
-    <footer class="w-full max-w-md text-center py-4 z-10 animate-fade-in" style="animation-delay: 0.8s;">
-        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">
-            © <span id="currentYear"></span> Nhật Huy. Designed with Pastel Aesthetic.
-        </p>
-    </footer>
-
-    
-    <!-- 1. QR CODE MODAL -->
-    <div id="qrModal" class="modal fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none">
-        <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 w-full max-w-sm shadow-2xl border border-white/20 transform transition-transform scale-95 duration-300" id="qrModalContainer">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-bold text-slate-800 dark:text-white flex items-center gap-2">
-                    <i class="fa-solid fa-qrcode text-indigo-500"></i> Mã QR Bio
-                </h3>
-                <button onclick="closeQrModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-500 hover:text-slate-800 dark:hover:text-white transition-colors">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            
-            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 text-center">
-                Quét mã bên dưới để truy cập nhanh trang Bio của Nhật Huy trên thiết bị di động
-            </p>
-
-            <div class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-2xl flex justify-center items-center mb-5 border border-slate-100 dark:border-slate-600">
-                <div id="qrcode" class="p-2 bg-white rounded-xl shadow-sm"></div>
-            </div>
-
-            <div class="space-y-2">
-                <button onclick="copyPageLink()" class="w-full py-2.5 px-4 bg-gradient-to-r from-pink-400 to-indigo-400 hover:from-pink-500 hover:to-indigo-500 text-white font-medium rounded-xl text-sm transition shadow-sm hover:shadow flex items-center justify-center gap-2">
-                    <i class="fa-regular fa-copy"></i> Sao chép liên kết
-                </button>
-            </div>
+        <div class="footer-text">
+            © <span id="year"></span> Nhật Huy. All rights reserved.
         </div>
     </div>
 
-    <!-- 2. IMAGE CUSTOMIZER MODAL (Allows updating images locally) -->
-    <div id="imageModal" class="modal fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none">
-        <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 w-full max-w-md shadow-2xl border border-white/20 transform transition-transform scale-95 duration-300 max-h-[85vh] overflow-y-auto" id="imageModalContainer">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-bold text-slate-800 dark:text-white flex items-center gap-2">
-                    <i class="fa-solid fa-images text-pink-500"></i> Tùy chỉnh hình ảnh
-                </h3>
-                <button onclick="closeImageModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-500 hover:text-slate-800 dark:hover:text-white transition-colors">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">
-                Tải lên ảnh 1 (Avatar) hoặc Ảnh 2-5 (Icons Zalo, Facebook, TikTok, Instagram) từ thiết bị của bạn:
-            </p>
-
-            <div class="space-y-4 text-xs">
-                <!-- Avatar Upload -->
-                <div class="p-3 bg-slate-50 dark:bg-slate-700/40 rounded-xl border border-slate-200/60 dark:border-slate-600">
-                    <label class="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
-                        Ảnh 1: Ảnh đại diện (Avatar)
-                    </label>
-                    <input type="file" accept="image/*" onchange="handleImageUpload(event, 'profileAvatar')" class="block w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-pink-50 file:text-pink-600 hover:file:bg-pink-100 cursor-pointer">
-                </div>
-
-                <!-- Zalo Upload -->
-                <div class="p-3 bg-slate-50 dark:bg-slate-700/40 rounded-xl border border-slate-200/60 dark:border-slate-600">
-                    <label class="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
-                        Ảnh 2: Icon Zalo
-                    </label>
-                    <input type="file" accept="image/*" onchange="handleImageUpload(event, 'iconZalo')" class="block w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100 cursor-pointer">
-                </div>
-
-                <!-- Facebook Upload -->
-                <div class="p-3 bg-slate-50 dark:bg-slate-700/40 rounded-xl border border-slate-200/60 dark:border-slate-600">
-                    <label class="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
-                        Ảnh 3: Icon Facebook
-                    </label>
-                    <input type="file" accept="image/*" onchange="handleImageUpload(event, 'iconFacebook')" class="block w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100 cursor-pointer">
-                </div>
-
-                <!-- TikTok Upload -->
-                <div class="p-3 bg-slate-50 dark:bg-slate-700/40 rounded-xl border border-slate-200/60 dark:border-slate-600">
-                    <label class="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
-                        Ảnh 4: Icon TikTok
-                    </label>
-                    <input type="file" accept="image/*" onchange="handleImageUpload(event, 'iconTiktok')" class="block w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-200 file:text-slate-800 hover:file:bg-slate-300 cursor-pointer">
-                </div>
-
-                <!-- Instagram Upload -->
-                <div class="p-3 bg-slate-50 dark:bg-slate-700/40 rounded-xl border border-slate-200/60 dark:border-slate-600">
-                    <label class="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
-                        Ảnh 5: Icon Instagram
-                    </label>
-                    <input type="file" accept="image/*" onchange="handleImageUpload(event, 'iconInstagram')" class="block w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-pink-50 file:text-pink-600 hover:file:bg-pink-100 cursor-pointer">
-                </div>
-            </div>
-
-            <button onclick="closeImageModal()" class="w-full mt-4 py-2 bg-slate-800 dark:bg-slate-700 text-white font-medium rounded-xl text-xs hover:bg-slate-700 transition">
-                Hoàn tất
-            </button>
+    <!-- Modal hiển thị QR Code -->
+    <div class="modal" id="qrModal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeModalBtn">&times;</button>
+            <h3 style="margin-bottom: 8px;">Mã QR Trang Bio</h3>
+            <p style="font-size: 0.85rem; color: var(--text-sub);">Quét để truy cập nhanh trang cá nhân này</p>
+            <div id="qrcode"></div>
         </div>
     </div>
 
-    <div id="toast" class="fixed bottom-6 z-50 transform translate-y-20 opacity-0 pointer-events-none bg-slate-900/90 text-white dark:bg-white/90 dark:text-slate-900 px-4 py-2.5 rounded-full shadow-lg text-xs font-semibold flex items-center gap-2 border border-slate-700/30">
-        <i class="fa-solid fa-circle-check text-emerald-400 dark:text-emerald-600 text-sm"></i>
-        <span id="toastMessage">Đã sao chép liên kết thành công!</span>
-    </div>
+    <!-- Nhập tệp data.js -->
+    <script src="data.js"></script>
 
     <script>
-        // 1. Dynamic Year Initialization
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. Load dữ liệu từ data.js vào Giao diện
+            document.getElementById("userName").textContent = bioData.profile.name;
+            document.getElementById("userBio").textContent = bioData.profile.bio;
+            document.getElementById("userAvatar").src = bioData.profile.avatar;
+            document.getElementById("year").textContent = new Date().getFullYear();
 
-        // 2. Light / Dark Theme Toggle Logic
-        const themeToggleBtn = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        
-        // System preference or saved setting detection
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-            document.documentElement.classList.remove('light');
-            themeIcon.className = 'fa-solid fa-moon text-sm';
-        } else {
-            document.documentElement.classList.remove('dark');
-            document.documentElement.classList.add('light');
-            themeIcon.className = 'fa-solid fa-sun text-sm';
-        }
-
-        themeToggleBtn.addEventListener('click', () => {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                document.documentElement.classList.add('light');
-                localStorage.theme = 'light';
-                themeIcon.className = 'fa-solid fa-sun text-sm';
-            } else {
-                document.documentElement.classList.add('dark');
-                document.documentElement.classList.remove('light');
-                localStorage.theme = 'dark';
-                themeIcon.className = 'fa-solid fa-moon text-sm';
-            }
-        });
-
-        // 3. QR Code Generator & Modal Logic
-        let qrGenerated = false;
-        const qrModal = document.getElementById('qrModal');
-        const qrModalContainer = document.getElementById('qrModalContainer');
-
-        function openQrModal() {
-            qrModal.classList.remove('opacity-0', 'pointer-events-none');
-            qrModalContainer.classList.remove('scale-95');
-            qrModalContainer.classList.add('scale-100');
-
-            if (!qrGenerated) {
-                const currentUrl = window.location.href.includes('about:blank') 
-                    ? 'https://nhzt-wiie.github.io' 
-                    : window.location.href;
+            // Render Danh sách Link
+            const container = document.getElementById("linksContainer");
+            bioData.links.forEach(link => {
+                const a = document.createElement("a");
+                a.className = "link-card";
+                a.href = link.url;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
                 
-                new QRCode(document.getElementById("qrcode"), {
-                    text: currentUrl,
-                    width: 160,
-                    height: 160,
-                    colorDark : "#1e293b",
-                    colorLight : "#ffffff",
-                    correctLevel : QRCode.CorrectLevel.H
-                });
-                qrGenerated = true;
-            }
-        }
+                a.innerHTML = `
+                    <img class="app-icon" src="${link.icon}" alt="${link.title}">
+                    <span class="link-title">${link.title}</span>
+                    <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                `;
+                container.appendChild(a);
+            });
 
-        function closeQrModal() {
-            qrModalContainer.classList.remove('scale-100');
-            qrModalContainer.classList.add('scale-95');
-            qrModal.classList.add('opacity-0', 'pointer-events-none');
-        }
+            // 2. Chức năng Đổi Theme (Light/Dark Mode)
+            const themeToggleBtn = document.getElementById("themeToggleBtn");
+            const themeIcon = document.getElementById("themeIcon");
+            const htmlTag = document.documentElement;
 
-        // Close Modal when clicking outside wrapper
-        qrModal.addEventListener('click', (e) => {
-            if (e.target === qrModal) closeQrModal();
+            themeToggleBtn.addEventListener("click", () => {
+                const currentTheme = htmlTag.getAttribute("data-theme");
+                const newTheme = currentTheme === "light" ? "dark" : "light";
+                htmlTag.setAttribute("data-theme", newTheme);
+                
+                themeIcon.className = newTheme === "light" ? "fa-solid fa-moon" : "fa-solid fa-sun";
+            });
+
+            // 3. Chức năng Tạo Pop-up Mã QR
+            const qrBtn = document.getElementById("qrBtn");
+            const qrModal = document.getElementById("qrModal");
+            const closeModalBtn = document.getElementById("closeModalBtn");
+            const qrContainer = document.getElementById("qrcode");
+            let qrGenerated = false;
+
+            qrBtn.addEventListener("click", () => {
+                qrModal.classList.add("active");
+                if (!qrGenerated) {
+                    new QRCode(qrContainer, {
+                        text: window.location.href,
+                        width: 180,
+                        height: 180,
+                        colorDark : "#2d3748",
+                        colorLight : "#ffffff",
+                        correctLevel : QRCode.CorrectLevel.H
+                    });
+                    qrGenerated = true;
+                }
+            });
+
+            closeModalBtn.addEventListener("click", () => {
+                qrModal.classList.remove("active");
+            });
+
+            qrModal.addEventListener("click", (e) => {
+                if (e.target === qrModal) {
+                    qrModal.classList.remove("active");
+                }
+            });
         });
-
-        // 4. Custom Image Manager Modal Logic
-        const imageModal = document.getElementById('imageModal');
-        const imageModalContainer = document.getElementById('imageModalContainer');
-
-        function openImageModal() {
-            imageModal.classList.remove('opacity-0', 'pointer-events-none');
-            imageModalContainer.classList.remove('scale-95');
-            imageModalContainer.classList.add('scale-100');
-        }
-
-        function closeImageModal() {
-            imageModalContainer.classList.remove('scale-100');
-            imageModalContainer.classList.add('scale-95');
-            imageModal.classList.add('opacity-0', 'pointer-events-none');
-        }
-
-        imageModal.addEventListener('click', (e) => {
-            if (e.target === imageModal) closeImageModal();
-        });
-
-        // Local Image Upload Handler Function
-        function handleImageUpload(event, targetElementId) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const imgElement = document.getElementById(targetElementId);
-                    if (imgElement) {
-                        imgElement.src = e.target.result;
-                        showToast('Đã cập nhật hình ảnh mới!');
-                    }
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // 5. Toast Notification System
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toastMessage');
-            
-            toastMessage.textContent = message;
-            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-            toast.classList.add('translate-y-0', 'opacity-100');
-
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-                toast.classList.remove('translate-y-0', 'opacity-100');
-            }, 2500);
-        }
-
-        // 6. Copy Page Link Action using execCommand fallback
-        function copyPageLink() {
-            const linkToCopy = window.location.href.includes('about:blank') ? 'https://nhzt-wiie.github.io' : window.location.href;
-            
-            const tempInput = document.createElement("input");
-            tempInput.value = linkToCopy;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-            
-            showToast('Đã sao chép liên kết vào bộ nhớ tạm!');
-        }
     </script>
 </body>
 </html>
