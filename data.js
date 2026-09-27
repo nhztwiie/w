@@ -10,7 +10,6 @@ const bioData = {
       { id: "facebook", title: "Facebook", url: "https://www.facebook.com/nhzt.wiie", icon: "images/facebook.png" },
       { id: "tiktok", title: "Tiktok", url: "https://www.tiktok.com/@nhzt.wiie", icon: "images/tiktok.png" },
       { id: "instagram", title: "Instagram", url: "https://www.instagram.com/nhzt.wiie", icon: "images/instagram.png" },
-      { id: "locket", title: "Locket", url: "https://locket.cam/l.nhathuyy", icon: "images/locket.png" }
     ],
     work: [
       { id: "zalo", title: "Zalo", url: "https://zalo.me/0398476794", icon: "images/zalo.png" },
