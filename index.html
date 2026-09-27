@@ -27,7 +27,7 @@
       --accent-pastel: #38bdf8;
       
       --tab-bg: #f1f5f9;
-      --tab-active-bg: #0284c7; /* Khối màu xanh lam nổi bật khi chọn tab */
+      --tab-active-bg: #0284c7;
       --tab-active-text: #ffffff;
       
       --link-bg: #ffffff;
@@ -97,7 +97,7 @@
     .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(45px); /* Giảm blur nhẹ để nhìn rõ khối hình cầu hơn */
+      filter: blur(45px);
       animation: floatOrb 10s infinite ease-in-out alternate;
     }
 
@@ -129,17 +129,10 @@
       animation-duration: 10s;
     }
 
-    /* Hiệu ứng chuyển động hình cầu */
     @keyframes floatOrb {
-      0% {
-        transform: translate(0, 0) scale(1);
-      }
-      50% {
-        transform: translate(90px, 60px) scale(1.18);
-      }
-      100% {
-        transform: translate(-60px, 100px) scale(0.9);
-      }
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(90px, 60px) scale(1.18); }
+      100% { transform: translate(-60px, 100px) scale(0.9); }
     }
 
     /* ==========================================================
@@ -207,10 +200,6 @@
       box-shadow: 0 10px 25px rgba(56, 189, 248, 0.25);
     }
 
-    .avatar-wrapper:hover .avatar-img {
-      transform: scale(1.04);
-    }
-
     .profile-name {
       font-size: 1.5rem;
       font-weight: 700;
@@ -225,9 +214,7 @@
       margin-bottom: 25px;
     }
 
-    /* ==========================================================
-       TAB NAVIGATION VỚI KHỐI MÀU NỔI BẬT
-       ========================================================== */
+    /* TAB NAVIGATION */
     .tab-navigation {
       display: flex;
       background: var(--tab-bg);
@@ -289,7 +276,6 @@
       font-weight: 600;
       font-size: 0.95rem;
       box-shadow: 0 4px 15px rgba(186, 230, 253, 0.15);
-      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, box-shadow 0.3s ease;
     }
 
     .link-item:hover {
@@ -308,23 +294,11 @@
       flex-shrink: 0;
     }
 
-    .link-title {
-      flex: 1;
-      text-align: left;
-    }
-
-    .link-arrow {
-      font-size: 0.85rem;
-      color: var(--text-sub);
-    }
-
-    .link-item:hover .link-arrow {
-      transform: translateX(4px);
-      color: var(--accent-pastel);
-    }
+    .link-title { flex: 1; text-align: left; }
+    .link-arrow { font-size: 0.85rem; color: var(--text-sub); }
 
     /* ==========================================================
-       MODAL QR CODE TÍCH HỢP CHIA SẺ LINK
+       MODAL QR CODE CÓ TÍCH HỢP CHIA SẺ VÀ COPY LINK
        ========================================================== */
     .modal-overlay {
       position: fixed;
@@ -352,9 +326,9 @@
       background: var(--card-bg);
       backdrop-filter: blur(20px);
       border-radius: 24px;
-      padding: 30px;
+      padding: 25px 20px;
       width: 90%;
-      max-width: 320px;
+      max-width: 340px;
       text-align: center;
       box-shadow: var(--shadow);
       border: 2px solid var(--card-border);
@@ -376,39 +350,74 @@
     #qrcode {
       display: flex;
       justify-content: center;
-      margin: 15px 0;
+      margin: 12px 0;
       padding: 12px;
       background: #ffffff;
       border-radius: 16px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
-    .close-btn {
+    /* Các nút chia sẻ trong Modal */
+    .share-actions {
+      display: flex;
+      gap: 8px;
       margin-top: 15px;
-      padding: 10px 28px;
+    }
+
+    .action-btn {
+      flex: 1;
+      padding: 10px 12px;
       border: none;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.25s ease;
+    }
+
+    .btn-copy {
+      background: var(--tab-bg);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-copy:hover {
+      background: var(--link-hover);
+    }
+
+    .btn-native-share {
       background: var(--accent-pastel);
       color: #ffffff;
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.35);
+    }
+
+    .btn-native-share:hover {
+      opacity: 0.9;
+    }
+
+    .close-btn {
+      margin-top: 12px;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background: transparent;
+      color: var(--text-sub);
       font-weight: 600;
-      border-radius: 20px;
+      font-size: 0.88rem;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
     }
 
     .close-btn:hover {
-      opacity: 0.95;
-      transform: scale(1.03);
+      color: var(--text-main);
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -452,22 +461,31 @@
     </div>
   </main>
 
-  <!-- Modal QR Code Share -->
+  <!-- Modal QR Code & Share Link -->
   <div class="modal-overlay" id="qr-modal">
     <div class="modal-card">
       <h3 class="modal-title">Chia sẻ trang Bio</h3>
       <div id="qrcode"></div>
-      <p style="font-size: 0.82rem; color: var(--text-sub);">Quét mã QR để truy cập liên kết</p>
+      <p style="font-size: 0.8rem; color: var(--text-sub); margin-bottom: 5px;">Quét mã QR hoặc dùng các lựa chọn bên dưới</p>
+
+      <!-- Các nút chia sẻ tích hợp -->
+      <div class="share-actions">
+        <button class="action-btn btn-copy" id="copy-link-btn">
+          <i class="fa-regular fa-copy"></i> <span id="copy-text">Sao chép</span>
+        </button>
+        <button class="action-btn btn-native-share" id="native-share-btn">
+          <i class="fa-solid fa-share-nodes"></i> Chia sẻ
+        </button>
+      </div>
+
       <button class="close-btn" id="close-modal">Đóng</button>
     </div>
   </div>
 
-  <!-- Tải file data.js chứa dữ liệu cấu hình -->
   <script src="data.js"></script>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // Render thông tin từ data.js
       document.getElementById("avatar-img").src = bioData.profile.avatar;
       document.getElementById("profile-name").textContent = bioData.profile.name;
       document.getElementById("profile-bio").textContent = bioData.profile.bio;
@@ -475,10 +493,9 @@
       renderLinks("social-panel", bioData.tabs.social);
       renderLinks("work-panel", bioData.tabs.work);
 
-      // Kích hoạt các tính năng
       initTabs();
       initTheme();
-      initQRCode();
+      initQRCodeAndShare();
     });
 
     function renderLinks(containerId, items) {
@@ -539,27 +556,68 @@
       }
     }
 
-    function initQRCode() {
+    // TÍNH NĂNG TẠO QR VÀ CHIA SẺ LINK
+    function initQRCodeAndShare() {
       const shareBtn = document.getElementById("share-btn");
       const closeBtn = document.getElementById("close-modal");
       const modal = document.getElementById("qr-modal");
       const qrContainer = document.getElementById("qrcode");
+      
+      const copyBtn = document.getElementById("copy-link-btn");
+      const copyText = document.getElementById("copy-text");
+      const nativeShareBtn = document.getElementById("native-share-btn");
+
+      // Lấy đường dẫn link chia sẻ
+      const shareUrl = (typeof bioData !== 'undefined' && bioData.profile.shareUrl) 
+                       ? bioData.profile.shareUrl 
+                       : window.location.href;
 
       let qrGenerated = false;
 
+      // Mở Modal và Tạo mã QR
       shareBtn.addEventListener("click", () => {
         modal.classList.add("open");
         if (!qrGenerated) {
-          // Tự động tạo mã QR chứa link chia sẻ
           new QRCode(qrContainer, {
-            text: (typeof bioData !== 'undefined' && bioData.profile.shareUrl) ? bioData.profile.shareUrl : window.location.href,
-            width: 160,
-            height: 160,
+            text: shareUrl,
+            width: 150,
+            height: 150,
             colorDark: "#0f172a",
             colorLight: "#ffffff",
             correctLevel: QRCode.CorrectLevel.H
           });
           qrGenerated = true;
+        }
+      });
+
+      // Xử lý nút Sao chép Link
+      copyBtn.addEventListener("click", () => {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+          copyText.textContent = "Đã chép!";
+          setTimeout(() => {
+            copyText.textContent = "Sao chép";
+          }, 2000);
+        }).catch(err => {
+          console.error("Lỗi khi sao chép link:", err);
+        });
+      });
+
+      // Xử lý nút Chia sẻ ứng dụng (Web Share API trên điện thoại)
+      nativeShareBtn.addEventListener("click", async () => {
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: bioData.profile.name || "Bio Link",
+              text: "Ghé thăm trang Bio Link của tôi:",
+              url: shareUrl
+            });
+          } catch (err) {
+            console.log("Đã hủy chia sẻ:", err);
+          }
+        } else {
+          // Nếu trình duyệt không hỗ trợ Web Share API thì tự động copy link
+          navigator.clipboard.writeText(shareUrl);
+          alert("Đã sao chép liên kết vào bộ nhớ tạm!");
         }
       });
 
