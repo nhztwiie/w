@@ -13,7 +13,7 @@ const bioData = {
     ],
     work: [
       { id: "zalo", title: "Zalo", url: "https://zalo.me/0398476794", icon: "images/zalo.png" },
-      { id: "email", title: "E-mail", url: "mailto:lnh.quii@gmail.com", icon: "logo-email.png" }
+      { id: "email", title: "E-mail", url: "mailto:lnh.quii@gmail.com", icon: "images/email.png" }
     ]
   }
 };
