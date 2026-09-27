@@ -34,10 +34,10 @@
       --link-hover: #f0f9ff;
       --shadow: 0 20px 40px rgba(186, 230, 253, 0.45);
 
-      /* HÌNH CẦU MỜ CÓ THỂ NHÌN THẤY RÕ */
-      --orb-1: rgba(125, 211, 252, 0.8);
-      --orb-2: rgba(56, 189, 248, 0.65);
-      --orb-3: rgba(186, 230, 253, 0.9);
+      /* MÀU HÌNH CẦU MỜ CÓ THỂ NHÌN THẤY RÕ BẰNG MẮT THƯỜNG */
+      --orb-1: rgba(125, 211, 252, 0.85);
+      --orb-2: rgba(56, 189, 248, 0.7);
+      --orb-3: rgba(186, 230, 253, 0.95);
     }
 
     :root[data-theme="dark"] {
@@ -56,9 +56,9 @@
       --link-hover: #1e293b;
       --shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 
-      --orb-1: rgba(14, 165, 233, 0.45);
-      --orb-2: rgba(56, 189, 248, 0.35);
-      --orb-3: rgba(125, 211, 252, 0.4);
+      --orb-1: rgba(14, 165, 233, 0.5);
+      --orb-2: rgba(56, 189, 248, 0.4);
+      --orb-3: rgba(125, 211, 252, 0.45);
     }
 
     * {
@@ -81,7 +81,7 @@
     }
 
     /* ==========================================================
-       HÌNH CẦU MỜ CHUYỂN ĐỘNG CHẬM (BLUR ORBS)
+       HÌNH CẦU MỜ CHUYỂN ĐỘNG RÕ RÀNG (ANIMATED BLUR ORBS)
        ========================================================== */
     .bg-orbs {
       position: fixed;
@@ -97,47 +97,48 @@
     .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(50px);
-      animation: floatOrb 12s infinite ease-in-out alternate;
+      filter: blur(45px); /* Giảm blur nhẹ để nhìn rõ khối hình cầu hơn */
+      animation: floatOrb 10s infinite ease-in-out alternate;
     }
 
     .orb-1 {
-      width: 320px;
-      height: 320px;
+      width: 340px;
+      height: 340px;
       background: var(--orb-1);
-      top: -40px;
-      left: -40px;
-      animation-duration: 10s;
+      top: -30px;
+      left: -30px;
+      animation-duration: 9s;
     }
 
     .orb-2 {
-      width: 360px;
-      height: 360px;
+      width: 380px;
+      height: 380px;
       background: var(--orb-2);
-      bottom: -60px;
-      right: -40px;
-      animation-duration: 14s;
+      bottom: -50px;
+      right: -30px;
+      animation-duration: 12s;
     }
 
     .orb-3 {
-      width: 260px;
-      height: 260px;
+      width: 280px;
+      height: 280px;
       background: var(--orb-3);
-      top: 45%;
-      left: 48%;
+      top: 40%;
+      left: 45%;
       transform: translate(-50%, -50%);
-      animation-duration: 11s;
+      animation-duration: 10s;
     }
 
+    /* Hiệu ứng chuyển động hình cầu */
     @keyframes floatOrb {
       0% {
         transform: translate(0, 0) scale(1);
       }
       50% {
-        transform: translate(80px, 50px) scale(1.15);
+        transform: translate(90px, 60px) scale(1.18);
       }
       100% {
-        transform: translate(-50px, 90px) scale(0.95);
+        transform: translate(-60px, 100px) scale(0.9);
       }
     }
 
@@ -323,7 +324,7 @@
     }
 
     /* ==========================================================
-       MODAL QR CODE
+       MODAL QR CODE TÍCH HỢP CHIA SẺ LINK
        ========================================================== */
     .modal-overlay {
       position: fixed;
@@ -369,7 +370,7 @@
       font-size: 1.15rem;
       font-weight: 700;
       color: var(--text-main);
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     #qrcode {
@@ -456,7 +457,7 @@
     <div class="modal-card">
       <h3 class="modal-title">Chia sẻ trang Bio</h3>
       <div id="qrcode"></div>
-      <p style="font-size: 0.82rem; color: var(--text-sub);">Quét mã QR để truy cập nhanh</p>
+      <p style="font-size: 0.82rem; color: var(--text-sub);">Quét mã QR để truy cập liên kết</p>
       <button class="close-btn" id="close-modal">Đóng</button>
     </div>
   </div>
@@ -549,8 +550,9 @@
       shareBtn.addEventListener("click", () => {
         modal.classList.add("open");
         if (!qrGenerated) {
+          // Tự động tạo mã QR chứa link chia sẻ
           new QRCode(qrContainer, {
-            text: bioData.profile.shareUrl || window.location.href,
+            text: (typeof bioData !== 'undefined' && bioData.profile.shareUrl) ? bioData.profile.shareUrl : window.location.href,
             width: 160,
             height: 160,
             colorDark: "#0f172a",
