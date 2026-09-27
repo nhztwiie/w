@@ -2,7 +2,7 @@
 const bioData = {
   profile: {
     name: "Nhật Huy",
-    bio: "Welcome to my official page ✨",
+    bio: "ung dung.",
     // Điền tên file ảnh đại diện của bạn (ví dụ: "avatar.jpg" hoặc URL)
     avatar: "avatar.jpg", 
     // Để trống "" sẽ tự động sử dụng link trang web hiện tại để tạo mã QR
