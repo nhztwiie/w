@@ -10,45 +10,50 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- Thư viện FontAwesome (Icon theme & QR) -->
+  <!-- FontAwesome Icon & Thư viện QRCode JS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Thư viện QRCode JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <style>
     /* ==========================================================
-       VARIABLES & THEME CONFIGURATION (PASTEL PALETTE)
+       VARIABLES & THEME CONFIGURATION (BRIGHT & PASTEL PALETTE)
        ========================================================== */
     :root[data-theme="light"] {
-      --bg-gradient: linear-gradient(135deg, #eef2f3 0%, #e0eafc 100%);
-      --card-bg: rgba(255, 255, 255, 0.85);
-      --card-border: rgba(255, 255, 255, 0.6);
-      --text-main: #2c3e50;
-      --text-sub: #7f8c8d;
-      --accent-pastel: #a8d8ea;
-      --accent-hover: #aaabb8;
-      --tab-bg: #e6f0fa;
+      --bg-base: #f4f8ff;
+      --card-bg: rgba(255, 255, 255, 0.75);
+      --card-border: rgba(255, 255, 255, 0.9);
+      --text-main: #1e293b;
+      --text-sub: #64748b;
+      --accent-pastel: #7dd3fc;
+      --tab-bg: rgba(224, 242, 254, 0.6);
       --tab-active: #ffffff;
-      --link-bg: rgba(255, 255, 255, 0.9);
-      --link-hover: #f0f7ff;
-      --shadow: 0 10px 30px rgba(168, 216, 234, 0.25);
-      --particle-color: rgba(168, 216, 234, 0.5);
+      --link-bg: rgba(255, 255, 255, 0.85);
+      --link-hover: #ffffff;
+      --shadow: 0 20px 40px rgba(186, 230, 253, 0.35);
+      
+      /* Orb Colors - Light Theme */
+      --orb-1: rgba(186, 230, 253, 0.7);
+      --orb-2: rgba(254, 215, 226, 0.6);
+      --orb-3: rgba(221, 214, 254, 0.6);
     }
 
     :root[data-theme="dark"] {
-      --bg-gradient: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-      --card-bg: rgba(25, 42, 52, 0.85);
-      --card-border: rgba(255, 255, 255, 0.1);
-      --text-main: #f0f4f8;
-      --text-sub: #9fb3c8;
-      --accent-pastel: #38b2ac;
-      --accent-hover: #4fd1c5;
-      --tab-bg: #102a43;
-      --tab-active: #243b53;
-      --link-bg: rgba(36, 59, 83, 0.8);
-      --link-hover: #334e68;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      --particle-color: rgba(79, 209, 197, 0.3);
+      --bg-base: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.75);
+      --card-border: rgba(255, 255, 255, 0.15);
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --accent-pastel: #38bdf8;
+      --tab-bg: rgba(15, 23, 42, 0.6);
+      --tab-active: #334155;
+      --link-bg: rgba(30, 41, 59, 0.85);
+      --link-hover: #475569;
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      
+      /* Orb Colors - Dark Theme */
+      --orb-1: rgba(14, 165, 233, 0.35);
+      --orb-2: rgba(236, 72, 153, 0.25);
+      --orb-3: rgba(139, 92, 246, 0.3);
     }
 
     * {
@@ -61,7 +66,7 @@
 
     body {
       min-height: 100vh;
-      background: var(--bg-gradient);
+      background-color: var(--bg-base);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -70,27 +75,79 @@
       padding: 20px 15px;
     }
 
-    /* Background Canvas Animation */
-    #particle-canvas {
-      position: absolute;
+    /* ==========================================================
+       ANIMATED BLUR ORBS BACKGROUND (HÌNH CẦU MỜ CHUYỂN ĐỘNG CHẬM)
+       ========================================================== */
+    .bg-orbs {
+      position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
       z-index: 1;
       pointer-events: none;
     }
 
-    /* Container Card */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: floatOrb 18s infinite ease-in-out alternate;
+    }
+
+    .orb-1 {
+      width: 320px;
+      height: 320px;
+      background: var(--orb-1);
+      top: -50px;
+      left: -50px;
+      animation-duration: 16s;
+    }
+
+    .orb-2 {
+      width: 380px;
+      height: 380px;
+      background: var(--orb-2);
+      bottom: -80px;
+      right: -50px;
+      animation-duration: 22s;
+    }
+
+    .orb-3 {
+      width: 280px;
+      height: 280px;
+      background: var(--orb-3);
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-duration: 19s;
+    }
+
+    @keyframes floatOrb {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      50% {
+        transform: translate(60px, 40px) scale(1.15);
+      }
+      100% {
+        transform: translate(-40px, 80px) scale(0.9);
+      }
+    }
+
+    /* ==========================================================
+       BIO CARD MAIN CONTAINER
+       ========================================================== */
     .bio-card {
       position: relative;
       z-index: 2;
       width: 100%;
       max-width: 420px;
       background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--card-border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1.5px solid var(--card-border);
       border-radius: 28px;
       padding: 35px 25px;
       box-shadow: var(--shadow);
@@ -98,7 +155,7 @@
       animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Controls (Theme Toggle & Share) */
+    /* Top Action Buttons */
     .top-controls {
       position: absolute;
       top: 20px;
@@ -110,10 +167,10 @@
     }
 
     .icon-btn {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      border: none;
+      border: 1px solid var(--card-border);
       background: var(--tab-bg);
       color: var(--text-main);
       cursor: pointer;
@@ -121,19 +178,18 @@
       align-items: center;
       justify-content: center;
       font-size: 1.1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      transition: transform 0.2s ease, background 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      transition: transform 0.25s ease, background 0.3s ease;
     }
 
     .icon-btn:hover {
       transform: scale(1.08);
       background: var(--accent-pastel);
-      color: #fff;
+      color: #ffffff;
     }
 
-    /* Avatar Profile */
+    /* Avatar Styling */
     .avatar-wrapper {
-      position: relative;
       width: 110px;
       height: 110px;
       margin: 10px auto 18px;
@@ -145,17 +201,17 @@
       object-fit: cover;
       border-radius: 50%;
       border: 4px solid #ffffff;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
       transition: transform 0.3s ease;
     }
 
     .avatar-wrapper:hover .avatar-img {
-      transform: scale(1.03);
+      transform: scale(1.04);
     }
 
-    /* Name & Bio */
+    /* Name & Subtitle */
     .profile-name {
-      font-size: 1.45rem;
+      font-size: 1.5rem;
       font-weight: 700;
       color: var(--text-main);
       margin-bottom: 6px;
@@ -163,7 +219,7 @@
     }
 
     .profile-bio {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: var(--text-sub);
       margin-bottom: 25px;
     }
@@ -175,7 +231,6 @@
       border-radius: 16px;
       padding: 5px;
       margin-bottom: 22px;
-      position: relative;
     }
 
     .tab-btn {
@@ -189,18 +244,16 @@
       border-radius: 12px;
       cursor: pointer;
       transition: color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-      z-index: 2;
     }
 
     .tab-btn.active {
       color: var(--text-main);
       background: var(--tab-active);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
-    /* Tab Contents Area */
+    /* Tab Content Links */
     .tab-content-container {
-      position: relative;
       min-height: 220px;
     }
 
@@ -219,7 +272,6 @@
       transform: translateY(0);
     }
 
-    /* Link Item Buttons */
     .link-item {
       display: flex;
       align-items: center;
@@ -238,17 +290,16 @@
     .link-item:hover {
       transform: translateY(-3px);
       background: var(--link-hover);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      box-shadow: 0 8px 25px rgba(125, 211, 252, 0.25);
     }
 
-    /* App Icon Styling */
     .app-icon {
       width: 38px;
       height: 38px;
       border-radius: 50%;
       object-fit: cover;
       margin-right: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       flex-shrink: 0;
     }
 
@@ -268,15 +319,17 @@
       color: var(--text-main);
     }
 
-    /* Modal Share / QR Code */
+    /* ==========================================================
+       MODAL SHARE & QR CODE
+       ========================================================== */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(5px);
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(6px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -293,14 +346,15 @@
 
     .modal-card {
       background: var(--card-bg);
+      backdrop-filter: blur(20px);
       border-radius: 24px;
       padding: 30px;
       width: 90%;
       max-width: 320px;
       text-align: center;
       box-shadow: var(--shadow);
-      border: 1px solid var(--card-border);
-      transform: scale(0.8);
+      border: 1.5px solid var(--card-border);
+      transform: scale(0.85);
       transition: transform 0.3s ease;
     }
 
@@ -309,7 +363,7 @@
     }
 
     .modal-title {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: var(--text-main);
       margin-bottom: 15px;
@@ -319,28 +373,30 @@
       display: flex;
       justify-content: center;
       margin: 15px 0;
-      padding: 10px;
+      padding: 12px;
       background: #ffffff;
-      border-radius: 12px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
     .close-btn {
       margin-top: 15px;
-      padding: 8px 24px;
+      padding: 10px 28px;
       border: none;
       background: var(--accent-pastel);
       color: #ffffff;
       font-weight: 600;
       border-radius: 20px;
       cursor: pointer;
-      transition: opacity 0.2s;
+      box-shadow: 0 4px 12px rgba(125, 211, 252, 0.4);
+      transition: opacity 0.2s, transform 0.2s;
     }
 
     .close-btn:hover {
-      opacity: 0.9;
+      opacity: 0.95;
+      transform: scale(1.03);
     }
 
-    /* Keyframes Animation */
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -355,14 +411,18 @@
 </head>
 <body>
 
-  <!-- Particle Animation Background -->
-  <canvas id="particle-canvas"></canvas>
+  <!-- Background Animated Blur Orbs -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
 
   <!-- Bio Main Card -->
   <main class="bio-card">
     <div class="top-controls">
       <button class="icon-btn" id="theme-toggle" aria-label="Toggle Theme">
-        <i class="fa-solid me fa-moon"></i>
+        <i class="fa-solid fa-moon"></i>
       </button>
       <button class="icon-btn" id="share-btn" aria-label="Share QR Code">
         <i class="fa-solid fa-qrcode"></i>
@@ -376,7 +436,7 @@
     <h1 class="profile-name" id="profile-name"></h1>
     <p class="profile-bio" id="profile-bio"></p>
 
-    <!-- Tab Buttons -->
+    <!-- Navigation Tabs -->
     <nav class="tab-navigation">
       <button class="tab-btn active" data-tab="social">Social Media</button>
       <button class="tab-btn" data-tab="work">Work</button>
@@ -394,33 +454,28 @@
     <div class="modal-card">
       <h3 class="modal-title">Chia sẻ trang Bio</h3>
       <div id="qrcode"></div>
-      <p style="font-size: 0.8rem; color: var(--text-sub);">Quét mã QR để truy cập nhanh</p>
+      <p style="font-size: 0.82rem; color: var(--text-sub);">Quét mã QR để truy cập nhanh</p>
       <button class="close-btn" id="close-modal">Đóng</button>
     </div>
   </div>
 
-  <!-- Tải file data.js cấu hình -->
+  <!-- Tải file data.js chứa dữ liệu cấu hình -->
   <script src="data.js"></script>
 
   <script>
-    // ==========================================================
-    // INITIALIZATION & RENDER
-    // ==========================================================
     document.addEventListener("DOMContentLoaded", () => {
-      // Render thông tin cá nhân
+      // 1. Render dữ liệu từ data.js
       document.getElementById("avatar-img").src = bioData.profile.avatar;
       document.getElementById("profile-name").textContent = bioData.profile.name;
       document.getElementById("profile-bio").textContent = bioData.profile.bio;
 
-      // Render danh sách link các Tab
       renderLinks("social-panel", bioData.tabs.social);
       renderLinks("work-panel", bioData.tabs.work);
 
-      // Khởi tạo tab switcher, theme, QR code và canvas
+      // 2. Kích hoạt tính năng
       initTabs();
       initTheme();
       initQRCode();
-      initParticles();
     });
 
     // Hàm render danh sách link
@@ -435,9 +490,7 @@
       `).join('');
     }
 
-    // ==========================================================
-    // TAB SWITCHING ANIMATION
-    // ==========================================================
+    // Chuyển Tab mượt mà
     function initTabs() {
       const tabBtns = document.querySelectorAll(".tab-btn");
       const panels = {
@@ -463,9 +516,7 @@
       });
     }
 
-    // ==========================================================
-    // THEME TOGGLE (LIGHT / DARK BLUE PASTEL)
-    // ==========================================================
+    // Chuyển đổi Theme Light / Dark
     function initTheme() {
       const toggleBtn = document.getElementById("theme-toggle");
       const icon = toggleBtn.querySelector("i");
@@ -488,9 +539,7 @@
       }
     }
 
-    // ==========================================================
-    // QR CODE MODAL
-    // ==========================================================
+    // Tạo mã QR Code
     function initQRCode() {
       const shareBtn = document.getElementById("share-btn");
       const closeBtn = document.getElementById("close-modal");
@@ -506,7 +555,7 @@
             text: bioData.profile.shareUrl || window.location.href,
             width: 160,
             height: 160,
-            colorDark: "#2c3e50",
+            colorDark: "#1e293b",
             colorLight: "#ffffff",
             correctLevel: QRCode.CorrectLevel.H
           });
@@ -518,64 +567,6 @@
       modal.addEventListener("click", (e) => {
         if (e.target === modal) modal.classList.remove("open");
       });
-    }
-
-    // ==========================================================
-    // BACKGROUND CANVAS PARTICLE ANIMATION
-    // ==========================================================
-    function initParticles() {
-      const canvas = document.getElementById("particle-canvas");
-      const ctx = canvas.getContext("2d");
-      let particles = [];
-
-      function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
-      window.addEventListener("resize", resize);
-      resize();
-
-      class Particle {
-        constructor() {
-          this.reset();
-        }
-        reset() {
-          this.x = Math.random() * canvas.width;
-          this.y = Math.random() * canvas.height;
-          this.radius = Math.random() * 3 + 1;
-          this.vx = (Math.random() - 0.5) * 0.4;
-          this.vy = (Math.random() - 0.5) * 0.4;
-          this.alpha = Math.random() * 0.5 + 0.2;
-        }
-        update() {
-          this.x += this.vx;
-          this.y += this.vy;
-
-          if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-            this.reset();
-          }
-        }
-        draw() {
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-          ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--particle-color').trim();
-          ctx.fill();
-        }
-      }
-
-      for (let i = 0; i < 40; i++) {
-        particles.push(new Particle());
-      }
-
-      function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
-          p.update();
-          p.draw();
-        });
-        requestAnimationFrame(animate);
-      }
-      animate();
     }
   </script>
 </body>
