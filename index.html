@@ -8,7 +8,7 @@
   <!-- Font Google Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- FontAwesome Icons & QRCode Library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,21 +16,26 @@
 
   <style>
     :root[data-theme="light"] {
-      --bg-base: #f0f7ff;
+      --bg-base: #f0f9ff;
       --card-bg: rgba(255, 255, 255, 0.82);
       --card-border: rgba(255, 255, 255, 0.95);
-      --text-main: #0f172a;
-      --text-sub: #475569;
+      --text-main: #0c4a6e;
+      --text-sub: #0369a1;
       --accent-pastel: #38bdf8;
       --accent-hover: #0284c7;
-      --tab-bg: rgba(224, 242, 254, 0.7);
-      --tab-active: #ffffff;
-      --link-bg: rgba(255, 255, 255, 0.92);
-      --link-border: rgba(186, 230, 253, 0.6);
-      --link-hover: #ffffff;
-      --shadow: 0 20px 50px rgba(56, 189, 248, 0.18);
       
-      /* Vibrant Floating Orb Colors - Light Theme */
+      /* Vibrant Active Tab Colors */
+      --tab-bg: #e0f2fe;
+      --tab-active-bg: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+      --tab-active-text: #ffffff;
+      --tab-active-shadow: 0 8px 20px rgba(56, 189, 248, 0.45);
+
+      --link-bg: rgba(255, 255, 255, 0.95);
+      --link-border: #bae6fd;
+      --link-hover: #ffffff;
+      --shadow: 0 20px 50px rgba(56, 189, 248, 0.22);
+      
+      /* Bright Vivid Floating Orbs - Light Theme */
       --orb-1: rgba(56, 189, 248, 0.65);
       --orb-2: rgba(244, 114, 182, 0.55);
       --orb-3: rgba(168, 85, 247, 0.55);
@@ -41,22 +46,27 @@
       --bg-base: #0b1329;
       --card-bg: rgba(20, 31, 56, 0.82);
       --card-border: rgba(255, 255, 255, 0.15);
-      --text-main: #f8fafc;
-      --text-sub: #94a3b8;
+      --text-main: #f0f9ff;
+      --text-sub: #7dd3fc;
       --accent-pastel: #38bdf8;
       --accent-hover: #7dd3fc;
+      
+      /* Active Tab - Dark Theme */
       --tab-bg: rgba(15, 23, 42, 0.7);
-      --tab-active: #1e293b;
+      --tab-active-bg: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+      --tab-active-text: #ffffff;
+      --tab-active-shadow: 0 8px 20px rgba(56, 189, 248, 0.35);
+
       --link-bg: rgba(30, 41, 59, 0.85);
-      --link-border: rgba(255, 255, 255, 0.08);
-      --link-hover: #334155;
+      --link-border: rgba(56, 189, 248, 0.25);
+      --link-hover: #1e293b;
       --shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
       
-      /* Floating Orb Colors - Dark Theme */
-      --orb-1: rgba(14, 165, 233, 0.5);
-      --orb-2: rgba(236, 72, 153, 0.45);
-      --orb-3: rgba(139, 92, 246, 0.45);
-      --orb-4: rgba(16, 185, 129, 0.4);
+      /* Floating Orbs - Dark Theme */
+      --orb-1: rgba(14, 165, 233, 0.45);
+      --orb-2: rgba(236, 72, 153, 0.4);
+      --orb-3: rgba(139, 92, 246, 0.4);
+      --orb-4: rgba(16, 185, 129, 0.35);
     }
 
     * {
@@ -64,7 +74,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Inter', sans-serif;
-      transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+      transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
     }
 
     body {
@@ -133,7 +143,7 @@
       animation: floatOrb4 14s ease-in-out infinite alternate;
     }
 
-    /* Clear, visible floating animations for background spheres */
+    /* Distinct visible movement keyframes for Orbs */
     @keyframes floatOrb1 {
       0% { transform: translate(0, 0) scale(1); }
       50% { transform: translate(120px, 90px) scale(1.25); }
@@ -174,7 +184,6 @@
       animation: cardAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Top control buttons */
     .top-controls {
       position: absolute;
       top: 22px;
@@ -221,7 +230,7 @@
       object-fit: cover;
       border-radius: 50%;
       border: 4px solid #ffffff;
-      box-shadow: 0 12px 28px rgba(56, 189, 248, 0.25);
+      box-shadow: 0 12px 28px rgba(56, 189, 248, 0.3);
       transition: transform 0.3s ease;
     }
 
@@ -230,18 +239,19 @@
     }
 
     .profile-name {
-      font-size: 1.6rem;
-      font-weight: 700;
+      font-size: 1.65rem;
+      font-weight: 800;
       color: var(--text-main);
       margin-bottom: 6px;
       letter-spacing: -0.4px;
     }
 
     .profile-bio {
-      font-size: 0.93rem;
+      font-size: 0.95rem;
       color: var(--text-sub);
       margin-bottom: 26px;
-      line-height: 1.4;
+      line-height: 1.45;
+      font-weight: 500;
     }
 
     .tab-navigation {
@@ -250,26 +260,31 @@
       border-radius: 20px;
       padding: 6px;
       margin-bottom: 24px;
-      border: 1px solid var(--card-border);
+      border: 1.5px solid var(--link-border);
+      position: relative;
     }
 
     .tab-btn {
       flex: 1;
-      padding: 12px 0;
+      padding: 13px 0;
       border: none;
       background: transparent;
       color: var(--text-sub);
-      font-weight: 600;
-      font-size: 0.93rem;
+      font-weight: 700;
+      font-size: 0.95rem;
       border-radius: 15px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
+    /* Highlighting active tab block */
     .tab-btn.active {
-      color: var(--text-main);
-      background: var(--tab-active);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+      color: var(--tab-active-text);
+      background: var(--tab-active-bg);
+      box-shadow: var(--tab-active-shadow);
+      transform: scale(1.02);
     }
 
     .tab-content-container {
@@ -294,15 +309,15 @@
     .link-item {
       display: flex;
       align-items: center;
-      padding: 13px 20px;
+      padding: 14px 20px;
       background: var(--link-bg);
-      border: 1.5px solid var(--link-border);
+      border: 2px solid var(--link-border);
       border-radius: 22px;
       text-decoration: none;
       color: var(--text-main);
-      font-weight: 600;
+      font-weight: 700;
       font-size: 0.98rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.08);
       transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
 
@@ -310,16 +325,16 @@
       transform: translateY(-4px);
       background: var(--link-hover);
       border-color: var(--accent-pastel);
-      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.22);
+      box-shadow: 0 12px 25px rgba(56, 189, 248, 0.28);
     }
 
     .app-icon {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       object-fit: cover;
       margin-right: 16px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       flex-shrink: 0;
     }
 
@@ -329,13 +344,13 @@
     }
 
     .link-arrow {
-      font-size: 0.88rem;
-      color: var(--text-sub);
+      font-size: 0.9rem;
+      color: var(--accent-pastel);
       transition: transform 0.3s ease, color 0.3s ease;
     }
 
     .link-item:hover .link-arrow {
-      transform: translateX(5px);
+      transform: translateX(6px);
       color: var(--accent-hover);
     }
 
@@ -345,7 +360,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(15, 23, 42, 0.45);
+      background: rgba(12, 74, 110, 0.45);
       backdrop-filter: blur(8px);
       display: flex;
       align-items: center;
@@ -380,8 +395,8 @@
     }
 
     .modal-title {
-      font-size: 1.2rem;
-      font-weight: 700;
+      font-size: 1.25rem;
+      font-weight: 800;
       color: var(--text-main);
       margin-bottom: 16px;
     }
@@ -390,10 +405,10 @@
       display: flex;
       justify-content: center;
       margin: 16px 0;
-      padding: 14px;
+      padding: 16px;
       background: #ffffff;
       border-radius: 20px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.15);
     }
 
     .modal-actions {
@@ -404,10 +419,10 @@
 
     .action-btn {
       flex: 1;
-      padding: 11px 0;
+      padding: 12px 0;
       border: none;
-      font-weight: 600;
-      font-size: 0.88rem;
+      font-weight: 700;
+      font-size: 0.9rem;
       border-radius: 16px;
       cursor: pointer;
       transition: all 0.25s ease;
@@ -420,7 +435,7 @@
     .copy-btn {
       background: var(--tab-bg);
       color: var(--text-main);
-      border: 1px solid var(--card-border);
+      border: 1.5px solid var(--link-border);
     }
 
     .copy-btn:hover {
@@ -429,14 +444,14 @@
     }
 
     .close-btn {
-      background: var(--accent-pastel);
+      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
       color: #ffffff;
       box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
     }
 
     .close-btn:hover {
-      background: var(--accent-hover);
       transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(56, 189, 248, 0.5);
     }
 
     /* Notification Toast */
@@ -445,13 +460,13 @@
       bottom: 25px;
       left: 50%;
       transform: translateX(-50%) translateY(100px);
-      background: rgba(15, 23, 42, 0.9);
+      background: #0c4a6e;
       color: #ffffff;
-      padding: 10px 22px;
+      padding: 12px 24px;
       border-radius: 20px;
-      font-size: 0.88rem;
-      font-weight: 500;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
       z-index: 200;
       opacity: 0;
       transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -476,6 +491,7 @@
 </head>
 <body>
 
+  <!-- Background Animated Blur Orbs -->
   <div class="bg-orbs">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
@@ -500,7 +516,7 @@
     <h1 class="profile-name" id="profile-name"></h1>
     <p class="profile-bio" id="profile-bio"></p>
 
-    <!-- Navigation Tabs -->
+    <!-- Navigation Tabs with Highlighted Block -->
     <nav class="tab-navigation">
       <button class="tab-btn active" data-tab="social">Social Media</button>
       <button class="tab-btn" data-tab="work">Work</button>
@@ -513,11 +529,12 @@
     </div>
   </main>
 
+  <!-- QR Code Modal -->
   <div class="modal-overlay" id="qr-modal">
     <div class="modal-card">
       <h3 class="modal-title">Chia sẻ trang Bio</h3>
       <div id="qrcode"></div>
-      <p style="font-size: 0.82rem; color: var(--text-sub);">Quét mã QR để truy cập nhanh</p>
+      <p style="font-size: 0.85rem; color: var(--text-sub); font-weight: 500;">Quét mã QR để truy cập nhanh</p>
       
       <div class="modal-actions">
         <button class="action-btn copy-btn" id="copy-btn">
@@ -531,25 +548,47 @@
   <!-- Toast Notification -->
   <div class="toast" id="toast">Đã sao chép liên kết!</div>
 
-  <!-- External Data File -->
   <script src="data.js"></script>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Render data from data.js
-      if (typeof bioData !== 'undefined') {
-        document.getElementById("avatar-img").src = bioData.profile.avatar;
-        document.getElementById("profile-name").textContent = bioData.profile.name;
-        document.getElementById("profile-bio").textContent = bioData.profile.bio;
+      // 1. Fallback / Default bioData structure if data.js is loading or custom
+      const defaultBioData = {
+        profile: {
+          name: "Nhật Huy",
+          bio: "Digital Creator & Tech Enthusiast 🚀",
+          avatar: "https://placehold.co/150x150/38bdf8/ffffff?text=Huy",
+          shareUrl: window.location.href
+        },
+        tabs: {
+          social: [
+            { title: "Facebook", url: "https://facebook.com", icon: "https://cdn-icons-png.flaticon.com/512/5968/5968764.png" },
+            { title: "Instagram", url: "https://instagram.com", icon: "https://cdn-icons-png.flaticon.com/512/2111/2111463.png" },
+            { title: "TikTok", url: "https://tiktok.com", icon: "https://cdn-icons-png.flaticon.com/512/3046/3046124.png" },
+            { title: "Zalo", url: "https://zalo.me", icon: "https://cdn-icons-png.flaticon.com/512/3670/3670070.png" }
+          ],
+          work: [
+            { title: "Email Contact", url: "mailto:contact@nhathuy.com", icon: "https://cdn-icons-png.flaticon.com/512/732/732200.png" },
+            { title: "Portfolio Website", url: "#", icon: "https://cdn-icons-png.flaticon.com/512/1006/1006771.png" }
+          ]
+        }
+      };
 
-        renderLinks("social-panel", bioData.tabs.social);
-        renderLinks("work-panel", bioData.tabs.work);
-      }
+      const data = (typeof bioData !== 'undefined') ? bioData : defaultBioData;
 
-      // 2. Activate features
+      // Render profile
+      document.getElementById("avatar-img").src = data.profile.avatar || defaultBioData.profile.avatar;
+      document.getElementById("profile-name").textContent = data.profile.name || defaultBioData.profile.name;
+      document.getElementById("profile-bio").textContent = data.profile.bio || defaultBioData.profile.bio;
+
+      // Render tab links
+      renderLinks("social-panel", data.tabs?.social || defaultBioData.tabs.social);
+      renderLinks("work-panel", data.tabs?.work || defaultBioData.tabs.work);
+
+      // Initialize interactive components
       initTabs();
       initTheme();
-      initQRCode();
+      initQRCode(data.profile.shareUrl || window.location.href);
     });
 
     function renderLinks(containerId, items) {
@@ -558,7 +597,7 @@
 
       container.innerHTML = items.map(item => `
         <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="link-item">
-          <img src="${item.icon}" alt="${item.title}" class="app-icon" onerror="this.src='https://placehold.co/40x40/e0f2fe/0284c7?text=App'">
+          <img src="${item.icon}" alt="${item.title}" class="app-icon" onerror="this.src='https://placehold.co/42x42/e0f2fe/0284c7?text=App'">
           <span class="link-title">${item.title}</span>
           <i class="fa-solid fa-chevron-right link-arrow"></i>
         </a>
@@ -612,7 +651,7 @@
       }
     }
 
-    function initQRCode() {
+    function initQRCode(shareUrl) {
       const shareBtn = document.getElementById("share-btn");
       const closeBtn = document.getElementById("close-modal");
       const copyBtn = document.getElementById("copy-btn");
@@ -625,15 +664,12 @@
       shareBtn.addEventListener("click", () => {
         modal.classList.add("open");
         if (!qrGenerated) {
-          const shareUrl = (typeof bioData !== 'undefined' && bioData.profile.shareUrl) 
-            ? bioData.profile.shareUrl 
-            : window.location.href;
-
+          qrContainer.innerHTML = "";
           new QRCode(qrContainer, {
             text: shareUrl,
             width: 160,
             height: 160,
-            colorDark: "#0f172a",
+            colorDark: "#0c4a6e",
             colorLight: "#ffffff",
             correctLevel: QRCode.CorrectLevel.H
           });
@@ -646,12 +682,8 @@
         if (e.target === modal) modal.classList.remove("open");
       });
 
-      // Copy Link function
+      // Copy Link functionality
       copyBtn.addEventListener("click", () => {
-        const shareUrl = (typeof bioData !== 'undefined' && bioData.profile.shareUrl) 
-          ? bioData.profile.shareUrl 
-          : window.location.href;
-
         const tempInput = document.createElement("input");
         tempInput.value = shareUrl;
         document.body.appendChild(tempInput);
@@ -659,7 +691,7 @@
         document.execCommand("copy");
         document.body.removeChild(tempInput);
 
-        // Show Toast Notification
+        // Toast feedback
         toast.classList.add("show");
         setTimeout(() => {
           toast.classList.remove("show");
