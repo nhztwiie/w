@@ -26,6 +26,7 @@
             --shadow-color: rgba(148, 163, 184, 0.12);
             --shadow-hover: rgba(148, 163, 184, 0.25);
             --modal-bg: rgba(255, 255, 255, 0.95);
+            --accent-color: #6366f1;
         }
 
         :root[data-theme="dark"] {
@@ -40,6 +41,7 @@
             --shadow-color: rgba(0, 0, 0, 0.3);
             --shadow-hover: rgba(0, 0, 0, 0.5);
             --modal-bg: rgba(30, 41, 59, 0.95);
+            --accent-color: #818cf8;
         }
 
         * {
@@ -81,7 +83,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Thanh Công Cụ Nút Bấm Top */
+        /* Thanh Nút Bấm Top */
         .top-tools {
             position: absolute;
             top: 20px;
@@ -110,7 +112,7 @@
             background: var(--btn-hover-bg);
         }
 
-        /* Avatar & Profile */
+        /* Profile */
         .profile {
             text-align: center;
             margin-top: 10px;
@@ -146,7 +148,7 @@
             font-weight: 400;
         }
 
-        /* Danh Sách Khung Nút Bấm Link */
+        /* Khung Nút Bấm Link */
         .links-list {
             display: flex;
             flex-direction: column;
@@ -159,14 +161,13 @@
             padding: 12px 18px;
             background: var(--btn-bg);
             border: 1px solid var(--btn-border);
-            border-radius: 50px; /* Bo tròn hoàn toàn các góc */
+            border-radius: 50px;
             text-decoration: none;
             color: var(--text-color);
             font-weight: 600;
             font-size: 1rem;
             box-shadow: 0 4px 12px var(--shadow-color);
             position: relative;
-            overflow: hidden;
         }
 
         .link-card:hover {
@@ -202,13 +203,13 @@
             transform: translateX(3px);
         }
 
-        /* Pop-up Modal QR Code */
+        /* Pop-up Modal QR Code Tích Hợp Link Chia Sẻ */
         .modal {
             display: none;
             position: fixed;
             inset: 0;
             background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(6px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -223,10 +224,10 @@
         .modal-content {
             background: var(--modal-bg);
             border: 1px solid var(--card-border);
-            padding: 28px;
+            padding: 24px;
             border-radius: 24px;
             text-align: center;
-            max-width: 320px;
+            max-width: 340px;
             width: 100%;
             position: relative;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
@@ -243,13 +244,70 @@
             cursor: pointer;
         }
 
-        #qrcode {
+        .qr-box {
             display: flex;
             justify-content: center;
-            margin: 20px 0;
-            padding: 12px;
+            align-items: center;
+            margin: 16px 0;
+            padding: 14px;
             background: #ffffff;
-            border-radius: 16px;
+            border-radius: 18px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        /* Khung Link bên trong Modal */
+        .link-box {
+            display: flex;
+            align-items: center;
+            background: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            border-radius: 12px;
+            padding: 8px 12px;
+            margin-top: 12px;
+            gap: 8px;
+        }
+
+        .link-input {
+            border: none;
+            background: transparent;
+            color: var(--text-color);
+            font-size: 0.82rem;
+            width: 100%;
+            outline: none;
+            text-overflow: ellipsis;
+        }
+
+        .copy-btn {
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .download-btn {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid var(--btn-border);
+            color: var(--text-color);
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .download-btn:hover {
+            background: var(--btn-hover-bg);
         }
 
         .footer-text {
@@ -290,13 +348,30 @@
         </div>
     </div>
 
-    <!-- Modal hiển thị QR Code -->
+    <!-- Modal hiển thị QR Code & Chia Sẻ Link -->
     <div class="modal" id="qrModal">
         <div class="modal-content">
             <button class="close-btn" id="closeModalBtn">&times;</button>
-            <h3 style="margin-bottom: 8px;">Mã QR Trang Bio</h3>
-            <p style="font-size: 0.85rem; color: var(--text-sub);">Quét để truy cập nhanh trang cá nhân này</p>
-            <div id="qrcode"></div>
+            <h3 style="margin-bottom: 4px; font-size: 1.1rem;">Mã QR Chia Sẻ</h3>
+            <p style="font-size: 0.82rem; color: var(--text-sub);">Quét để xem trang cá nhân của Nhật Huy</p>
+            
+            <!-- Khung chứa ảnh mã QR -->
+            <div class="qr-box">
+                <div id="qrcode"></div>
+            </div>
+
+            <!-- Khung chứa Link & Sao chép -->
+            <div class="link-box">
+                <input type="text" id="shareUrlInput" class="link-input" readonly>
+                <button class="copy-btn" id="copyBtn">
+                    <i class="fa-regular fa-copy"></i>
+                </button>
+            </div>
+
+            <!-- Nút tải ảnh QR về máy -->
+            <button class="download-btn" id="downloadQrBtn">
+                <i class="fa-solid fa-download"></i> Tải ảnh QR
+            </button>
         </div>
     </div>
 
@@ -305,11 +380,18 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // 1. Load dữ liệu từ data.js vào Giao diện
+            // 1. Render Dữ liệu từ data.js
             document.getElementById("userName").textContent = bioData.profile.name;
             document.getElementById("userBio").textContent = bioData.profile.bio;
             document.getElementById("userAvatar").src = bioData.profile.avatar;
             document.getElementById("year").textContent = new Date().getFullYear();
+
+            // Link dùng để chia sẻ (Ưu tiên shareUrl trong data.js, nếu trống sẽ tự lấy link trang hiện tại)
+            const targetShareUrl = bioData.profile.shareUrl && bioData.profile.shareUrl.trim() !== "" 
+                ? bioData.profile.shareUrl 
+                : window.location.href;
+
+            document.getElementById("shareUrlInput").value = targetShareUrl;
 
             // Render Danh sách Link
             const container = document.getElementById("linksContainer");
@@ -328,7 +410,7 @@
                 container.appendChild(a);
             });
 
-            // 2. Chức năng Đổi Theme (Light/Dark Mode)
+            // 2. Chức năng Đổi Theme Light/Dark Mode
             const themeToggleBtn = document.getElementById("themeToggleBtn");
             const themeIcon = document.getElementById("themeIcon");
             const htmlTag = document.documentElement;
@@ -341,21 +423,24 @@
                 themeIcon.className = newTheme === "light" ? "fa-solid fa-moon" : "fa-solid fa-sun";
             });
 
-            // 3. Chức năng Tạo Pop-up Mã QR
+            // 3. Xử lý Mã QR & Link Chia Sẻ
             const qrBtn = document.getElementById("qrBtn");
             const qrModal = document.getElementById("qrModal");
             const closeModalBtn = document.getElementById("closeModalBtn");
             const qrContainer = document.getElementById("qrcode");
+            const copyBtn = document.getElementById("copyBtn");
+            const downloadQrBtn = document.getElementById("downloadQrBtn");
             let qrGenerated = false;
 
+            // Mở Modal và tạo Mã QR
             qrBtn.addEventListener("click", () => {
                 qrModal.classList.add("active");
                 if (!qrGenerated) {
                     new QRCode(qrContainer, {
-                        text: window.location.href,
-                        width: 180,
-                        height: 180,
-                        colorDark : "#2d3748",
+                        text: targetShareUrl,
+                        width: 170,
+                        height: 170,
+                        colorDark : "#1e293b",
                         colorLight : "#ffffff",
                         correctLevel : QRCode.CorrectLevel.H
                     });
@@ -363,13 +448,31 @@
                 }
             });
 
-            closeModalBtn.addEventListener("click", () => {
-                qrModal.classList.remove("active");
+            // Đóng Modal
+            closeModalBtn.addEventListener("click", () => qrModal.classList.remove("active"));
+            qrModal.addEventListener("click", (e) => {
+                if (e.target === qrModal) qrModal.classList.remove("active");
             });
 
-            qrModal.addEventListener("click", (e) => {
-                if (e.target === qrModal) {
-                    qrModal.classList.remove("active");
+            // Sao chép Link
+            copyBtn.addEventListener("click", () => {
+                const copyText = document.getElementById("shareUrlInput");
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    copyBtn.innerHTML = `<i class="fa-solid fa-check"></i>`;
+                    setTimeout(() => {
+                        copyBtn.innerHTML = `<i class="fa-regular fa-copy"></i>`;
+                    }, 2000);
+                });
+            });
+
+            // Tải Ảnh Mã QR về máy
+            downloadQrBtn.addEventListener("click", () => {
+                const img = qrContainer.querySelector("img");
+                if (img) {
+                    const a = document.createElement("a");
+                    a.href = img.src;
+                    a.download = "Bio-QR-NhatHuy.png";
+                    a.click();
                 }
             });
         });
