@@ -34,7 +34,7 @@
       --link-hover: #f0f9ff;
       --shadow: 0 20px 40px rgba(186, 230, 253, 0.45);
 
-      /* MÀU HÌNH CẦU MỜ CÓ THỂ NHÌN THẤY RÕ BẰNG MẮT THƯỜNG */
+      /* HÌNH CẦU MỜ BẰNG MẮT THƯỜNG */
       --orb-1: rgba(125, 211, 252, 0.85);
       --orb-2: rgba(56, 189, 248, 0.7);
       --orb-3: rgba(186, 230, 253, 0.95);
@@ -298,7 +298,7 @@
     .link-arrow { font-size: 0.85rem; color: var(--text-sub); }
 
     /* ==========================================================
-       MODAL QR CODE CÓ TÍCH HỢP CHIA SẺ VÀ COPY LINK
+       MODAL QR CODE + NÚT SAO CHÉP LINK
        ========================================================== */
     .modal-overlay {
       position: fixed;
@@ -326,9 +326,9 @@
       background: var(--card-bg);
       backdrop-filter: blur(20px);
       border-radius: 24px;
-      padding: 25px 20px;
+      padding: 28px 22px;
       width: 90%;
-      max-width: 340px;
+      max-width: 320px;
       text-align: center;
       box-shadow: var(--shadow);
       border: 2px solid var(--card-border);
@@ -357,57 +357,40 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
-    /* Các nút chia sẻ trong Modal */
-    .share-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 15px;
-    }
-
-    .action-btn {
-      flex: 1;
-      padding: 10px 12px;
+    /* Nút Copy Link thiết kế nổi bật bên dưới QR */
+    .copy-btn {
+      width: 100%;
+      margin-top: 10px;
+      padding: 11px 16px;
       border: none;
-      border-radius: 14px;
+      background: var(--accent-pastel);
+      color: #ffffff;
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
+      border-radius: 16px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.35);
       transition: all 0.25s ease;
     }
 
-    .btn-copy {
-      background: var(--tab-bg);
-      color: var(--text-main);
-      border: 1px solid var(--card-border);
-    }
-
-    .btn-copy:hover {
-      background: var(--link-hover);
-    }
-
-    .btn-native-share {
-      background: var(--accent-pastel);
-      color: #ffffff;
-      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.35);
-    }
-
-    .btn-native-share:hover {
-      opacity: 0.9;
+    .copy-btn:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
     }
 
     .close-btn {
-      margin-top: 12px;
+      margin-top: 10px;
       width: 100%;
-      padding: 10px;
+      padding: 8px;
       border: none;
       background: transparent;
       color: var(--text-sub);
       font-weight: 600;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       cursor: pointer;
     }
 
@@ -461,22 +444,17 @@
     </div>
   </main>
 
-  <!-- Modal QR Code & Share Link -->
+  <!-- Modal QR Code & Copy Link -->
   <div class="modal-overlay" id="qr-modal">
     <div class="modal-card">
-      <h3 class="modal-title">Chia sẻ trang Bio</h3>
+      <h3 class="modal-title">Quét mã QR</h3>
       <div id="qrcode"></div>
-      <p style="font-size: 0.8rem; color: var(--text-sub); margin-bottom: 5px;">Quét mã QR hoặc dùng các lựa chọn bên dưới</p>
-
-      <!-- Các nút chia sẻ tích hợp -->
-      <div class="share-actions">
-        <button class="action-btn btn-copy" id="copy-link-btn">
-          <i class="fa-regular fa-copy"></i> <span id="copy-text">Sao chép</span>
-        </button>
-        <button class="action-btn btn-native-share" id="native-share-btn">
-          <i class="fa-solid fa-share-nodes"></i> Chia sẻ
-        </button>
-      </div>
+      
+      <!-- Nút Sao Chép Link bên dưới QR Code -->
+      <button class="copy-btn" id="copy-link-btn">
+        <i class="fa-regular fa-copy"></i>
+        <span id="copy-text">Sao chép link</span>
+      </button>
 
       <button class="close-btn" id="close-modal">Đóng</button>
     </div>
@@ -495,7 +473,7 @@
 
       initTabs();
       initTheme();
-      initQRCodeAndShare();
+      initQRCodeAndCopy();
     });
 
     function renderLinks(containerId, items) {
@@ -556,8 +534,8 @@
       }
     }
 
-    // TÍNH NĂNG TẠO QR VÀ CHIA SẺ LINK
-    function initQRCodeAndShare() {
+    // TÍNH NĂNG TẠO QR VÀ SAO CHÉP LINK
+    function initQRCodeAndCopy() {
       const shareBtn = document.getElementById("share-btn");
       const closeBtn = document.getElementById("close-modal");
       const modal = document.getElementById("qr-modal");
@@ -565,16 +543,15 @@
       
       const copyBtn = document.getElementById("copy-link-btn");
       const copyText = document.getElementById("copy-text");
-      const nativeShareBtn = document.getElementById("native-share-btn");
 
-      // Lấy đường dẫn link chia sẻ
+      // Lấy link cần chia sẻ từ data.js hoặc đường dẫn trang hiện tại
       const shareUrl = (typeof bioData !== 'undefined' && bioData.profile.shareUrl) 
                        ? bioData.profile.shareUrl 
                        : window.location.href;
 
       let qrGenerated = false;
 
-      // Mở Modal và Tạo mã QR
+      // Mở Modal và tạo QR Code
       shareBtn.addEventListener("click", () => {
         modal.classList.add("open");
         if (!qrGenerated) {
@@ -593,32 +570,16 @@
       // Xử lý nút Sao chép Link
       copyBtn.addEventListener("click", () => {
         navigator.clipboard.writeText(shareUrl).then(() => {
-          copyText.textContent = "Đã chép!";
+          copyText.textContent = "Đã sao chép!";
+          copyBtn.style.background = "#22c55e"; // Đổi sang màu xanh lá báo thành công
+          
           setTimeout(() => {
-            copyText.textContent = "Sao chép";
+            copyText.textContent = "Sao chép link";
+            copyBtn.style.background = "var(--accent-pastel)";
           }, 2000);
         }).catch(err => {
-          console.error("Lỗi khi sao chép link:", err);
+          console.error("Lỗi khi sao chép:", err);
         });
-      });
-
-      // Xử lý nút Chia sẻ ứng dụng (Web Share API trên điện thoại)
-      nativeShareBtn.addEventListener("click", async () => {
-        if (navigator.share) {
-          try {
-            await navigator.share({
-              title: bioData.profile.name || "Bio Link",
-              text: "Ghé thăm trang Bio Link của tôi:",
-              url: shareUrl
-            });
-          } catch (err) {
-            console.log("Đã hủy chia sẻ:", err);
-          }
-        } else {
-          // Nếu trình duyệt không hỗ trợ Web Share API thì tự động copy link
-          navigator.clipboard.writeText(shareUrl);
-          alert("Đã sao chép liên kết vào bộ nhớ tạm!");
-        }
       });
 
       closeBtn.addEventListener("click", () => modal.classList.remove("open"));
