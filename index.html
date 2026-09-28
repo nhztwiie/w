@@ -16,7 +16,7 @@
 
   <style>
     /* ==========================================================
-       BẢNG MÀU SÁNG TƯƠI & LAM PASTEL (BRIGHT PASTEL)
+       BẢNG MÀU SÁNG TƯƠI & HÌNH CẦU PASTEL (LAM, ĐỎ, VÀNG)
        ========================================================== */
     :root[data-theme="light"] {
       --bg-base: #ffffff;
@@ -34,10 +34,10 @@
       --link-hover: #f0f9ff;
       --shadow: 0 20px 40px rgba(186, 230, 253, 0.45);
 
-      /* HÌNH CẦU MỜ BẰNG MẮT THƯỜNG */
-      --orb-1: rgba(125, 211, 252, 0.85);
-      --orb-2: rgba(56, 189, 248, 0.7);
-      --orb-3: rgba(186, 230, 253, 0.95);
+      /* MÀU 3 HÌNH CẦU PASTEL: LAM, ĐỎ, VÀNG BẰNG MẮT THƯỜNG */
+      --orb-blue: rgba(125, 211, 252, 0.85);   /* Xanh lam pastel */
+      --orb-red: rgba(254, 178, 178, 0.75);    /* Đỏ/hồng pastel */
+      --orb-yellow: rgba(253, 230, 138, 0.85); /* Vàng pastel */
     }
 
     :root[data-theme="dark"] {
@@ -56,9 +56,9 @@
       --link-hover: #1e293b;
       --shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 
-      --orb-1: rgba(14, 165, 233, 0.5);
-      --orb-2: rgba(56, 189, 248, 0.4);
-      --orb-3: rgba(125, 211, 252, 0.45);
+      --orb-blue: rgba(14, 165, 233, 0.5);
+      --orb-red: rgba(239, 68, 68, 0.35);
+      --orb-yellow: rgba(245, 158, 11, 0.4);
     }
 
     * {
@@ -66,7 +66,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Inter', sans-serif;
-      transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, transform 0.3s ease;
+      transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
     }
 
     body {
@@ -81,7 +81,7 @@
     }
 
     /* ==========================================================
-       HÌNH CẦU MỜ CHUYỂN ĐỘNG RÕ RÀNG (ANIMATED BLUR ORBS)
+       HÌNH CẦU MỜ CÓ MÀU LAM, ĐỎ, VÀNG CHUYỂN ĐỘNG CHẬM
        ========================================================== */
     .bg-orbs {
       position: fixed;
@@ -98,31 +98,31 @@
       position: absolute;
       border-radius: 50%;
       filter: blur(45px);
-      animation: floatOrb 10s infinite ease-in-out alternate;
+      animation: floatOrb 11s infinite ease-in-out alternate;
     }
 
     .orb-1 {
       width: 340px;
       height: 340px;
-      background: var(--orb-1);
+      background: var(--orb-blue);
       top: -30px;
       left: -30px;
       animation-duration: 9s;
     }
 
     .orb-2 {
-      width: 380px;
-      height: 380px;
-      background: var(--orb-2);
-      bottom: -50px;
+      width: 360px;
+      height: 360px;
+      background: var(--orb-red);
+      bottom: -40px;
       right: -30px;
-      animation-duration: 12s;
+      animation-duration: 13s;
     }
 
     .orb-3 {
-      width: 280px;
-      height: 280px;
-      background: var(--orb-3);
+      width: 300px;
+      height: 300px;
+      background: var(--orb-yellow);
       top: 40%;
       left: 45%;
       transform: translate(-50%, -50%);
@@ -131,8 +131,8 @@
 
     @keyframes floatOrb {
       0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(90px, 60px) scale(1.18); }
-      100% { transform: translate(-60px, 100px) scale(0.9); }
+      50% { transform: translate(80px, 50px) scale(1.15); }
+      100% { transform: translate(-50px, 90px) scale(0.92); }
     }
 
     /* ==========================================================
@@ -177,6 +177,7 @@
       justify-content: center;
       font-size: 1.1rem;
       box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      transition: transform 0.25s ease, background 0.3s ease;
     }
 
     .icon-btn:hover {
@@ -198,6 +199,11 @@
       border-radius: 50%;
       border: 4px solid #ffffff;
       box-shadow: 0 10px 25px rgba(56, 189, 248, 0.25);
+      transition: transform 0.3s ease;
+    }
+
+    .avatar-wrapper:hover .avatar-img {
+      transform: scale(1.05);
     }
 
     .profile-name {
@@ -214,15 +220,32 @@
       margin-bottom: 25px;
     }
 
-    /* TAB NAVIGATION */
+    /* ==========================================================
+       TAB NAVIGATION VỚI HIỆU ỨNG TRƯỢT MƯỢT MÀ
+       ========================================================== */
     .tab-navigation {
+      position: relative;
       display: flex;
       background: var(--tab-bg);
       border-radius: 16px;
       padding: 6px;
       margin-bottom: 22px;
-      gap: 6px;
       border: 1px solid var(--card-border);
+      z-index: 1;
+    }
+
+    /* Khối màu hiệu ứng trượt mượt */
+    .tab-indicator {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: calc(50% - 6px);
+      height: calc(100% - 12px);
+      background: var(--tab-active-bg);
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1;
     }
 
     .tab-btn {
@@ -235,16 +258,18 @@
       font-size: 0.92rem;
       border-radius: 12px;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      z-index: 2;
+      transition: color 0.3s ease;
     }
 
     .tab-btn.active {
       color: var(--tab-active-text);
-      background: var(--tab-active-bg);
-      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
-      transform: scale(1.02);
     }
 
+    /* ==========================================================
+       THANH THÔNG TIN LINK CÓ HIỆU ỨNG CHUYỂN ĐỘNG
+       ========================================================== */
     .tab-content-container {
       min-height: 220px;
     }
@@ -254,7 +279,7 @@
       flex-direction: column;
       gap: 12px;
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(12px);
       transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
@@ -264,6 +289,7 @@
       transform: translateY(0);
     }
 
+    /* Ô link với hiệu ứng chuyển động lơ lửng nhẹ */
     .link-item {
       display: flex;
       align-items: center;
@@ -276,10 +302,24 @@
       font-weight: 600;
       font-size: 0.95rem;
       box-shadow: 0 4px 15px rgba(186, 230, 253, 0.15);
+      animation: floatItem 6s infinite ease-in-out alternate;
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Nhịp trôi lệch thời gian giữa các thanh thông tin */
+    .link-item:nth-child(1) { animation-delay: 0s; }
+    .link-item:nth-child(2) { animation-delay: 1.2s; }
+    .link-item:nth-child(3) { animation-delay: 2.4s; }
+    .link-item:nth-child(4) { animation-delay: 3.6s; }
+
+    @keyframes floatItem {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-3px); }
     }
 
     .link-item:hover {
-      transform: translateY(-3px);
+      animation-play-state: paused;
+      transform: translateY(-5px) scale(1.01) !important;
       background: var(--link-hover);
       box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3);
     }
@@ -295,10 +335,15 @@
     }
 
     .link-title { flex: 1; text-align: left; }
-    .link-arrow { font-size: 0.85rem; color: var(--text-sub); }
+    .link-arrow { font-size: 0.85rem; color: var(--text-sub); transition: transform 0.3s ease; }
+
+    .link-item:hover .link-arrow {
+      transform: translateX(4px);
+      color: var(--accent-pastel);
+    }
 
     /* ==========================================================
-       MODAL QR CODE + NÚT SAO CHÉP LINK
+       MODAL QR CODE + SAO CHÉP LINK
        ========================================================== */
     .modal-overlay {
       position: fixed;
@@ -357,7 +402,6 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
-    /* Nút Copy Link thiết kế nổi bật bên dưới QR */
     .copy-btn {
       width: 100%;
       margin-top: 10px;
@@ -406,7 +450,7 @@
 </head>
 <body>
 
-  <!-- Background Animated Blur Orbs -->
+  <!-- Background Animated Blur Orbs (Lam, Đỏ, Vàng Pastel) -->
   <div class="bg-orbs">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
@@ -433,6 +477,7 @@
 
     <!-- Navigation Tabs -->
     <nav class="tab-navigation">
+      <div class="tab-indicator" id="tab-indicator"></div>
       <button class="tab-btn active" data-tab="social">Social Media</button>
       <button class="tab-btn" data-tab="work">Work</button>
     </nav>
@@ -450,7 +495,6 @@
       <h3 class="modal-title">Quét mã QR</h3>
       <div id="qrcode"></div>
       
-      <!-- Nút Sao Chép Link bên dưới QR Code -->
       <button class="copy-btn" id="copy-link-btn">
         <i class="fa-regular fa-copy"></i>
         <span id="copy-text">Sao chép link</span>
@@ -487,16 +531,21 @@
       `).join('');
     }
 
+    // TÍNH NĂNG CHUYỂN TAB TRƯỢT MƯỢT
     function initTabs() {
       const tabBtns = document.querySelectorAll(".tab-btn");
+      const indicator = document.getElementById("tab-indicator");
       const panels = {
         social: document.getElementById("social-panel"),
         work: document.getElementById("work-panel")
       };
 
-      tabBtns.forEach(btn => {
+      tabBtns.forEach((btn, index) => {
         btn.addEventListener("click", () => {
           const targetTab = btn.dataset.tab;
+
+          // Di chuyển khối màu active
+          indicator.style.transform = `translateX(${index * 100}%)`;
 
           tabBtns.forEach(b => b.classList.remove("active"));
           btn.classList.add("active");
@@ -534,7 +583,6 @@
       }
     }
 
-    // TÍNH NĂNG TẠO QR VÀ SAO CHÉP LINK
     function initQRCodeAndCopy() {
       const shareBtn = document.getElementById("share-btn");
       const closeBtn = document.getElementById("close-modal");
@@ -544,14 +592,12 @@
       const copyBtn = document.getElementById("copy-link-btn");
       const copyText = document.getElementById("copy-text");
 
-      // Lấy link cần chia sẻ từ data.js hoặc đường dẫn trang hiện tại
       const shareUrl = (typeof bioData !== 'undefined' && bioData.profile.shareUrl) 
                        ? bioData.profile.shareUrl 
                        : window.location.href;
 
       let qrGenerated = false;
 
-      // Mở Modal và tạo QR Code
       shareBtn.addEventListener("click", () => {
         modal.classList.add("open");
         if (!qrGenerated) {
@@ -567,11 +613,10 @@
         }
       });
 
-      // Xử lý nút Sao chép Link
       copyBtn.addEventListener("click", () => {
         navigator.clipboard.writeText(shareUrl).then(() => {
           copyText.textContent = "Đã sao chép!";
-          copyBtn.style.background = "#22c55e"; // Đổi sang màu xanh lá báo thành công
+          copyBtn.style.background = "#22c55e";
           
           setTimeout(() => {
             copyText.textContent = "Sao chép link";
