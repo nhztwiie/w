@@ -16,7 +16,7 @@
 
   <style>
     /* ==========================================================
-       BẢNG MÀU SÁNG TƯƠI & HÌNH CẦU PASTEL (LAM, ĐỎ, VÀNG)
+       BẢNG MÀU SÁNG TƯƠI & 5 HÌNH CẦU PASTEL (LAM, ĐỎ, VÀNG, TÍM, NGỌC)
        ========================================================== */
     :root[data-theme="light"] {
       --bg-base: #ffffff;
@@ -34,10 +34,12 @@
       --link-hover: #f0f9ff;
       --shadow: 0 20px 40px rgba(186, 230, 253, 0.45);
 
-      /* MÀU 3 HÌNH CẦU PASTEL: LAM, ĐỎ, VÀNG BẰNG MẮT THƯỜNG */
+      /* MÀU 5 HÌNH CẦU PASTEL */
       --orb-blue: rgba(125, 211, 252, 0.85);   /* Xanh lam pastel */
       --orb-red: rgba(254, 178, 178, 0.75);    /* Đỏ/hồng pastel */
       --orb-yellow: rgba(253, 230, 138, 0.85); /* Vàng pastel */
+      --orb-purple: rgba(221, 214, 254, 0.85); /* Tím pastel */
+      --orb-teal: rgba(153, 246, 228, 0.8);    /* Xanh ngọc pastel */
     }
 
     :root[data-theme="dark"] {
@@ -59,6 +61,8 @@
       --orb-blue: rgba(14, 165, 233, 0.5);
       --orb-red: rgba(239, 68, 68, 0.35);
       --orb-yellow: rgba(245, 158, 11, 0.4);
+      --orb-purple: rgba(168, 85, 247, 0.4);
+      --orb-teal: rgba(20, 184, 166, 0.4);
     }
 
     * {
@@ -81,7 +85,7 @@
     }
 
     /* ==========================================================
-       HÌNH CẦU MỜ CÓ MÀU LAM, ĐỎ, VÀNG CHUYỂN ĐỘNG CHẬM
+       HỆ THỐNG 5 HÌNH CẦU MỜ CÓ KÍCH THƯỚC ĐA DẠNG & MÀU PASTEL
        ========================================================== */
     .bg-orbs {
       position: fixed;
@@ -97,42 +101,65 @@
     .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(45px);
-      animation: floatOrb 11s infinite ease-in-out alternate;
+      filter: blur(50px);
+      animation: floatOrb 12s infinite ease-in-out alternate;
     }
 
+    /* Khối 1: Lam (Lớn - Góc trên trái) */
     .orb-1 {
-      width: 340px;
-      height: 340px;
-      background: var(--orb-blue);
-      top: -30px;
-      left: -30px;
-      animation-duration: 9s;
-    }
-
-    .orb-2 {
       width: 360px;
       height: 360px;
+      background: var(--orb-blue);
+      top: -60px;
+      left: -60px;
+      animation-duration: 10s;
+    }
+
+    /* Khối 2: Đỏ/Hồng (Lớn - Góc dưới phải) */
+    .orb-2 {
+      width: 380px;
+      height: 380px;
       background: var(--orb-red);
-      bottom: -40px;
-      right: -30px;
+      bottom: -70px;
+      right: -50px;
+      animation-duration: 14s;
+    }
+
+    /* Khối 3: Tím (Trung bình - Góc trên phải) */
+    .orb-3 {
+      width: 270px;
+      height: 270px;
+      background: var(--orb-purple);
+      top: 10%;
+      right: 5%;
+      animation-duration: 11s;
+    }
+
+    /* Khối 4: Vàng (Trung bình - Trung tâm) */
+    .orb-4 {
+      width: 290px;
+      height: 290px;
+      background: var(--orb-yellow);
+      top: 45%;
+      left: 40%;
+      transform: translate(-50%, -50%);
       animation-duration: 13s;
     }
 
-    .orb-3 {
-      width: 300px;
-      height: 300px;
-      background: var(--orb-yellow);
-      top: 40%;
-      left: 45%;
-      transform: translate(-50%, -50%);
-      animation-duration: 10s;
+    /* Khối 5: Xanh Ngọc (Nhỏ - Góc dưới trái) */
+    .orb-5 {
+      width: 220px;
+      height: 220px;
+      background: var(--orb-teal);
+      bottom: 12%;
+      left: 8%;
+      animation-duration: 9s;
     }
 
     @keyframes floatOrb {
       0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(80px, 50px) scale(1.15); }
-      100% { transform: translate(-50px, 90px) scale(0.92); }
+      50% { transform: translate(75px, 45px) scale(1.15); }
+      100% { transform: translate(-45px, 85px) scale(0.92); }
     }
 
     /* ==========================================================
@@ -234,7 +261,6 @@
       z-index: 1;
     }
 
-    /* Khối màu hiệu ứng trượt mượt */
     .tab-indicator {
       position: absolute;
       top: 6px;
@@ -289,7 +315,6 @@
       transform: translateY(0);
     }
 
-    /* Ô link với hiệu ứng chuyển động lơ lửng nhẹ */
     .link-item {
       display: flex;
       align-items: center;
@@ -306,7 +331,6 @@
       transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, box-shadow 0.3s ease;
     }
 
-    /* Nhịp trôi lệch thời gian giữa các thanh thông tin */
     .link-item:nth-child(1) { animation-delay: 0s; }
     .link-item:nth-child(2) { animation-delay: 1.2s; }
     .link-item:nth-child(3) { animation-delay: 2.4s; }
@@ -450,11 +474,13 @@
 </head>
 <body>
 
-  <!-- Background Animated Blur Orbs (Lam, Đỏ, Vàng Pastel) -->
+  <!-- Background Animated Blur Orbs (5 Khối Cầu Mờ) -->
   <div class="bg-orbs">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+    <div class="orb orb-5"></div>
   </div>
 
   <!-- Bio Main Card -->
@@ -531,7 +557,6 @@
       `).join('');
     }
 
-    // TÍNH NĂNG CHUYỂN TAB TRƯỢT MƯỢT
     function initTabs() {
       const tabBtns = document.querySelectorAll(".tab-btn");
       const indicator = document.getElementById("tab-indicator");
@@ -544,7 +569,6 @@
         btn.addEventListener("click", () => {
           const targetTab = btn.dataset.tab;
 
-          // Di chuyển khối màu active
           indicator.style.transform = `translateX(${index * 100}%)`;
 
           tabBtns.forEach(b => b.classList.remove("active"));
