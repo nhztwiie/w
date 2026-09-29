@@ -518,7 +518,7 @@
   <!-- Modal QR Code & Copy Link -->
   <div class="modal-overlay" id="qr-modal">
     <div class="modal-card">
-      <h3 class="modal-title">Quét mã QR</h3>
+      <h3 class="modal-title">Scan QR code</h3>
       <div id="qrcode"></div>
       
       <button class="copy-btn" id="copy-link-btn">
@@ -526,7 +526,7 @@
         <span id="copy-text">Copy link</span>
       </button>
 
-      <button class="close-btn" id="close-modal">Close</button>
+      <button class="close-btn" id="close-modal">Đóng</button>
     </div>
   </div>
 
@@ -639,11 +639,11 @@
 
       copyBtn.addEventListener("click", () => {
         navigator.clipboard.writeText(shareUrl).then(() => {
-          copyText.textContent = "Đã sao chép!";
+          copyText.textContent = "Copied!";
           copyBtn.style.background = "#22c55e";
           
           setTimeout(() => {
-            copyText.textContent = "Sao chép link";
+            copyText.textContent = "Copy link";
             copyBtn.style.background = "var(--accent-pastel)";
           }, 2000);
         }).catch(err => {
