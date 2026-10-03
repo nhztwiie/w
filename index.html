@@ -153,7 +153,7 @@
     }
 
     /* ==========================================================
-       MAIN CARD CONTAINER (DESKTOP & MOBILE FIX)
+       MAIN CARD CONTAINER
        ========================================================== */
     .liquid-card {
       position: relative;
@@ -181,7 +181,7 @@
     }
 
     /* ==========================================================
-       TOP BAR & CÔNG TẮC THEME
+       TOP BAR & CÔNG TẮC THEME (CĂN CHỈNH TỰ ĐỘNG KHÔNG LỆCH)
        ========================================================== */
     .top-bar {
       padding: 18px 24px 10px;
@@ -194,22 +194,22 @@
 
     .theme-toggle-pill {
       position: relative;
-      width: 72px;
-      height: 38px;
+      width: 68px;
+      height: 36px;
       background: var(--pill-bg);
       border: 1.5px solid var(--pill-border);
       border-radius: 30px;
       display: flex;
       align-items: center;
-      padding: 3px;
+      padding: 2px;
       cursor: pointer;
       backdrop-filter: blur(10px);
     }
 
     .theme-indicator {
       position: absolute;
-      top: 2.5px;
-      left: 2.5px;
+      top: 2px;
+      left: 2px;
       width: 30px;
       height: 30px;
       border-radius: 50%;
@@ -226,7 +226,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       z-index: 2;
       transition: color 0.3s ease;
     }
@@ -371,11 +371,8 @@
       width: 300%;
       transform: translate3d(-33.333%, 0, 0);
       transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-      cursor: grab;
       will-change: transform;
     }
-
-    .viewport:active { cursor: grabbing; }
 
     .tab-page {
       width: 33.333%;
@@ -434,7 +431,7 @@
     .liquid-link-item:hover .link-chevron { transform: translate3d(4px, 0, 0); }
 
     /* ==========================================================
-       THANH TAB BÊN DƯỚI (DESKTOP & MOBILE FIX)
+       THANH TAB BÊN DƯỚI
        ========================================================== */
     .bottom-nav-container {
       padding: 10px 20px 20px;
@@ -723,7 +720,6 @@
       renderLinks("work-links-list", bioData.tabs.work);
 
       initTabNavigation();
-      initSwipeGesture();
       initThemeToggle();
       initQRCodeModal();
     });
@@ -777,36 +773,6 @@
       window.switchTabGlobal = switchTab;
     }
 
-    function initSwipeGesture() {
-      const viewport = document.getElementById("viewport");
-      let startX = 0;
-      let currentX = 0;
-      let isSwiping = false;
-
-      viewport.addEventListener("touchstart", (e) => {
-        startX = e.touches[0].clientX;
-        isSwiping = true;
-      }, { passive: true });
-
-      viewport.addEventListener("touchmove", (e) => {
-        if (!isSwiping) return;
-        currentX = e.touches[0].clientX;
-      }, { passive: true });
-
-      viewport.addEventListener("touchend", () => {
-        if (!isSwiping) return;
-        const diffX = startX - currentX;
-
-        if (diffX > 45 && currentTabIndex < 2) {
-          window.switchTabGlobal(currentTabIndex + 1);
-        } else if (diffX < -45 && currentTabIndex > 0) {
-          window.switchTabGlobal(currentTabIndex - 1);
-        }
-
-        isSwiping = false;
-      });
-    }
-
     function initThemeToggle() {
       const toggle = document.getElementById("theme-toggle");
       const indicator = document.getElementById("theme-indicator");
@@ -830,8 +796,8 @@
           indicator.style.transform = "translate3d(0, 0, 0)";
           indicator.style.backgroundColor = "#38bdf8";
         } else {
-          // Tính toán chuẩn xác 36px cho nút ở Light Mode
-          indicator.style.transform = "translate3d(36px, 0, 0)";
+          // Dùng translateX(100%) thay vì px cứng giúp khối ôm khít tuyệt đối nút mặt trời
+          indicator.style.transform = "translate3d(100%, 0, 0)";
           indicator.style.backgroundColor = "#f59e0b";
         }
       }
