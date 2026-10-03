@@ -6,12 +6,12 @@
   <title>Nhật Huy | Bio Link</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="images/avatar.png">
+  <link rel="icon" type="image/png" href="images/Huy.png">
 
   <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- FontAwesome & QRCode Library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -19,29 +19,30 @@
 
   <style>
     /* ==========================================================
-       LIQUID GLASS THEME VARIABLES (DYNAMIC LIGHT / DARK)
+       BẢNG MÀU TƯƠNG PHẢN CAO & HIỆU ỨNG LIQUID GLASS
        ========================================================== */
     :root[data-theme="light"] {
-      --bg-gradient: radial-gradient(circle at 50% 0%, #e0f2fe 0%, #bae6fd 45%, #f0f9ff 100%);
-      --glass-bg: rgba(255, 255, 255, 0.42);
-      --glass-border: rgba(255, 255, 255, 0.85);
-      --glass-shadow: 0 30px 60px rgba(14, 165, 233, 0.18), inset 0 1px 2px rgba(255, 255, 255, 0.95);
-      --glass-glow: rgba(56, 189, 248, 0.25);
+      --bg-gradient: radial-gradient(circle at 50% 0%, #e0f2fe 0%, #bae6fd 50%, #f0f9ff 100%);
+      --glass-bg: rgba(255, 255, 255, 0.55);
+      --glass-border: rgba(255, 255, 255, 0.9);
+      --glass-shadow: 0 25px 50px rgba(14, 165, 233, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.95);
+      --glass-glow: rgba(56, 189, 248, 0.35);
       
-      --text-main: #0284c7;
-      --text-title: #0f172a;
-      --text-sub: #0284c7;
+      /* Tương phản cao cho Light Mode */
+      --text-title: #0f172a;       /* Chữ đen xanh đậm rất rõ nét */
+      --text-sub: #0369a1;         /* Chữ phụ xanh đậm */
+      --text-link: #0f172a;
       
-      --nav-bg: rgba(255, 255, 255, 0.55);
-      --indicator-bg: rgba(255, 255, 255, 0.9);
-      --indicator-shadow: 0 8px 20px rgba(56, 189, 248, 0.35), inset 0 2px 4px rgba(255, 255, 255, 1);
-      --nav-icon-active: #0284c7;
+      --nav-bg: rgba(255, 255, 255, 0.65);
+      --indicator-bg: #0284c7;     /* Khối chọn xanh nổi bật */
+      --indicator-shadow: 0 6px 18px rgba(2, 132, 199, 0.4);
+      --nav-icon-active: #ffffff;
       --nav-icon-inactive: #64748b;
 
-      --link-bg: rgba(255, 255, 255, 0.6);
-      --link-border: rgba(255, 255, 255, 0.9);
-      --link-hover: rgba(255, 255, 255, 0.88);
-      --link-shadow: 0 10px 25px rgba(186, 230, 253, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+      --link-bg: rgba(255, 255, 255, 0.75);
+      --link-border: rgba(255, 255, 255, 0.95);
+      --link-hover: #ffffff;
+      --link-shadow: 0 10px 20px rgba(186, 230, 253, 0.4);
 
       --orb-1: #38bdf8;
       --orb-2: #93c5fd;
@@ -52,25 +53,26 @@
 
     :root[data-theme="dark"] {
       --bg-gradient: radial-gradient(circle at 50% 0%, #0f172a 0%, #090d16 60%, #020617 100%);
-      --glass-bg: rgba(15, 23, 42, 0.58);
-      --glass-border: rgba(56, 189, 248, 0.25);
-      --glass-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.15);
-      --glass-glow: rgba(56, 189, 248, 0.35);
+      --glass-bg: rgba(15, 23, 42, 0.75);
+      --glass-border: rgba(56, 189, 248, 0.35);
+      --glass-shadow: 0 25px 50px rgba(0, 0, 0, 0.65), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+      --glass-glow: rgba(56, 189, 248, 0.4);
 
-      --text-main: #38bdf8;
-      --text-title: #f8fafc;
-      --text-sub: #7dd3fc;
+      /* Tương phản cao cho Dark Mode */
+      --text-title: #ffffff;       /* Chữ trắng tinh nổi bật trên nền tối */
+      --text-sub: #38bdf8;         /* Chữ phụ xanh neon */
+      --text-link: #f8fafc;
 
-      --nav-bg: rgba(30, 41, 59, 0.65);
-      --indicator-bg: #38bdf8;
-      --indicator-shadow: 0 8px 22px rgba(56, 189, 248, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+      --nav-bg: rgba(30, 41, 59, 0.8);
+      --indicator-bg: #38bdf8;     /* Khối chọn xanh neon */
+      --indicator-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
       --nav-icon-active: #0f172a;
       --nav-icon-inactive: #94a3b8;
 
-      --link-bg: rgba(30, 41, 59, 0.65);
-      --link-border: rgba(56, 189, 248, 0.25);
-      --link-hover: rgba(51, 65, 85, 0.85);
-      --link-shadow: 0 10px 25px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      --link-bg: rgba(30, 41, 59, 0.8);
+      --link-border: rgba(56, 189, 248, 0.3);
+      --link-hover: rgba(51, 65, 85, 0.95);
+      --link-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
 
       --orb-1: #0284c7;
       --orb-2: #1e3a8a;
@@ -101,7 +103,7 @@
     }
 
     /* ==========================================================
-       DYNAMIC LIQUID BACKGROUND & BLING GLOWS
+       HỆ THỐNG 5 HÌNH CẦU LIQUID & PARTICLES
        ========================================================== */
     .bg-canvas {
       position: fixed;
@@ -118,7 +120,7 @@
       position: absolute;
       border-radius: 50%;
       filter: blur(40px);
-      opacity: 0.75;
+      opacity: 0.8;
       animation: floatFluid 14s infinite ease-in-out alternate;
     }
 
@@ -138,7 +140,7 @@
       position: absolute;
       background: #ffffff;
       border-radius: 50%;
-      box-shadow: 0 0 12px #ffffff, 0 0 24px var(--text-main);
+      box-shadow: 0 0 12px #ffffff, 0 0 24px var(--text-sub);
       animation: sparkleAnim 3s infinite ease-in-out alternate;
     }
 
@@ -174,7 +176,9 @@
       to { opacity: 1; transform: scale(1) translateY(0); }
     }
 
-    /* TOP BAR & EVENLY BALANCED THEME TOGGLE PILL */
+    /* ==========================================================
+       TOP BAR & CHUẨN CÂN BẰNG KHỐI THEME TOGGLE (100% CÂN ĐỐI)
+       ========================================================== */
     .top-bar {
       padding: 22px 24px 10px;
       display: flex;
@@ -183,9 +187,10 @@
       z-index: 10;
     }
 
+    /* Khung ngoài Toggle Pill */
     .theme-toggle-pill {
       position: relative;
-      width: 76px;
+      width: 72px;
       height: 38px;
       background: rgba(255, 255, 255, 0.35);
       border: 1.5px solid var(--glass-border);
@@ -193,12 +198,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 4px;
+      padding: 3px;
       cursor: pointer;
       backdrop-filter: blur(15px);
       box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
     }
 
+    /* Khối tròn di chuyển ôm khít Icon */
     .theme-indicator {
       position: absolute;
       top: 3px;
@@ -207,12 +213,13 @@
       height: 30px;
       border-radius: 50%;
       background: #ffffff;
-      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
       transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 1;
     }
 
     [data-theme="dark"] .theme-indicator {
-      transform: translateX(38px);
+      transform: translateX(34px);
       background: #38bdf8;
     }
 
@@ -222,7 +229,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       z-index: 2;
       color: var(--nav-icon-inactive);
       transition: color 0.3s;
@@ -232,6 +239,7 @@
       color: var(--nav-icon-active);
     }
 
+    /* Nút QR Top Right */
     .qr-glass-btn {
       width: 42px;
       height: 42px;
@@ -256,7 +264,7 @@
     }
 
     /* ==========================================================
-       UNIFIED PROFILE HEADER & VIEWPORT
+       HEADER THÔNG TIN NHẬT HUY (ĐỒNG BỘ CÂN ĐỐI 3 TAB)
        ========================================================== */
     .profile-header {
       display: flex;
@@ -269,8 +277,8 @@
 
     .avatar-frame {
       position: relative;
-      width: 110px;
-      height: 110px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
       padding: 4px;
       background: rgba(255, 255, 255, 0.65);
@@ -298,30 +306,31 @@
 
     .profile-name-title {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.9rem;
+      font-size: 2rem;
       font-weight: 800;
       color: var(--text-title);
-      margin-top: 10px;
+      margin-top: 12px;
       letter-spacing: -0.5px;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
     }
 
     .profile-subtitle {
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--text-sub);
-      margin-top: 1px;
+      margin-top: 2px;
     }
 
-    /* SWIPEABLE TAB VIEWPORT */
+    /* ==========================================================
+       VIEWPORT HỖ TRỢ CHUYỂN 3 TAB VUỐT
+       ========================================================== */
     .viewport {
       flex: 1;
       display: flex;
       width: 300%;
-      transform: translateX(-33.333%); /* Home Tab Default */
+      transform: translateX(-33.333%); /* Mặc định Tab Home */
       transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
       cursor: grab;
-      margin-top: 10px;
+      margin-top: 15px;
     }
 
     .viewport:active { cursor: grabbing; }
@@ -329,7 +338,7 @@
     .tab-page {
       width: 33.333%;
       height: 100%;
-      padding: 10px 24px 15px;
+      padding: 5px 24px 15px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -337,35 +346,7 @@
       overflow-y: auto;
     }
 
-    /* CONTACT ME BUTTON (HOME TAB) */
-    .contact-me-btn {
-      margin-top: 35px;
-      padding: 15px 45px;
-      border-radius: 30px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(186,230,253,0.65));
-      border: 2px solid rgba(255, 255, 255, 0.95);
-      color: #0284c7;
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 12px 28px rgba(56, 189, 248, 0.35), inset 0 2px 4px rgba(255,255,255,0.9);
-      backdrop-filter: blur(15px);
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    [data-theme="dark"] .contact-me-btn {
-      background: linear-gradient(135deg, rgba(30,41,59,0.85), rgba(56,189,248,0.4));
-      color: #f8fafc;
-      border-color: rgba(56, 189, 248, 0.4);
-    }
-
-    .contact-me-btn:hover {
-      transform: scale(1.06) translateY(-3px);
-      box-shadow: 0 18px 35px rgba(56, 189, 248, 0.5);
-    }
-
-    /* LIQUID LINK ITEMS */
+    /* LINK CARDS BO TRÒN */
     .links-list {
       width: 100%;
       display: flex;
@@ -376,14 +357,14 @@
     .liquid-link-item {
       display: flex;
       align-items: center;
-      padding: 13px 18px;
+      padding: 14px 20px;
       background: var(--link-bg);
       border: 1.5px solid var(--link-border);
       border-radius: 22px;
       text-decoration: none;
-      color: var(--text-title);
+      color: var(--text-link);
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 1rem;
       backdrop-filter: blur(20px);
       box-shadow: var(--link-shadow);
       animation: floatCard 6s infinite ease-in-out alternate;
@@ -416,7 +397,7 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    .link-text-label { flex: 1; text-align: left; color: var(--text-title); }
+    .link-text-label { flex: 1; text-align: left; color: var(--text-link); }
     .link-chevron { font-size: 0.85rem; color: var(--text-sub); transition: transform 0.3s; }
 
     .liquid-link-item:hover .link-chevron {
@@ -424,7 +405,7 @@
     }
 
     /* ==========================================================
-       BOTTOM NAVIGATION DOCK (3 TABS WITH LIQUID INDICATOR)
+       THANH CHUYỂN 3 TAB BÊN DƯỚI (BOTTOM DOCK NAV) - RÕ RÀNG
        ========================================================== */
     .bottom-nav-container {
       padding: 0 20px 20px;
@@ -441,17 +422,17 @@
       border-radius: 35px;
       padding: 5px;
       backdrop-filter: blur(25px);
-      box-shadow: 0 10px 30px rgba(2, 132, 199, 0.12);
+      box-shadow: 0 12px 32px rgba(2, 132, 199, 0.18);
     }
 
+    /* Khối Indicator ôm vừa khít 100% nút tab */
     .nav-indicator-pill {
       position: absolute;
       top: 5px;
       left: 5px;
-      width: calc(33.333% - 7px);
+      width: calc(33.333% - 6.66px);
       height: calc(100% - 10px);
       background: var(--indicator-bg);
-      border: 1.5px solid rgba(255, 255, 255, 0.9);
       border-radius: 30px;
       box-shadow: var(--indicator-shadow);
       transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -480,7 +461,7 @@
     }
 
     /* ==========================================================
-       PROPORTIONAL QR CODE MODAL
+       TINH CHỈNH MÀU KHUNG QR CODE HÀI HÒA HƠN
        ========================================================== */
     .modal-backdrop {
       position: fixed;
@@ -488,8 +469,8 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(15, 23, 42, 0.55);
-      backdrop-filter: blur(15px);
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(16px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -513,7 +494,7 @@
       width: 88%;
       max-width: 320px;
       text-align: center;
-      box-shadow: var(--glass-shadow);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 30px var(--glass-glow);
       transform: scale(0.88);
       transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
@@ -527,9 +508,10 @@
       font-size: 1.25rem;
       font-weight: 800;
       color: var(--text-title);
-      margin-bottom: 15px;
+      margin-bottom: 16px;
     }
 
+    /* Khung QR viền mờ cao cấp hợp nền */
     .qr-box-wrapper {
       position: relative;
       width: 185px;
@@ -537,8 +519,9 @@
       margin: 0 auto;
       padding: 10px;
       background: #ffffff;
-      border-radius: 24px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      border: 3px solid rgba(255, 255, 255, 0.8);
+      border-radius: 26px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -630,7 +613,7 @@
   <!-- MAIN CARD CONTAINER -->
   <main class="liquid-card" id="main-card">
     
-    <!-- TOP BAR -->
+    <!-- TOP BAR (CÂN ĐỐI KHỐI TOGGLE) -->
     <div class="top-bar">
       <div class="theme-toggle-pill" id="theme-toggle">
         <div class="theme-indicator"></div>
@@ -643,7 +626,7 @@
       </button>
     </div>
 
-    <!-- UNIFIED PROFILE HEADER -->
+    <!-- HEADER THÔNG TIN NHẬT HUY (CÂN ĐỐI TẤT CẢ TABS) -->
     <header class="profile-header">
       <div class="avatar-frame">
         <img src="" alt="Avatar Nhật Huy" class="user-avatar-img">
@@ -660,10 +643,8 @@
         <div class="links-list" id="social-links-list"></div>
       </section>
 
-      <!-- TAB 2: HOME -->
-      <section class="tab-page" id="page-home">
-        <button class="contact-me-btn" id="contact-me-btn">Contact me!</button>
-      </section>
+      <!-- TAB 2: HOME (BỎ CONTACT ME, TỐI GIẢN) -->
+      <section class="tab-page" id="page-home"></section>
 
       <!-- TAB 3: WORK -->
       <section class="tab-page" id="page-work">
@@ -672,7 +653,7 @@
 
     </div>
 
-    <!-- BOTTOM 3-TAB NAVIGATION BAR -->
+    <!-- THANH CHUYỂN 3 TAB BÊN DƯỚI (HIỂN THỊ RÕ RÀNG) -->
     <div class="bottom-nav-container">
       <nav class="bottom-nav-glass">
         <div class="nav-indicator-pill" id="nav-indicator"></div>
@@ -693,7 +674,7 @@
 
   </main>
 
-  <!-- QR CODE MODAL -->
+  <!-- QR CODE MODAL CÂN ĐỐI -->
   <div class="modal-backdrop" id="qr-modal">
     <div class="qr-glass-card">
       <h3 class="qr-modal-header">Scan QR Code</h3>
@@ -741,13 +722,12 @@
       `).join('');
     }
 
-    let currentTabIndex = 1; // Default to Home (Index 1)
+    let currentTabIndex = 1; // Mặc định Tab Home (Index = 1)
 
     function initTabNavigation() {
       const navBtns = document.querySelectorAll(".nav-tab-btn");
       const indicator = document.getElementById("nav-indicator");
       const viewport = document.getElementById("viewport");
-      const contactBtn = document.getElementById("contact-me-btn");
 
       function switchTab(index) {
         currentTabIndex = index;
@@ -764,7 +744,6 @@
         btn.addEventListener("click", () => switchTab(i));
       });
 
-      contactBtn.addEventListener("click", () => switchTab(2));
       window.switchTabGlobal = switchTab;
     }
 
@@ -862,7 +841,7 @@
           setTimeout(() => {
             copyText.textContent = "Copy link";
             copyBtn.style.background = "var(--indicator-bg)";
-            copyBtn.style.color = "";
+            copyBtn.style.color = "var(--nav-icon-active)";
           }, 2000);
         });
       });
