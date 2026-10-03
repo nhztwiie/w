@@ -140,6 +140,7 @@
       backdrop-filter: blur(5px);
       animation: floatArc 16s infinite ease-in-out alternate;
       will-change: transform;
+      backface-visibility: hidden;
     }
 
     .arc-1 { width: 500px; height: 500px; top: -140px; left: -160px; animation-duration: 18s; }
@@ -153,15 +154,16 @@
     }
 
     /* ==========================================================
-       MAIN CARD CONTAINER
+       MAIN CARD CONTAINER (KHUNG TỰ ĐỘNG FIT NỘI DUNG)
        ========================================================== */
     .liquid-card {
       position: relative;
       z-index: 2;
       width: 100%;
       max-width: 410px;
-      height: 740px;
-      max-height: 92vh;
+      height: auto;               /* Tự động co giãn theo nội dung */
+      min-height: 520px;          /* Chiều cao tối thiểu đẹp dáng */
+      max-height: 90vh;           /* Tránh tràn màn hình trên thiết bị nhỏ */
       background: var(--glass-bg);
       backdrop-filter: blur(16px) saturate(180%);
       -webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -173,6 +175,9 @@
       justify-content: space-between;
       overflow: hidden;
       animation: glassAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Hiệu ứng co giãn mượt */
+      will-change: height;
+      backface-visibility: hidden;
     }
 
     @keyframes glassAppear {
@@ -321,17 +326,16 @@
       margin-top: 1px;
     }
 
-    /* CAPTION HOME DỊCH XUỐNG DƯỚI NẸT CÂN ĐỐI */
+    /* CAPTION HOME DỊCH XUỐNG DƯỚI CÂN ĐỐI */
     .home-quote-box {
       margin: auto 0;
-      margin-top: 25px;
-      padding: 0 20px;
+      padding: 20px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transform: translateY(14px);
+      transform: translateY(10px);
     }
 
     .quote-text {
@@ -365,7 +369,7 @@
     }
 
     /* ==========================================================
-       VIEWPORT & CONTENT
+       VIEWPORT & CONTENT (TỐI ƯU GPU - KHÔNG GIẬT LAG)
        ========================================================== */
     .viewport {
       flex: 1 1 auto;
@@ -375,12 +379,12 @@
       transform: translate3d(-33.333%, 0, 0);
       transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: transform;
+      backface-visibility: hidden;
     }
 
     .tab-page {
       width: 33.333%;
-      height: 100%;
-      padding: 10px 24px 15px;
+      padding: 15px 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -413,6 +417,7 @@
       box-shadow: 0 6px 16px rgba(0,0,0,0.05);
       transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
       will-change: transform;
+      backface-visibility: hidden;
     }
 
     .liquid-link-item:hover {
@@ -471,6 +476,7 @@
       transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
       z-index: 1;
       will-change: transform;
+      backface-visibility: hidden;
     }
 
     .nav-tab-btn {
@@ -496,7 +502,7 @@
     }
 
     /* ==========================================================
-       MODAL QR CODE (KHUNG QR VÀ NÚT COPY RIÊNG BỆT)
+       MODAL QR CODE
        ========================================================== */
     .modal-backdrop {
       position: fixed;
@@ -543,7 +549,6 @@
       margin-bottom: 14px;
     }
 
-    /* KHUNG QR RIÊNG */
     .qr-box-wrapper {
       position: relative;
       width: 180px;
@@ -583,7 +588,6 @@
       pointer-events: none;
     }
 
-    /* NÚT COPY RIÊNG (FIT VỪA KHÍT ĐỘ RỘNG 180PX) */
     .copy-link-btn {
       width: 180px;
       margin: 14px auto 0;
@@ -665,7 +669,10 @@
       <!-- TAB 2: HOME (CAPTION QUOTE) -->
       <section class="tab-page" id="page-home">
         <div class="home-quote-box">
-          <p class="quote-text">“Even the darkest night wiil end,<br>and the sun will rise”</p>
+          <br>
+          <br>
+          <br>
+          <p class="quote-text">“<br>Even the darkest night wiil end,<br>and the sun will rise.</p>
           <span class="quote-author">Les Misérables - Victor Hugo</span>
         </div>
       </section>
@@ -698,18 +705,16 @@
 
   </main>
 
-  <!-- MODAL QR CODE (KHUNG QR VÀ NÚT COPY LÀ 2 NÚT RIÊNG BỆT) -->
+  <!-- MODAL QR CODE -->
   <div class="modal-backdrop" id="qr-modal">
     <div class="qr-glass-card">
       <h3 class="qr-modal-header">Scan QR Code</h3>
       
-      <!-- 1. Khung QR riêng -->
       <div class="qr-box-wrapper">
         <div id="qrcode-canvas"></div>
         <img src="images/Huy.png" alt="Avatar Center" class="qr-center-avatar">
       </div>
 
-      <!-- 2. Nút Copy riêng -->
       <button class="copy-link-btn" id="copy-btn">
         <i class="fa-regular fa-copy"></i>
         <span id="copy-text">Copy link</span>
@@ -754,6 +759,7 @@
       function switchTab(index) {
         currentTabIndex = index;
 
+        // Trượt Viewport qua GPU
         viewport.style.transform = `translate3d(-${index * 33.333}%, 0, 0)`;
         indicator.style.transform = `translate3d(${index * 100}%, 0, 0)`;
 
