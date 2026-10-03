@@ -1,11 +1,11 @@
-// data.js - Cấu hình dữ liệu Bio Link phong cách Liquid Glass cho Nhật Huy
+// data.js - Cấu hình dữ liệu Bio Link cho Nhật Huy
 const bioData = {
   profile: {
     name: "Nhật Huy",
     subTitle: "ung dung.",
     bio: "Contact me!",
-    avatar: "images/Huy.png", // Ảnh đại diện hình tròn
-    shareUrl: window.location.href // Tự động lấy URL hiện tại để tạo mã QR
+    avatar: "images/avatar.png",
+    shareUrl: window.location.href
   },
   tabs: {
     social: [
