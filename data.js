@@ -2,9 +2,8 @@
 const bioData = {
   profile: {
     name: "Nhật Huy",
-    subTitle: "ung dung.",
-    bio: "Contact me!",
-    avatar: "images/avatar.png",
+    bio: "ung dung.",
+    avatar: "images/Huy.png",
     shareUrl: window.location.href
   },
   tabs: {
