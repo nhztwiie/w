@@ -8,7 +8,7 @@
   <!-- Favicon từ images/email.png -->
   <link rel="icon" type="image/png" href="images/email.png">
 
-  <!-- Google Fonts: Plus Jakarta Sans & Inter (Tối giản, sang trọng) -->
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -38,7 +38,7 @@
       --pill-bg: rgba(30, 41, 59, 0.35);
       --pill-border: rgba(255, 255, 255, 0.15);
       
-      --nav-bg: rgba(15, 23, 42, 0.4);
+      --nav-bg: rgba(15, 23, 42, 0.45);
       --indicator-bg: #38bdf8;
       --indicator-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
       --nav-icon-active: #0f172a;
@@ -86,7 +86,6 @@
       --link-border: rgba(255, 255, 255, 0.85);
       --link-hover: rgba(255, 255, 255, 0.75);
 
-      /* Nền QR Code tươi sáng hơn ở Light Theme */
       --qr-modal-bg: rgba(186, 230, 253, 0.5);
       --qr-card-bg: rgba(255, 255, 255, 0.82);
       --qr-card-border: rgba(255, 255, 255, 0.95);
@@ -114,7 +113,7 @@
       align-items: center;
       position: relative;
       overflow: hidden;
-      padding: 20px 15px;
+      padding: 15px;
       transition: background 0.5s ease;
     }
 
@@ -153,7 +152,7 @@
     }
 
     /* ==========================================================
-       MAIN CARD CONTAINER (CÂN ĐỐI TRONG KHUNG PAGE)
+       MAIN CARD CONTAINER (CĂN CHỈNH CHO DESKTOP & MOBILE)
        ========================================================== */
     .liquid-card {
       position: relative;
@@ -170,7 +169,7 @@
       box-shadow: var(--glass-shadow);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: space-between; /* Đảm bảo đáy cố định */
       overflow: hidden;
       animation: glassAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -181,7 +180,7 @@
     }
 
     /* ==========================================================
-       TOP BAR & CÔNG TẮC THEME CĂN GIỮA TUYỆT ĐỐI
+       TOP BAR & CÔNG TẮC THEME CĂN GIỮA ICON
        ========================================================== */
     .top-bar {
       padding: 20px 24px 10px;
@@ -195,25 +194,23 @@
     .theme-toggle-pill {
       position: relative;
       width: 74px;
-      height: 36px;
+      height: 38px;
       background: var(--pill-bg);
       border: 1.5px solid var(--pill-border);
       border-radius: 30px;
       display: flex;
       align-items: center;
-      padding: 2px;
+      padding: 3px;
       cursor: pointer;
       backdrop-filter: blur(10px);
     }
 
-    /* Khối đánh dấu tròn được tính toán căn giữa tuyệt đối */
     .theme-indicator {
       position: absolute;
-      top: 50%;
-      left: 2px;
+      top: 3px;
+      left: 3px;
       width: 30px;
       height: 30px;
-      margin-top: -15px; /* Căn giữa chiều dọc */
       border-radius: 50%;
       background: #38bdf8;
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
@@ -260,7 +257,7 @@
     }
 
     /* ==========================================================
-       DYNAMIC HEADER & NỘI DUNG CĂN GIỮA TOÀN BỘ PAGE
+       DYNAMIC HEADER & AVATAR CÂN ĐỐI NỘI DUNG
        ========================================================== */
     .profile-header {
       display: flex;
@@ -276,8 +273,8 @@
 
     .avatar-frame {
       position: relative;
-      width: 115px;
-      height: 115px;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
       padding: 3px;
       background: rgba(255, 255, 255, 0.4);
@@ -307,15 +304,15 @@
 
     .profile-name-title {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.85rem;
+      font-size: 1.8rem;
       font-weight: 800;
       color: var(--text-title);
-      margin-top: 10px;
+      margin-top: 8px;
       letter-spacing: -0.3px;
     }
 
     .profile-subtitle {
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       font-weight: 600;
       color: var(--text-sub);
       margin-top: 1px;
@@ -351,8 +348,8 @@
 
     /* THU NHỎ AVATAR KHI SANG SOCIAL/WORK */
     .liquid-card.compact-mode .avatar-frame {
-      width: 74px;
-      height: 74px;
+      width: 72px;
+      height: 72px;
     }
 
     .liquid-card.compact-mode .profile-info-block {
@@ -364,7 +361,7 @@
     }
 
     /* ==========================================================
-       VIEWPORT & CONTENT TỰ ĐỘNG CĂN GIỮA
+       VIEWPORT & CONTENT CĂN GIỮA
        ========================================================== */
     .viewport {
       flex: 1;
@@ -385,12 +382,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center; /* Căn giữa toàn bộ nội dung page */
+      justify-content: center;
       box-sizing: border-box;
       overflow-y: auto;
     }
 
-    /* LINK CARDS CĂN GIỮA */
+    /* LINK CARDS */
     .links-list {
       width: 100%;
       display: flex;
@@ -435,13 +432,13 @@
     .liquid-link-item:hover .link-chevron { transform: translateX(4px); }
 
     /* ==========================================================
-       THANH TAB BÊN DƯỚI - CĂN GIỮA KHỐI ĐÁNH DẤU CHÍNH XÁC
+       THANH TAB DƯỚI ĐÁY - KHẮC PHỤC HOÀN TOÀN TRÊN DESKTOP
        ========================================================== */
     .bottom-nav-container {
       padding: 0 20px 20px;
-      z-index: 20;
+      z-index: 30;
       width: 100%;
-      flex-shrink: 0;
+      flex-shrink: 0; /* Khóa vị trí không bị ép mất */
     }
 
     .bottom-nav-glass {
@@ -457,7 +454,7 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
     }
 
-    /* Khối Indicator ôm vừa khít 100% Nút Tab */
+    /* Khối Indicator căn giữa 100% icon */
     .nav-indicator-pill {
       position: absolute;
       top: 4px;
@@ -479,7 +476,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       color: var(--nav-icon-inactive);
       cursor: pointer;
       position: relative;
@@ -494,7 +491,7 @@
     }
 
     /* ==========================================================
-       MODAL QR CODE - TỰ ĐỔI MÀU SÁNG / TỐI NỀN TƯƠNG THÍCH THEME
+       MODAL QR CODE
        ========================================================== */
     .modal-backdrop {
       position: fixed;
@@ -658,7 +655,7 @@
         <div class="links-list" id="social-links-list"></div>
       </section>
 
-      <!-- TAB 2: HOME (CAPTION QUOTE CĂN GIỮA) -->
+      <!-- TAB 2: HOME (CAPTION QUOTE) -->
       <section class="tab-page" id="page-home">
         <div class="home-quote-box">
           <p class="quote-text">“Even the darkest night wiil end,<br>and the sun will rise”</p>
@@ -673,7 +670,7 @@
 
     </div>
 
-    <!-- THANH CHUYỂN TAB BÊN DƯỚI (DESKTOP & MOBILE) -->
+    <!-- THANH CHUYỂN TAB DƯỚI ĐÁY (ĐẢM BẢO HIỆN CẢ DESKTOP VÀ MOBILE) -->
     <div class="bottom-nav-container">
       <nav class="bottom-nav-glass">
         <div class="nav-indicator-pill" id="nav-indicator"></div>
@@ -694,7 +691,7 @@
 
   </main>
 
-  <!-- MODAL QR CODE THÍCH ỨNG THEME LIGHT/DARK -->
+  <!-- MODAL QR CODE -->
   <div class="modal-backdrop" id="qr-modal">
     <div class="qr-glass-card">
       <h3 class="qr-modal-header">Scan QR Code</h3>
@@ -751,7 +748,7 @@
         // Trượt Viewport
         viewport.style.transform = `translateX(-${index * 33.333}%)`;
         
-        // Trượt Indicator chính xác 100% căn giữa
+        // Trượt Indicator chuẩn 100%
         indicator.style.transform = `translateX(${index * 100}%)`;
 
         navBtns.forEach((btn, i) => {
