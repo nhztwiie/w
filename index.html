@@ -8,7 +8,7 @@
   <!-- Favicon từ images/email.png -->
   <link rel="icon" type="image/png" href="images/email.png">
 
-  <!-- Google Fonts: Plus Jakarta Sans & Inter (Cực kỳ đơn giản, sang trọng) -->
+  <!-- Google Fonts: Plus Jakarta Sans & Inter (Tối giản, sang trọng) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
 
   <style>
     /* ==========================================================
-       BẢNG MÀU & HIỆU ỨNG LIQUID GLASS
+       BẢNG MÀU & HIỆU ỨNG LIQUID GLASS (DARK / LIGHT)
        ========================================================== */
     :root[data-theme="dark"] {
       --bg-base: #060913;
@@ -49,6 +49,10 @@
       --link-border: rgba(255, 255, 255, 0.12);
       --link-hover: rgba(51, 65, 85, 0.6);
 
+      --qr-modal-bg: rgba(15, 23, 42, 0.7);
+      --qr-card-bg: rgba(15, 23, 42, 0.65);
+      --qr-card-border: rgba(255, 255, 255, 0.2);
+
       --arc-1: rgba(30, 58, 138, 0.6);
       --arc-2: rgba(30, 27, 75, 0.7);
       --arc-edge: rgba(186, 230, 253, 0.4);
@@ -68,10 +72,10 @@
       --text-quote: #0f172a;
       --text-author: #475569;
 
-      --pill-bg: rgba(255, 255, 255, 0.4);
+      --pill-bg: rgba(255, 255, 255, 0.45);
       --pill-border: rgba(255, 255, 255, 0.8);
 
-      --nav-bg: rgba(255, 255, 255, 0.4);
+      --nav-bg: rgba(255, 255, 255, 0.45);
       --indicator-bg: #0284c7;
       --indicator-shadow: 0 6px 18px rgba(2, 132, 199, 0.35);
       --nav-icon-active: #ffffff;
@@ -81,6 +85,11 @@
       --link-bg: rgba(255, 255, 255, 0.38);
       --link-border: rgba(255, 255, 255, 0.85);
       --link-hover: rgba(255, 255, 255, 0.75);
+
+      /* Nền QR Code tươi sáng hơn ở Light Theme */
+      --qr-modal-bg: rgba(186, 230, 253, 0.5);
+      --qr-card-bg: rgba(255, 255, 255, 0.82);
+      --qr-card-border: rgba(255, 255, 255, 0.95);
 
       --arc-1: rgba(186, 230, 253, 0.7);
       --arc-2: rgba(125, 211, 252, 0.5);
@@ -144,7 +153,7 @@
     }
 
     /* ==========================================================
-       MAIN CARD CONTAINER (CÂN ĐỐI TRÊN DESKTOP & MOBILE)
+       MAIN CARD CONTAINER (CÂN ĐỐI TRONG KHUNG PAGE)
        ========================================================== */
     .liquid-card {
       position: relative;
@@ -161,7 +170,7 @@
       box-shadow: var(--glass-shadow);
       display: flex;
       flex-direction: column;
-      justify-content: space-between; /* Giữ thanh Tab luôn ở đáy trên máy tính */
+      justify-content: space-between;
       overflow: hidden;
       animation: glassAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -172,7 +181,7 @@
     }
 
     /* ==========================================================
-       TOP BAR & CÔNG TẮC THEME DYNAMIC FIT
+       TOP BAR & CÔNG TẮC THEME CĂN GIỮA TUYỆT ĐỐI
        ========================================================== */
     .top-bar {
       padding: 20px 24px 10px;
@@ -197,15 +206,17 @@
       backdrop-filter: blur(10px);
     }
 
+    /* Khối đánh dấu tròn được tính toán căn giữa tuyệt đối */
     .theme-indicator {
       position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 28px;
-      height: 28px;
+      top: 50%;
+      left: 2px;
+      width: 30px;
+      height: 30px;
+      margin-top: -15px; /* Căn giữa chiều dọc */
       border-radius: 50%;
       background: #38bdf8;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
       transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.35s ease;
       z-index: 1;
     }
@@ -249,12 +260,13 @@
     }
 
     /* ==========================================================
-       DYNAMIC HEADER (AVATAR: images/Huy.png)
+       DYNAMIC HEADER & NỘI DUNG CĂN GIỮA TOÀN BỘ PAGE
        ========================================================== */
     .profile-header {
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       text-align: center;
       padding: 10px 24px 0;
       z-index: 5;
@@ -289,6 +301,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
@@ -308,11 +321,15 @@
       margin-top: 1px;
     }
 
-    /* CAPTION HOME */
+    /* CAPTION HOME CĂN GIỮA */
     .home-quote-box {
-      margin-top: 25px;
+      margin: auto 0;
       padding: 0 20px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       animation: fadeIn 0.8s ease;
     }
 
@@ -332,7 +349,7 @@
       display: block;
     }
 
-    /* KHI Ở TAB WORK/SOCIAL: GIỮ AVATAR THU NHỎ GỌN GÀNG */
+    /* THU NHỎ AVATAR KHI SANG SOCIAL/WORK */
     .liquid-card.compact-mode .avatar-frame {
       width: 74px;
       height: 74px;
@@ -347,7 +364,7 @@
     }
 
     /* ==========================================================
-       VIEWPORT & SWIPEABLE TAB CONTENT
+       VIEWPORT & CONTENT TỰ ĐỘNG CĂN GIỮA
        ========================================================== */
     .viewport {
       flex: 1;
@@ -356,7 +373,7 @@
       transform: translateX(-33.333%);
       transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
       cursor: grab;
-      margin-top: 10px;
+      margin-top: 5px;
     }
 
     .viewport:active { cursor: grabbing; }
@@ -368,16 +385,19 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center; /* Căn giữa toàn bộ nội dung page */
       box-sizing: border-box;
       overflow-y: auto;
     }
 
-    /* LINK CARDS */
+    /* LINK CARDS CĂN GIỮA */
     .links-list {
       width: 100%;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       gap: 12px;
+      margin: auto 0;
     }
 
     .liquid-link-item {
@@ -415,7 +435,7 @@
     .liquid-link-item:hover .link-chevron { transform: translateX(4px); }
 
     /* ==========================================================
-       THANH CHUYỂN TAB DƯỚI ĐÁY (ĐẢM BẢO HIỆN TRÊN DESKTOP & MOBILE)
+       THANH TAB BÊN DƯỚI - CĂN GIỮA KHỐI ĐÁNH DẤU CHÍNH XÁC
        ========================================================== */
     .bottom-nav-container {
       padding: 0 20px 20px;
@@ -437,7 +457,7 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
     }
 
-    /* Khối Indicator ôm khít 100% Nút Tab */
+    /* Khối Indicator ôm vừa khít 100% Nút Tab */
     .nav-indicator-pill {
       position: absolute;
       top: 4px;
@@ -467,7 +487,6 @@
       transition: color 0.3s, transform 0.3s, text-shadow 0.3s;
     }
 
-    /* Hiệu ứng Icon phát sáng nhẹ khi đang Active Tab */
     .nav-tab-btn.active {
       color: var(--nav-icon-active);
       transform: scale(1.12);
@@ -475,7 +494,7 @@
     }
 
     /* ==========================================================
-       MODAL QR CODE CÂN ĐỐI
+       MODAL QR CODE - TỰ ĐỔI MÀU SÁNG / TỐI NỀN TƯƠNG THÍCH THEME
        ========================================================== */
     .modal-backdrop {
       position: fixed;
@@ -483,7 +502,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(6, 9, 19, 0.6);
+      background: var(--qr-modal-bg);
       backdrop-filter: blur(15px);
       display: flex;
       align-items: center;
@@ -491,7 +510,7 @@
       z-index: 100;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.35s ease;
+      transition: opacity 0.35s ease, background 0.35s ease;
     }
 
     .modal-backdrop.active {
@@ -500,17 +519,17 @@
     }
 
     .qr-glass-card {
-      background: var(--glass-bg);
+      background: var(--qr-card-bg);
       backdrop-filter: blur(28px);
-      border: 1.5px solid var(--glass-border);
+      border: 1.5px solid var(--qr-card-border);
       border-radius: 36px;
       padding: 24px 20px;
       width: 88%;
       max-width: 310px;
       text-align: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 0 25px var(--glass-glow);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 0 25px var(--glass-glow);
       transform: scale(0.88);
-      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.35s ease;
     }
 
     .modal-backdrop.active .qr-glass-card { transform: scale(1); }
@@ -529,7 +548,7 @@
       margin: 0 auto;
       padding: 10px;
       background: #ffffff;
-      border: 2px solid rgba(255, 255, 255, 0.9);
+      border: 2px solid rgba(255, 255, 255, 0.95);
       border-radius: 24px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       display: flex;
@@ -590,7 +609,7 @@
       font-weight: 600;
       font-size: 0.85rem;
       cursor: pointer;
-      opacity: 0.8;
+      opacity: 0.85;
     }
   </style>
 </head>
@@ -639,7 +658,7 @@
         <div class="links-list" id="social-links-list"></div>
       </section>
 
-      <!-- TAB 2: HOME (CAPTION QUOTE) -->
+      <!-- TAB 2: HOME (CAPTION QUOTE CĂN GIỮA) -->
       <section class="tab-page" id="page-home">
         <div class="home-quote-box">
           <p class="quote-text">“Even the darkest night wiil end,<br>and the sun will rise”</p>
@@ -654,7 +673,7 @@
 
     </div>
 
-    <!-- THANH CHUYỂN TAB BÊN DƯỚI -->
+    <!-- THANH CHUYỂN TAB BÊN DƯỚI (DESKTOP & MOBILE) -->
     <div class="bottom-nav-container">
       <nav class="bottom-nav-glass">
         <div class="nav-indicator-pill" id="nav-indicator"></div>
@@ -675,7 +694,7 @@
 
   </main>
 
-  <!-- MODAL QR CODE -->
+  <!-- MODAL QR CODE THÍCH ỨNG THEME LIGHT/DARK -->
   <div class="modal-backdrop" id="qr-modal">
     <div class="qr-glass-card">
       <h3 class="qr-modal-header">Scan QR Code</h3>
@@ -732,7 +751,7 @@
         // Trượt Viewport
         viewport.style.transform = `translateX(-${index * 33.333}%)`;
         
-        // Trượt Indicator chính xác 100%
+        // Trượt Indicator chính xác 100% căn giữa
         indicator.style.transform = `translateX(${index * 100}%)`;
 
         navBtns.forEach((btn, i) => {
@@ -803,13 +822,12 @@
       function applyTheme(theme) {
         document.documentElement.setAttribute("data-theme", theme);
         
-        // Dark theme -> Khối chọn ở Mặt trăng (bên trái: 0px)
-        // Light theme -> Khối chọn ở Mặt trời (bên phải: 35px)
+        // Căn giữa chính xác nút đánh dấu Theme
         if (theme === "dark") {
           indicator.style.transform = "translateX(0px)";
           indicator.style.backgroundColor = "#38bdf8";
         } else {
-          indicator.style.transform = "translateX(35px)";
+          indicator.style.transform = "translateX(36px)";
           indicator.style.backgroundColor = "#f59e0b";
         }
       }
