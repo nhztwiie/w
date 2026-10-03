@@ -38,7 +38,7 @@
       --pill-bg: rgba(30, 41, 59, 0.35);
       --pill-border: rgba(255, 255, 255, 0.15);
       
-      --nav-bg: rgba(15, 23, 42, 0.45);
+      --nav-bg: rgba(15, 23, 42, 0.5);
       --indicator-bg: #38bdf8;
       --indicator-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
       --nav-icon-active: #0f172a;
@@ -75,7 +75,7 @@
       --pill-bg: rgba(255, 255, 255, 0.45);
       --pill-border: rgba(255, 255, 255, 0.8);
 
-      --nav-bg: rgba(255, 255, 255, 0.45);
+      --nav-bg: rgba(255, 255, 255, 0.5);
       --indicator-bg: #0284c7;
       --indicator-shadow: 0 6px 18px rgba(2, 132, 199, 0.35);
       --nav-icon-active: #ffffff;
@@ -118,7 +118,7 @@
     }
 
     /* ==========================================================
-       BACKGROUND NỀN CHUYỂN ĐỘNG LIQUID SPHERES
+       BACKGROUND SPHERES (GPU ACCELERATED)
        ========================================================== */
     .bg-canvas {
       position: fixed;
@@ -139,6 +139,7 @@
       box-shadow: 0 0 50px rgba(2, 132, 199, 0.15), inset 0 0 30px var(--arc-edge);
       backdrop-filter: blur(5px);
       animation: floatArc 16s infinite ease-in-out alternate;
+      will-change: transform;
     }
 
     .arc-1 { width: 500px; height: 500px; top: -140px; left: -160px; animation-duration: 18s; }
@@ -146,13 +147,13 @@
     .arc-center { width: 300px; height: 300px; top: 45%; left: 48%; transform: translate(-50%, -50%); opacity: 0.7; animation-duration: 12s; }
 
     @keyframes floatArc {
-      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-      50% { transform: translate(35px, 25px) scale(1.05) rotate(8deg); }
-      100% { transform: translate(-25px, 45px) scale(0.95) rotate(-8deg); }
+      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+      50% { transform: translate3d(35px, 25px, 0) scale(1.05) rotate(8deg); }
+      100% { transform: translate3d(-25px, 45px, 0) scale(0.95) rotate(-8deg); }
     }
 
     /* ==========================================================
-       MAIN CARD CONTAINER (CĂN CHỈNH CHO DESKTOP & MOBILE)
+       MAIN CARD CONTAINER (DESKTOP & MOBILE FIX)
        ========================================================== */
     .liquid-card {
       position: relative;
@@ -169,7 +170,7 @@
       box-shadow: var(--glass-shadow);
       display: flex;
       flex-direction: column;
-      justify-content: space-between; /* Đảm bảo đáy cố định */
+      justify-content: space-between;
       overflow: hidden;
       animation: glassAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -180,10 +181,10 @@
     }
 
     /* ==========================================================
-       TOP BAR & CÔNG TẮC THEME CĂN GIỮA ICON
+       TOP BAR & CÔNG TẮC THEME
        ========================================================== */
     .top-bar {
-      padding: 20px 24px 10px;
+      padding: 18px 24px 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -193,7 +194,7 @@
 
     .theme-toggle-pill {
       position: relative;
-      width: 74px;
+      width: 72px;
       height: 38px;
       background: var(--pill-bg);
       border: 1.5px solid var(--pill-border);
@@ -216,6 +217,7 @@
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
       transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.35s ease;
       z-index: 1;
+      will-change: transform;
     }
 
     .theme-icon-box {
@@ -265,22 +267,23 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 10px 24px 0;
+      padding: 5px 24px 0;
       z-index: 5;
       flex-shrink: 0;
-      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     .avatar-frame {
       position: relative;
-      width: 110px;
-      height: 110px;
+      width: 105px;
+      height: 105px;
       border-radius: 50%;
       padding: 3px;
       background: rgba(255, 255, 255, 0.4);
       border: 1.5px solid var(--glass-border);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 0 20px var(--glass-glow);
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      will-change: width, height;
     }
 
     .avatar-frame img {
@@ -299,12 +302,12 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     .profile-name-title {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.8rem;
+      font-size: 1.75rem;
       font-weight: 800;
       color: var(--text-title);
       margin-top: 8px;
@@ -318,7 +321,6 @@
       margin-top: 1px;
     }
 
-    /* CAPTION HOME CĂN GIỮA */
     .home-quote-box {
       margin: auto 0;
       padding: 0 20px;
@@ -327,7 +329,6 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      animation: fadeIn 0.8s ease;
     }
 
     .quote-text {
@@ -346,10 +347,10 @@
       display: block;
     }
 
-    /* THU NHỎ AVATAR KHI SANG SOCIAL/WORK */
+    /* Thu nhỏ Avatar khi sang tab phụ */
     .liquid-card.compact-mode .avatar-frame {
-      width: 72px;
-      height: 72px;
+      width: 68px;
+      height: 68px;
     }
 
     .liquid-card.compact-mode .profile-info-block {
@@ -361,16 +362,17 @@
     }
 
     /* ==========================================================
-       VIEWPORT & CONTENT CĂN GIỮA
+       VIEWPORT & CONTENT (TỐI ƯU MƯỢT MÀ KHÔNG GIẬT LAG)
        ========================================================== */
     .viewport {
       flex: 1;
       display: flex;
       width: 300%;
-      transform: translateX(-33.333%);
-      transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+      /* Khởi tạo hiển thị tab Home ở giữa */
+      transform: translate3d(-33.333%, 0, 0);
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
       cursor: grab;
-      margin-top: 5px;
+      will-change: transform;
     }
 
     .viewport:active { cursor: grabbing; }
@@ -387,7 +389,6 @@
       overflow-y: auto;
     }
 
-    /* LINK CARDS */
     .links-list {
       width: 100%;
       display: flex;
@@ -410,11 +411,12 @@
       font-size: 0.95rem;
       backdrop-filter: blur(10px);
       box-shadow: 0 6px 16px rgba(0,0,0,0.05);
-      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+      will-change: transform;
     }
 
     .liquid-link-item:hover {
-      transform: translateY(-3px) scale(1.02);
+      transform: translate3d(0, -3px, 0) scale(1.015);
       background: var(--link-hover);
       box-shadow: 0 10px 25px var(--glass-glow);
     }
@@ -428,17 +430,18 @@
     }
 
     .link-text-label { flex: 1; text-align: left; }
-    .link-chevron { font-size: 0.85rem; color: var(--text-sub); transition: transform 0.3s; }
-    .liquid-link-item:hover .link-chevron { transform: translateX(4px); }
+    .link-chevron { font-size: 0.85rem; color: var(--text-sub); transition: transform 0.25s; }
+    .liquid-link-item:hover .link-chevron { transform: translate3d(4px, 0, 0); }
 
     /* ==========================================================
-       THANH TAB DƯỚI ĐÁY - KHẮC PHỤC HOÀN TOÀN TRÊN DESKTOP
+       THANH TAB BÊN DƯỚI (HIỂN THỊ CẢ DESKTOP & MOBILE, CĂN GIỮA ICON)
        ========================================================== */
     .bottom-nav-container {
       padding: 0 20px 20px;
       z-index: 30;
       width: 100%;
-      flex-shrink: 0; /* Khóa vị trí không bị ép mất */
+      flex-shrink: 0; /* Đảm bảo luôn cố định trên Máy tính */
+      display: block !important;
     }
 
     .bottom-nav-glass {
@@ -454,18 +457,21 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
     }
 
-    /* Khối Indicator căn giữa 100% icon */
+    /* Dấu trang đánh dấu căn giữa tuyệt đối chuẩn xăm tắp */
     .nav-indicator-pill {
       position: absolute;
       top: 4px;
       left: 4px;
-      width: calc(33.333% - 5.33px);
+      width: calc((100% - 8px) / 3);
       height: calc(100% - 8px);
       background: var(--indicator-bg);
       border-radius: 28px;
       box-shadow: var(--indicator-shadow);
+      /* Đặt sẵn vị trí ở Tab Home (Index 1) */
+      transform: translate3d(100%, 0, 0);
       transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
       z-index: 1;
+      will-change: transform;
     }
 
     .nav-tab-btn {
@@ -481,12 +487,12 @@
       cursor: pointer;
       position: relative;
       z-index: 2;
-      transition: color 0.3s, transform 0.3s, text-shadow 0.3s;
+      transition: color 0.3s, transform 0.3s;
     }
 
     .nav-tab-btn.active {
       color: var(--nav-icon-active);
-      transform: scale(1.12);
+      transform: scale(1.1);
       text-shadow: var(--icon-glow);
     }
 
@@ -507,7 +513,7 @@
       z-index: 100;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.35s ease, background 0.35s ease;
+      transition: opacity 0.35s ease;
     }
 
     .modal-backdrop.active {
@@ -526,7 +532,7 @@
       text-align: center;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 0 25px var(--glass-glow);
       transform: scale(0.88);
-      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.35s ease;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .modal-backdrop.active .qr-glass-card { transform: scale(1); }
@@ -636,7 +642,7 @@
       </button>
     </div>
 
-    <!-- DYNAMIC PROFILE HEADER (AVATAR: images/Huy.png) -->
+    <!-- DYNAMIC PROFILE HEADER -->
     <header class="profile-header">
       <div class="avatar-frame">
         <img src="images/Huy.png" alt="Avatar Nhật Huy">
@@ -670,7 +676,7 @@
 
     </div>
 
-    <!-- THANH CHUYỂN TAB DƯỚI ĐÁY (ĐẢM BẢO HIỆN CẢ DESKTOP VÀ MOBILE) -->
+    <!-- THANH CHUYỂN TAB (LUÔN HIỂN THỊ TRÊN DESKTOP VÀ MOBILE) -->
     <div class="bottom-nav-container">
       <nav class="bottom-nav-glass">
         <div class="nav-indicator-pill" id="nav-indicator"></div>
@@ -679,6 +685,7 @@
           <i class="fa-solid fa-globe"></i>
         </button>
 
+        <!-- Khởi tạo Active sẵn cho Tab Home -->
         <button class="nav-tab-btn active" data-index="1" aria-label="Home Tab">
           <i class="fa-solid fa-house"></i>
         </button>
@@ -734,7 +741,8 @@
       `).join('');
     }
 
-    let currentTabIndex = 1; // Mặc định ở Tab Home (Index = 1)
+    // Đặt mặc định khi vừa tải trang là Tab Home (Index = 1)
+    let currentTabIndex = 1;
 
     function initTabNavigation() {
       const navBtns = document.querySelectorAll(".nav-tab-btn");
@@ -745,18 +753,18 @@
       function switchTab(index) {
         currentTabIndex = index;
 
-        // Trượt Viewport
-        viewport.style.transform = `translateX(-${index * 33.333}%)`;
+        // Trượt Viewport (Tăng tốc phần cứng GPU)
+        viewport.style.transform = `translate3d(-${index * 33.333}%, 0, 0)`;
         
-        // Trượt Indicator chuẩn 100%
-        indicator.style.transform = `translateX(${index * 100}%)`;
+        // Trượt Indicator khớp chính xác tâm Icon
+        indicator.style.transform = `translate3d(${index * 100}%, 0, 0)`;
 
         navBtns.forEach((btn, i) => {
           if (i === index) btn.classList.add("active");
           else btn.classList.remove("active");
         });
 
-        // Toggle chế độ thu nhỏ Avatar khi sang Tab Social/Work
+        // Tự động thu gọn Avatar khi rời Tab Home
         if (index === 1) {
           mainCard.classList.remove("compact-mode");
         } else {
@@ -767,6 +775,9 @@
       navBtns.forEach((btn, i) => {
         btn.addEventListener("click", () => switchTab(i));
       });
+
+      // Mở định vị ban đầu ở trang Home
+      switchTab(1);
 
       window.switchTabGlobal = switchTab;
     }
@@ -819,12 +830,12 @@
       function applyTheme(theme) {
         document.documentElement.setAttribute("data-theme", theme);
         
-        // Căn giữa chính xác nút đánh dấu Theme
+        // Căn giữa công tắc Theme
         if (theme === "dark") {
-          indicator.style.transform = "translateX(0px)";
+          indicator.style.transform = "translate3d(0, 0, 0)";
           indicator.style.backgroundColor = "#38bdf8";
         } else {
-          indicator.style.transform = "translateX(36px)";
+          indicator.style.transform = "translate3d(34px, 0, 0)";
           indicator.style.backgroundColor = "#f59e0b";
         }
       }
@@ -838,7 +849,7 @@
       const copyBtn = document.getElementById("copy-btn");
       const copyText = document.getElementById("copy-text");
 
-      const shareUrl = bioData.profile.shareUrl || window.location.href;
+      const shareUrl = (typeof bioData !== 'undefined' && bioData.profile && bioData.profile.shareUrl) ? bioData.profile.shareUrl : window.location.href;
       let qrGenerated = false;
 
       openBtn.addEventListener("click", () => {
