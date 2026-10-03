@@ -160,11 +160,8 @@
       z-index: 2;
       width: 100%;
       max-width: 410px;
-  /* Thay đổi chiều cao cố định thành chiều cao tự động */
-      height: auto; 
-      min-height: 520px; /* Độ cao tối thiểu để trang Home không bị quá lùn */
-      max-height: 90vh;  /* Tránh tràn màn hình trên các thiết bị nhỏ */
-  
+      height: 740px;
+      max-height: 92vh;
       background: var(--glass-bg);
       backdrop-filter: blur(16px) saturate(180%);
       -webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -175,7 +172,7 @@
       flex-direction: column;
       justify-content: space-between;
       overflow: hidden;
-      transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Hiệu ứng co giãn mượt mà */
+      animation: glassAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     @keyframes glassAppear {
@@ -184,7 +181,7 @@
     }
 
     /* ==========================================================
-       TOP BAR & CÔNG TẮC THEME (CĂN CHỈNH TỰ ĐỘNG KHÔNG LỆCH)
+       TOP BAR & CÔNG TẮC THEME
        ========================================================== */
     .top-bar {
       padding: 18px 24px 10px;
@@ -324,14 +321,17 @@
       margin-top: 1px;
     }
 
+    /* CAPTION HOME DỊCH XUỐNG DƯỚI NẸT CÂN ĐỐI */
     .home-quote-box {
       margin: auto 0;
+      margin-top: 25px;
       padding: 0 20px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      transform: translateY(14px);
     }
 
     .quote-text {
@@ -496,7 +496,7 @@
     }
 
     /* ==========================================================
-       MODAL QR CODE
+       MODAL QR CODE (KHUNG QR VÀ NÚT COPY RIÊNG BỆT)
        ========================================================== */
     .modal-backdrop {
       position: fixed;
@@ -543,6 +543,7 @@
       margin-bottom: 14px;
     }
 
+    /* KHUNG QR RIÊNG */
     .qr-box-wrapper {
       position: relative;
       width: 180px;
@@ -582,10 +583,11 @@
       pointer-events: none;
     }
 
+    /* NÚT COPY RIÊNG (FIT VỪA KHÍT ĐỘ RỘNG 180PX) */
     .copy-link-btn {
-      width: 180px;            /* Bằng đúng chiều rộng khung QR (180px) */
-      margin: 16px auto 0;     /* margin-left/right: auto giúp nút nằm chính giữa */
-      padding: 10px 14px;
+      width: 180px;
+      margin: 14px auto 0;
+      padding: 10px;
       border: none;
       background: var(--indicator-bg);
       color: var(--nav-icon-active);
@@ -600,7 +602,7 @@
       box-shadow: 0 6px 16px rgba(56, 189, 248, 0.3);
       transition: all 0.25s ease;
     }
-    
+
     .close-modal-btn {
       margin-top: 10px;
       width: 100%;
@@ -663,10 +665,7 @@
       <!-- TAB 2: HOME (CAPTION QUOTE) -->
       <section class="tab-page" id="page-home">
         <div class="home-quote-box">
-          <br>
-          <br>
-          <br>
-          <p class="quote-text">“<br>Even the darkest night wiil end,<br>and the sun will rise.</p>
+          <p class="quote-text">“Even the darkest night wiil end,<br>and the sun will rise”</p>
           <span class="quote-author">Les Misérables - Victor Hugo</span>
         </div>
       </section>
@@ -699,16 +698,18 @@
 
   </main>
 
-  <!-- MODAL QR CODE -->
+  <!-- MODAL QR CODE (KHUNG QR VÀ NÚT COPY LÀ 2 NÚT RIÊNG BỆT) -->
   <div class="modal-backdrop" id="qr-modal">
     <div class="qr-glass-card">
       <h3 class="qr-modal-header">Scan QR Code</h3>
       
+      <!-- 1. Khung QR riêng -->
       <div class="qr-box-wrapper">
         <div id="qrcode-canvas"></div>
         <img src="images/Huy.png" alt="Avatar Center" class="qr-center-avatar">
       </div>
 
+      <!-- 2. Nút Copy riêng -->
       <button class="copy-link-btn" id="copy-btn">
         <i class="fa-regular fa-copy"></i>
         <span id="copy-text">Copy link</span>
@@ -802,7 +803,6 @@
           indicator.style.transform = "translate3d(0, 0, 0)";
           indicator.style.backgroundColor = "#38bdf8";
         } else {
-          // Dùng translateX(100%) thay vì px cứng giúp khối ôm khít tuyệt đối nút mặt trời
           indicator.style.transform = "translate3d(100%, 0, 0)";
           indicator.style.backgroundColor = "#f59e0b";
         }
