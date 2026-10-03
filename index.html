@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Nhật Huy | Bio Link</title>
 
-  <!-- Favicon từ images/email.png -->
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/email.png">
 
   <!-- Google Fonts: Plus Jakarta Sans & Inter -->
@@ -208,8 +208,8 @@
 
     .theme-indicator {
       position: absolute;
-      top: 3px;
-      left: 3px;
+      top: 2.5px;
+      left: 2.5px;
       width: 30px;
       height: 30px;
       border-radius: 50%;
@@ -365,10 +365,10 @@
        VIEWPORT & CONTENT (TỐI ƯU MƯỢT MÀ KHÔNG GIẬT LAG)
        ========================================================== */
     .viewport {
-      flex: 1;
+      flex: 1 1 auto;
+      min-height: 0; /* Bắt buộc để Flexbox trên Desktop tính toán chiều cao chuẩn */
       display: flex;
       width: 300%;
-      /* Khởi tạo hiển thị tab Home ở giữa */
       transform: translate3d(-33.333%, 0, 0);
       transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
       cursor: grab;
@@ -434,13 +434,14 @@
     .liquid-link-item:hover .link-chevron { transform: translate3d(4px, 0, 0); }
 
     /* ==========================================================
-       THANH TAB BÊN DƯỚI (HIỂN THỊ CẢ DESKTOP & MOBILE, CĂN GIỮA ICON)
+       THANH TAB BÊN DƯỚI (HIỂN THỊ CẢ DESKTOP & MOBILE)
        ========================================================== */
     .bottom-nav-container {
-      padding: 0 20px 20px;
-      z-index: 30;
+      padding: 10px 20px 20px;
+      z-index: 50;
       width: 100%;
-      flex-shrink: 0; /* Đảm bảo luôn cố định trên Máy tính */
+      flex-shrink: 0 !important; /* Đảm bảo không bao giờ bị chèn ép trên Desktop */
+      position: relative;
       display: block !important;
     }
 
@@ -457,7 +458,6 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
     }
 
-    /* Dấu trang đánh dấu căn giữa tuyệt đối chuẩn xăm tắp */
     .nav-indicator-pill {
       position: absolute;
       top: 4px;
@@ -467,7 +467,6 @@
       background: var(--indicator-bg);
       border-radius: 28px;
       box-shadow: var(--indicator-shadow);
-      /* Đặt sẵn vị trí ở Tab Home (Index 1) */
       transform: translate3d(100%, 0, 0);
       transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
       z-index: 1;
@@ -664,7 +663,7 @@
       <!-- TAB 2: HOME (CAPTION QUOTE) -->
       <section class="tab-page" id="page-home">
         <div class="home-quote-box">
-          <p class="quote-text">“Even the darkest night wiil end,<br>and the sun will rise”</p>
+          <p class="quote-text">“<br>Even the darkest night wiil end,<br>and the sun will rise.</p>
           <span class="quote-author">Les Misérables - Victor Hugo</span>
         </div>
       </section>
@@ -676,7 +675,7 @@
 
     </div>
 
-    <!-- THANH CHUYỂN TAB (LUÔN HIỂN THỊ TRÊN DESKTOP VÀ MOBILE) -->
+    <!-- THANH CHUYỂN TAB -->
     <div class="bottom-nav-container">
       <nav class="bottom-nav-glass">
         <div class="nav-indicator-pill" id="nav-indicator"></div>
@@ -685,7 +684,6 @@
           <i class="fa-solid fa-globe"></i>
         </button>
 
-        <!-- Khởi tạo Active sẵn cho Tab Home -->
         <button class="nav-tab-btn active" data-index="1" aria-label="Home Tab">
           <i class="fa-solid fa-house"></i>
         </button>
@@ -732,6 +730,7 @@
 
     function renderLinks(containerId, items) {
       const container = document.getElementById(containerId);
+      if (!container || !items) return;
       container.innerHTML = items.map(item => `
         <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="liquid-link-item">
           <img src="${item.icon}" alt="${item.title}" class="link-app-icon">
@@ -741,7 +740,6 @@
       `).join('');
     }
 
-    // Đặt mặc định khi vừa tải trang là Tab Home (Index = 1)
     let currentTabIndex = 1;
 
     function initTabNavigation() {
@@ -753,10 +751,7 @@
       function switchTab(index) {
         currentTabIndex = index;
 
-        // Trượt Viewport (Tăng tốc phần cứng GPU)
         viewport.style.transform = `translate3d(-${index * 33.333}%, 0, 0)`;
-        
-        // Trượt Indicator khớp chính xác tâm Icon
         indicator.style.transform = `translate3d(${index * 100}%, 0, 0)`;
 
         navBtns.forEach((btn, i) => {
@@ -764,7 +759,6 @@
           else btn.classList.remove("active");
         });
 
-        // Tự động thu gọn Avatar khi rời Tab Home
         if (index === 1) {
           mainCard.classList.remove("compact-mode");
         } else {
@@ -776,9 +770,7 @@
         btn.addEventListener("click", () => switchTab(i));
       });
 
-      // Mở định vị ban đầu ở trang Home
       switchTab(1);
-
       window.switchTabGlobal = switchTab;
     }
 
@@ -830,12 +822,12 @@
       function applyTheme(theme) {
         document.documentElement.setAttribute("data-theme", theme);
         
-        // Căn giữa công tắc Theme
         if (theme === "dark") {
           indicator.style.transform = "translate3d(0, 0, 0)";
           indicator.style.backgroundColor = "#38bdf8";
         } else {
-          indicator.style.transform = "translate3d(34px, 0, 0)";
+          // Đã chỉnh tọa độ chuẩn 32px giúp cân đối tuyệt đối ở Light Mode
+          indicator.style.transform = "translate3d(32px, 0, 0)";
           indicator.style.backgroundColor = "#f59e0b";
         }
       }
