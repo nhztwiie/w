@@ -2,70 +2,67 @@
 <html lang="vi" data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Nhật Huy | Bio Link</title>
 
-  <!-- Khai báo Favicon trên tab trình duyệt -->
-<link rel="icon" type="image/png" href="images/email.png">
+  <!-- Favicon Tab trình duyệt -->
+  <link rel="icon" type="image/png" href="images/avatar.png">
 
-  <!-- Font Google Inter -->
+  <!-- Google Font Inter & Outift -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Thư viện FontAwesome & QRCode JS -->
+  <!-- FontAwesome & QRCode Library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <style>
     /* ==========================================================
-       BẢNG MÀU SÁNG TƯƠI & 5 HÌNH CẦU PASTEL (LAM, ĐỎ, VÀNG, TÍM, NGỌC)
+       LIQUID GLASS THEME VARIABLES (LIGHT / DARK)
        ========================================================== */
     :root[data-theme="light"] {
-      --bg-base: #ffffff;
-      --card-bg: rgba(255, 255, 255, 0.88);
-      --card-border: rgba(186, 230, 253, 0.8);
-      --text-main: #0f172a;
-      --text-sub: #475569;
-      --accent-pastel: #38bdf8;
+      --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #f0f9ff 100%);
+      --glass-bg: rgba(255, 255, 255, 0.45);
+      --glass-border: rgba(255, 255, 255, 0.7);
+      --glass-shadow: 0 20px 50px rgba(14, 165, 233, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+      --text-main: #0284c7;
+      --text-title: #ffffff;
+      --text-sub: #38bdf8;
       
-      --tab-bg: #f1f5f9;
-      --tab-active-bg: #0284c7;
-      --tab-active-text: #ffffff;
+      --nav-bg: rgba(255, 255, 255, 0.5);
+      --indicator-bg: rgba(255, 255, 255, 0.85);
+      --indicator-shadow: 0 8px 25px rgba(56, 189, 248, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.9);
       
-      --link-bg: #ffffff;
-      --link-hover: #f0f9ff;
-      --shadow: 0 20px 40px rgba(186, 230, 253, 0.45);
-
-      /* MÀU 5 HÌNH CẦU PASTEL */
-      --orb-blue: rgba(125, 211, 252, 0.85);   /* Xanh lam pastel */
-      --orb-red: rgba(254, 178, 178, 0.75);    /* Đỏ/hồng pastel */
-      --orb-yellow: rgba(253, 230, 138, 0.85); /* Vàng pastel */
-      --orb-purple: rgba(221, 214, 254, 0.85); /* Tím pastel */
-      --orb-teal: rgba(153, 246, 228, 0.8);    /* Xanh ngọc pastel */
+      --link-bg: rgba(255, 255, 255, 0.65);
+      --link-border: rgba(255, 255, 255, 0.9);
+      --link-hover: rgba(255, 255, 255, 0.9);
+      
+      --orb-blue: #38bdf8;
+      --orb-light-blue: #93c5fd;
+      --orb-sparkle: #e0f2fe;
     }
 
     :root[data-theme="dark"] {
-      --bg-base: #0f172a;
-      --card-bg: rgba(30, 41, 59, 0.85);
-      --card-border: rgba(56, 189, 248, 0.3);
-      --text-main: #f8fafc;
-      --text-sub: #94a3b8;
-      --accent-pastel: #38bdf8;
-      
-      --tab-bg: rgba(15, 23, 42, 0.8);
-      --tab-active-bg: #38bdf8;
-      --tab-active-text: #0f172a;
-      
-      --link-bg: rgba(30, 41, 59, 0.9);
-      --link-hover: #1e293b;
-      --shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      --bg-gradient: linear-gradient(135deg, #0b1329 0%, #1e293b 50%, #0f172a 100%);
+      --glass-bg: rgba(15, 23, 42, 0.6);
+      --glass-border: rgba(56, 189, 248, 0.3);
+      --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+      --text-main: #38bdf8;
+      --text-title: #f8fafc;
+      --text-sub: #7dd3fc;
 
-      --orb-blue: rgba(14, 165, 233, 0.5);
-      --orb-red: rgba(239, 68, 68, 0.35);
-      --orb-yellow: rgba(245, 158, 11, 0.4);
-      --orb-purple: rgba(168, 85, 247, 0.4);
-      --orb-teal: rgba(20, 184, 166, 0.4);
+      --nav-bg: rgba(30, 41, 59, 0.7);
+      --indicator-bg: #38bdf8;
+      --indicator-shadow: 0 8px 25px rgba(56, 189, 248, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+
+      --link-bg: rgba(30, 41, 59, 0.75);
+      --link-border: rgba(56, 189, 248, 0.3);
+      --link-hover: rgba(51, 65, 85, 0.9);
+
+      --orb-blue: #0284c7;
+      --orb-light-blue: #0369a1;
+      --orb-sparkle: #38bdf8;
     }
 
     * {
@@ -73,565 +70,861 @@
       margin: 0;
       padding: 0;
       font-family: 'Inter', sans-serif;
-      transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
 
     body {
       min-height: 100vh;
-      background-color: var(--bg-base);
+      background: var(--bg-gradient);
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
-      overflow-x: hidden;
-      padding: 20px 15px;
+      overflow: hidden;
+      padding: 15px;
+      transition: background 0.5s ease;
     }
 
     /* ==========================================================
-       HỆ THỐNG 5 HÌNH CẦU MỜ CÓ KÍCH THƯỚC ĐA DẠNG & MÀU PASTEL
+       BACKGROUND BLING BLING & LIQUID ORBS (ẢNH 2 CREATIVE)
        ========================================================== */
-    .bg-orbs {
+    .bg-canvas {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      overflow: hidden;
       z-index: 1;
       pointer-events: none;
+      overflow: hidden;
     }
 
-    .orb {
+    /* Các khối cầu 3D thủy tinh trôi nổi (Mô phỏng chính xác Ảnh 2) */
+    .liquid-orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(50px);
-      animation: floatOrb 12s infinite ease-in-out alternate;
+      background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.9) 0%, var(--orb-blue) 40%, var(--orb-light-blue) 100%);
+      box-shadow: 0 20px 40px rgba(2, 132, 199, 0.3), inset -10px -10px 20px rgba(0, 0, 0, 0.1), inset 10px 10px 20px rgba(255, 255, 255, 0.8);
+      filter: blur(2px);
+      animation: floatFluid 12s infinite ease-in-out alternate;
     }
 
-    /* Khối 1: Lam (Lớn - Góc trên trái) */
-    .orb-1 {
-      width: 360px;
-      height: 360px;
-      background: var(--orb-blue);
-      top: -60px;
-      left: -60px;
-      animation-duration: 10s;
+    .orb-huge-top {
+      width: 320px;
+      height: 320px;
+      top: -120px;
+      left: -100px;
+      opacity: 0.6;
+      filter: blur(15px);
     }
 
-    /* Khối 2: Đỏ/Hồng (Lớn - Góc dưới phải) */
-    .orb-2 {
-      width: 380px;
-      height: 380px;
-      background: var(--orb-red);
-      bottom: -70px;
-      right: -50px;
-      animation-duration: 14s;
-    }
-
-    /* Khối 3: Tím (Trung bình - Góc trên phải) */
-    .orb-3 {
-      width: 270px;
-      height: 270px;
-      background: var(--orb-purple);
-      top: 10%;
-      right: 5%;
-      animation-duration: 11s;
-    }
-
-    /* Khối 4: Vàng (Trung bình - Trung tâm) */
-    .orb-4 {
-      width: 290px;
-      height: 290px;
-      background: var(--orb-yellow);
-      top: 45%;
-      left: 40%;
-      transform: translate(-50%, -50%);
-      animation-duration: 13s;
-    }
-
-    /* Khối 5: Xanh Ngọc (Nhỏ - Góc dưới trái) */
-    .orb-5 {
-      width: 220px;
-      height: 220px;
-      background: var(--orb-teal);
-      bottom: 12%;
+    .orb-main-left {
+      width: 140px;
+      height: 140px;
+      top: 15%;
       left: 8%;
       animation-duration: 9s;
     }
 
-    @keyframes floatOrb {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(75px, 45px) scale(1.15); }
-      100% { transform: translate(-45px, 85px) scale(0.92); }
+    .orb-main-right {
+      width: 220px;
+      height: 220px;
+      bottom: 20%;
+      right: -40px;
+      animation-duration: 11s;
+    }
+
+    .orb-huge-bottom {
+      width: 380px;
+      height: 380px;
+      bottom: -150px;
+      right: -80px;
+      opacity: 0.5;
+      filter: blur(20px);
+    }
+
+    .orb-small-1 {
+      width: 45px;
+      height: 45px;
+      top: 22%;
+      right: 18%;
+      animation-duration: 7s;
+      background: radial-gradient(circle at 30% 30%, #fff, var(--orb-sparkle));
+    }
+
+    .orb-small-2 {
+      width: 60px;
+      height: 60px;
+      bottom: 38%;
+      left: 12%;
+      animation-duration: 8s;
+    }
+
+    @keyframes floatFluid {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      50% { transform: translate(40px, 35px) scale(1.08) rotate(180deg); }
+      100% { transform: translate(-30px, 60px) scale(0.95) rotate(360deg); }
+    }
+
+    /* Hiệu ứng lấp lánh Bling Bling Particle */
+    .sparkle {
+      position: absolute;
+      background: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #ffffff, 0 0 20px #38bdf8;
+      animation: sparkleAnim 3s infinite ease-in-out alternate;
+    }
+
+    @keyframes sparkleAnim {
+      0% { opacity: 0.2; transform: scale(0.6); }
+      100% { opacity: 1; transform: scale(1.4); }
     }
 
     /* ==========================================================
-       BIO CARD CONTAINER
+       MAIN CONTAINER (LIQUID GLASS CONTAINER)
        ========================================================== */
-    .bio-card {
+    .liquid-card {
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 420px;
-      background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 2px solid var(--card-border);
-      border-radius: 28px;
-      padding: 35px 25px;
-      box-shadow: var(--shadow);
-      text-align: center;
-      animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 400px;
+      height: 720px;
+      max-height: 92vh;
+      background: var(--glass-bg);
+      backdrop-filter: blur(35px) saturate(180%);
+      -webkit-backdrop-filter: blur(35px) saturate(180%);
+      border: 2px solid var(--glass-border);
+      border-radius: 40px;
+      box-shadow: var(--glass-shadow);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: glassAppear 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .top-controls {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      right: 20px;
+    @keyframes glassAppear {
+      from { opacity: 0; transform: scale(0.92) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* TOP CONTROLS (THEME SWITCHER & QR ICON) */
+    .top-bar {
+      padding: 22px 24px 0;
       display: flex;
       justify-content: space-between;
-      z-index: 3;
+      align-items: center;
+      z-index: 10;
     }
 
-    .icon-btn {
+    /* Switch Theme Pill với khối nền chuyển động dạng Toggle */
+    .theme-toggle-pill {
+      position: relative;
+      width: 76px;
+      height: 38px;
+      background: rgba(255, 255, 255, 0.4);
+      border: 1.5px solid var(--glass-border);
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      padding: 3px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+    }
+
+    .theme-indicator {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    [data-theme="dark"] .theme-indicator {
+      transform: translateX(38px);
+      background: #38bdf8;
+    }
+
+    .theme-btn-icon {
+      flex: 1;
+      text-align: center;
+      font-size: 0.95rem;
+      z-index: 2;
+      color: #0284c7;
+      transition: color 0.3s;
+    }
+
+    [data-theme="dark"] .theme-btn-icon { color: #f8fafc; }
+
+    .qr-glass-btn {
       width: 42px;
       height: 42px;
-      border-radius: 50%;
-      border: 1px solid var(--card-border);
-      background: var(--tab-bg);
-      color: var(--text-main);
-      cursor: pointer;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.5);
+      border: 1.5px solid var(--glass-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-      transition: transform 0.25s ease, background 0.3s ease;
+      color: var(--text-main);
+      font-size: 1.2rem;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .icon-btn:hover {
-      transform: scale(1.08);
-      background: var(--accent-pastel);
-      color: #ffffff;
+    .qr-glass-btn:hover {
+      transform: scale(1.08) rotate(5deg);
+      background: rgba(255, 255, 255, 0.8);
     }
 
-    .avatar-wrapper {
-      width: 110px;
-      height: 110px;
-      margin: 10px auto 18px;
+    /* ==========================================================
+       SWIPEABLE VIEWPORT & PROFILE HEADER SLIDING LOGIC
+       ========================================================== */
+    .viewport {
+      flex: 1;
+      display: flex;
+      width: 300%; /* 3 Tabs: Social (0%), Home (100%), Work (200%) */
+      transform: translateX(-33.333%); /* Mặc định ở giữa (Tab Home) */
+      transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+      cursor: grab;
     }
 
-    .avatar-img {
+    .viewport:active { cursor: grabbing; }
+
+    .tab-page {
+      width: 33.333%;
+      height: 100%;
+      padding: 10px 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    /* PROFILE HEADER (THÔNG TIN NHẬT HUY TRUYỀN THỐNG TRONG ẢNH 1) */
+    .profile-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      margin-top: 15px;
+      transition: all 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .avatar-frame {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      padding: 5px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 2px solid var(--glass-border);
+      box-shadow: 0 15px 35px rgba(2, 132, 199, 0.25);
+      transition: all 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .avatar-frame img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       border-radius: 50%;
-      border: 4px solid #ffffff;
-      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.25);
-      transition: transform 0.3s ease;
+      filter: grayscale(100%); /* Chuẩn phong cách đen trắng như ảnh 1 */
+      transition: filter 0.3s;
     }
 
-    .avatar-wrapper:hover .avatar-img {
-      transform: scale(1.05);
+    .avatar-frame:hover img { filter: grayscale(0%); }
+
+    .profile-name-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #ffffff;
+      text-shadow: 0 4px 15px rgba(2, 132, 199, 0.4), 0 0 20px rgba(255, 255, 255, 0.8);
+      margin-top: 15px;
+      letter-spacing: -0.5px;
+      transition: all 0.45s ease;
     }
 
-    .profile-name {
-      font-size: 1.5rem;
+    .profile-subtitle {
+      font-size: 1.15rem;
       font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 6px;
-      letter-spacing: -0.3px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-top: 2px;
+      letter-spacing: -0.2px;
+      transition: all 0.45s ease;
     }
 
-    .profile-bio {
-      font-size: 0.92rem;
-      color: var(--text-sub);
-      margin-bottom: 25px;
-    }
-
-    /* ==========================================================
-       TAB NAVIGATION VỚI HIỆU ỨNG TRƯỢT MƯỢT MÀ
-       ========================================================== */
-    .tab-navigation {
-      position: relative;
-      display: flex;
-      background: var(--tab-bg);
-      border-radius: 16px;
-      padding: 6px;
-      margin-bottom: 22px;
-      border: 1px solid var(--card-border);
-      z-index: 1;
-    }
-
-    .tab-indicator {
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      width: calc(50% - 6px);
-      height: calc(100% - 12px);
-      background: var(--tab-active-bg);
-      border-radius: 12px;
-      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
-      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 1;
-    }
-
-    .tab-btn {
-      flex: 1;
-      padding: 12px 0;
-      border: none;
-      background: transparent;
-      color: var(--text-sub);
-      font-weight: 700;
-      font-size: 0.92rem;
-      border-radius: 12px;
+    /* NÚT "CONTACT ME!" TRÊN TAB HOME (ẢNH 1) */
+    .contact-me-btn {
+      margin-top: 28px;
+      padding: 14px 42px;
+      border-radius: 25px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(125,211,252,0.6));
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      color: #0284c7;
+      font-size: 1.25rem;
+      font-weight: 800;
       cursor: pointer;
-      position: relative;
-      z-index: 2;
-      transition: color 0.3s ease;
+      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3), inset 0 2px 4px rgba(255,255,255,0.8);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .tab-btn.active {
-      color: var(--tab-active-text);
+    .contact-me-btn:hover {
+      transform: scale(1.06) translateY(-2px);
+      box-shadow: 0 15px 30px rgba(56, 189, 248, 0.5);
+    }
+
+    /* KHI CHUYỂN TỪ HOME SANG SOCIAL HOẶC WORK: THÔNG TIN DI CHUYỂN THU NHỎ LÊN TRÊN */
+    .liquid-card.mini-header .profile-header {
+      margin-top: 0;
+      transform: scale(0.72) translateY(-20px);
+    }
+
+    .liquid-card.mini-header .avatar-frame {
+      width: 90px;
+      height: 90px;
+    }
+
+    .liquid-card.mini-header .profile-name-title {
+      font-size: 1.6rem;
+      margin-top: 5px;
+    }
+
+    .liquid-card.mini-header .profile-subtitle {
+      display: none;
     }
 
     /* ==========================================================
-       THANH THÔNG TIN LINK CÓ HIỆU ỨNG CHUYỂN ĐỘNG
+       LINK CARDS BO TRÒN VỚI HIỆU ỨNG ĐỘNG LƠ LỬNG
        ========================================================== */
-    .tab-content-container {
-      min-height: 220px;
-    }
-
-    .tab-panel {
-      display: none;
-      flex-direction: column;
-      gap: 12px;
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-
-    .tab-panel.active {
+    .links-list {
+      width: 100%;
       display: flex;
-      opacity: 1;
-      transform: translateY(0);
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 10px;
     }
 
-    .link-item {
+    .liquid-link-item {
       display: flex;
       align-items: center;
-      padding: 12px 18px;
+      padding: 14px 20px;
       background: var(--link-bg);
-      border: 1.5px solid var(--card-border);
-      border-radius: 18px;
+      border: 1.5px solid var(--link-border);
+      border-radius: 24px;
       text-decoration: none;
-      color: var(--text-main);
-      font-weight: 600;
-      font-size: 0.95rem;
-      box-shadow: 0 4px 15px rgba(186, 230, 253, 0.15);
-      animation: floatItem 6s infinite ease-in-out alternate;
-      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, box-shadow 0.3s ease;
+      color: var(--text-title);
+      font-weight: 700;
+      font-size: 1rem;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+      animation: floatCard 6s infinite ease-in-out alternate;
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
-    .link-item:nth-child(1) { animation-delay: 0s; }
-    .link-item:nth-child(2) { animation-delay: 1.2s; }
-    .link-item:nth-child(3) { animation-delay: 2.4s; }
-    .link-item:nth-child(4) { animation-delay: 3.6s; }
+    .liquid-link-item:nth-child(1) { animation-delay: 0s; }
+    .liquid-link-item:nth-child(2) { animation-delay: 1.2s; }
+    .liquid-link-item:nth-child(3) { animation-delay: 2.4s; }
+    .liquid-link-item:nth-child(4) { animation-delay: 3.6s; }
 
-    @keyframes floatItem {
-      0% { transform: translateY(0px); }
-      100% { transform: translateY(-3px); }
+    @keyframes floatCard {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-4px); }
     }
 
-    .link-item:hover {
+    .liquid-link-item:hover {
       animation-play-state: paused;
-      transform: translateY(-5px) scale(1.01) !important;
+      transform: translateY(-4px) scale(1.02) !important;
       background: var(--link-hover);
-      box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3);
+      box-shadow: 0 12px 28px rgba(56, 189, 248, 0.35);
     }
 
-    .app-icon {
-      width: 38px;
-      height: 38px;
+    .link-app-icon {
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       object-fit: cover;
       margin-right: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    .link-title { flex: 1; text-align: left; }
-    .link-arrow { font-size: 0.85rem; color: var(--text-sub); transition: transform 0.3s ease; }
+    .link-text-label { flex: 1; text-align: left; color: var(--text-title); }
+    .link-chevron { font-size: 0.9rem; opacity: 0.7; transition: transform 0.3s; }
 
-    .link-item:hover .link-arrow {
-      transform: translateX(4px);
-      color: var(--accent-pastel);
+    .liquid-link-item:hover .link-chevron {
+      transform: translateX(5px);
+      opacity: 1;
     }
 
     /* ==========================================================
-       MODAL QR CODE + SAO CHÉP LINK
+       BOTTOM NAVIGATION BAR (LIQUID GLASS 3-TAB NAV - ÁNH VÀO ẢNH 1)
        ========================================================== */
-    .modal-overlay {
+    .bottom-nav-container {
+      padding: 0 20px 20px;
+      z-index: 10;
+    }
+
+    .bottom-nav-glass {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--nav-bg);
+      border: 2px solid var(--glass-border);
+      border-radius: 35px;
+      padding: 6px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 10px 30px rgba(2, 132, 199, 0.15);
+    }
+
+    /* Khối nền đánh dấu Tab active chuyển động trượt mượt */
+    .nav-indicator-pill {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: calc(33.333% - 8px);
+      height: calc(100% - 12px);
+      background: var(--indicator-bg);
+      border: 2px solid #ffffff;
+      border-radius: 28px;
+      box-shadow: var(--indicator-shadow);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 1;
+    }
+
+    .nav-tab-btn {
+      flex: 1;
+      height: 52px;
+      border: none;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .nav-tab-btn.active {
+      color: #0284c7;
+      transform: scale(1.1);
+    }
+
+    [data-theme="dark"] .nav-tab-btn.active { color: #0f172a; }
+
+    /* ==========================================================
+       MODAL QR CODE CÂN ĐỐI VỚI AVATAR NHẬT HUY TÍCH HỢP
+       ========================================================== */
+    .modal-backdrop {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(15, 23, 42, 0.4);
-      backdrop-filter: blur(8px);
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.5);
+      backdrop-filter: blur(12px);
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 100;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.35s ease;
     }
 
-    .modal-overlay.open {
+    .modal-backdrop.active {
       opacity: 1;
       pointer-events: auto;
     }
 
-    .modal-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      border-radius: 24px;
-      padding: 28px 22px;
-      width: 90%;
+    .qr-glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(30px);
+      border: 2px solid var(--glass-border);
+      border-radius: 32px;
+      padding: 28px 24px;
+      width: 88%;
       max-width: 320px;
       text-align: center;
-      box-shadow: var(--shadow);
-      border: 2px solid var(--card-border);
+      box-shadow: var(--glass-shadow);
       transform: scale(0.85);
-      transition: transform 0.3s ease;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .modal-overlay.open .modal-card {
+    .modal-backdrop.active .qr-glass-card {
       transform: scale(1);
     }
 
-    .modal-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 12px;
+    .qr-modal-header {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text-title);
+      margin-bottom: 15px;
     }
 
-    #qrcode {
-      display: flex;
-      justify-content: center;
-      margin: 12px 0;
+    /* Khung mã QR Code thiết kế cân đối, ôm khít hoàn hảo */
+    .qr-box-wrapper {
+      position: relative;
+      width: 190px;
+      height: 190px;
+      margin: 0 auto;
       padding: 12px;
       background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-radius: 24px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .copy-btn {
+    #qrcode-canvas {
+      width: 105% !important;
+      height: 105% !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #qrcode-canvas img {
+      border-radius: 12px;
+    }
+
+    /* Avatar lồng giữa tâm mã QR Code */
+    .qr-center-avatar {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 3px solid #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    /* Các Nút bấm thao tác QR */
+    .copy-link-btn {
       width: 100%;
-      margin-top: 10px;
-      padding: 11px 16px;
+      margin-top: 18px;
+      padding: 12px;
       border: none;
-      background: var(--accent-pastel);
-      color: #ffffff;
-      font-weight: 600;
-      font-size: 0.9rem;
-      border-radius: 16px;
+      background: var(--indicator-bg);
+      color: #0284c7;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border-radius: 18px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.35);
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.35);
       transition: all 0.25s ease;
     }
 
-    .copy-btn:hover {
-      opacity: 0.92;
-      transform: translateY(-1px);
+    [data-theme="dark"] .copy-link-btn { color: #0f172a; }
+
+    .copy-link-btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
     }
 
-    .close-btn {
-      margin-top: 10px;
+    .close-modal-btn {
+      margin-top: 12px;
       width: 100%;
-      padding: 8px;
+      padding: 10px;
       border: none;
       background: transparent;
-      color: var(--text-sub);
-      font-weight: 600;
-      font-size: 0.85rem;
+      color: var(--text-title);
+      font-weight: 700;
+      font-size: 0.9rem;
       cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.2s;
     }
 
-    .close-btn:hover {
-      color: var(--text-main);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .close-modal-btn:hover { opacity: 1; }
   </style>
 </head>
 <body>
 
-  <!-- Background Animated Blur Orbs (5 Khối Cầu Mờ) -->
-  <div class="bg-orbs">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    <div class="orb orb-4"></div>
-    <div class="orb orb-5"></div>
+  <!-- BACKGROUND BLING BLING & LIQUID ORBS (ẢNH 2 CREATIVE) -->
+  <div class="bg-canvas">
+    <div class="liquid-orb orb-huge-top"></div>
+    <div class="liquid-orb orb-main-left"></div>
+    <div class="liquid-orb orb-main-right"></div>
+    <div class="liquid-orb orb-huge-bottom"></div>
+    <div class="liquid-orb orb-small-1"></div>
+    <div class="liquid-orb orb-small-2"></div>
+
+    <!-- Hạt Bling Bling lung linh -->
+    <div class="sparkle" style="top: 18%; left: 25%; width: 6px; height: 6px; animation-delay: 0s;"></div>
+    <div class="sparkle" style="top: 35%; right: 20%; width: 8px; height: 8px; animation-delay: 1s;"></div>
+    <div class="sparkle" style="top: 65%; left: 15%; width: 5px; height: 5px; animation-delay: 1.5s;"></div>
+    <div class="sparkle" style="top: 80%; right: 30%; width: 7px; height: 7px; animation-delay: 0.5s;"></div>
   </div>
 
-  <!-- Bio Main Card -->
-  <main class="bio-card">
-    <div class="top-controls">
-      <button class="icon-btn" id="theme-toggle" aria-label="Toggle Theme">
-        <i class="fa-solid fa-moon"></i>
-      </button>
-      <button class="icon-btn" id="share-btn" aria-label="Share QR Code">
+  <!-- MAIN LIQUID GLASS CARD CONTAINER -->
+  <main class="liquid-card" id="main-card">
+    
+    <!-- TOP BAR (THEME SWITCHER & QR CODE ICON) -->
+    <div class="top-bar">
+      <!-- Toggle Dark/Light dạng Pill có khối chuyển động -->
+      <div class="theme-toggle-pill" id="theme-toggle">
+        <div class="theme-indicator"></div>
+        <span class="theme-btn-icon"><i class="fa-solid fa-moon"></i></span>
+        <span class="theme-btn-icon"><i class="fa-solid fa-sun"></i></span>
+      </div>
+
+      <!-- Icon Mã QR Code -->
+      <button class="qr-glass-btn" id="open-qr-btn" aria-label="Open QR">
         <i class="fa-solid fa-qrcode"></i>
       </button>
     </div>
 
-    <div class="avatar-wrapper">
-      <img id="avatar-img" src="" alt="Avatar Nhật Huy" class="avatar-img">
+    <!-- VIEWPORT HỖ TRỢ VUỐT & CHUYỂN TAB 3 TRANG -->
+    <div class="viewport" id="viewport">
+
+      <!-- TAB 1: SOCIAL MEDIA (BÊN TRÁI) -->
+      <section class="tab-page" id="page-social">
+        <div class="profile-header">
+          <div class="avatar-frame">
+            <img src="" alt="Avatar Nhật Huy" class="user-avatar-img">
+          </div>
+          <h1 class="profile-name-title">Nhật Huy</h1>
+          <p class="profile-subtitle">ung dung.</p>
+        </div>
+        <div class="links-list" id="social-links-list"></div>
+      </section>
+
+      <!-- TAB 2: HOME (CHÍNH GIỮA - CHUẨN MẪU ẢNH 1) -->
+      <section class="tab-page" id="page-home">
+        <div class="profile-header">
+          <div class="avatar-frame">
+            <img src="" alt="Avatar Nhật Huy" class="user-avatar-img">
+          </div>
+          <h1 class="profile-name-title">Nhật Huy</h1>
+          <p class="profile-subtitle">ung dung.</p>
+        </div>
+        <!-- Nút Contact Me thiết kế nổi bật -->
+        <button class="contact-me-btn" id="contact-me-btn">Contact me!</button>
+      </section>
+
+      <!-- TAB 3: WORK (BÊN PHẢI) -->
+      <section class="tab-page" id="page-work">
+        <div class="profile-header">
+          <div class="avatar-frame">
+            <img src="" alt="Avatar Nhật Huy" class="user-avatar-img">
+          </div>
+          <h1 class="profile-name-title">Nhật Huy</h1>
+          <p class="profile-subtitle">ung dung.</p>
+        </div>
+        <div class="links-list" id="work-links-list"></div>
+      </section>
+
     </div>
 
-    <h1 class="profile-name" id="profile-name"></h1>
-    <p class="profile-bio" id="profile-bio"></p>
+    <!-- BOTTOM NAVIGATION BAR (LIQUID GLASS 3-TAB NAV - ÁNH VÀO ẢNH 1) -->
+    <div class="bottom-nav-container">
+      <nav class="bottom-nav-glass">
+        <div class="nav-indicator-pill" id="nav-indicator"></div>
+        
+        <!-- Icon Tab Social (Quả địa cầu) -->
+        <button class="nav-tab-btn" data-index="0" aria-label="Social Tab">
+          <i class="fa-solid fa-globe"></i>
+        </button>
 
-    <!-- Navigation Tabs -->
-    <nav class="tab-navigation">
-      <div class="tab-indicator" id="tab-indicator"></div>
-      <button class="tab-btn active" data-tab="social">Social Media</button>
-      <button class="tab-btn" data-tab="work">Work</button>
-    </nav>
+        <!-- Icon Tab Home (Ngôi nhà chính giữa) -->
+        <button class="nav-tab-btn active" data-index="1" aria-label="Home Tab">
+          <i class="fa-solid fa-house"></i>
+        </button>
 
-    <!-- Tab Panels Container -->
-    <div class="tab-content-container">
-      <div class="tab-panel active" id="social-panel"></div>
-      <div class="tab-panel" id="work-panel"></div>
+        <!-- Icon Tab Work (Thư/Công việc) -->
+        <button class="nav-tab-btn" data-index="2" aria-label="Work Tab">
+          <i class="fa-solid fa-envelope"></i>
+        </button>
+      </nav>
     </div>
+
   </main>
 
-  <!-- Modal QR Code & Copy Link -->
-  <div class="modal-overlay" id="qr-modal">
-    <div class="modal-card">
-      <h3 class="modal-title">Scan QR code</h3>
-      <div id="qrcode"></div>
+  <!-- MODAL QR CODE CHUYÊN NGHIỆP CÂN ĐỐI -->
+  <div class="modal-backdrop" id="qr-modal">
+    <div class="qr-glass-card">
+      <h3 class="qr-modal-header">Scan QR Code</h3>
       
-      <button class="copy-btn" id="copy-link-btn">
+      <!-- Khung QR cân đối lồng Avatar -->
+      <div class="qr-box-wrapper">
+        <div id="qrcode-canvas"></div>
+        <img src="" alt="Avatar Center" class="qr-center-avatar user-avatar-img">
+      </div>
+
+      <!-- Nút Copy Link -->
+      <button class="copy-link-btn" id="copy-btn">
         <i class="fa-regular fa-copy"></i>
         <span id="copy-text">Copy link</span>
       </button>
 
-      <button class="close-btn" id="close-modal">Close</button>
+      <!-- Nút Đóng đổi thành Close -->
+      <button class="close-modal-btn" id="close-qr-btn">Close</button>
     </div>
   </div>
 
+  <!-- Tải file data.js -->
   <script src="data.js"></script>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("avatar-img").src = bioData.profile.avatar;
-      document.getElementById("profile-name").textContent = bioData.profile.name;
-      document.getElementById("profile-bio").textContent = bioData.profile.bio;
+      // 1. Render Thông tin Avatar & Tên
+      const avatars = document.querySelectorAll(".user-avatar-img");
+      avatars.forEach(img => img.src = bioData.profile.avatar);
 
-      renderLinks("social-panel", bioData.tabs.social);
-      renderLinks("work-panel", bioData.tabs.work);
+      renderLinks("social-links-list", bioData.tabs.social);
+      renderLinks("work-links-list", bioData.tabs.work);
 
-      initTabs();
-      initTheme();
-      initQRCodeAndCopy();
+      // 2. Kích hoạt logic ứng dụng
+      initTabNavigation();
+      initSwipeGesture();
+      initThemeToggle();
+      initQRCodeModal();
     });
 
+    // Hàm Render danh sách các đường dẫn
     function renderLinks(containerId, items) {
       const container = document.getElementById(containerId);
       container.innerHTML = items.map(item => `
-        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="link-item">
-          <img src="${item.icon}" alt="${item.title}" class="app-icon">
-          <span class="link-title">${item.title}</span>
-          <i class="fa-solid fa-chevron-right link-arrow"></i>
+        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="liquid-link-item">
+          <img src="${item.icon}" alt="${item.title}" class="link-app-icon">
+          <span class="link-text-label">${item.title}</span>
+          <i class="fa-solid fa-chevron-right link-chevron"></i>
         </a>
       `).join('');
     }
 
-    function initTabs() {
-      const tabBtns = document.querySelectorAll(".tab-btn");
-      const indicator = document.getElementById("tab-indicator");
-      const panels = {
-        social: document.getElementById("social-panel"),
-        work: document.getElementById("work-panel")
-      };
+    // TÍNH NĂNG 1: CHUYỂN TAB VÀ DI CHUYỂN HEADER LÊN TRÊN
+    let currentTabIndex = 1; // Mặc định Tab Home ở giữa (Index = 1)
 
-      tabBtns.forEach((btn, index) => {
-        btn.addEventListener("click", () => {
-          const targetTab = btn.dataset.tab;
+    function initTabNavigation() {
+      const navBtns = document.querySelectorAll(".nav-tab-btn");
+      const indicator = document.getElementById("nav-indicator");
+      const viewport = document.getElementById("viewport");
+      const mainCard = document.getElementById("main-card");
+      const contactBtn = document.getElementById("contact-me-btn");
 
-          indicator.style.transform = `translateX(${index * 100}%)`;
+      function switchTab(index) {
+        currentTabIndex = index;
 
-          tabBtns.forEach(b => b.classList.remove("active"));
-          btn.classList.add("active");
+        // Di chuyển viewport tương ứng (-0%, -33.333%, -66.666%)
+        viewport.style.transform = `translateX(-${index * 33.333}%)`;
 
-          Object.keys(panels).forEach(key => {
-            if (key === targetTab) {
-              panels[key].classList.add("active");
-            } else {
-              panels[key].classList.remove("active");
-            }
-          });
+        // Di chuyển khối màu đánh dấu trên Navigation Bar
+        indicator.style.transform = `translateX(${index * 100}%)`;
+
+        // Đổi trạng thái active cho icon tab
+        navBtns.forEach((btn, i) => {
+          if (i === index) btn.classList.add("active");
+          else btn.classList.remove("active");
         });
+
+        // Xử lý di chuyển thu nhỏ Header khi sang Tab Social/Work
+        if (index === 1) {
+          mainCard.classList.remove("mini-header"); // Ở Home giữ vị trí chuẩn
+        } else {
+          mainCard.classList.add("mini-header"); // Sang Social/Work di chuyển thu nhỏ lên trên
+        }
+      }
+
+      navBtns.forEach((btn, i) => {
+        btn.addEventListener("click", () => switchTab(i));
+      });
+
+      // Nút "Contact me!" trên Home khi bấm sẽ chuyển sang Tab Work
+      contactBtn.addEventListener("click", () => switchTab(2));
+
+      window.switchTabGlobal = switchTab;
+    }
+
+    // TÍNH NĂNG 2: CỬ CHỈ VUỐT SANG (SWIPE GESTURE)
+    function initSwipeGesture() {
+      const viewport = document.getElementById("viewport");
+      let startX = 0;
+      let currentX = 0;
+      let isSwiping = false;
+
+      viewport.addEventListener("touchstart", (e) => {
+        startX = e.touches[0].clientX;
+        isSwiping = true;
+      }, { passive: true });
+
+      viewport.addEventListener("touchmove", (e) => {
+        if (!isSwiping) return;
+        currentX = e.touches[0].clientX;
+      }, { passive: true });
+
+      viewport.addEventListener("touchend", () => {
+        if (!isSwiping) return;
+        const diffX = startX - currentX;
+
+        // Nếu vuốt sang trái > 50px -> Chuyển Tab tiếp theo
+        if (diffX > 50 && currentTabIndex < 2) {
+          window.switchTabGlobal(currentTabIndex + 1);
+        } 
+        // Nếu vuốt sang phải > 50px -> Chuyển Tab trước đó
+        else if (diffX < -50 && currentTabIndex > 0) {
+          window.switchTabGlobal(currentTabIndex - 1);
+        }
+
+        isSwiping = false;
       });
     }
 
-    function initTheme() {
-      const toggleBtn = document.getElementById("theme-toggle");
-      const icon = toggleBtn.querySelector("i");
-      
-      const savedTheme = localStorage.getItem("bio-theme") || "light";
+    // TÍNH NĂNG 3: DARK / LIGHT THEME TOGGLE
+    function initThemeToggle() {
+      const toggle = document.getElementById("theme-toggle");
+      const savedTheme = localStorage.getItem("liquid-theme") || "light";
       document.documentElement.setAttribute("data-theme", savedTheme);
-      updateIcon(savedTheme);
 
-      toggleBtn.addEventListener("click", () => {
+      toggle.addEventListener("click", () => {
         const currentTheme = document.documentElement.getAttribute("data-theme");
         const newTheme = currentTheme === "light" ? "dark" : "light";
         
         document.documentElement.setAttribute("data-theme", newTheme);
-        localStorage.setItem("bio-theme", newTheme);
-        updateIcon(newTheme);
+        localStorage.setItem("liquid-theme", newTheme);
       });
-
-      function updateIcon(theme) {
-        icon.className = theme === "light" ? "fa-solid fa-moon" : "fa-solid fa-sun";
-      }
     }
 
-    function initQRCodeAndCopy() {
-      const shareBtn = document.getElementById("share-btn");
-      const closeBtn = document.getElementById("close-modal");
+    // TÍNH NĂNG 4: QR CODE MODAL CHUYÊN NGHIỆP & COPY LINK
+    function initQRCodeModal() {
+      const openBtn = document.getElementById("open-qr-btn");
+      const closeBtn = document.getElementById("close-qr-btn");
       const modal = document.getElementById("qr-modal");
-      const qrContainer = document.getElementById("qrcode");
-      
-      const copyBtn = document.getElementById("copy-link-btn");
+      const qrCanvas = document.getElementById("qrcode-canvas");
+      const copyBtn = document.getElementById("copy-btn");
       const copyText = document.getElementById("copy-text");
 
-      const shareUrl = (typeof bioData !== 'undefined' && bioData.profile.shareUrl) 
-                       ? bioData.profile.shareUrl 
-                       : window.location.href;
-
+      const shareUrl = bioData.profile.shareUrl || window.location.href;
       let qrGenerated = false;
 
-      shareBtn.addEventListener("click", () => {
-        modal.classList.add("open");
+      openBtn.addEventListener("click", () => {
+        modal.classList.add("active");
         if (!qrGenerated) {
-          new QRCode(qrContainer, {
+          new QRCode(qrCanvas, {
             text: shareUrl,
-            width: 150,
-            height: 150,
+            width: 165,
+            height: 165,
             colorDark: "#0f172a",
             colorLight: "#ffffff",
             correctLevel: QRCode.CorrectLevel.H
@@ -640,23 +933,24 @@
         }
       });
 
+      // Sao chép Link
       copyBtn.addEventListener("click", () => {
         navigator.clipboard.writeText(shareUrl).then(() => {
           copyText.textContent = "Copied!";
           copyBtn.style.background = "#22c55e";
-          
+          copyBtn.style.color = "#ffffff";
+
           setTimeout(() => {
             copyText.textContent = "Copy link";
-            copyBtn.style.background = "var(--accent-pastel)";
+            copyBtn.style.background = "var(--indicator-bg)";
+            copyBtn.style.color = "";
           }, 2000);
-        }).catch(err => {
-          console.error("Lỗi khi sao chép:", err);
         });
       });
 
-      closeBtn.addEventListener("click", () => modal.classList.remove("open"));
+      closeBtn.addEventListener("click", () => modal.classList.remove("active"));
       modal.addEventListener("click", (e) => {
-        if (e.target === modal) modal.classList.remove("open");
+        if (e.target === modal) modal.classList.remove("active");
       });
     }
   </script>
