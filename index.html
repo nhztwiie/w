@@ -8,46 +8,46 @@
   <!-- Favicon từ images/email.png -->
   <link rel="icon" type="image/png" href="images/email.png">
 
-  <!-- Font Google Inter & Plus Jakarta Sans (Đơn giản, sang trọng) -->
+  <!-- Google Fonts: Plus Jakarta Sans & Inter (Cực kỳ đơn giản, sang trọng) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- FontAwesome & QRCode JS -->
+  <!-- FontAwesome & QRCode Library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <style>
     /* ==========================================================
-       BẢNG MÀU & HIỆU ỨNG LIQUID GLASS MỜ NHẸ (THẤY NỀN ĐỘNG)
+       BẢNG MÀU & HIỆU ỨNG LIQUID GLASS
        ========================================================== */
     :root[data-theme="dark"] {
       --bg-base: #060913;
       --bg-gradient: radial-gradient(circle at 50% 30%, #172554 0%, #0b1329 55%, #030712 100%);
       
-      /* Mờ vừa phải để thấy khối cầu phía sau */
-      --glass-bg: rgba(15, 23, 42, 0.35);
-      --glass-border: rgba(255, 255, 255, 0.2);
-      --glass-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.25);
-      --glass-glow: rgba(56, 189, 248, 0.3);
+      --glass-bg: rgba(15, 23, 42, 0.25);
+      --glass-border: rgba(255, 255, 255, 0.16);
+      --glass-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+      --glass-glow: rgba(56, 189, 248, 0.4);
 
       --text-title: #ffffff;
       --text-sub: #38bdf8;
-      --text-quote: #e2e8f0;
+      --text-quote: #f1f5f9;
       --text-author: #94a3b8;
 
-      --pill-bg: rgba(30, 41, 59, 0.45);
-      --pill-border: rgba(255, 255, 255, 0.18);
+      --pill-bg: rgba(30, 41, 59, 0.35);
+      --pill-border: rgba(255, 255, 255, 0.15);
       
-      --nav-bg: rgba(15, 23, 42, 0.5);
+      --nav-bg: rgba(15, 23, 42, 0.4);
       --indicator-bg: #38bdf8;
       --indicator-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
       --nav-icon-active: #0f172a;
       --nav-icon-inactive: #94a3b8;
+      --icon-glow: 0 0 12px rgba(56, 189, 248, 0.8);
 
-      --link-bg: rgba(30, 41, 59, 0.4);
-      --link-border: rgba(255, 255, 255, 0.15);
-      --link-hover: rgba(51, 65, 85, 0.7);
+      --link-bg: rgba(30, 41, 59, 0.3);
+      --link-border: rgba(255, 255, 255, 0.12);
+      --link-hover: rgba(51, 65, 85, 0.6);
 
       --arc-1: rgba(30, 58, 138, 0.6);
       --arc-2: rgba(30, 27, 75, 0.7);
@@ -58,28 +58,29 @@
       --bg-base: #e0f2fe;
       --bg-gradient: radial-gradient(circle at 50% 30%, #f0f9ff 0%, #bae6fd 60%, #7dd3fc 100%);
       
-      --glass-bg: rgba(255, 255, 255, 0.38);
+      --glass-bg: rgba(255, 255, 255, 0.3);
       --glass-border: rgba(255, 255, 255, 0.85);
-      --glass-shadow: 0 25px 50px rgba(14, 165, 233, 0.18), inset 0 1px 2px rgba(255, 255, 255, 0.95);
-      --glass-glow: rgba(2, 132, 199, 0.2);
+      --glass-shadow: 0 25px 50px rgba(14, 165, 233, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.95);
+      --glass-glow: rgba(2, 132, 199, 0.3);
 
       --text-title: #0f172a;
       --text-sub: #0284c7;
-      --text-quote: #1e293b;
+      --text-quote: #0f172a;
       --text-author: #475569;
 
-      --pill-bg: rgba(255, 255, 255, 0.45);
+      --pill-bg: rgba(255, 255, 255, 0.4);
       --pill-border: rgba(255, 255, 255, 0.8);
 
-      --nav-bg: rgba(255, 255, 255, 0.5);
+      --nav-bg: rgba(255, 255, 255, 0.4);
       --indicator-bg: #0284c7;
       --indicator-shadow: 0 6px 18px rgba(2, 132, 199, 0.35);
       --nav-icon-active: #ffffff;
       --nav-icon-inactive: #64748b;
+      --icon-glow: 0 0 12px rgba(2, 132, 199, 0.6);
 
-      --link-bg: rgba(255, 255, 255, 0.48);
+      --link-bg: rgba(255, 255, 255, 0.38);
       --link-border: rgba(255, 255, 255, 0.85);
-      --link-hover: rgba(255, 255, 255, 0.85);
+      --link-hover: rgba(255, 255, 255, 0.75);
 
       --arc-1: rgba(186, 230, 253, 0.7);
       --arc-2: rgba(125, 211, 252, 0.5);
@@ -90,7 +91,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Inter', 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
       -webkit-tap-highlight-color: transparent;
       user-select: none;
     }
@@ -104,7 +105,7 @@
       align-items: center;
       position: relative;
       overflow: hidden;
-      padding: 15px;
+      padding: 20px 15px;
       transition: background 0.5s ease;
     }
 
@@ -128,7 +129,7 @@
       background: radial-gradient(circle at 40% 40%, var(--arc-1) 0%, var(--arc-2) 70%, transparent 100%);
       border: 1.5px solid var(--arc-edge);
       box-shadow: 0 0 50px rgba(2, 132, 199, 0.15), inset 0 0 30px var(--arc-edge);
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(5px);
       animation: floatArc 16s infinite ease-in-out alternate;
     }
 
@@ -143,7 +144,7 @@
     }
 
     /* ==========================================================
-       MAIN CARD CONTAINER (KHUNG KÍNH MỜ BẢO ĐẢM THẤY NỀN)
+       MAIN CARD CONTAINER (CÂN ĐỐI TRÊN DESKTOP & MOBILE)
        ========================================================== */
     .liquid-card {
       position: relative;
@@ -151,15 +152,16 @@
       width: 100%;
       max-width: 410px;
       height: 740px;
-      max-height: 94vh;
+      max-height: 92vh;
       background: var(--glass-bg);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
       border: 1.5px solid var(--glass-border);
       border-radius: 40px;
       box-shadow: var(--glass-shadow);
       display: flex;
       flex-direction: column;
+      justify-content: space-between; /* Giữ thanh Tab luôn ở đáy trên máy tính */
       overflow: hidden;
       animation: glassAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -170,7 +172,7 @@
     }
 
     /* ==========================================================
-       TOP BAR - TOGGLE DARK/LIGHT CÂN ĐỐI NÓNG LẠNH CHUẨN YÊU CẦU
+       TOP BAR & CÔNG TẮC THEME DYNAMIC FIT
        ========================================================== */
     .top-bar {
       padding: 20px 24px 10px;
@@ -178,11 +180,12 @@
       justify-content: space-between;
       align-items: center;
       z-index: 10;
+      flex-shrink: 0;
     }
 
     .theme-toggle-pill {
       position: relative;
-      width: 72px;
+      width: 74px;
       height: 36px;
       background: var(--pill-bg);
       border: 1.5px solid var(--pill-border);
@@ -194,32 +197,17 @@
       backdrop-filter: blur(10px);
     }
 
-    /* Khối đánh dấu tròn trượt chính xác */
     .theme-indicator {
       position: absolute;
-      top: 2px;
-      left: 2px;
-      width: 29px;
-      height: 29px;
+      top: 3px;
+      left: 3px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      background: #ffffff;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
-      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-      z-index: 1;
-    }
-
-    /* QUY TẮC THEME DỰA VÀO CÂU HỎI:
-       - Dark Theme -> Đánh dấu ở Icon Dark (Mặt trăng)
-       - Light Theme -> Đánh dấu ở Icon Light (Mặt trời)
-    */
-    [data-theme="dark"] .theme-indicator {
-      transform: translateX(0px); /* Nằm ở Mặt trăng bên trái */
       background: #38bdf8;
-    }
-
-    [data-theme="light"] .theme-indicator {
-      transform: translateX(35px); /* Nằm ở Mặt trời bên phải */
-      background: #f59e0b;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.35s ease;
+      z-index: 1;
     }
 
     .theme-icon-box {
@@ -233,15 +221,15 @@
       transition: color 0.3s ease;
     }
 
-    [data-theme="dark"] .icon-moon { color: #0f172a; }
-    [data-theme="dark"] .icon-sun { color: #94a3b8; }
+    .icon-moon { color: #ffffff; }
+    .icon-sun { color: #f59e0b; }
 
     [data-theme="light"] .icon-moon { color: #64748b; }
     [data-theme="light"] .icon-sun { color: #ffffff; }
 
     .qr-glass-btn {
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       border-radius: 14px;
       background: var(--pill-bg);
       border: 1.5px solid var(--pill-border);
@@ -261,7 +249,7 @@
     }
 
     /* ==========================================================
-       DYNAMIC HEADER (AVATAR HUY.PNG & CAPTION CHÍNH GIỮA)
+       DYNAMIC HEADER (AVATAR: images/Huy.png)
        ========================================================== */
     .profile-header {
       display: flex;
@@ -270,16 +258,17 @@
       text-align: center;
       padding: 10px 24px 0;
       z-index: 5;
+      flex-shrink: 0;
       transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     .avatar-frame {
       position: relative;
-      width: 120px;
-      height: 120px;
+      width: 115px;
+      height: 115px;
       border-radius: 50%;
       padding: 3px;
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.4);
       border: 1.5px solid var(--glass-border);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 0 20px var(--glass-glow);
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -296,7 +285,6 @@
 
     .avatar-frame:hover img { filter: grayscale(0%); }
 
-    /* Nội dung Profile */
     .profile-info-block {
       display: flex;
       flex-direction: column;
@@ -306,7 +294,7 @@
 
     .profile-name-title {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.9rem;
+      font-size: 1.85rem;
       font-weight: 800;
       color: var(--text-title);
       margin-top: 10px;
@@ -314,25 +302,25 @@
     }
 
     .profile-subtitle {
-      font-size: 1rem;
+      font-size: 0.98rem;
       font-weight: 600;
       color: var(--text-sub);
       margin-top: 1px;
     }
 
-    /* CAPTION CÂU NÓI TRANG HOME */
+    /* CAPTION HOME */
     .home-quote-box {
-      margin-top: 20px;
-      padding: 0 15px;
+      margin-top: 25px;
+      padding: 0 20px;
       text-align: center;
       animation: fadeIn 0.8s ease;
     }
 
     .quote-text {
       font-size: 0.98rem;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--text-quote);
-      line-height: 1.5;
+      line-height: 1.55;
       letter-spacing: 0.2px;
     }
 
@@ -340,64 +328,14 @@
       font-size: 0.82rem;
       font-style: italic;
       color: var(--text-author);
-      margin-top: 8px;
+      margin-top: 10px;
       display: block;
     }
 
-    /* TÍCH HỢP AUDIO PLAYER LIQUID GLASS */
-    .audio-player-glass {
-      margin-top: 22px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 20px;
-      background: var(--link-bg);
-      border: 1.5px solid var(--link-border);
-      border-radius: 25px;
-      backdrop-filter: blur(15px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      cursor: pointer;
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-
-    .audio-player-glass:hover {
-      transform: scale(1.03);
-      background: var(--link-hover);
-    }
-
-    .audio-play-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--indicator-bg);
-      color: var(--nav-icon-active);
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
-
-    .audio-info {
-      text-align: left;
-    }
-
-    .audio-title {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text-title);
-    }
-
-    .audio-sub {
-      font-size: 0.72rem;
-      color: var(--text-author);
-    }
-
-    /* KHI Ở TAB WORK/SOCIAL: CHỈ GIỮ AVATAR THU NHỎ */
+    /* KHI Ở TAB WORK/SOCIAL: GIỮ AVATAR THU NHỎ GỌN GÀNG */
     .liquid-card.compact-mode .avatar-frame {
-      width: 78px;
-      height: 78px;
+      width: 74px;
+      height: 74px;
     }
 
     .liquid-card.compact-mode .profile-info-block {
@@ -453,8 +391,8 @@
       color: var(--text-title);
       font-weight: 600;
       font-size: 0.95rem;
-      backdrop-filter: blur(15px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.05);
       transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
@@ -477,12 +415,13 @@
     .liquid-link-item:hover .link-chevron { transform: translateX(4px); }
 
     /* ==========================================================
-       THANH CHUYỂN TAB BÊN DƯỚI (100% HIỂN THỊ ĐẸP CẢ DESKTOP & MOBILE)
+       THANH CHUYỂN TAB DƯỚI ĐÁY (ĐẢM BẢO HIỆN TRÊN DESKTOP & MOBILE)
        ========================================================== */
     .bottom-nav-container {
       padding: 0 20px 20px;
       z-index: 20;
       width: 100%;
+      flex-shrink: 0;
     }
 
     .bottom-nav-glass {
@@ -498,7 +437,7 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
     }
 
-    /* Khối Indicator trượt chuẩn 100% không lệch */
+    /* Khối Indicator ôm khít 100% Nút Tab */
     .nav-indicator-pill {
       position: absolute;
       top: 4px;
@@ -520,17 +459,19 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       color: var(--nav-icon-inactive);
       cursor: pointer;
       position: relative;
       z-index: 2;
-      transition: color 0.3s, transform 0.3s;
+      transition: color 0.3s, transform 0.3s, text-shadow 0.3s;
     }
 
+    /* Hiệu ứng Icon phát sáng nhẹ khi đang Active Tab */
     .nav-tab-btn.active {
       color: var(--nav-icon-active);
-      transform: scale(1.1);
+      transform: scale(1.12);
+      text-shadow: var(--icon-glow);
     }
 
     /* ==========================================================
@@ -560,7 +501,7 @@
 
     .qr-glass-card {
       background: var(--glass-bg);
-      backdrop-filter: blur(30px);
+      backdrop-filter: blur(28px);
       border: 1.5px solid var(--glass-border);
       border-radius: 36px;
       padding: 24px 20px;
@@ -667,9 +608,9 @@
     
     <!-- TOP BAR -->
     <div class="top-bar">
-      <!-- Theme Switcher với quy tắc hiển thị chuẩn -->
+      <!-- Theme Switcher -->
       <div class="theme-toggle-pill" id="theme-toggle">
-        <div class="theme-indicator"></div>
+        <div class="theme-indicator" id="theme-indicator"></div>
         <div class="theme-icon-box icon-moon"><i class="fa-solid fa-moon"></i></div>
         <div class="theme-icon-box icon-sun"><i class="fa-solid fa-sun"></i></div>
       </div>
@@ -698,26 +639,12 @@
         <div class="links-list" id="social-links-list"></div>
       </section>
 
-      <!-- TAB 2: HOME (CAPTION & AUDIO PLAYER) -->
+      <!-- TAB 2: HOME (CAPTION QUOTE) -->
       <section class="tab-page" id="page-home">
         <div class="home-quote-box">
-          <p class="quote-text">“Even the darkest night will end,<br>and the sun will rise”</p>
+          <p class="quote-text">“Even the darkest night wiil end,<br>and the sun will rise”</p>
           <span class="quote-author">Les Misérables - Victor Hugo</span>
         </div>
-
-        <!-- Trình phát nhạc tự chọn -->
-        <div class="audio-player-glass" id="audio-toggle-btn">
-          <button class="audio-play-btn" id="play-icon">
-            <i class="fa-solid fa-play"></i>
-          </button>
-          <div class="audio-info">
-            <div class="audio-title">Phát nhạc nền</div>
-            <div class="audio-sub">Một Đứa Trẻ Gai Góc</div>
-          </div>
-        </div>
-
-        <!-- File âm thanh liên kết ngầm -->
-        <audio id="bg-audio" loop src="https://v16-webapp-prime.us.tiktok.com/video/tos/useast2a/tos-useast2a-pve-0037c001-aiso/oAnQyMCEfA05iDE3XIBIebg3pIBPgeD7eUARi7/?a=1988&bti=OU1TOTY1QDRjM2M1Y2A1&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&cv=1&br=2560&bt=1280&cs=0&ds=6&ft=4b~KM4yq8Zmo0dC2c64jV4m4PpWrK2m~p~E&mime_type=video_mp4&qs=0&rc=Z2U0N2UzZmg3ODg1N2k1OEBpM2V1dng5cnN1czMzNzczM0A1Y142LTIvXzExNTQxLjMuYSNuMXJqcjRvcG1gLS1kLTRzc3M%3D&btag=e00090000&expire=1728038400&l=20261003135900&ply_type=2&policy=2&signature=0&tk=tt_chain_token"></audio>
       </section>
 
       <!-- TAB 3: WORK -->
@@ -778,7 +705,6 @@
       initSwipeGesture();
       initThemeToggle();
       initQRCodeModal();
-      initAudioPlayer();
     });
 
     function renderLinks(containerId, items) {
@@ -806,7 +732,7 @@
         // Trượt Viewport
         viewport.style.transform = `translateX(-${index * 33.333}%)`;
         
-        // Trượt Indicator chính xác
+        // Trượt Indicator chính xác 100%
         indicator.style.transform = `translateX(${index * 100}%)`;
 
         navBtns.forEach((btn, i) => {
@@ -861,35 +787,32 @@
 
     function initThemeToggle() {
       const toggle = document.getElementById("theme-toggle");
-      const savedTheme = localStorage.getItem("liquid-theme") || "dark";
+      const indicator = document.getElementById("theme-indicator");
       
-      document.documentElement.setAttribute("data-theme", savedTheme);
+      const savedTheme = localStorage.getItem("liquid-theme") || "dark";
+      applyTheme(savedTheme);
 
       toggle.addEventListener("click", () => {
         const currentTheme = document.documentElement.getAttribute("data-theme");
         const newTheme = currentTheme === "light" ? "dark" : "light";
         
-        document.documentElement.setAttribute("data-theme", newTheme);
+        applyTheme(newTheme);
         localStorage.setItem("liquid-theme", newTheme);
       });
-    }
 
-    function initAudioPlayer() {
-      const audioBtn = document.getElementById("audio-toggle-btn");
-      const audio = document.getElementById("bg-audio");
-      const playIcon = document.getElementById("play-icon").querySelector("i");
-      let isPlaying = false;
-
-      audioBtn.addEventListener("click", () => {
-        if (isPlaying) {
-          audio.pause();
-          playIcon.className = "fa-solid fa-play";
+      function applyTheme(theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+        
+        // Dark theme -> Khối chọn ở Mặt trăng (bên trái: 0px)
+        // Light theme -> Khối chọn ở Mặt trời (bên phải: 35px)
+        if (theme === "dark") {
+          indicator.style.transform = "translateX(0px)";
+          indicator.style.backgroundColor = "#38bdf8";
         } else {
-          audio.play().catch(e => console.log("Audio play blocked", e));
-          playIcon.className = "fa-solid fa-pause";
+          indicator.style.transform = "translateX(35px)";
+          indicator.style.backgroundColor = "#f59e0b";
         }
-        isPlaying = !isPlaying;
-      });
+      }
     }
 
     function initQRCodeModal() {
