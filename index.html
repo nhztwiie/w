@@ -583,14 +583,14 @@
     }
 
     .copy-link-btn {
-      width: 100%;
-      margin-top: 16px;
-      padding: 11px;
+      width: 180px;            /* Bằng đúng chiều rộng khung QR (180px) */
+      margin: 16px auto 0;     /* margin-left/right: auto giúp nút nằm chính giữa */
+      padding: 10px 14px;
       border: none;
       background: var(--indicator-bg);
       color: var(--nav-icon-active);
       font-weight: 700;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       border-radius: 16px;
       cursor: pointer;
       display: flex;
@@ -599,6 +599,7 @@
       gap: 8px;
       box-shadow: 0 6px 16px rgba(56, 189, 248, 0.3);
       transition: all 0.25s ease;
+    }
     }
 
     .close-modal-btn {
