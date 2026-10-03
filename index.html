@@ -160,8 +160,11 @@
       z-index: 2;
       width: 100%;
       max-width: 410px;
-      height: 740px;
-      max-height: 92vh;
+  /* Thay đổi chiều cao cố định thành chiều cao tự động */
+      height: auto; 
+      min-height: 520px; /* Độ cao tối thiểu để trang Home không bị quá lùn */
+      max-height: 90vh;  /* Tránh tràn màn hình trên các thiết bị nhỏ */
+  
       background: var(--glass-bg);
       backdrop-filter: blur(16px) saturate(180%);
       -webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -172,7 +175,7 @@
       flex-direction: column;
       justify-content: space-between;
       overflow: hidden;
-      animation: glassAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Hiệu ứng co giãn mượt mà */
     }
 
     @keyframes glassAppear {
