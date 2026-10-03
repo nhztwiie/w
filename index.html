@@ -192,33 +192,33 @@
       flex-shrink: 0;
     }
 
-.theme-toggle-pill {
-  position: relative;
-  width: 72px;
-  height: 38px;
-  background: var(--pill-bg);
-  border: 1.5px solid var(--pill-border);
-  border-radius: 30px;
-  display: flex;
-  align-items: center;
-  padding: 3px;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
-}
+    .theme-toggle-pill {
+      position: relative;
+      width: 72px;
+      height: 38px;
+      background: var(--pill-bg);
+      border: 1.5px solid var(--pill-border);
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      padding: 3px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+    }
 
-.theme-indicator {
-  position: absolute;
-  top: 2.5px;
-  left: 2.5px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: #38bdf8;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.35s ease;
-  z-index: 1;
-  will-change: transform;
-}
+    .theme-indicator {
+      position: absolute;
+      top: 2.5px;
+      left: 2.5px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.35s ease;
+      z-index: 1;
+      will-change: transform;
+    }
 
     .theme-icon-box {
       flex: 1;
@@ -362,11 +362,11 @@
     }
 
     /* ==========================================================
-       VIEWPORT & CONTENT (TỐI ƯU MƯỢT MÀ KHÔNG GIẬT LAG)
+       VIEWPORT & CONTENT
        ========================================================== */
     .viewport {
       flex: 1 1 auto;
-      min-height: 0; /* Bắt buộc để Flexbox trên Desktop tính toán chiều cao chuẩn */
+      min-height: 0;
       display: flex;
       width: 300%;
       transform: translate3d(-33.333%, 0, 0);
@@ -434,13 +434,13 @@
     .liquid-link-item:hover .link-chevron { transform: translate3d(4px, 0, 0); }
 
     /* ==========================================================
-       THANH TAB BÊN DƯỚI (HIỂN THỊ CẢ DESKTOP & MOBILE)
+       THANH TAB BÊN DƯỚI (DESKTOP & MOBILE FIX)
        ========================================================== */
     .bottom-nav-container {
       padding: 10px 20px 20px;
       z-index: 50;
       width: 100%;
-      flex-shrink: 0 !important; /* Đảm bảo không bao giờ bị chèn ép trên Desktop */
+      flex-shrink: 0 !important;
       position: relative;
       display: block !important;
     }
@@ -663,7 +663,7 @@
       <!-- TAB 2: HOME (CAPTION QUOTE) -->
       <section class="tab-page" id="page-home">
         <div class="home-quote-box">
-          <p class="quote-text">“<br>Even the darkest night wiil end,<br>and the sun will rise.</p>
+          <p class="quote-text">“Even the darkest night wiil end,<br>and the sun will rise”</p>
           <span class="quote-author">Les Misérables - Victor Hugo</span>
         </div>
       </section>
@@ -732,7 +732,7 @@
       const container = document.getElementById(containerId);
       if (!container || !items) return;
       container.innerHTML = items.map(item => `
-        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="liquid-link-item">
+        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="liquid-link-item" onclick="event.stopPropagation();">
           <img src="${item.icon}" alt="${item.title}" class="link-app-icon">
           <span class="link-text-label">${item.title}</span>
           <i class="fa-solid fa-chevron-right link-chevron"></i>
@@ -767,7 +767,10 @@
       }
 
       navBtns.forEach((btn, i) => {
-        btn.addEventListener("click", () => switchTab(i));
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          switchTab(i);
+        });
       });
 
       switchTab(1);
@@ -811,7 +814,8 @@
       const savedTheme = localStorage.getItem("liquid-theme") || "dark";
       applyTheme(savedTheme);
 
-      toggle.addEventListener("click", () => {
+      toggle.addEventListener("click", (e) => {
+        e.stopPropagation();
         const currentTheme = document.documentElement.getAttribute("data-theme");
         const newTheme = currentTheme === "light" ? "dark" : "light";
         
@@ -826,8 +830,8 @@
           indicator.style.transform = "translate3d(0, 0, 0)";
           indicator.style.backgroundColor = "#38bdf8";
         } else {
-          // Đã chỉnh tọa độ chuẩn 32px giúp cân đối tuyệt đối ở Light Mode
-          indicator.style.transform = "translate3d(32px, 0, 0)";
+          // Tính toán chuẩn xác 36px cho nút ở Light Mode
+          indicator.style.transform = "translate3d(36px, 0, 0)";
           indicator.style.backgroundColor = "#f59e0b";
         }
       }
@@ -844,7 +848,8 @@
       const shareUrl = (typeof bioData !== 'undefined' && bioData.profile && bioData.profile.shareUrl) ? bioData.profile.shareUrl : window.location.href;
       let qrGenerated = false;
 
-      openBtn.addEventListener("click", () => {
+      openBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
         modal.classList.add("active");
         if (!qrGenerated) {
           new QRCode(qrCanvas, {
@@ -859,7 +864,8 @@
         }
       });
 
-      copyBtn.addEventListener("click", () => {
+      copyBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
         navigator.clipboard.writeText(shareUrl).then(() => {
           copyText.textContent = "Copied!";
           copyBtn.style.background = "#22c55e";
@@ -873,7 +879,11 @@
         });
       });
 
-      closeBtn.addEventListener("click", () => modal.classList.remove("active"));
+      closeBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        modal.classList.remove("active");
+      });
+
       modal.addEventListener("click", (e) => {
         if (e.target === modal) modal.classList.remove("active");
       });
