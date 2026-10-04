@@ -167,13 +167,13 @@
     }
 
     /* ==========================================================
-       MAIN CARD CONTAINER (Liquid Auto-Fit Layout)
+       MAIN CARD CONTAINER (Liquid Auto-Fit Flex Layout)
        ========================================================== */
     .liquid-card {
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 400px;
+      max-width: 410px;
       background: var(--glass-bg);
       backdrop-filter: blur(24px) saturate(210%);
       -webkit-backdrop-filter: blur(24px) saturate(210%);
@@ -271,7 +271,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 6px 24px 4px;
+      padding: 10px 24px 8px;
       z-index: 5;
       flex-shrink: 0;
       transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), margin 0.45s cubic-bezier(0.25, 1, 0.5, 1);
@@ -279,9 +279,9 @@
 
     .avatar-frame {
       position: relative;
-      width: 90px; height: 90px;
+      width: 100px; height: 100px;
       border-radius: 50%;
-      padding: 3.5px;
+      padding: 4px;
       background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.2) 100%);
       border: 1.5px solid var(--glass-border);
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22), 0 0 30px var(--glass-glow);
@@ -311,24 +311,24 @@
     }
 
     .profile-name-title {
-      font-size: 1.55rem;
+      font-size: 1.7rem;
       font-weight: 800;
       color: var(--text-title);
-      margin-top: 10px;
+      margin-top: 12px;
       letter-spacing: -0.02em;
     }
 
     .profile-subtitle {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: 600;
       color: var(--text-sub);
-      margin-top: 1px;
+      margin-top: 2px;
     }
 
-    /* Thu gọn Header khi chuyển sang tab Social / Work */
+    /* Thu gọn Header khi ở Tab khác */
     .liquid-card.compact-mode .profile-header {
-      transform: scale(0.8);
-      margin-bottom: -50px;
+      transform: scale(0.82);
+      margin-bottom: -55px;
     }
 
     .liquid-card.compact-mode .profile-info-block {
@@ -337,19 +337,17 @@
       pointer-events: none;
     }
 
-    /* VIEWPORT SLIDER & AUTO FIT CONTAINER */
+    /* VIEWPORT SLIDER */
     .viewport-wrapper {
       width: 100%;
       overflow: hidden;
       flex: 1;
-      display: flex;
-      align-items: center; /* Căn giữa theo trục dọc */
     }
 
     .viewport {
       width: 300%;
       display: flex;
-      align-items: center; /* Căn giữa nội dung từng tab */
+      align-items: flex-start;
       transform: translate3d(-33.3333%, 0, 0);
       transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: transform;
@@ -357,22 +355,21 @@
 
     .tab-page {
       width: 33.3333%;
-      padding: 12px 20px 16px;
+      padding: 10px 24px 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center; /* Căn giữa tuyệt đối trong khoảng trống */
       box-sizing: border-box;
     }
 
     /* QUOTE BOX */
     .home-quote-box {
-      margin: 4px 0 8px;
+      margin: 10px 0 15px;
       padding: 22px 20px;
       text-align: center;
       background: rgba(255, 255, 255, 0.04);
       border: 1.5px solid rgba(255, 255, 255, 0.12);
-      border-radius: 26px;
+      border-radius: 28px;
       width: 100%;
       backdrop-filter: blur(12px);
       box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
@@ -382,37 +379,36 @@
     .home-quote-box:hover { transform: translateY(-2px); }
 
     .quote-text {
-      font-size: 1.02rem;
+      font-size: 1.08rem;
       font-weight: 600;
       color: var(--text-quote);
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     .quote-author {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-style: italic;
       color: var(--text-author);
-      margin-top: 12px;
+      margin-top: 14px;
       display: block;
     }
 
-    /* LINK CARDS LIST & OPTIMIZED SIZE (To & Cao hơn một chút xíu) */
+    /* LINK CARDS LIST & HOVER EFFECTS */
     .links-list {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 12px; /* Khoảng cách vừa vặn giữa các link */
-      justify-content: center;
+      gap: 12px;
     }
 
     .liquid-link-item {
       position: relative;
       display: flex;
       align-items: center;
-      padding: 13px 18px; /* Đã tăng chiều cao & độ rộng ô link một chút xíu */
+      padding: 14px 18px;
       background: var(--link-bg);
       border: 1.5px solid var(--link-border);
-      border-radius: 22px;
+      border-radius: 24px;
       text-decoration: none;
       color: var(--text-title);
       font-weight: 600;
@@ -423,7 +419,7 @@
       transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
     }
 
-    /* Hiệu ứng vệt sáng quét qua khi hover */
+    /* Hiệu ứng vệt sáng quét qua khi hover (Light Sheen) */
     .liquid-link-item::before {
       content: '';
       position: absolute;
@@ -438,7 +434,7 @@
     .liquid-link-item:hover::before { left: 160%; }
 
     .liquid-link-item:hover {
-      transform: translate3d(0, -3px, 0) scale(1.015);
+      transform: translate3d(0, -4px, 0) scale(1.02);
       background: var(--link-hover-bg);
       border-color: var(--link-hover-border);
       box-shadow: var(--link-hover-glow);
@@ -447,10 +443,9 @@
     .liquid-link-item:active { transform: scale(0.98); }
 
     .link-app-icon {
-      width: 30px; height: 30px; /* Tăng kích thước Icon tương ứng */
+      width: 34px; height: 34px;
       border-radius: 50%;
       margin-right: 14px;
-      object-fit: cover;
       transition: transform 0.35s ease;
     }
 
@@ -464,13 +459,13 @@
       transition: transform 0.35s ease;
     }
 
-    .liquid-link-item:hover .link-chevron { transform: translateX(3px); }
+    .liquid-link-item:hover .link-chevron { transform: translateX(4px); }
 
     /* ==========================================================
-       NAV DOCK CAPSULE
+       NAV DOCK CAPSULE (Cố định an toàn trong khung)
        ========================================================== */
     .bottom-nav-container {
-      padding: 4px 20px 18px;
+      padding: 6px 22px 20px;
       z-index: 50;
       width: 100%;
       flex-shrink: 0;
@@ -485,16 +480,16 @@
       background: var(--nav-dock-bg);
       border: 1.5px solid var(--nav-dock-border);
       border-radius: 40px;
-      padding: 4px;
+      padding: 5px;
       backdrop-filter: blur(28px);
       box-shadow: var(--nav-dock-shadow);
     }
 
     .nav-indicator-pill {
       position: absolute;
-      top: 4px; left: 4px;
-      width: calc((100% - 8px) / 3);
-      height: calc(100% - 8px);
+      top: 5px; left: 5px;
+      width: calc((100% - 10px) / 3);
+      height: calc(100% - 10px);
       background: var(--indicator-pill-bg);
       border: 1.5px solid var(--indicator-pill-border);
       border-radius: 32px;
@@ -505,7 +500,7 @@
 
     .nav-tab-btn {
       flex: 1;
-      height: 44px;
+      height: 46px;
       border: none;
       background: transparent;
       display: flex;
@@ -517,14 +512,14 @@
     }
 
     .nav-tab-btn i {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       color: var(--nav-icon-inactive);
       transition: color 0.35s ease, transform 0.35s ease;
     }
 
     .nav-tab-btn.active i {
       color: var(--nav-icon-active);
-      transform: scale(1.15);
+      transform: scale(1.18);
     }
 
     /* MODAL QR CODE */
@@ -686,7 +681,7 @@
       </div>
     </div>
 
-    <!-- THANH TAB NAV DOCK -->
+    <!-- THANH TAB NAV DOCK (CỐ ĐỊNH TRONG CARD) -->
     <div class="bottom-nav-container">
       <nav class="bottom-nav-glass">
         <div class="nav-indicator-pill" id="nav-indicator"></div>
@@ -756,7 +751,7 @@
       const mainCard = document.getElementById("main-card");
       const tabPages = document.querySelectorAll(".tab-page");
 
-      // Căn chỉnh tự động kích thước Card fit theo từng Tab chính xác
+      // Căn chỉnh linh hoạt chiều cao Card vừa vặn nội dung
       function adjustCardHeight(index) {
         requestAnimationFrame(() => {
           const topBarH = document.querySelector(".top-bar").offsetHeight;
@@ -776,7 +771,7 @@
 
         const activeBtn = navBtns[index];
         if (activeBtn && indicator) {
-          indicator.style.transform = `translate3d(${activeBtn.offsetLeft - 4}px, 0, 0)`;
+          indicator.style.transform = `translate3d(${activeBtn.offsetLeft - 5}px, 0, 0)`;
         }
 
         navBtns.forEach((btn, i) => btn.classList.toggle("active", i === index));
