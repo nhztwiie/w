@@ -8,7 +8,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/email.png">
 
-  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,13 +19,13 @@
 
   <style>
     /* ==========================================================
-       BẢNG MÀU & HIỆU ỨNG LIQUID GLASS SYSTEM (DARK / LIGHT)
+       BẢNG MÀU & HIỆU ỨNG LIQUID GLASS SYSTEM
        ========================================================== */
     :root[data-theme="dark"] {
       --bg-base: #030712;
       --bg-gradient: radial-gradient(circle at 50% 20%, #1e1b4b 0%, #0f172a 50%, #030712 100%);
       
-      --glass-bg: rgba(15, 23, 42, 0.48);
+      --glass-bg: rgba(15, 23, 42, 0.52);
       --glass-border: rgba(255, 255, 255, 0.18);
       --glass-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1.5px 1.5px rgba(255, 255, 255, 0.3);
       --glass-glow: rgba(56, 189, 248, 0.35);
@@ -35,14 +35,12 @@
       --text-quote: #f8fafc;
       --text-author: #94a3b8;
 
-      /* Liquid Toggle Theme Dark */
       --toggle-track-bg: rgba(255, 255, 255, 0.12);
       --toggle-track-border: rgba(255, 255, 255, 0.25);
       --toggle-orb-bg: radial-gradient(circle at 35% 35%, #38bdf8 0%, #818cf8 50%, #1e1b4b 100%);
       --toggle-orb-glow: 0 0 25px rgba(56, 189, 248, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.8);
 
-      /* Liquid Glass Dock & Indicator Theme Dark */
-      --nav-dock-bg: rgba(15, 23, 42, 0.55);
+      --nav-dock-bg: rgba(15, 23, 42, 0.65);
       --nav-dock-border: rgba(255, 255, 255, 0.25);
       --nav-dock-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.4), inset 0 -2px 6px rgba(0, 0, 0, 0.5), 0 20px 45px rgba(0, 0, 0, 0.5);
       
@@ -71,7 +69,7 @@
       --bg-base: #f0f9ff;
       --bg-gradient: radial-gradient(circle at 50% 20%, #ffffff 0%, #bae6fd 50%, #38bdf8 100%);
       
-      --glass-bg: rgba(255, 255, 255, 0.62);
+      --glass-bg: rgba(255, 255, 255, 0.65);
       --glass-border: rgba(255, 255, 255, 0.95);
       --glass-shadow: 0 25px 50px rgba(14, 165, 233, 0.2), inset 0 1.5px 2px rgba(255, 255, 255, 1);
       --glass-glow: rgba(2, 132, 199, 0.35);
@@ -81,14 +79,12 @@
       --text-quote: #0f172a;
       --text-author: #475569;
 
-      /* Liquid Toggle Theme Light */
       --toggle-track-bg: rgba(255, 255, 255, 0.85);
       --toggle-track-border: rgba(255, 255, 255, 1);
       --toggle-orb-bg: radial-gradient(circle at 50% 50%, #fffbeb 0%, #fef08a 30%, #7dd3fc 85%, #38bdf8 100%);
       --toggle-orb-glow: 0 4px 18px rgba(253, 224, 71, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.95);
 
-      /* Liquid Glass Dock & Indicator Theme Light */
-      --nav-dock-bg: rgba(255, 255, 255, 0.65);
+      --nav-dock-bg: rgba(255, 255, 255, 0.75);
       --nav-dock-border: rgba(255, 255, 255, 0.95);
       --nav-dock-shadow: inset 0 2px 4px rgba(255, 255, 255, 1), inset 0 -2px 6px rgba(14, 165, 233, 0.12), 0 20px 40px rgba(14, 165, 233, 0.25);
       
@@ -99,7 +95,6 @@
       --nav-icon-active: #0284c7;
       --nav-icon-inactive: #64748b;
 
-      /* Link Cards ở Light Mode */
       --link-bg: rgba(255, 255, 255, 0.78);
       --link-border: #ffffff;
       --link-hover: rgba(255, 255, 255, 0.95);
@@ -137,15 +132,11 @@
       transition: background 0.5s ease;
     }
 
-    /* ==========================================================
-       BACKGROUND SPHERES (GPU ACCELERATED & SMOOTH DRIFT)
-       ========================================================== */
+    /* BACKGROUND SPHERES */
     .bg-canvas {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
       z-index: 1;
       pointer-events: none;
       overflow: hidden;
@@ -174,14 +165,13 @@
     }
 
     /* ==========================================================
-       MAIN CARD CONTAINER (KHUNG TỰ ĐỘNG FIT FIT VỚI NỘI DUNG)
+       MAIN CARD CONTAINER (ĐÃ CỐ ĐỊNH LAYOUT ĐỂ KHÔNG MẤT TAB)
        ========================================================== */
     .liquid-card {
       position: relative;
       z-index: 2;
       width: 100%;
       max-width: 410px;
-      height: auto;
       background: var(--glass-bg);
       backdrop-filter: blur(22px) saturate(200%);
       -webkit-backdrop-filter: blur(22px) saturate(200%);
@@ -191,20 +181,11 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      animation: glassAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
       transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1), background 0.4s ease, border-color 0.4s ease;
-      will-change: height, transform;
-      transform: translateZ(0);
+      will-change: height;
     }
 
-    @keyframes glassAppear {
-      from { opacity: 0; transform: scale(0.94) translate3d(0, 20px, 0); }
-      to { opacity: 1; transform: scale(1) translate3d(0, 0, 0); }
-    }
-
-    /* ==========================================================
-       TOP BAR & NÚT CHUYỂN THEME
-       ========================================================== */
+    /* TOP BAR */
     .top-bar {
       padding: 18px 24px 6px;
       display: flex;
@@ -232,10 +213,8 @@
 
     .theme-orb-indicator {
       position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 35px;
-      height: 35px;
+      top: 3px; left: 3px;
+      width: 35px; height: 35px;
       border-radius: 50%;
       background: var(--toggle-orb-bg);
       border: 1.5px solid rgba(255, 255, 255, 0.95);
@@ -245,47 +224,23 @@
       justify-content: center;
       transition: transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease, box-shadow 0.4s ease;
       z-index: 2;
-      will-change: transform;
     }
 
     .theme-orb-indicator .orb-icon-svg {
-      width: 20px;
-      height: 20px;
+      width: 20px; height: 20px;
       transition: opacity 0.3s ease, transform 0.35s ease;
       position: absolute;
     }
 
-    .orb-sun-svg {
-      opacity: 0;
-      transform: scale(0.5) rotate(-90deg);
-    }
+    .orb-sun-svg { opacity: 0; transform: scale(0.5) rotate(-90deg); }
+    .orb-moon { color: #ffffff; font-size: 1rem; text-shadow: 0 0 8px rgba(56, 189, 248, 0.8); opacity: 1; transform: scale(1) rotate(0deg); }
 
-    .orb-moon {
-      color: #ffffff;
-      font-size: 1rem;
-      text-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
-      opacity: 1;
-      transform: scale(1) rotate(0deg);
-      transition: opacity 0.3s ease, transform 0.35s ease;
-    }
-
-    [data-theme="light"] .theme-orb-indicator {
-      transform: translate3d(38px, 0, 0);
-    }
-
-    [data-theme="light"] .orb-sun-svg {
-      opacity: 1;
-      transform: scale(1) rotate(0deg);
-    }
-
-    [data-theme="light"] .orb-moon {
-      opacity: 0;
-      transform: scale(0.5) rotate(90deg);
-    }
+    [data-theme="light"] .theme-orb-indicator { transform: translate3d(38px, 0, 0); }
+    [data-theme="light"] .orb-sun-svg { opacity: 1; transform: scale(1) rotate(0deg); }
+    [data-theme="light"] .orb-moon { opacity: 0; transform: scale(0.5) rotate(90deg); }
 
     .qr-glass-btn {
-      width: 42px;
-      height: 42px;
+      width: 42px; height: 42px;
       border-radius: 16px;
       background: var(--link-bg);
       border: 1.5px solid var(--link-border);
@@ -297,17 +252,12 @@
       cursor: pointer;
       backdrop-filter: blur(14px);
       box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.4);
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .qr-glass-btn:hover {
-      transform: scale(1.08) rotate(5deg);
-      box-shadow: 0 0 20px var(--glass-glow);
-    }
+    .qr-glass-btn:hover { transform: scale(1.08) rotate(5deg); }
 
-    /* ==========================================================
-       DYNAMIC PROFILE HEADER (TỐI ƯU CÂN ĐỐI CHO HOME TAB)
-       ========================================================== */
+    /* PROFILE HEADER */
     .profile-header {
       display: flex;
       flex-direction: column;
@@ -317,26 +267,21 @@
       padding: 10px 24px 8px;
       z-index: 5;
       flex-shrink: 0;
-      transform-origin: top center;
       transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), margin 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-      will-change: transform;
     }
 
     .avatar-frame {
       position: relative;
-      width: 100px; /* Tăng nhẹ để nổi bật ở Home Tab */
-      height: 100px;
+      width: 100px; height: 100px;
       border-radius: 50%;
       padding: 4px;
       background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.2) 100%);
       border: 1.5px solid var(--glass-border);
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22), 0 0 30px var(--glass-glow);
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .avatar-frame img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
       border-radius: 50%;
       filter: grayscale(100%);
@@ -349,17 +294,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       transition: opacity 0.3s ease, transform 0.35s ease;
-      will-change: opacity, transform;
     }
 
     .profile-name-title {
-      font-size: 1.7rem; /* Tăng từ 1.55rem để ấn tượng hơn */
+      font-size: 1.7rem;
       font-weight: 800;
       color: var(--text-title);
       margin-top: 12px;
-      letter-spacing: -0.3px;
     }
 
     .profile-subtitle {
@@ -369,10 +311,10 @@
       margin-top: 2px;
     }
 
-    /* Thu gọn Header khi chuyển sang Social/Work tab */
+    /* Thu gọn Header khi ở Social/Work tab */
     .liquid-card.compact-mode .profile-header {
-      transform: scale(0.82);
-      margin-bottom: -50px;
+      transform: scale(0.8);
+      margin-bottom: -55px;
     }
 
     .liquid-card.compact-mode .profile-info-block {
@@ -381,9 +323,13 @@
       pointer-events: none;
     }
 
-    /* ==========================================================
-       VIEWPORT & LINK CARDS (FIT NỘI DUNG MƯỢT MÀ)
-       ========================================================== */
+    /* VIEWPORT SLIDER CONTAINER */
+    .viewport-wrapper {
+      width: 100%;
+      overflow: hidden;
+      flex: 1;
+    }
+
     .viewport {
       width: 300%;
       display: flex;
@@ -391,41 +337,33 @@
       transform: translate3d(-33.3333%, 0, 0);
       transition: transform 0.42s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: transform;
-      contain: layout style;
     }
 
     .tab-page {
       width: 33.3333%;
-      padding: 10px 24px 16px;
+      padding: 10px 24px 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
       box-sizing: border-box;
     }
 
-    /* HOME TAB QUOTE BOX */
+    /* HOME TAB QUOTE */
     .home-quote-box {
-      margin: 10px 0 20px;
+      margin: 10px 0 15px;
       padding: 22px 20px;
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 28px;
       width: 100%;
-      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1);
     }
 
     .quote-text {
-      font-size: 1.08rem; /* Tăng kích thước chữ caption */
+      font-size: 1.08rem;
       font-weight: 600;
       color: var(--text-quote);
       line-height: 1.65;
-      letter-spacing: 0.2px;
     }
 
     .quote-author {
@@ -436,19 +374,15 @@
       display: block;
     }
 
-    /* TỐI ƯU DANH SÁCH THẺ THÔNG TIN - KHÔNG BỊ KHUẤT DOCK */
+    /* LINK CARDS LIST */
     .links-list {
       width: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      gap: 11px; /* Khoảng cách hợp lý giữa các thẻ */
-      margin: 0 auto;
-      padding-bottom: 8px;
+      gap: 10px;
     }
 
     .liquid-link-item {
-      flex-shrink: 0; /* Giữ kích thước cố định, chống co ép */
       display: flex;
       align-items: center;
       padding: 13px 18px;
@@ -459,38 +393,30 @@
       color: var(--text-title);
       font-weight: 600;
       font-size: 0.92rem;
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      backdrop-filter: blur(16px);
       box-shadow: var(--link-shadow);
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-      will-change: transform;
-      transform: translateZ(0);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
     }
 
     .liquid-link-item:hover {
       transform: translate3d(0, -3px, 0) scale(1.015);
       background: var(--link-hover);
-      box-shadow: 0 12px 28px var(--glass-glow), inset 0 2px 4px rgba(255, 255, 255, 0.8);
     }
 
     .link-app-icon {
-      width: 34px;
-      height: 34px;
+      width: 34px; height: 34px;
       border-radius: 50%;
-      object-fit: cover;
       margin-right: 14px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
     .link-text-label { flex: 1; text-align: left; }
-    .link-chevron { font-size: 0.85rem; color: var(--text-sub); transition: transform 0.3s ease; }
-    .liquid-link-item:hover .link-chevron { transform: translate3d(5px, 0, 0); }
+    .link-chevron { font-size: 0.85rem; color: var(--text-sub); }
 
     /* ==========================================================
-       THANH TAB DOCK CAPSULE
+       NAV DOCK CAPSULE (CỐ ĐỊNH LUÔN NẰM TRONG KHUNG)
        ========================================================== */
     .bottom-nav-container {
-      padding: 8px 22px 18px;
+      padding: 6px 22px 20px;
       z-index: 50;
       width: 100%;
       flex-shrink: 0;
@@ -506,25 +432,21 @@
       border: 1.5px solid var(--nav-dock-border);
       border-radius: 40px;
       padding: 5px;
-      backdrop-filter: blur(28px) saturate(210%);
-      -webkit-backdrop-filter: blur(28px) saturate(210%);
+      backdrop-filter: blur(28px);
       box-shadow: var(--nav-dock-shadow);
-      transition: background 0.4s ease, border-color 0.4s ease;
     }
 
     .nav-indicator-pill {
       position: absolute;
-      top: 5px;
-      left: 5px;
+      top: 5px; left: 5px;
       width: calc((100% - 10px) / 3);
       height: calc(100% - 10px);
       background: var(--indicator-pill-bg);
       border: 1.5px solid var(--indicator-pill-border);
       border-radius: 32px;
       box-shadow: var(--indicator-pill-glow);
-      transition: transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease, border-color 0.4s ease;
+      transition: transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1);
       z-index: 1;
-      will-change: transform;
     }
 
     .nav-tab-btn {
@@ -543,32 +465,21 @@
     .nav-tab-btn i {
       font-size: 1.3rem;
       color: var(--nav-icon-inactive);
-      transition: color 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+      transition: color 0.35s ease, transform 0.35s ease;
     }
 
     .nav-tab-btn.active i {
       color: var(--nav-icon-active);
       transform: scale(1.15);
-      filter: drop-shadow(0 0 10px var(--text-sub));
     }
 
-    .nav-tab-btn:hover i {
-      transform: scale(1.08);
-    }
-
-    /* ==========================================================
-       MODAL QR CODE
-       ========================================================== */
+    /* MODAL QR CODE */
     .modal-backdrop {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
       background: var(--qr-modal-bg);
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -578,75 +489,47 @@
       transition: opacity 0.35s ease;
     }
 
-    .modal-backdrop.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
+    .modal-backdrop.active { opacity: 1; pointer-events: auto; }
 
     .qr-glass-card {
       background: var(--qr-card-bg);
-      backdrop-filter: blur(30px) saturate(190%);
-      -webkit-backdrop-filter: blur(30px) saturate(190%);
+      backdrop-filter: blur(30px);
       border: 1.5px solid var(--qr-card-border);
       border-radius: 38px;
       padding: 26px 20px;
       width: 88%;
       max-width: 310px;
       text-align: center;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3), 0 0 30px var(--glass-glow);
-      transform: scale(0.88) translate3d(0, 10px, 0);
+      transform: scale(0.88);
       transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      will-change: transform;
     }
 
-    .modal-backdrop.active .qr-glass-card { 
-      transform: scale(1) translate3d(0, 0, 0); 
-    }
-
-    .qr-modal-header {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--text-title);
-      margin-bottom: 16px;
-    }
+    .modal-backdrop.active .qr-glass-card { transform: scale(1); }
+    .qr-modal-header { font-size: 1.15rem; font-weight: 700; color: var(--text-title); margin-bottom: 16px; }
 
     .qr-box-wrapper {
       position: relative;
-      width: 175px;
-      height: 175px;
+      width: 175px; height: 175px;
       margin: 0 auto;
       padding: 10px;
       background: #ffffff;
-      border: 2px solid rgba(255, 255, 255, 0.95);
       border-radius: 26px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    #qrcode-canvas {
-      width: 100% !important;
-      height: 100% !important;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
+    #qrcode-canvas { width: 100% !important; height: 100% !important; display: flex; justify-content: center; align-items: center; }
     #qrcode-canvas img { border-radius: 12px; }
 
     .qr-center-avatar {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 38px;
-      height: 38px;
+      width: 38px; height: 38px;
       border-radius: 50%;
       border: 2.5px solid #ffffff;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
       object-fit: cover;
-      pointer-events: none;
     }
 
     .copy-link-btn {
@@ -664,12 +547,6 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 8px 20px var(--glass-glow);
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-
-    .copy-link-btn:active {
-      transform: scale(0.96);
     }
 
     .close-modal-btn {
@@ -682,49 +559,40 @@
       font-weight: 600;
       font-size: 0.85rem;
       cursor: pointer;
-      opacity: 0.85;
     }
   </style>
 </head>
 <body>
 
-  <!-- BACKGROUND LIQUID SPHERES -->
   <div class="bg-canvas">
     <div class="glass-arc-sphere arc-1"></div>
     <div class="glass-arc-sphere arc-2"></div>
     <div class="glass-arc-sphere arc-center"></div>
   </div>
 
-  <!-- MAIN CARD CONTAINER -->
   <main class="liquid-card" id="main-card">
     
     <!-- TOP BAR -->
     <div class="top-bar">
-      <!-- Theme Switcher Orb -->
-      <div class="theme-toggle-track" id="theme-toggle" role="button" aria-label="Toggle Theme">
+      <div class="theme-toggle-track" id="theme-toggle">
         <div class="theme-orb-indicator" id="theme-indicator">
           <i class="fa-solid fa-moon orb-moon"></i>
-          
-          <svg class="orb-icon-svg orb-sun-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg class="orb-icon-svg orb-sun-svg" viewBox="0 0 100 100" fill="none">
             <circle cx="50" cy="50" r="18" fill="#fef08a" />
             <path d="M50 15 C47 22, 47 26, 50 28 C53 26, 53 22, 50 15 Z" fill="#fef08a" />
             <path d="M50 85 C47 78, 47 74, 50 72 C53 74, 53 78, 50 85 Z" fill="#fef08a" />
             <path d="M15 50 C22 47, 26 47, 28 50 C26 53, 22 53, 15 50 Z" fill="#fef08a" />
             <path d="M85 50 C78 47, 74 47, 72 50 C74 53, 78 53, 85 50 Z" fill="#fef08a" />
-            <path d="M25.2 25.2 C31.5 28.5, 34.3 30.2, 34.4 34.4 C30.2 34.3, 28.5 31.5, 25.2 25.2 Z" fill="#fef08a" />
-            <path d="M74.8 74.8 C68.5 71.5, 65.7 69.8, 65.6 65.6 C69.8 65.7, 71.5 68.5, 74.8 74.8 Z" fill="#fef08a" />
-            <path d="M74.8 25.2 C71.5 31.5, 69.8 34.3, 65.6 34.4 C65.7 30.2, 68.5 28.5, 74.8 25.2 Z" fill="#fef08a" />
-            <path d="M25.2 74.8 C28.5 68.5, 30.2 65.7, 34.4 65.6 C34.3 69.8, 31.5 71.5, 25.2 74.8 Z" fill="#fef08a" />
           </svg>
         </div>
       </div>
 
-      <button class="qr-glass-btn" id="open-qr-btn" aria-label="Open QR">
+      <button class="qr-glass-btn" id="open-qr-btn">
         <i class="fa-solid fa-qrcode"></i>
       </button>
     </div>
 
-    <!-- DYNAMIC PROFILE HEADER -->
+    <!-- PROFILE HEADER -->
     <header class="profile-header">
       <div class="avatar-frame">
         <img src="images/Huy.png" alt="Avatar Nhật Huy">
@@ -736,42 +604,44 @@
     </header>
 
     <!-- VIEWPORT CHUYỂN TAB -->
-    <div class="viewport" id="viewport">
+    <div class="viewport-wrapper">
+      <div class="viewport" id="viewport">
 
-      <!-- TAB 1: SOCIAL MEDIA -->
-      <section class="tab-page" id="page-social">
-        <div class="links-list" id="social-links-list"></div>
-      </section>
+        <!-- TAB 1: SOCIAL -->
+        <section class="tab-page" id="page-social">
+          <div class="links-list" id="social-links-list"></div>
+        </section>
 
-      <!-- TAB 2: HOME (CAPTION QUOTE) -->
-      <section class="tab-page" id="page-home">
-        <div class="home-quote-box">
-          <p class="quote-text">“<br>Even the darkest night will end,<br>and the sun will rise.</p>
-          <span class="quote-author">Les Misérables - Victor Hugo</span>
-        </div>
-      </section>
+        <!-- TAB 2: HOME (QUOTE) -->
+        <section class="tab-page" id="page-home">
+          <div class="home-quote-box">
+            <p class="quote-text">“<br>Even the darkest night will end,<br>and the sun will rise.</p>
+            <span class="quote-author">Les Misérables - Victor Hugo</span>
+          </div>
+        </section>
 
-      <!-- TAB 3: WORK -->
-      <section class="tab-page" id="page-work">
-        <div class="links-list" id="work-links-list"></div>
-      </section>
+        <!-- TAB 3: WORK -->
+        <section class="tab-page" id="page-work">
+          <div class="links-list" id="work-links-list"></div>
+        </section>
 
+      </div>
     </div>
 
-    <!-- THANH TAB LIQUID GLASS CAPSULE -->
+    <!-- THANH TAB NAV DOCK (LUÔN NẰM TRONG CARD) -->
     <div class="bottom-nav-container">
       <nav class="bottom-nav-glass">
         <div class="nav-indicator-pill" id="nav-indicator"></div>
         
-        <button class="nav-tab-btn" data-index="0" aria-label="Social Tab">
+        <button class="nav-tab-btn" data-index="0" aria-label="Social">
           <i class="fa-solid fa-globe"></i>
         </button>
 
-        <button class="nav-tab-btn active" data-index="1" aria-label="Home Tab">
+        <button class="nav-tab-btn active" data-index="1" aria-label="Home">
           <i class="fa-solid fa-house"></i>
         </button>
 
-        <button class="nav-tab-btn" data-index="2" aria-label="Work Tab">
+        <button class="nav-tab-btn" data-index="2" aria-label="Work">
           <i class="fa-solid fa-envelope"></i>
         </button>
       </nav>
@@ -783,17 +653,14 @@
   <div class="modal-backdrop" id="qr-modal">
     <div class="qr-glass-card">
       <h3 class="qr-modal-header">Scan QR Code</h3>
-      
       <div class="qr-box-wrapper">
         <div id="qrcode-canvas"></div>
-        <img src="images/Huy.png" alt="Avatar Center" class="qr-center-avatar">
+        <img src="images/Huy.png" alt="Avatar" class="qr-center-avatar">
       </div>
-
       <button class="copy-link-btn" id="copy-btn">
         <i class="fa-regular fa-copy"></i>
         <span id="copy-text">Copy link</span>
       </button>
-
       <button class="close-modal-btn" id="close-qr-btn">Close</button>
     </div>
   </div>
@@ -831,82 +698,63 @@
       const mainCard = document.getElementById("main-card");
       const tabPages = document.querySelectorAll(".tab-page");
 
-      // Cập nhật chiều cao linh hoạt cho Card theo Tab được chọn
+      // Cập nhật chiều cao chuẩn xác cho Card
       function adjustCardHeight(index) {
         requestAnimationFrame(() => {
-          const topBarHeight = document.querySelector(".top-bar").offsetHeight;
-          const headerHeight = document.querySelector(".profile-header").offsetHeight;
-          const navHeight = document.querySelector(".bottom-nav-container").offsetHeight;
+          const topBarH = document.querySelector(".top-bar").offsetHeight;
+          const headerH = document.querySelector(".profile-header").offsetHeight;
+          const navH = document.querySelector(".bottom-nav-container").offsetHeight;
           
           const currentTabPage = tabPages[index];
-          const contentHeight = currentTabPage ? currentTabPage.scrollHeight : 0;
+          const contentH = currentTabPage ? currentTabPage.scrollHeight : 0;
 
-          // Tổng chiều cao chuẩn cho từng Tab
-          const totalHeight = topBarHeight + headerHeight + contentHeight + navHeight;
-          mainCard.style.height = `${totalHeight}px`;
+          const totalH = topBarH + headerH + contentH + navH;
+          mainCard.style.height = `${totalH}px`;
         });
       }
 
       function switchTab(index) {
-        // 1. Dịch chuyển Viewport
         viewport.style.transform = `translate3d(-${index * 33.3333}%, 0, 0)`;
 
-        // 2. Định vị Indicator
         const activeBtn = navBtns[index];
         if (activeBtn && indicator) {
-          const offsetLeft = activeBtn.offsetLeft;
-          indicator.style.transform = `translate3d(${offsetLeft - 5}px, 0, 0)`;
+          indicator.style.transform = `translate3d(${activeBtn.offsetLeft - 5}px, 0, 0)`;
         }
 
-        // 3. Cập nhật icon Active
-        navBtns.forEach((btn, i) => {
-          btn.classList.toggle("active", i === index);
-        });
+        navBtns.forEach((btn, i) => btn.classList.toggle("active", i === index));
 
-        // 4. Bật/Tắt Compact Mode cho Profile Header
         if (index === 1) {
           mainCard.classList.remove("compact-mode");
         } else {
           mainCard.classList.add("compact-mode");
         }
 
-        // 5. Fit lại chiều cao card
         adjustCardHeight(index);
       }
 
-      navBtns.forEach((btn, i) => {
-        btn.addEventListener("click", () => switchTab(i));
-      });
+      navBtns.forEach((btn, i) => btn.addEventListener("click", () => switchTab(i)));
 
       window.addEventListener("resize", () => {
         const activeBtn = document.querySelector(".nav-tab-btn.active");
         if (activeBtn) {
-          const index = parseInt(activeBtn.getAttribute("data-index") || "1");
-          switchTab(index);
+          switchTab(parseInt(activeBtn.getAttribute("data-index") || "1"));
         }
       });
 
-      // Mặc định ở Home Tab (Index 1)
-      setTimeout(() => { switchTab(1); }, 50);
+      setTimeout(() => { switchTab(1); }, 60);
     }
 
     function initThemeToggle() {
       const toggle = document.getElementById("theme-toggle");
       const savedTheme = localStorage.getItem("liquid-theme") || "dark";
-      
-      applyTheme(savedTheme);
+      document.documentElement.setAttribute("data-theme", savedTheme);
 
       toggle.addEventListener("click", () => {
         const currentTheme = document.documentElement.getAttribute("data-theme");
         const newTheme = currentTheme === "light" ? "dark" : "light";
-        
-        applyTheme(newTheme);
+        document.documentElement.setAttribute("data-theme", newTheme);
         localStorage.setItem("liquid-theme", newTheme);
       });
-
-      function applyTheme(theme) {
-        document.documentElement.setAttribute("data-theme", theme);
-      }
     }
 
     function initQRCodeModal() {
@@ -947,13 +795,8 @@
         });
       });
 
-      closeBtn.addEventListener("click", () => {
-        modal.classList.remove("active");
-      });
-
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) modal.classList.remove("active");
-      });
+      closeBtn.addEventListener("click", () => modal.classList.remove("active"));
+      modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("active"); });
     }
   </script>
 </body>
