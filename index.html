@@ -137,7 +137,7 @@
     }
 
     /* ==========================================================
-       BACKGROUND SPHERES (GPU ACCELERATED & SMOOTH DRIFT)
+       BACKGROUND SPHERES
        ========================================================== */
     .bg-canvas {
       position: fixed;
@@ -174,7 +174,7 @@
     }
 
     /* ==========================================================
-       MAIN CARD CONTAINER (LIQUID GLASS FIT CÂN ĐỐI)
+       MAIN CARD CONTAINER (KHÔNG BỊ CẮT XÉN - TỰ ĐỘNG KHÍT NỘI DUNG)
        ========================================================== */
     .liquid-card {
       position: relative;
@@ -182,8 +182,7 @@
       width: 100%;
       max-width: 410px;
       height: auto;               
-      min-height: 540px;          
-      max-height: 90vh;           
+      min-height: 520px;          
       background: var(--glass-bg);
       backdrop-filter: blur(22px) saturate(200%);
       -webkit-backdrop-filter: blur(22px) saturate(200%);
@@ -210,7 +209,7 @@
        TOP BAR & NÚT CHUYỂN THEME QUẢ CẦU LIQUID GLASS
        ========================================================== */
     .top-bar {
-      padding: 20px 24px 8px;
+      padding: 18px 24px 4px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -309,7 +308,7 @@
     }
 
     /* ==========================================================
-       DYNAMIC PROFILE HEADER (CÂN ĐỐI KHOẢNG CÁCH NỔI BẬT)
+       DYNAMIC PROFILE HEADER (AVATAR NHÍCH LÊN TRÊN HÀI HÒA)
        ========================================================== */
     .profile-header {
       display: flex;
@@ -317,7 +316,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 10px 24px 12px; /* Tăng lề trên và lề dưới để AVT phân bổ đều */
+      padding: 2px 24px 6px; /* Nhích Avatar lên trên 1 chút xíu */
       z-index: 5;
       flex-shrink: 0;
       transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
@@ -325,8 +324,8 @@
 
     .avatar-frame {
       position: relative;
-      width: 100px;
-      height: 100px;
+      width: 98px;
+      height: 98px;
       border-radius: 50%;
       padding: 3.5px;
       background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.25) 100%);
@@ -357,15 +356,15 @@
 
     .profile-name-title {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.7rem;
+      font-size: 1.65rem;
       font-weight: 800;
       color: var(--text-title);
-      margin-top: 10px;
+      margin-top: 8px;
       letter-spacing: -0.3px;
     }
 
     .profile-subtitle {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: var(--text-sub);
       margin-top: 1px;
@@ -373,7 +372,7 @@
 
     .home-quote-box {
       margin: auto 0;
-      padding: 24px 20px;
+      padding: 20px;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -398,8 +397,8 @@
     }
 
     .liquid-card.compact-mode .avatar-frame {
-      width: 66px;
-      height: 66px;
+      width: 64px;
+      height: 64px;
     }
 
     .liquid-card.compact-mode .profile-info-block {
@@ -411,7 +410,7 @@
     }
 
     /* ==========================================================
-       VIEWPORT & LINK CARDS (NỔI BẬT LIQUID GLASS)
+       VIEWPORT & LINK CARDS (ĐẢM BẢO HIỂN THỊ ĐỦ CÁC Ô LINK)
        ========================================================== */
     .viewport {
       flex: 1 1 auto;
@@ -427,7 +426,7 @@
 
     .tab-page {
       width: 33.333%;
-      padding: 16px 24px 20px; /* Điều chỉnh padding cân bằng với nút link đầu */
+      padding: 10px 24px 16px; /* Căn chỉnh khoảng cách đều đặn */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -441,14 +440,15 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 14px;
+      gap: 12px;
       margin: auto 0;
+      padding-bottom: 4px; /* Giúp ô link cuối cùng không chạm chân Dock */
     }
 
     .liquid-link-item {
       display: flex;
       align-items: center;
-      padding: 14px 18px;
+      padding: 13.5px 18px;
       background: var(--link-bg);
       border: 1.5px solid var(--link-border);
       border-radius: 24px;
@@ -472,8 +472,8 @@
     }
 
     .link-app-icon {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       object-fit: cover;
       margin-right: 14px;
@@ -488,7 +488,7 @@
        THANH TAB LIQUID GLASS CAPSULE
        ========================================================== */
     .bottom-nav-container {
-      padding: 10px 22px 22px;
+      padding: 8px 22px 20px;
       z-index: 50;
       width: 100%;
       flex-shrink: 0 !important;
