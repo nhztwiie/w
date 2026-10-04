@@ -25,7 +25,7 @@
       --bg-base: #030712;
       --bg-gradient: radial-gradient(circle at 50% 20%, #1e1b4b 0%, #0f172a 50%, #030712 100%);
       
-      --glass-bg: rgba(15, 23, 42, 0.45);
+      --glass-bg: rgba(15, 23, 42, 0.48);
       --glass-border: rgba(255, 255, 255, 0.18);
       --glass-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1.5px 1.5px rgba(255, 255, 255, 0.3);
       --glass-glow: rgba(56, 189, 248, 0.35);
@@ -71,7 +71,7 @@
       --bg-base: #f0f9ff;
       --bg-gradient: radial-gradient(circle at 50% 20%, #ffffff 0%, #bae6fd 50%, #38bdf8 100%);
       
-      --glass-bg: rgba(255, 255, 255, 0.55);
+      --glass-bg: rgba(255, 255, 255, 0.62);
       --glass-border: rgba(255, 255, 255, 0.95);
       --glass-shadow: 0 25px 50px rgba(14, 165, 233, 0.2), inset 0 1.5px 2px rgba(255, 255, 255, 1);
       --glass-glow: rgba(2, 132, 199, 0.35);
@@ -131,8 +131,9 @@
       justify-content: center;
       align-items: center;
       position: relative;
-      overflow: hidden;
-      padding: 15px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding: 20px 15px;
       transition: background 0.5s ease;
     }
 
@@ -173,16 +174,14 @@
     }
 
     /* ==========================================================
-       MAIN CARD CONTAINER (TỰ TÍNH TOÁN CHIỀU CAO FIT NỘI DUNG)
+       MAIN CARD CONTAINER (KHUNG TỰ ĐỘNG FIT FIT VỚI NỘI DUNG)
        ========================================================== */
     .liquid-card {
       position: relative;
       z-index: 2;
       width: 100%;
       max-width: 410px;
-      height: 92vh;
-      max-height: 720px;
-      min-height: 520px;
+      height: auto;
       background: var(--glass-bg);
       backdrop-filter: blur(22px) saturate(200%);
       -webkit-backdrop-filter: blur(22px) saturate(200%);
@@ -193,7 +192,8 @@
       flex-direction: column;
       overflow: hidden;
       animation: glassAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      transition: background 0.4s ease, border-color 0.4s ease;
+      transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1), background 0.4s ease, border-color 0.4s ease;
+      will-change: height, transform;
       transform: translateZ(0);
     }
 
@@ -206,7 +206,7 @@
        TOP BAR & NÚT CHUYỂN THEME
        ========================================================== */
     .top-bar {
-      padding: 18px 24px 4px;
+      padding: 18px 24px 6px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -306,7 +306,7 @@
     }
 
     /* ==========================================================
-       DYNAMIC PROFILE HEADER (TO HƠN NHẸ Ở TAB HOME CHO MÃN NHÃN)
+       DYNAMIC PROFILE HEADER (TỐI ƯU CÂN ĐỐI CHO HOME TAB)
        ========================================================== */
     .profile-header {
       display: flex;
@@ -314,7 +314,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 10px 24px 6px;
+      padding: 10px 24px 8px;
       z-index: 5;
       flex-shrink: 0;
       transform-origin: top center;
@@ -324,13 +324,13 @@
 
     .avatar-frame {
       position: relative;
-      width: 100px; /* Tăng từ 90px lên 100px giúp nổi bật ấn tượng hơn */
+      width: 100px; /* Tăng nhẹ để nổi bật ở Home Tab */
       height: 100px;
       border-radius: 50%;
       padding: 4px;
-      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.25) 100%);
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.2) 100%);
       border: 1.5px solid var(--glass-border);
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22), 0 0 28px var(--glass-glow);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22), 0 0 30px var(--glass-glow);
       transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
@@ -355,20 +355,21 @@
     }
 
     .profile-name-title {
-      font-size: 1.68rem; /* Tăng kích thước chữ tiêu đề */
+      font-size: 1.7rem; /* Tăng từ 1.55rem để ấn tượng hơn */
       font-weight: 800;
       color: var(--text-title);
-      margin-top: 10px;
+      margin-top: 12px;
       letter-spacing: -0.3px;
     }
 
     .profile-subtitle {
-      font-size: 0.92rem; /* Tăng chữ phụ đề */
+      font-size: 0.95rem;
       font-weight: 600;
       color: var(--text-sub);
       margin-top: 2px;
     }
 
+    /* Thu gọn Header khi chuyển sang Social/Work tab */
     .liquid-card.compact-mode .profile-header {
       transform: scale(0.82);
       margin-bottom: -50px;
@@ -381,48 +382,46 @@
     }
 
     /* ==========================================================
-       VIEWPORT & LINK CARDS (KHẮC PHỤC CẮT XÉN TAB SOCIAL)
+       VIEWPORT & LINK CARDS (FIT NỘI DUNG MƯỢT MÀ)
        ========================================================== */
     .viewport {
-      flex: 1;
-      min-height: 0; /* Ngăn flexbox tràn nội dung làm ẩn dock */
-      display: flex;
       width: 300%;
+      display: flex;
+      align-items: flex-start;
       transform: translate3d(-33.3333%, 0, 0);
       transition: transform 0.42s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: transform;
-      contain: content;
+      contain: layout style;
     }
 
     .tab-page {
       width: 33.3333%;
-      height: 100%;
-      padding: 10px 24px 20px; /* Tăng padding bottom */
+      padding: 10px 24px 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
       box-sizing: border-box;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
     }
 
-    /* Ẩn thanh cuộn xấu nhưng vẫn giữ tính năng cuộn mượt */
-    .tab-page::-webkit-scrollbar { display: none; }
-    .tab-page { -ms-overflow-style: none; scrollbar-width: none; }
-
+    /* HOME TAB QUOTE BOX */
     .home-quote-box {
-      margin: auto 0;
-      padding: 18px 22px;
+      margin: 10px 0 20px;
+      padding: 22px 20px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 28px;
+      width: 100%;
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1);
     }
 
     .quote-text {
-      font-size: 1.05rem; /* Tăng nhẹ font chữ quote cho cân đối với header mới */
+      font-size: 1.08rem; /* Tăng kích thước chữ caption */
       font-weight: 600;
       color: var(--text-quote);
       line-height: 1.65;
@@ -430,28 +429,29 @@
     }
 
     .quote-author {
-      font-size: 0.86rem;
+      font-size: 0.88rem;
       font-style: italic;
       color: var(--text-author);
       margin-top: 14px;
       display: block;
     }
 
+    /* TỐI ƯU DANH SÁCH THẺ THÔNG TIN - KHÔNG BỊ KHUẤT DOCK */
     .links-list {
       width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      gap: 10px; /* Thu gọn gap từ 12px xuống 10px để bớt chiếm khoảng trống */
-      margin: 0 auto; /* Đổi từ margin: auto 0 thành 0 auto để không bị đẩy tràn mép dưới */
-      padding-bottom: 12px;
+      gap: 11px; /* Khoảng cách hợp lý giữa các thẻ */
+      margin: 0 auto;
+      padding-bottom: 8px;
     }
 
     .liquid-link-item {
-      flex-shrink: 0; /* Cố định chiều cao link, không bị nén trào */
+      flex-shrink: 0; /* Giữ kích thước cố định, chống co ép */
       display: flex;
       align-items: center;
-      padding: 12px 18px;
+      padding: 13px 18px;
       background: var(--link-bg);
       border: 1.5px solid var(--link-border);
       border-radius: 24px;
@@ -487,15 +487,14 @@
     .liquid-link-item:hover .link-chevron { transform: translate3d(5px, 0, 0); }
 
     /* ==========================================================
-       THANH TAB DOCK CAPSULE (CỐ ĐỊNH CHẮC CHẮN Ở BOTTOM)
+       THANH TAB DOCK CAPSULE
        ========================================================== */
     .bottom-nav-container {
-      padding: 8px 22px 20px;
+      padding: 8px 22px 18px;
       z-index: 50;
       width: 100%;
       flex-shrink: 0;
       position: relative;
-      margin-top: auto;
     }
 
     .bottom-nav-glass {
@@ -803,7 +802,6 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // Load dữ liệu link từ file data.js nếu có
       if (typeof bioData !== 'undefined' && bioData.tabs) {
         renderLinks("social-links-list", bioData.tabs.social);
         renderLinks("work-links-list", bioData.tabs.work);
@@ -831,36 +829,55 @@
       const indicator = document.getElementById("nav-indicator");
       const viewport = document.getElementById("viewport");
       const mainCard = document.getElementById("main-card");
+      const tabPages = document.querySelectorAll(".tab-page");
+
+      // Cập nhật chiều cao linh hoạt cho Card theo Tab được chọn
+      function adjustCardHeight(index) {
+        requestAnimationFrame(() => {
+          const topBarHeight = document.querySelector(".top-bar").offsetHeight;
+          const headerHeight = document.querySelector(".profile-header").offsetHeight;
+          const navHeight = document.querySelector(".bottom-nav-container").offsetHeight;
+          
+          const currentTabPage = tabPages[index];
+          const contentHeight = currentTabPage ? currentTabPage.scrollHeight : 0;
+
+          // Tổng chiều cao chuẩn cho từng Tab
+          const totalHeight = topBarHeight + headerHeight + contentHeight + navHeight;
+          mainCard.style.height = `${totalHeight}px`;
+        });
+      }
 
       function switchTab(index) {
-        // 1. Trượt Viewport
+        // 1. Dịch chuyển Viewport
         viewport.style.transform = `translate3d(-${index * 33.3333}%, 0, 0)`;
 
-        // 2. Định vị Indicator chính xác theo Pixel thực tế
+        // 2. Định vị Indicator
         const activeBtn = navBtns[index];
         if (activeBtn && indicator) {
           const offsetLeft = activeBtn.offsetLeft;
           indicator.style.transform = `translate3d(${offsetLeft - 5}px, 0, 0)`;
         }
 
-        // 3. Cập nhật trạng thái Active Icon
+        // 3. Cập nhật icon Active
         navBtns.forEach((btn, i) => {
           btn.classList.toggle("active", i === index);
         });
 
-        // 4. Bật/Tắt Compact Mode cho Profile
+        // 4. Bật/Tắt Compact Mode cho Profile Header
         if (index === 1) {
           mainCard.classList.remove("compact-mode");
         } else {
           mainCard.classList.add("compact-mode");
         }
+
+        // 5. Fit lại chiều cao card
+        adjustCardHeight(index);
       }
 
       navBtns.forEach((btn, i) => {
         btn.addEventListener("click", () => switchTab(i));
       });
 
-      // Tự động căn chỉnh lại thanh Indicator khi đổi kích thước màn hình
       window.addEventListener("resize", () => {
         const activeBtn = document.querySelector(".nav-tab-btn.active");
         if (activeBtn) {
@@ -870,7 +887,7 @@
       });
 
       // Mặc định ở Home Tab (Index 1)
-      switchTab(1);
+      setTimeout(() => { switchTab(1); }, 50);
     }
 
     function initThemeToggle() {
