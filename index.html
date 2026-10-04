@@ -68,12 +68,12 @@
     }
 
     :root[data-theme="light"] {
-      --bg-base: #e0f2fe;
-      --bg-gradient: radial-gradient(circle at 50% 20%, #ffffff 0%, #bae6fd 50%, #38bdf8 100%);
+      --bg-base: #f0f4f8;
+      --bg-gradient: radial-gradient(circle at 50% 20%, #ffffff 0%, #e0f2fe 50%, #bae6fd 100%);
       
-      --glass-bg: rgba(255, 255, 255, 0.45);
+      --glass-bg: rgba(255, 255, 255, 0.55);
       --glass-border: rgba(255, 255, 255, 0.95);
-      --glass-shadow: 0 25px 50px rgba(14, 165, 233, 0.2), inset 0 1.5px 2px rgba(255, 255, 255, 1);
+      --glass-shadow: 0 25px 50px rgba(14, 165, 233, 0.18), inset 0 1.5px 2px rgba(255, 255, 255, 1);
       --glass-glow: rgba(2, 132, 199, 0.35);
 
       --text-title: #0f172a;
@@ -81,11 +81,11 @@
       --text-quote: #0f172a;
       --text-author: #475569;
 
-      /* Liquid Toggle Theme Light */
-      --toggle-track-bg: rgba(255, 255, 255, 0.85);
+      /* Liquid Toggle Theme Light (Nền Bầu Trời Như Ảnh) */
+      --toggle-track-bg: rgba(255, 255, 255, 0.9);
       --toggle-track-border: rgba(255, 255, 255, 1);
-      --toggle-orb-bg: radial-gradient(circle at 50% 50%, #fef08a 0%, #fde047 30%, #38bdf8 85%, #7dd3fc 100%);
-      --toggle-orb-glow: 0 4px 18px rgba(253, 224, 71, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.95);
+      --toggle-orb-bg: radial-gradient(circle at 45% 45%, #fffef0 0%, #fef08a 35%, #93c5fd 80%, #60a5fa 100%);
+      --toggle-orb-glow: 0 6px 20px rgba(253, 224, 71, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.95);
 
       /* Liquid Glass Dock & Indicator Theme Light */
       --nav-dock-bg: rgba(255, 255, 255, 0.65);
@@ -99,11 +99,11 @@
       --nav-icon-active: #0284c7;
       --nav-icon-inactive: #64748b;
 
-      /* Ô Link Nổi Bật Phong Cách Liquid Glass Ở Light Mode */
-      --link-bg: rgba(255, 255, 255, 0.72);
+      /* Ô Link Nổi Bật Light Mode */
+      --link-bg: rgba(255, 255, 255, 0.75);
       --link-border: rgba(255, 255, 255, 0.95);
-      --link-hover: rgba(255, 255, 255, 0.92);
-      --link-shadow: 0 10px 25px rgba(2, 132, 199, 0.18), inset 0 2px 3px rgba(255, 255, 255, 1);
+      --link-hover: rgba(255, 255, 255, 0.95);
+      --link-shadow: 0 10px 25px rgba(2, 132, 199, 0.15), inset 0 2px 3px rgba(255, 255, 255, 1);
 
       --qr-modal-bg: rgba(186, 230, 253, 0.65);
       --qr-card-bg: rgba(255, 255, 255, 0.92);
@@ -131,8 +131,8 @@
       justify-content: center;
       align-items: center;
       position: relative;
-      overflow: hidden;
-      padding: 15px;
+      overflow-x: hidden;
+      padding: 20px 15px;
       transition: background 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -174,15 +174,14 @@
     }
 
     /* ==========================================================
-       MAIN CARD CONTAINER (KHÔNG BỊ CẮT XÉN - TỰ ĐỘNG KHÍT NỘI DUNG)
+       MAIN CARD CONTAINER (TỰ ĐỘNG DÃN DÒNG THEO NỘI DUNG TAB)
        ========================================================== */
     .liquid-card {
       position: relative;
       z-index: 2;
       width: 100%;
       max-width: 410px;
-      height: auto;               
-      min-height: 520px;          
+      height: auto;
       background: var(--glass-bg);
       backdrop-filter: blur(22px) saturate(200%);
       -webkit-backdrop-filter: blur(22px) saturate(200%);
@@ -191,7 +190,6 @@
       box-shadow: var(--glass-shadow);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       overflow: hidden;
       animation: glassAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
       transition: height 0.45s cubic-bezier(0.25, 1, 0.5, 1), background 0.5s ease;
@@ -206,7 +204,7 @@
     }
 
     /* ==========================================================
-       TOP BAR & NÚT CHUYỂN THEME QUẢ CẦU LIQUID GLASS
+       TOP BAR & NÚT CHUYỂN THEME QUẢ CẦU 3D LIQUID GLASS
        ========================================================== */
     .top-bar {
       padding: 18px 24px 4px;
@@ -249,33 +247,35 @@
       transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.45s ease, box-shadow 0.45s ease;
       z-index: 2;
       will-change: transform;
+      overflow: hidden;
     }
 
-    .theme-orb-indicator i {
-      font-size: 1.05rem;
-      transition: opacity 0.3s ease, transform 0.35s ease;
-      position: absolute;
-    }
-
-    .orb-sun {
-      color: #ffffff;
-      text-shadow: 0 0 8px rgba(253, 224, 71, 0.8);
+    /* MẶT TRỜI SVG TÙY CHỈNH HẠT NƯỚC / TIA LÁ MỀM MẠI */
+    .orb-sun-svg {
+      width: 22px;
+      height: 22px;
       opacity: 0;
       transform: scale(0.5) rotate(-90deg);
+      transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: absolute;
+      filter: drop-shadow(0 0 4px rgba(254, 240, 138, 0.8));
     }
 
     .orb-moon {
       color: #ffffff;
+      font-size: 1.05rem;
       text-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
       opacity: 1;
       transform: scale(1) rotate(0deg);
+      transition: opacity 0.3s ease, transform 0.35s ease;
+      position: absolute;
     }
 
     [data-theme="light"] .theme-orb-indicator {
       transform: translate3d(38px, 0, 0);
     }
 
-    [data-theme="light"] .orb-sun {
+    [data-theme="light"] .orb-sun-svg {
       opacity: 1;
       transform: scale(1) rotate(0deg);
     }
@@ -289,8 +289,8 @@
       width: 42px;
       height: 42px;
       border-radius: 16px;
-      background: var(--pill-bg);
-      border: 1.5px solid var(--pill-border);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1.5px solid var(--glass-border);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -308,7 +308,7 @@
     }
 
     /* ==========================================================
-       DYNAMIC PROFILE HEADER (AVATAR NHÍCH LÊN TRÊN HÀI HÒA)
+       DYNAMIC PROFILE HEADER
        ========================================================== */
     .profile-header {
       display: flex;
@@ -316,7 +316,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 2px 24px 6px; /* Nhích Avatar lên trên 1 chút xíu */
+      padding: 2px 24px 6px;
       z-index: 5;
       flex-shrink: 0;
       transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
@@ -370,32 +370,6 @@
       margin-top: 1px;
     }
 
-    .home-quote-box {
-      margin: auto 0;
-      padding: 20px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .quote-text {
-      font-size: 0.98rem;
-      font-weight: 600;
-      color: var(--text-quote);
-      line-height: 1.6;
-      letter-spacing: 0.2px;
-    }
-
-    .quote-author {
-      font-size: 0.82rem;
-      font-style: italic;
-      color: var(--text-author);
-      margin-top: 12px;
-      display: block;
-    }
-
     .liquid-card.compact-mode .avatar-frame {
       width: 64px;
       height: 64px;
@@ -404,45 +378,39 @@
     .liquid-card.compact-mode .profile-info-block {
       opacity: 0;
       max-height: 0;
+      margin: 0;
       transform: translateY(-8px);
       pointer-events: none;
       overflow: hidden;
     }
 
     /* ==========================================================
-       VIEWPORT & LINK CARDS (ĐẢM BẢO HIỂN THỊ ĐỦ CÁC Ô LINK)
+       VIEWPORT & LINK CARDS (KHUNG TRƯỢT TỰ ĐỘNG ĐO CHIỀU CAO)
        ========================================================== */
     .viewport {
-      flex: 1 1 auto;
-      min-height: 0;
-      display: flex;
       width: 300%;
+      display: flex;
+      align-items: flex-start;
       transform: translate3d(-33.333%, 0, 0);
       transition: transform 0.42s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: transform;
       backface-visibility: hidden;
-      contain: content;
     }
 
     .tab-page {
       width: 33.333%;
-      padding: 10px 24px 16px; /* Căn chỉnh khoảng cách đều đặn */
+      padding: 10px 24px 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       box-sizing: border-box;
-      overflow-y: auto;
     }
 
     .links-list {
       width: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       gap: 12px;
-      margin: auto 0;
-      padding-bottom: 4px; /* Giúp ô link cuối cùng không chạm chân Dock */
     }
 
     .liquid-link-item {
@@ -484,6 +452,31 @@
     .link-chevron { font-size: 0.85rem; color: var(--text-sub); transition: transform 0.3s; }
     .liquid-link-item:hover .link-chevron { transform: translate3d(5px, 0, 0); }
 
+    .home-quote-box {
+      padding: 28px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quote-text {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-quote);
+      line-height: 1.6;
+      letter-spacing: 0.2px;
+    }
+
+    .quote-author {
+      font-size: 0.82rem;
+      font-style: italic;
+      color: var(--text-author);
+      margin-top: 12px;
+      display: block;
+    }
+
     /* ==========================================================
        THANH TAB LIQUID GLASS CAPSULE
        ========================================================== */
@@ -491,9 +484,8 @@
       padding: 8px 22px 20px;
       z-index: 50;
       width: 100%;
-      flex-shrink: 0 !important;
+      flex-shrink: 0;
       position: relative;
-      display: block !important;
     }
 
     .bottom-nav-glass {
@@ -692,22 +684,56 @@
   <main class="liquid-card" id="main-card">
     
     <!-- TOP BAR -->
-    <div class="top-bar">
-      <!-- Theme Switcher Orb (Liquid Glass) -->
-      <div class="theme-toggle-track" id="theme-toggle">
+    <div class="top-bar" id="top-bar">
+      <!-- Theme Switcher Orb (Liquid Glass 3D Sphere) -->
+      <div class="theme-toggle-track" id="theme-toggle" role="button" aria-label="Toggle Theme">
         <div class="theme-orb-indicator" id="theme-indicator">
           <i class="fa-solid fa-moon orb-moon"></i>
-          <i class="fa-solid fa-sun orb-sun"></i>
+          
+          <!-- ICON MẶT TRỜI SVG CHUẨN DẠNG TIA LÁ/HẠT NƯỚC (NHƯ ẢNH) -->
+          <svg class="orb-sun-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="sunCoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="60%" stop-color="#fef08a"/>
+                <stop offset="100%" stop-color="#fde047"/>
+              </linearGradient>
+              <linearGradient id="sunRayGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="100%" stop-color="#fef08a"/>
+              </linearGradient>
+            </defs>
+            <!-- Vòng tròn lõi Mặt Trời -->
+            <circle cx="50" cy="50" r="22" fill="url(#sunCoreGrad)" />
+            <!-- 8 Tia hạt nước / lá mềm mại bao quanh -->
+            <!-- Tia Trên (0 deg) -->
+            <path d="M50 8 C54 16 54 22 50 24 C46 22 46 16 50 8 Z" fill="url(#sunRayGrad)" />
+            <!-- Tia Trên-Phải (45 deg) -->
+            <path d="M50 8 C54 16 54 22 50 24 C46 22 46 16 50 8 Z" fill="url(#sunRayGrad)" transform="rotate(45 50 50)" />
+            <!-- Tia Phải (90 deg) -->
+            <path d="M50 8 C54 16 54 22 50 24 C46 22 46 16 50 8 Z" fill="url(#sunRayGrad)" transform="rotate(90 50 50)" />
+            <!-- Tia Dưới-Phải (135 deg) -->
+            <path d="M50 8 C54 16 54 22 50 24 C46 22 46 16 50 8 Z" fill="url(#sunRayGrad)" transform="rotate(135 50 50)" />
+            <!-- Tia Dưới (180 deg) -->
+            <path d="M50 8 C54 16 54 22 50 24 C46 22 46 16 50 8 Z" fill="url(#sunRayGrad)" transform="rotate(180 50 50)" />
+            <!-- Tia Dưới-Trái (225 deg) -->
+            <path d="M50 8 C54 16 54 22 50 24 C46 22 46 16 50 8 Z" fill="url(#sunRayGrad)" transform="rotate(225 50 50)" />
+            <!-- Tia Trái (270 deg) -->
+            <path d="M50 8 C54 16 54 22 50 24 C46 22 46 16 50 8 Z" fill="url(#sunRayGrad)" transform="rotate(270 50 50)" />
+            <!-- Tia Trên-Trái (315 deg) -->
+            <path d="M50 8 C54 16 54 22 50 24 C46 22 46 16 50 8 Z" fill="url(#sunRayGrad)" transform="rotate(315 50 50)" />
+          </svg>
+
         </div>
       </div>
 
-      <button class="qr-glass-btn" id="open-qr-btn" aria-label="Open QR">
+      <button class="qr-glass-btn" id="open-qr-btn" aria-label="Open QR Code">
         <i class="fa-solid fa-qrcode"></i>
       </button>
     </div>
 
     <!-- DYNAMIC PROFILE HEADER -->
-    <header class="profile-header">
+    <header class="profile-header" id="profile-header">
       <div class="avatar-frame">
         <img src="images/Huy.png" alt="Avatar Nhật Huy">
       </div>
@@ -741,7 +767,7 @@
     </div>
 
     <!-- THANH TAB LIQUID GLASS -->
-    <div class="bottom-nav-container">
+    <div class="bottom-nav-container" id="nav-container">
       <nav class="bottom-nav-glass">
         <div class="nav-indicator-pill" id="nav-indicator"></div>
         
@@ -784,8 +810,8 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      renderLinks("social-links-list", bioData.tabs.social);
-      renderLinks("work-links-list", bioData.tabs.work);
+      renderLinks("social-links-list", typeof bioData !== 'undefined' ? bioData.tabs.social : []);
+      renderLinks("work-links-list", typeof bioData !== 'undefined' ? bioData.tabs.work : []);
 
       initTabNavigation();
       initThemeToggle();
@@ -806,6 +832,32 @@
 
     let currentTabIndex = 1;
 
+    /* TÍNH TOÁN VÀ CẬP NHẬT CHIỀU CAO THỰC TẾ KHUNG CARD THEO NỘI DUNG TAB */
+    function updateCardHeight(index) {
+      const mainCard = document.getElementById("main-card");
+      const topBar = document.getElementById("top-bar");
+      const profileHeader = document.getElementById("profile-header");
+      const navContainer = document.getElementById("nav-container");
+
+      const pages = [
+        document.getElementById("page-social"),
+        document.getElementById("page-home"),
+        document.getElementById("page-work")
+      ];
+
+      const activePage = pages[index];
+      if (!activePage) return;
+
+      // Đo chiều cao thực tế chính xác từng phần tử
+      const topBarHeight = topBar.offsetHeight;
+      const headerHeight = profileHeader.offsetHeight;
+      const navHeight = navContainer.offsetHeight;
+      const pageHeight = activePage.getBoundingClientRect().height;
+
+      const totalHeight = Math.round(topBarHeight + headerHeight + pageHeight + navHeight);
+      mainCard.style.height = `${totalHeight}px`;
+    }
+
     function initTabNavigation() {
       const navBtns = document.querySelectorAll(".nav-tab-btn");
       const indicator = document.getElementById("nav-indicator");
@@ -815,7 +867,14 @@
       function switchTab(index) {
         currentTabIndex = index;
 
-        // Trượt Viewport qua GPU 60fps
+        // Chỉ ở Tab Home (index = 1) mới hiện đầy đủ tiêu đề bio, các tab link thu gọn header
+        if (index === 1) {
+          mainCard.classList.remove("compact-mode");
+        } else {
+          mainCard.classList.add("compact-mode");
+        }
+
+        // Trượt Viewport & Indicator
         viewport.style.transform = `translate3d(-${index * 33.333}%, 0, 0)`;
         indicator.style.transform = `translate3d(${index * 100}%, 0, 0)`;
 
@@ -824,11 +883,10 @@
           else btn.classList.remove("active");
         });
 
-        if (index === 1) {
-          mainCard.classList.remove("compact-mode");
-        } else {
-          mainCard.classList.add("compact-mode");
-        }
+        // Cập nhật ngay và cập nhật lại sau khi CSS transition kết thúc để chuẩn xác 100%
+        updateCardHeight(index);
+        setTimeout(() => updateCardHeight(index), 150);
+        setTimeout(() => updateCardHeight(index), 420);
       }
 
       navBtns.forEach((btn, i) => {
@@ -838,8 +896,17 @@
         });
       });
 
+      // Mặc định chọn Home (Index 1)
       switchTab(1);
       window.switchTabGlobal = switchTab;
+
+      window.addEventListener("resize", () => updateCardHeight(currentTabIndex));
+
+      // Lắng nghe biến đổi kích thước nội dung tự động nếu dữ liệu động nạp chậm
+      if (window.ResizeObserver) {
+        const ro = new ResizeObserver(() => updateCardHeight(currentTabIndex));
+        document.querySelectorAll('.tab-page').forEach(page => ro.observe(page));
+      }
     }
 
     function initThemeToggle() {
