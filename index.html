@@ -347,7 +347,7 @@
     .viewport {
       width: 300%;
       display: flex;
-      align-items: flex-start;
+      align-items: stretch; /* Đảm bảo các trang bằng chiều cao nhau */
       transform: translate3d(-33.3333%, 0, 0);
       transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: transform;
@@ -355,9 +355,10 @@
 
     .tab-page {
       width: 33.3333%;
-      padding: 6px 20px 8px;
+      padding: 10px 20px 14px;
       display: flex;
       flex-direction: column;
+      justify-content: center; /* Căn giữa theo trục dọc giữa Avatar & Thanh Tab */
       align-items: center;
       box-sizing: border-box;
     }
@@ -365,7 +366,7 @@
     /* QUOTE BOX */
     .home-quote-box {
       margin: 8px 0 12px;
-      padding: 20px 18px;
+      padding: 22px 20px;
       text-align: center;
       background: rgba(255, 255, 255, 0.04);
       border: 1.5px solid rgba(255, 255, 255, 0.12);
@@ -398,21 +399,22 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 10px; /* Thu gọn khoảng cách giữa các link */
+      justify-content: center; /* Căn giữa danh sách link */
+      gap: 12px; /* Khoảng cách vừa vặn giữa các link */
     }
 
     .liquid-link-item {
       position: relative;
       display: flex;
       align-items: center;
-      padding: 10px 16px; /* Tối ưu padding fit dáng vừa vặn */
+      padding: 12px 18px; /* Tăng nhẹ kích thước cho nút to & cao hơn 1 tí */
       background: var(--link-bg);
       border: 1.5px solid var(--link-border);
-      border-radius: 20px;
+      border-radius: 22px;
       text-decoration: none;
       color: var(--text-title);
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       backdrop-filter: blur(16px);
       box-shadow: var(--link-shadow);
       overflow: hidden;
@@ -443,9 +445,9 @@
     .liquid-link-item:active { transform: scale(0.98); }
 
     .link-app-icon {
-      width: 28px; height: 28px; /* Fit kích thước icon gọn gàng */
+      width: 32px; height: 32px; /* Icon to hơn 1 chút siêu đẹp */
       border-radius: 50%;
-      margin-right: 12px;
+      margin-right: 14px;
       object-fit: cover;
       transition: transform 0.35s ease;
     }
@@ -455,7 +457,7 @@
     .link-text-label { flex: 1; text-align: left; }
     
     .link-chevron {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--text-sub);
       transition: transform 0.35s ease;
     }
