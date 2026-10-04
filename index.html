@@ -173,7 +173,7 @@
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 410px;
+      max-width: 400px;
       background: var(--glass-bg);
       backdrop-filter: blur(24px) saturate(210%);
       -webkit-backdrop-filter: blur(24px) saturate(210%);
@@ -271,7 +271,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 10px 24px 8px;
+      padding: 6px 24px 4px;
       z-index: 5;
       flex-shrink: 0;
       transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), margin 0.45s cubic-bezier(0.25, 1, 0.5, 1);
@@ -279,9 +279,9 @@
 
     .avatar-frame {
       position: relative;
-      width: 100px; height: 100px;
+      width: 90px; height: 90px;
       border-radius: 50%;
-      padding: 4px;
+      padding: 3.5px;
       background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.2) 100%);
       border: 1.5px solid var(--glass-border);
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22), 0 0 30px var(--glass-glow);
@@ -311,24 +311,24 @@
     }
 
     .profile-name-title {
-      font-size: 1.7rem;
+      font-size: 1.55rem;
       font-weight: 800;
       color: var(--text-title);
-      margin-top: 12px;
+      margin-top: 10px;
       letter-spacing: -0.02em;
     }
 
     .profile-subtitle {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: var(--text-sub);
-      margin-top: 2px;
+      margin-top: 1px;
     }
 
     /* Thu gọn Header khi ở Tab khác */
     .liquid-card.compact-mode .profile-header {
-      transform: scale(0.82);
-      margin-bottom: -55px;
+      transform: scale(0.8);
+      margin-bottom: -50px;
     }
 
     .liquid-card.compact-mode .profile-info-block {
@@ -355,7 +355,7 @@
 
     .tab-page {
       width: 33.3333%;
-      padding: 10px 24px 12px;
+      padding: 6px 20px 8px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -364,12 +364,12 @@
 
     /* QUOTE BOX */
     .home-quote-box {
-      margin: 10px 0 15px;
-      padding: 22px 20px;
+      margin: 8px 0 12px;
+      padding: 20px 18px;
       text-align: center;
       background: rgba(255, 255, 255, 0.04);
       border: 1.5px solid rgba(255, 255, 255, 0.12);
-      border-radius: 28px;
+      border-radius: 24px;
       width: 100%;
       backdrop-filter: blur(12px);
       box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
@@ -379,40 +379,40 @@
     .home-quote-box:hover { transform: translateY(-2px); }
 
     .quote-text {
-      font-size: 1.08rem;
+      font-size: 1.02rem;
       font-weight: 600;
       color: var(--text-quote);
-      line-height: 1.65;
+      line-height: 1.6;
     }
 
     .quote-author {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       font-style: italic;
       color: var(--text-author);
-      margin-top: 14px;
+      margin-top: 12px;
       display: block;
     }
 
-    /* LINK CARDS LIST & HOVER EFFECTS */
+    /* LINK CARDS LIST & OPTIMIZED FIT HOVER EFFECTS */
     .links-list {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px; /* Thu gọn khoảng cách giữa các link */
     }
 
     .liquid-link-item {
       position: relative;
       display: flex;
       align-items: center;
-      padding: 14px 18px;
+      padding: 10px 16px; /* Tối ưu padding fit dáng vừa vặn */
       background: var(--link-bg);
       border: 1.5px solid var(--link-border);
-      border-radius: 24px;
+      border-radius: 20px;
       text-decoration: none;
       color: var(--text-title);
       font-weight: 600;
-      font-size: 0.94rem;
+      font-size: 0.9rem;
       backdrop-filter: blur(16px);
       box-shadow: var(--link-shadow);
       overflow: hidden;
@@ -434,7 +434,7 @@
     .liquid-link-item:hover::before { left: 160%; }
 
     .liquid-link-item:hover {
-      transform: translate3d(0, -4px, 0) scale(1.02);
+      transform: translate3d(0, -3px, 0) scale(1.015);
       background: var(--link-hover-bg);
       border-color: var(--link-hover-border);
       box-shadow: var(--link-hover-glow);
@@ -443,9 +443,10 @@
     .liquid-link-item:active { transform: scale(0.98); }
 
     .link-app-icon {
-      width: 34px; height: 34px;
+      width: 28px; height: 28px; /* Fit kích thước icon gọn gàng */
       border-radius: 50%;
-      margin-right: 14px;
+      margin-right: 12px;
+      object-fit: cover;
       transition: transform 0.35s ease;
     }
 
@@ -454,18 +455,18 @@
     .link-text-label { flex: 1; text-align: left; }
     
     .link-chevron {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--text-sub);
       transition: transform 0.35s ease;
     }
 
-    .liquid-link-item:hover .link-chevron { transform: translateX(4px); }
+    .liquid-link-item:hover .link-chevron { transform: translateX(3px); }
 
     /* ==========================================================
        NAV DOCK CAPSULE (Cố định an toàn trong khung)
        ========================================================== */
     .bottom-nav-container {
-      padding: 6px 22px 20px;
+      padding: 4px 20px 18px;
       z-index: 50;
       width: 100%;
       flex-shrink: 0;
@@ -480,16 +481,16 @@
       background: var(--nav-dock-bg);
       border: 1.5px solid var(--nav-dock-border);
       border-radius: 40px;
-      padding: 5px;
+      padding: 4px;
       backdrop-filter: blur(28px);
       box-shadow: var(--nav-dock-shadow);
     }
 
     .nav-indicator-pill {
       position: absolute;
-      top: 5px; left: 5px;
-      width: calc((100% - 10px) / 3);
-      height: calc(100% - 10px);
+      top: 4px; left: 4px;
+      width: calc((100% - 8px) / 3);
+      height: calc(100% - 8px);
       background: var(--indicator-pill-bg);
       border: 1.5px solid var(--indicator-pill-border);
       border-radius: 32px;
@@ -500,7 +501,7 @@
 
     .nav-tab-btn {
       flex: 1;
-      height: 46px;
+      height: 44px;
       border: none;
       background: transparent;
       display: flex;
@@ -512,14 +513,14 @@
     }
 
     .nav-tab-btn i {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       color: var(--nav-icon-inactive);
       transition: color 0.35s ease, transform 0.35s ease;
     }
 
     .nav-tab-btn.active i {
       color: var(--nav-icon-active);
-      transform: scale(1.18);
+      transform: scale(1.15);
     }
 
     /* MODAL QR CODE */
@@ -771,7 +772,7 @@
 
         const activeBtn = navBtns[index];
         if (activeBtn && indicator) {
-          indicator.style.transform = `translate3d(${activeBtn.offsetLeft - 5}px, 0, 0)`;
+          indicator.style.transform = `translate3d(${activeBtn.offsetLeft - 4}px, 0, 0)`;
         }
 
         navBtns.forEach((btn, i) => btn.classList.toggle("active", i === index));
