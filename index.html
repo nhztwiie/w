@@ -173,15 +173,15 @@
     }
 
     /* ==========================================================
-       MAIN CARD CONTAINER (CO GIÃN TỰ ĐỘNG - CHỐNG TRÀN DOCK)
+       MAIN CARD CONTAINER (TỰ TÍNH TOÁN CHIỀU CAO FIT NỘI DUNG)
        ========================================================== */
     .liquid-card {
       position: relative;
       z-index: 2;
       width: 100%;
       max-width: 410px;
-      height: 90vh;
-      max-height: 680px;
+      height: 92vh;
+      max-height: 720px;
       min-height: 520px;
       background: var(--glass-bg);
       backdrop-filter: blur(22px) saturate(200%);
@@ -306,7 +306,7 @@
     }
 
     /* ==========================================================
-       DYNAMIC PROFILE HEADER
+       DYNAMIC PROFILE HEADER (TO HƠN NHẸ Ở TAB HOME CHO MÃN NHÃN)
        ========================================================== */
     .profile-header {
       display: flex;
@@ -314,7 +314,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 6px 24px 4px;
+      padding: 10px 24px 6px;
       z-index: 5;
       flex-shrink: 0;
       transform-origin: top center;
@@ -324,13 +324,13 @@
 
     .avatar-frame {
       position: relative;
-      width: 90px;
-      height: 90px;
+      width: 100px; /* Tăng từ 90px lên 100px giúp nổi bật ấn tượng hơn */
+      height: 100px;
       border-radius: 50%;
-      padding: 3.5px;
+      padding: 4px;
       background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.25) 100%);
       border: 1.5px solid var(--glass-border);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2), 0 0 25px var(--glass-glow);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22), 0 0 28px var(--glass-glow);
       transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
@@ -355,23 +355,23 @@
     }
 
     .profile-name-title {
-      font-size: 1.55rem;
+      font-size: 1.68rem; /* Tăng kích thước chữ tiêu đề */
       font-weight: 800;
       color: var(--text-title);
-      margin-top: 8px;
+      margin-top: 10px;
       letter-spacing: -0.3px;
     }
 
     .profile-subtitle {
-      font-size: 0.88rem;
+      font-size: 0.92rem; /* Tăng chữ phụ đề */
       font-weight: 600;
       color: var(--text-sub);
-      margin-top: 1px;
+      margin-top: 2px;
     }
 
     .liquid-card.compact-mode .profile-header {
-      transform: scale(0.85);
-      margin-bottom: -45px;
+      transform: scale(0.82);
+      margin-bottom: -50px;
     }
 
     .liquid-card.compact-mode .profile-info-block {
@@ -381,11 +381,11 @@
     }
 
     /* ==========================================================
-       VIEWPORT & LINK CARDS (KHẮC PHỤC TRIỆT ĐỂ LỖI ĐẨY DOCK)
+       VIEWPORT & LINK CARDS (KHẮC PHỤC CẮT XÉN TAB SOCIAL)
        ========================================================== */
     .viewport {
       flex: 1;
-      min-height: 0; /* QUAN TRỌNG: Ngăn flexbox bị trào nội dung làm ẩn dock */
+      min-height: 0; /* Ngăn flexbox tràn nội dung làm ẩn dock */
       display: flex;
       width: 300%;
       transform: translate3d(-33.3333%, 0, 0);
@@ -397,7 +397,7 @@
     .tab-page {
       width: 33.3333%;
       height: 100%;
-      padding: 10px 24px 16px;
+      padding: 10px 24px 20px; /* Tăng padding bottom */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -413,7 +413,7 @@
 
     .home-quote-box {
       margin: auto 0;
-      padding: 20px;
+      padding: 18px 22px;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -422,18 +422,18 @@
     }
 
     .quote-text {
-      font-size: 0.98rem;
+      font-size: 1.05rem; /* Tăng nhẹ font chữ quote cho cân đối với header mới */
       font-weight: 600;
       color: var(--text-quote);
-      line-height: 1.6;
+      line-height: 1.65;
       letter-spacing: 0.2px;
     }
 
     .quote-author {
-      font-size: 0.82rem;
+      font-size: 0.86rem;
       font-style: italic;
       color: var(--text-author);
-      margin-top: 12px;
+      margin-top: 14px;
       display: block;
     }
 
@@ -442,15 +442,16 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      gap: 12px;
-      margin: auto 0;
-      padding-bottom: 8px;
+      gap: 10px; /* Thu gọn gap từ 12px xuống 10px để bớt chiếm khoảng trống */
+      margin: 0 auto; /* Đổi từ margin: auto 0 thành 0 auto để không bị đẩy tràn mép dưới */
+      padding-bottom: 12px;
     }
 
     .liquid-link-item {
+      flex-shrink: 0; /* Cố định chiều cao link, không bị nén trào */
       display: flex;
       align-items: center;
-      padding: 13px 18px;
+      padding: 12px 18px;
       background: var(--link-bg);
       border: 1.5px solid var(--link-border);
       border-radius: 24px;
@@ -486,7 +487,7 @@
     .liquid-link-item:hover .link-chevron { transform: translate3d(5px, 0, 0); }
 
     /* ==========================================================
-       THANH TAB DOCK CAPSULE (CỐ ĐỊNH AN TOÀN BOTTOM)
+       THANH TAB DOCK CAPSULE (CỐ ĐỊNH CHẮC CHẮN Ở BOTTOM)
        ========================================================== */
     .bottom-nav-container {
       padding: 8px 22px 20px;
