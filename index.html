@@ -53,9 +53,10 @@
       --nav-icon-active: #ffffff;
       --nav-icon-inactive: rgba(255, 255, 255, 0.55);
 
-      --link-bg: rgba(255, 255, 255, 0.06);
-      --link-border: rgba(255, 255, 255, 0.15);
-      --link-hover: rgba(56, 189, 248, 0.18);
+      --link-bg: rgba(255, 255, 255, 0.08);
+      --link-border: rgba(255, 255, 255, 0.18);
+      --link-hover: rgba(56, 189, 248, 0.2);
+      --link-shadow: 0 8px 22px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.3);
 
       --qr-modal-bg: rgba(3, 7, 18, 0.75);
       --qr-card-bg: rgba(15, 23, 42, 0.75);
@@ -67,42 +68,44 @@
     }
 
     :root[data-theme="light"] {
-      --bg-base: #f8fafc;
-      --bg-gradient: radial-gradient(circle at 50% 20%, #ffffff 0%, #e0f2fe 50%, #bae6fd 100%);
+      --bg-base: #e0f2fe;
+      --bg-gradient: radial-gradient(circle at 50% 20%, #ffffff 0%, #bae6fd 50%, #38bdf8 100%);
       
-      --glass-bg: rgba(255, 255, 255, 0.55);
+      --glass-bg: rgba(255, 255, 255, 0.45);
       --glass-border: rgba(255, 255, 255, 0.95);
-      --glass-shadow: 0 25px 50px rgba(14, 165, 233, 0.15), inset 0 1.5px 2px rgba(255, 255, 255, 1);
-      --glass-glow: rgba(2, 132, 199, 0.25);
+      --glass-shadow: 0 25px 50px rgba(14, 165, 233, 0.2), inset 0 1.5px 2px rgba(255, 255, 255, 1);
+      --glass-glow: rgba(2, 132, 199, 0.35);
 
       --text-title: #0f172a;
       --text-sub: #0284c7;
       --text-quote: #0f172a;
       --text-author: #475569;
 
-      /* Liquid Toggle Theme Light (Giống ảnh mẫu) */
+      /* Liquid Toggle Theme Light */
       --toggle-track-bg: rgba(255, 255, 255, 0.85);
       --toggle-track-border: rgba(255, 255, 255, 1);
       --toggle-orb-bg: radial-gradient(circle at 50% 50%, #fef08a 0%, #fde047 30%, #38bdf8 85%, #7dd3fc 100%);
-      --toggle-orb-glow: 0 4px 18px rgba(253, 224, 71, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.95);
+      --toggle-orb-glow: 0 4px 18px rgba(253, 224, 71, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.95);
 
       /* Liquid Glass Dock & Indicator Theme Light */
       --nav-dock-bg: rgba(255, 255, 255, 0.65);
       --nav-dock-border: rgba(255, 255, 255, 0.95);
-      --nav-dock-shadow: inset 0 2px 4px rgba(255, 255, 255, 1), inset 0 -2px 6px rgba(14, 165, 233, 0.12), 0 20px 40px rgba(14, 165, 233, 0.2);
+      --nav-dock-shadow: inset 0 2px 4px rgba(255, 255, 255, 1), inset 0 -2px 6px rgba(14, 165, 233, 0.12), 0 20px 40px rgba(14, 165, 233, 0.25);
       
       --indicator-pill-bg: rgba(2, 132, 199, 0.25);
       --indicator-pill-border: rgba(2, 132, 199, 0.6);
-      --indicator-pill-glow: 0 6px 20px rgba(2, 132, 199, 0.3), inset 0 1.5px 2px rgba(255, 255, 255, 0.95);
+      --indicator-pill-glow: 0 6px 20px rgba(2, 132, 199, 0.35), inset 0 1.5px 2px rgba(255, 255, 255, 0.95);
       
       --nav-icon-active: #0284c7;
       --nav-icon-inactive: #64748b;
 
-      --link-bg: rgba(255, 255, 255, 0.6);
+      /* Ô Link Nổi Bật Phong Cách Liquid Glass Ở Light Mode */
+      --link-bg: rgba(255, 255, 255, 0.72);
       --link-border: rgba(255, 255, 255, 0.95);
-      --link-hover: rgba(255, 255, 255, 0.9);
+      --link-hover: rgba(255, 255, 255, 0.92);
+      --link-shadow: 0 10px 25px rgba(2, 132, 199, 0.18), inset 0 2px 3px rgba(255, 255, 255, 1);
 
-      --qr-modal-bg: rgba(186, 230, 253, 0.6);
+      --qr-modal-bg: rgba(186, 230, 253, 0.65);
       --qr-card-bg: rgba(255, 255, 255, 0.92);
       --qr-card-border: rgba(255, 255, 255, 1);
 
@@ -134,7 +137,7 @@
     }
 
     /* ==========================================================
-       BACKGROUND SPHERES
+       BACKGROUND SPHERES (GPU ACCELERATED & SMOOTH DRIFT)
        ========================================================== */
     .bg-canvas {
       position: fixed;
@@ -157,6 +160,7 @@
       animation: floatArc 18s infinite ease-in-out alternate;
       will-change: transform;
       backface-visibility: hidden;
+      transform: translateZ(0);
     }
 
     .arc-1 { width: 520px; height: 520px; top: -150px; left: -170px; animation-duration: 20s; }
@@ -170,7 +174,7 @@
     }
 
     /* ==========================================================
-       MAIN CARD CONTAINER (LIQUID GLASS CO GIÃN TỰ ĐỘNG)
+       MAIN CARD CONTAINER (LIQUID GLASS FIT CÂN ĐỐI)
        ========================================================== */
     .liquid-card {
       position: relative;
@@ -178,7 +182,7 @@
       width: 100%;
       max-width: 410px;
       height: auto;               
-      min-height: 520px;          
+      min-height: 540px;          
       max-height: 90vh;           
       background: var(--glass-bg);
       backdrop-filter: blur(22px) saturate(200%);
@@ -194,6 +198,7 @@
       transition: height 0.45s cubic-bezier(0.25, 1, 0.5, 1), background 0.5s ease;
       will-change: height, transform;
       backface-visibility: hidden;
+      transform: translateZ(0);
     }
 
     @keyframes glassAppear {
@@ -202,10 +207,10 @@
     }
 
     /* ==========================================================
-       TOP BAR & NÚT CHUYỂN THEME QUẢ CẦU LIQUID GLASS (NHƯ HÌNH MẪU)
+       TOP BAR & NÚT CHUYỂN THEME QUẢ CẦU LIQUID GLASS
        ========================================================== */
     .top-bar {
-      padding: 20px 24px 10px;
+      padding: 20px 24px 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -213,7 +218,6 @@
       flex-shrink: 0;
     }
 
-    /* Track chứa nút gạt */
     .theme-toggle-track {
       position: relative;
       width: 82px;
@@ -230,7 +234,6 @@
       transition: all 0.4s ease;
     }
 
-    /* Quả cầu Kính Lỏng (Liquid Orb) */
     .theme-orb-indicator {
       position: absolute;
       top: 3px;
@@ -306,7 +309,7 @@
     }
 
     /* ==========================================================
-       DYNAMIC PROFILE HEADER
+       DYNAMIC PROFILE HEADER (CÂN ĐỐI KHOẢNG CÁCH NỔI BẬT)
        ========================================================== */
     .profile-header {
       display: flex;
@@ -314,7 +317,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 5px 24px 0;
+      padding: 10px 24px 12px; /* Tăng lề trên và lề dưới để AVT phân bổ đều */
       z-index: 5;
       flex-shrink: 0;
       transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
@@ -322,8 +325,8 @@
 
     .avatar-frame {
       position: relative;
-      width: 105px;
-      height: 105px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       padding: 3.5px;
       background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.25) 100%);
@@ -354,15 +357,15 @@
 
     .profile-name-title {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.75rem;
+      font-size: 1.7rem;
       font-weight: 800;
       color: var(--text-title);
-      margin-top: 8px;
+      margin-top: 10px;
       letter-spacing: -0.3px;
     }
 
     .profile-subtitle {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 600;
       color: var(--text-sub);
       margin-top: 1px;
@@ -370,13 +373,12 @@
 
     .home-quote-box {
       margin: auto 0;
-      padding: 20px;
+      padding: 24px 20px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transform: translateY(10px);
     }
 
     .quote-text {
@@ -391,13 +393,13 @@
       font-size: 0.82rem;
       font-style: italic;
       color: var(--text-author);
-      margin-top: 10px;
+      margin-top: 12px;
       display: block;
     }
 
     .liquid-card.compact-mode .avatar-frame {
-      width: 68px;
-      height: 68px;
+      width: 66px;
+      height: 66px;
     }
 
     .liquid-card.compact-mode .profile-info-block {
@@ -409,7 +411,7 @@
     }
 
     /* ==========================================================
-       VIEWPORT & LINKS
+       VIEWPORT & LINK CARDS (NỔI BẬT LIQUID GLASS)
        ========================================================== */
     .viewport {
       flex: 1 1 auto;
@@ -420,11 +422,12 @@
       transition: transform 0.42s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: transform;
       backface-visibility: hidden;
+      contain: content;
     }
 
     .tab-page {
       width: 33.333%;
-      padding: 15px 24px;
+      padding: 16px 24px 20px; /* Điều chỉnh padding cân bằng với nút link đầu */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -438,14 +441,14 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 12px;
+      gap: 14px;
       margin: auto 0;
     }
 
     .liquid-link-item {
       display: flex;
       align-items: center;
-      padding: 13px 18px;
+      padding: 14px 18px;
       background: var(--link-bg);
       border: 1.5px solid var(--link-border);
       border-radius: 24px;
@@ -453,26 +456,28 @@
       color: var(--text-title);
       font-weight: 600;
       font-size: 0.95rem;
-      backdrop-filter: blur(14px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.4);
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      box-shadow: var(--link-shadow);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       will-change: transform;
       backface-visibility: hidden;
+      transform: translateZ(0);
     }
 
     .liquid-link-item:hover {
       transform: translate3d(0, -3px, 0) scale(1.02);
       background: var(--link-hover);
-      box-shadow: 0 12px 28px var(--glass-glow), inset 0 1.5px 2px rgba(255,255,255,0.8);
+      box-shadow: 0 14px 30px var(--glass-glow), inset 0 2px 4px rgba(255, 255, 255, 0.9);
     }
 
     .link-app-icon {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       object-fit: cover;
       margin-right: 14px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
     .link-text-label { flex: 1; text-align: left; }
@@ -480,7 +485,7 @@
     .liquid-link-item:hover .link-chevron { transform: translate3d(5px, 0, 0); }
 
     /* ==========================================================
-       THANH TAB LIQUID GLASS DẠNG CAPSULE TÙY ỨNG THEO THEME
+       THANH TAB LIQUID GLASS CAPSULE
        ========================================================== */
     .bottom-nav-container {
       padding: 10px 22px 22px;
@@ -688,7 +693,7 @@
     
     <!-- TOP BAR -->
     <div class="top-bar">
-      <!-- Theme Switcher Orb (Kính Lỏng 3D) -->
+      <!-- Theme Switcher Orb (Liquid Glass) -->
       <div class="theme-toggle-track" id="theme-toggle">
         <div class="theme-orb-indicator" id="theme-indicator">
           <i class="fa-solid fa-moon orb-moon"></i>
@@ -735,7 +740,7 @@
 
     </div>
 
-    <!-- THANH TAB LIQUID GLASS (MÀU SẮC INDICATOR TÙY ỨNG THEO THEME) -->
+    <!-- THANH TAB LIQUID GLASS -->
     <div class="bottom-nav-container">
       <nav class="bottom-nav-glass">
         <div class="nav-indicator-pill" id="nav-indicator"></div>
