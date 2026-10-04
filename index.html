@@ -23,7 +23,7 @@
        ========================================================== */
     :root[data-theme="dark"] {
       --bg-base: #030712;
-      --bg-gradient: radial-gradient(circle at 50% 20%, #1e1b4b 0%, #0f172a 45%, #030712 100%);
+      --bg-gradient: radial-gradient(circle at 50% 20%, #1e1b4b 0%, #0f172a 50%, #030712 100%);
       
       --glass-bg: rgba(15, 23, 42, 0.45);
       --glass-border: rgba(255, 255, 255, 0.18);
@@ -35,8 +35,11 @@
       --text-quote: #f8fafc;
       --text-author: #94a3b8;
 
-      --pill-bg: rgba(255, 255, 255, 0.08);
-      --pill-border: rgba(255, 255, 255, 0.2);
+      /* Liquid Toggle Theme Dark */
+      --toggle-track-bg: rgba(255, 255, 255, 0.12);
+      --toggle-track-border: rgba(255, 255, 255, 0.25);
+      --toggle-orb-bg: radial-gradient(circle at 35% 35%, #38bdf8 0%, #818cf8 50%, #1e1b4b 100%);
+      --toggle-orb-glow: 0 0 25px rgba(56, 189, 248, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.8);
 
       /* Liquid Glass Dock & Indicator Theme Dark */
       --nav-dock-bg: rgba(15, 23, 42, 0.55);
@@ -64,12 +67,12 @@
     }
 
     :root[data-theme="light"] {
-      --bg-base: #e0f2fe;
-      --bg-gradient: radial-gradient(circle at 50% 20%, #ffffff 0%, #bae6fd 50%, #38bdf8 100%);
+      --bg-base: #f8fafc;
+      --bg-gradient: radial-gradient(circle at 50% 20%, #ffffff 0%, #e0f2fe 50%, #bae6fd 100%);
       
-      --glass-bg: rgba(255, 255, 255, 0.42);
-      --glass-border: rgba(255, 255, 255, 0.9);
-      --glass-shadow: 0 25px 50px rgba(14, 165, 233, 0.18), inset 0 1.5px 2px rgba(255, 255, 255, 0.95);
+      --glass-bg: rgba(255, 255, 255, 0.55);
+      --glass-border: rgba(255, 255, 255, 0.95);
+      --glass-shadow: 0 25px 50px rgba(14, 165, 233, 0.15), inset 0 1.5px 2px rgba(255, 255, 255, 1);
       --glass-glow: rgba(2, 132, 199, 0.25);
 
       --text-title: #0f172a;
@@ -77,32 +80,35 @@
       --text-quote: #0f172a;
       --text-author: #475569;
 
-      --pill-bg: rgba(255, 255, 255, 0.6);
-      --pill-border: rgba(255, 255, 255, 0.9);
+      /* Liquid Toggle Theme Light (Giống ảnh mẫu) */
+      --toggle-track-bg: rgba(255, 255, 255, 0.85);
+      --toggle-track-border: rgba(255, 255, 255, 1);
+      --toggle-orb-bg: radial-gradient(circle at 50% 50%, #fef08a 0%, #fde047 30%, #38bdf8 85%, #7dd3fc 100%);
+      --toggle-orb-glow: 0 4px 18px rgba(253, 224, 71, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.95);
 
       /* Liquid Glass Dock & Indicator Theme Light */
-      --nav-dock-bg: rgba(255, 255, 255, 0.55);
+      --nav-dock-bg: rgba(255, 255, 255, 0.65);
       --nav-dock-border: rgba(255, 255, 255, 0.95);
-      --nav-dock-shadow: inset 0 2px 4px rgba(255, 255, 255, 1), inset 0 -2px 6px rgba(14, 165, 233, 0.15), 0 20px 40px rgba(14, 165, 233, 0.25);
+      --nav-dock-shadow: inset 0 2px 4px rgba(255, 255, 255, 1), inset 0 -2px 6px rgba(14, 165, 233, 0.12), 0 20px 40px rgba(14, 165, 233, 0.2);
       
-      --indicator-pill-bg: rgba(2, 132, 199, 0.3);
-      --indicator-pill-border: rgba(2, 132, 199, 0.7);
-      --indicator-pill-glow: 0 6px 20px rgba(2, 132, 199, 0.35), inset 0 1.5px 2px rgba(255, 255, 255, 0.9);
+      --indicator-pill-bg: rgba(2, 132, 199, 0.25);
+      --indicator-pill-border: rgba(2, 132, 199, 0.6);
+      --indicator-pill-glow: 0 6px 20px rgba(2, 132, 199, 0.3), inset 0 1.5px 2px rgba(255, 255, 255, 0.95);
       
       --nav-icon-active: #0284c7;
       --nav-icon-inactive: #64748b;
 
-      --link-bg: rgba(255, 255, 255, 0.5);
+      --link-bg: rgba(255, 255, 255, 0.6);
       --link-border: rgba(255, 255, 255, 0.95);
-      --link-hover: rgba(255, 255, 255, 0.85);
+      --link-hover: rgba(255, 255, 255, 0.9);
 
       --qr-modal-bg: rgba(186, 230, 253, 0.6);
-      --qr-card-bg: rgba(255, 255, 255, 0.88);
+      --qr-card-bg: rgba(255, 255, 255, 0.92);
       --qr-card-border: rgba(255, 255, 255, 1);
 
-      --arc-1: rgba(186, 230, 253, 0.8);
-      --arc-2: rgba(125, 211, 252, 0.6);
-      --arc-edge: rgba(255, 255, 255, 0.95);
+      --arc-1: rgba(186, 230, 253, 0.85);
+      --arc-2: rgba(125, 211, 252, 0.65);
+      --arc-edge: rgba(255, 255, 255, 1);
     }
 
     * {
@@ -128,7 +134,7 @@
     }
 
     /* ==========================================================
-       BACKGROUND SPHERES (GPU ACCELERATED & SMOOTH DRIFT)
+       BACKGROUND SPHERES
        ========================================================== */
     .bg-canvas {
       position: fixed;
@@ -175,8 +181,8 @@
       min-height: 520px;          
       max-height: 90vh;           
       background: var(--glass-bg);
-      backdrop-filter: blur(20px) saturate(190%);
-      -webkit-backdrop-filter: blur(20px) saturate(190%);
+      backdrop-filter: blur(22px) saturate(200%);
+      -webkit-backdrop-filter: blur(22px) saturate(200%);
       border: 1.5px solid var(--glass-border);
       border-radius: 42px;
       box-shadow: var(--glass-shadow);
@@ -196,7 +202,7 @@
     }
 
     /* ==========================================================
-       TOP BAR & CÔNG TẮC THEME DẠNG QUẢ CẦU KÍNH 3D
+       TOP BAR & NÚT CHUYỂN THEME QUẢ CẦU LIQUID GLASS (NHƯ HÌNH MẪU)
        ========================================================== */
     .top-bar {
       padding: 20px 24px 10px;
@@ -207,72 +213,90 @@
       flex-shrink: 0;
     }
 
-    .theme-toggle-pill {
+    /* Track chứa nút gạt */
+    .theme-toggle-track {
       position: relative;
-      width: 68px;
-      height: 36px;
-      background: var(--pill-bg);
-      border: 1.5px solid var(--pill-border);
-      border-radius: 30px;
+      width: 82px;
+      height: 44px;
+      background: var(--toggle-track-bg);
+      border: 1.5px solid var(--toggle-track-border);
+      border-radius: 40px;
       display: flex;
       align-items: center;
-      padding: 2px;
+      padding: 3px;
       cursor: pointer;
-      backdrop-filter: blur(12px);
-      box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.3);
-      transition: all 0.3s ease;
+      backdrop-filter: blur(16px);
+      box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.4), 0 8px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s ease;
     }
 
-    .theme-indicator {
+    /* Quả cầu Kính Lỏng (Liquid Orb) */
+    .theme-orb-indicator {
       position: absolute;
-      top: 2px;
-      left: 2px;
-      width: 30px;
-      height: 30px;
+      top: 3px;
+      left: 3px;
+      width: 35px;
+      height: 35px;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #38bdf8 0%, #0284c7 100%);
-      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.8);
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease, box-shadow 0.4s ease;
-      z-index: 1;
-      will-change: transform;
-    }
-
-    [data-theme="light"] .theme-indicator {
-      background: radial-gradient(circle at 30% 30%, #fbbf24 0%, #f59e0b 100%);
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.9);
-    }
-
-    .theme-icon-box {
-      flex: 1;
-      height: 100%;
+      background: var(--toggle-orb-bg);
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      box-shadow: var(--toggle-orb-glow);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.85rem;
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.45s ease, box-shadow 0.45s ease;
       z-index: 2;
-      transition: color 0.3s ease;
+      will-change: transform;
     }
 
-    .icon-moon { color: #ffffff; }
-    .icon-sun { color: #f59e0b; }
+    .theme-orb-indicator i {
+      font-size: 1.05rem;
+      transition: opacity 0.3s ease, transform 0.35s ease;
+      position: absolute;
+    }
 
-    [data-theme="light"] .icon-moon { color: #64748b; }
-    [data-theme="light"] .icon-sun { color: #ffffff; }
+    .orb-sun {
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(253, 224, 71, 0.8);
+      opacity: 0;
+      transform: scale(0.5) rotate(-90deg);
+    }
+
+    .orb-moon {
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+
+    [data-theme="light"] .theme-orb-indicator {
+      transform: translate3d(38px, 0, 0);
+    }
+
+    [data-theme="light"] .orb-sun {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+
+    [data-theme="light"] .orb-moon {
+      opacity: 0;
+      transform: scale(0.5) rotate(90deg);
+    }
 
     .qr-glass-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 14px;
+      width: 42px;
+      height: 42px;
+      border-radius: 16px;
       background: var(--pill-bg);
       border: 1.5px solid var(--pill-border);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--text-title);
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       cursor: pointer;
-      backdrop-filter: blur(12px);
-      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(14px);
+      box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.4);
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
@@ -302,7 +326,7 @@
       height: 105px;
       border-radius: 50%;
       padding: 3.5px;
-      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.2) 100%);
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.25) 100%);
       border: 1.5px solid var(--glass-border);
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2), 0 0 25px var(--glass-glow);
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -482,7 +506,6 @@
       transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
     }
 
-    /* Block Indicator tùy biến màu sắc chuẩn theo Theme */
     .nav-indicator-pill {
       position: absolute;
       top: 5px;
@@ -665,11 +688,12 @@
     
     <!-- TOP BAR -->
     <div class="top-bar">
-      <!-- Theme Switcher -->
-      <div class="theme-toggle-pill" id="theme-toggle">
-        <div class="theme-indicator" id="theme-indicator"></div>
-        <div class="theme-icon-box icon-moon"><i class="fa-solid fa-moon"></i></div>
-        <div class="theme-icon-box icon-sun"><i class="fa-solid fa-sun"></i></div>
+      <!-- Theme Switcher Orb (Kính Lỏng 3D) -->
+      <div class="theme-toggle-track" id="theme-toggle">
+        <div class="theme-orb-indicator" id="theme-indicator">
+          <i class="fa-solid fa-moon orb-moon"></i>
+          <i class="fa-solid fa-sun orb-sun"></i>
+        </div>
       </div>
 
       <button class="qr-glass-btn" id="open-qr-btn" aria-label="Open QR">
@@ -711,7 +735,7 @@
 
     </div>
 
-    <!-- THANH TAB LIQUID GLASS CẢI TIẾN TÙY ỨNG THEO THEME -->
+    <!-- THANH TAB LIQUID GLASS (MÀU SẮC INDICATOR TÙY ỨNG THEO THEME) -->
     <div class="bottom-nav-container">
       <nav class="bottom-nav-glass">
         <div class="nav-indicator-pill" id="nav-indicator"></div>
@@ -786,7 +810,7 @@
       function switchTab(index) {
         currentTabIndex = index;
 
-        // Trượt Viewport qua GPU
+        // Trượt Viewport qua GPU 60fps
         viewport.style.transform = `translate3d(-${index * 33.333}%, 0, 0)`;
         indicator.style.transform = `translate3d(${index * 100}%, 0, 0)`;
 
@@ -815,7 +839,6 @@
 
     function initThemeToggle() {
       const toggle = document.getElementById("theme-toggle");
-      const indicator = document.getElementById("theme-indicator");
       
       const savedTheme = localStorage.getItem("liquid-theme") || "dark";
       applyTheme(savedTheme);
@@ -831,12 +854,6 @@
 
       function applyTheme(theme) {
         document.documentElement.setAttribute("data-theme", theme);
-        
-        if (theme === "dark") {
-          indicator.style.transform = "translate3d(0, 0, 0)";
-        } else {
-          indicator.style.transform = "translate3d(100%, 0, 0)";
-        }
       }
     }
 
