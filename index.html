@@ -68,10 +68,10 @@
     }
 
     :root[data-theme="light"] {
-      --bg-base: #e0f2fe;
+      --bg-base: #f0f9ff;
       --bg-gradient: radial-gradient(circle at 50% 20%, #ffffff 0%, #bae6fd 50%, #38bdf8 100%);
       
-      --glass-bg: rgba(255, 255, 255, 0.45);
+      --glass-bg: rgba(255, 255, 255, 0.55);
       --glass-border: rgba(255, 255, 255, 0.95);
       --glass-shadow: 0 25px 50px rgba(14, 165, 233, 0.2), inset 0 1.5px 2px rgba(255, 255, 255, 1);
       --glass-glow: rgba(2, 132, 199, 0.35);
@@ -81,10 +81,10 @@
       --text-quote: #0f172a;
       --text-author: #475569;
 
-      /* Liquid Toggle Theme Light */
+      /* Liquid Toggle Theme Light (Giống ảnh mẫu 100%) */
       --toggle-track-bg: rgba(255, 255, 255, 0.85);
       --toggle-track-border: rgba(255, 255, 255, 1);
-      --toggle-orb-bg: radial-gradient(circle at 50% 50%, #fef08a 0%, #fde047 30%, #38bdf8 85%, #7dd3fc 100%);
+      --toggle-orb-bg: radial-gradient(circle at 50% 50%, #fffbeb 0%, #fef08a 30%, #7dd3fc 85%, #38bdf8 100%);
       --toggle-orb-glow: 0 4px 18px rgba(253, 224, 71, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.95);
 
       /* Liquid Glass Dock & Indicator Theme Light */
@@ -99,11 +99,11 @@
       --nav-icon-active: #0284c7;
       --nav-icon-inactive: #64748b;
 
-      /* Ô Link Nổi Bật Phong Cách Liquid Glass Ở Light Mode */
-      --link-bg: rgba(255, 255, 255, 0.72);
-      --link-border: rgba(255, 255, 255, 0.95);
-      --link-hover: rgba(255, 255, 255, 0.92);
-      --link-shadow: 0 10px 25px rgba(2, 132, 199, 0.18), inset 0 2px 3px rgba(255, 255, 255, 1);
+      /* Ô Link Nổi Bật Tách Biệt Trên Nền Trắng ở Light Mode */
+      --link-bg: rgba(255, 255, 255, 0.78);
+      --link-border: #ffffff;
+      --link-hover: rgba(255, 255, 255, 0.95);
+      --link-shadow: 0 10px 25px rgba(2, 132, 199, 0.22), inset 0 2px 3px rgba(255, 255, 255, 1);
 
       --qr-modal-bg: rgba(186, 230, 253, 0.65);
       --qr-card-bg: rgba(255, 255, 255, 0.92);
@@ -137,7 +137,7 @@
     }
 
     /* ==========================================================
-       BACKGROUND SPHERES
+       BACKGROUND SPHERES (GPU ACCELERATED & SMOOTH DRIFT)
        ========================================================== */
     .bg-canvas {
       position: fixed;
@@ -174,15 +174,15 @@
     }
 
     /* ==========================================================
-       MAIN CARD CONTAINER (KHÔNG BỊ CẮT XÉN - TỰ ĐỘNG KHÍT NỘI DUNG)
+       MAIN CARD CONTAINER (LIQUID GLASS ADAPTIVE FLEX HEIGHT)
        ========================================================== */
     .liquid-card {
       position: relative;
       z-index: 2;
       width: 100%;
       max-width: 410px;
-      height: auto;               
-      min-height: 520px;          
+      height: auto;
+      max-height: 90vh;
       background: var(--glass-bg);
       backdrop-filter: blur(22px) saturate(200%);
       -webkit-backdrop-filter: blur(22px) saturate(200%);
@@ -241,7 +241,7 @@
       height: 35px;
       border-radius: 50%;
       background: var(--toggle-orb-bg);
-      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
       box-shadow: var(--toggle-orb-glow);
       display: flex;
       align-items: center;
@@ -251,21 +251,21 @@
       will-change: transform;
     }
 
-    .theme-orb-indicator i {
-      font-size: 1.05rem;
+    .theme-orb-indicator .orb-icon-svg {
+      width: 22px;
+      height: 22px;
       transition: opacity 0.3s ease, transform 0.35s ease;
       position: absolute;
     }
 
-    .orb-sun {
-      color: #ffffff;
-      text-shadow: 0 0 8px rgba(253, 224, 71, 0.8);
+    .orb-sun-svg {
       opacity: 0;
       transform: scale(0.5) rotate(-90deg);
     }
 
     .orb-moon {
       color: #ffffff;
+      font-size: 1.05rem;
       text-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
       opacity: 1;
       transform: scale(1) rotate(0deg);
@@ -275,7 +275,7 @@
       transform: translate3d(38px, 0, 0);
     }
 
-    [data-theme="light"] .orb-sun {
+    [data-theme="light"] .orb-sun-svg {
       opacity: 1;
       transform: scale(1) rotate(0deg);
     }
@@ -308,7 +308,7 @@
     }
 
     /* ==========================================================
-       DYNAMIC PROFILE HEADER (AVATAR NHÍCH LÊN TRÊN HÀI HÒA)
+       DYNAMIC PROFILE HEADER
        ========================================================== */
     .profile-header {
       display: flex;
@@ -316,7 +316,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 2px 24px 6px; /* Nhích Avatar lên trên 1 chút xíu */
+      padding: 2px 24px 6px;
       z-index: 5;
       flex-shrink: 0;
       transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
@@ -372,7 +372,7 @@
 
     .home-quote-box {
       margin: auto 0;
-      padding: 20px;
+      padding: 24px 20px;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -410,7 +410,7 @@
     }
 
     /* ==========================================================
-       VIEWPORT & LINK CARDS (ĐẢM BẢO HIỂN THỊ ĐỦ CÁC Ô LINK)
+       VIEWPORT & LINK CARDS (LIQUID GLASS NỔI BẬT)
        ========================================================== */
     .viewport {
       flex: 1 1 auto;
@@ -426,7 +426,7 @@
 
     .tab-page {
       width: 33.333%;
-      padding: 10px 24px 16px; /* Căn chỉnh khoảng cách đều đặn */
+      padding: 10px 24px 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -442,7 +442,7 @@
       justify-content: center;
       gap: 12px;
       margin: auto 0;
-      padding-bottom: 4px; /* Giúp ô link cuối cùng không chạm chân Dock */
+      padding-bottom: 4px;
     }
 
     .liquid-link-item {
@@ -485,7 +485,7 @@
     .liquid-link-item:hover .link-chevron { transform: translate3d(5px, 0, 0); }
 
     /* ==========================================================
-       THANH TAB LIQUID GLASS CAPSULE
+       THANH TAB DOCK LIQUID GLASS CAPSULE (ĐẢM BẢO CỐ ĐỊNH)
        ========================================================== */
     .bottom-nav-container {
       padding: 8px 22px 20px;
@@ -697,7 +697,20 @@
       <div class="theme-toggle-track" id="theme-toggle">
         <div class="theme-orb-indicator" id="theme-indicator">
           <i class="fa-solid fa-moon orb-moon"></i>
-          <i class="fa-solid fa-sun orb-sun"></i>
+          
+          <!-- ICON MẶT TRỜI SVG CHUẨN XÁC THEO ẢNH MẪU -->
+          <svg class="orb-icon-svg orb-sun-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="18" fill="#fef08a" />
+            <!-- Các tia hạt lá vòm cong xung quanh -->
+            <path d="M50 15 C47 22, 47 26, 50 28 C53 26, 53 22, 50 15 Z" fill="#fef08a" />
+            <path d="M50 85 C47 78, 47 74, 50 72 C53 74, 53 78, 50 85 Z" fill="#fef08a" />
+            <path d="M15 50 C22 47, 26 47, 28 50 C26 53, 22 53, 15 50 Z" fill="#fef08a" />
+            <path d="M85 50 C78 47, 74 47, 72 50 C74 53, 78 53, 85 50 Z" fill="#fef08a" />
+            <path d="M25.2 25.2 C31.5 28.5, 34.3 30.2, 34.4 34.4 C30.2 34.3, 28.5 31.5, 25.2 25.2 Z" fill="#fef08a" />
+            <path d="M74.8 74.8 C68.5 71.5, 65.7 69.8, 65.6 65.6 C69.8 65.7, 71.5 68.5, 74.8 74.8 Z" fill="#fef08a" />
+            <path d="M74.8 25.2 C71.5 31.5, 69.8 34.3, 65.6 34.4 C65.7 30.2, 68.5 28.5, 74.8 25.2 Z" fill="#fef08a" />
+            <path d="M25.2 74.8 C28.5 68.5, 30.2 65.7, 34.4 65.6 C34.3 69.8, 31.5 71.5, 25.2 74.8 Z" fill="#fef08a" />
+          </svg>
         </div>
       </div>
 
@@ -740,7 +753,7 @@
 
     </div>
 
-    <!-- THANH TAB LIQUID GLASS -->
+    <!-- THANH TAB LIQUID GLASS CAPSULE -->
     <div class="bottom-nav-container">
       <nav class="bottom-nav-glass">
         <div class="nav-indicator-pill" id="nav-indicator"></div>
