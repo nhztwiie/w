@@ -19,10 +19,11 @@
 
   <style>
     /* ==========================================================
-       iOS 26 LIQUID GLASS SYSTEM - ULTRA OPTIMIZED STABLE ENGINE
+       iOS 26 LIQUID GLASS SYSTEM - ULTRA STABLE ENGINE
        ========================================================== */
     :root[data-theme="dark"] {
       --bg-gradient: radial-gradient(circle at 50% 0%, #0f172a 0%, #030712 65%, #000000 100%);
+      
       --glass-bg: rgba(15, 23, 42, 0.55);
       --glass-border: rgba(255, 255, 255, 0.18);
       --glass-border-highlight: rgba(255, 255, 255, 0.5);
@@ -55,7 +56,9 @@
 
     :root[data-theme="light"] {
       --bg-gradient: radial-gradient(circle at 50% 0%, #e0f2fe 0%, #bae6fd 50%, #38bdf8 100%);
-      --glass-bg: rgba(255, 255, 255, 0.75);
+
+      /* Tăng độ phản quang và tương phản rõ nét cho Light Mode */
+      --glass-bg: rgba(255, 255, 255, 0.82);
       --glass-border: rgba(255, 255, 255, 0.95);
       --glass-border-highlight: rgba(255, 255, 255, 1);
       --glass-shadow: 
@@ -69,13 +72,13 @@
       --text-quote: #0f172a;
       --text-author: #334155;
 
-      --pill-bg: rgba(255, 255, 255, 0.88);
+      --pill-bg: rgba(255, 255, 255, 0.9);
       --pill-border: rgba(2, 132, 199, 0.25);
       --pill-hover-bg: #ffffff;
       --pill-hover-border: #0284c7;
       --pill-hover-glow: 0 12px 30px rgba(14, 165, 233, 0.3);
 
-      --dock-bg: rgba(255, 255, 255, 0.85);
+      --dock-bg: rgba(255, 255, 255, 0.88);
       --dock-border: rgba(255, 255, 255, 1);
       --indicator-bg: linear-gradient(135deg, rgba(186, 230, 253, 0.95) 0%, rgba(125, 211, 252, 0.85) 100%);
       --indicator-border: rgba(2, 132, 199, 0.8);
@@ -155,7 +158,7 @@
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 0);
+      background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 0);
       background-size: 20px 20px;
       z-index: 2;
       pointer-events: none;
@@ -401,8 +404,8 @@
     }
 
     [data-theme="light"] .ios26-quote-card {
-      background: rgba(255, 255, 255, 0.6);
-      border-color: rgba(2, 132, 199, 0.2);
+      background: rgba(255, 255, 255, 0.65);
+      border-color: rgba(2, 132, 199, 0.25);
     }
 
     .ios26-quote-card:hover { transform: translate3d(0, -3px, 0); }
@@ -765,7 +768,7 @@
   <!-- AUDIO ELEMENT -->
   <audio id="bg-music" src="audio/neungayay.mp3" preload="auto"></audio>
 
-  <!-- TÍCH HỢP TRỰC TIẾP DỮ LIỆU ĐỂ LOẠI BỎ LỖI CORS KHI CHẠY FILE CỤC BỘ -->
+  <!-- DỮ LIỆU LIÊN KẾT TÍCH HỢP -->
   <script>
     const bioData = {
       profile: {
@@ -942,6 +945,7 @@
       });
     }
 
+    /* ĐIỀU KHIỂN BẬT / TẮT NHẠC ĐỘC LẬP */
     function initAudioPlayer() {
       const musicBtn = document.getElementById("music-toggle-btn");
       const musicIcon = document.getElementById("music-icon");
@@ -964,8 +968,8 @@
             musicIcon.className = "fa-solid fa-compact-disc";
             isPlaying = true;
           }).catch(err => {
-            console.log("Trình duyệt chặn hoặc chưa tìm thấy file nhạc:", err);
-            alert("Vui lòng đặt đúng file nhạc 'neungayay.mp3' vào thư mục 'audio' để phát nhạc!");
+            console.log("Không thể phát nhạc:", err);
+            alert("Vui lòng kiểm tra lại file 'neungayay.mp3' trong thư mục 'audio'!");
           });
         }
       });
