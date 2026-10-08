@@ -19,11 +19,10 @@
 
   <style>
     /* ==========================================================
-       iOS 26 LIQUID GLASS SYSTEM - ADVANCED OPTIMIZED ENGINE
+       iOS 26 LIQUID GLASS SYSTEM - ULTRA OPTIMIZED STABLE ENGINE
        ========================================================== */
     :root[data-theme="dark"] {
       --bg-gradient: radial-gradient(circle at 50% 0%, #0f172a 0%, #030712 65%, #000000 100%);
-      
       --glass-bg: rgba(15, 23, 42, 0.55);
       --glass-border: rgba(255, 255, 255, 0.18);
       --glass-border-highlight: rgba(255, 255, 255, 0.5);
@@ -56,9 +55,7 @@
 
     :root[data-theme="light"] {
       --bg-gradient: radial-gradient(circle at 50% 0%, #e0f2fe 0%, #bae6fd 50%, #38bdf8 100%);
-
-      /* Đã chỉnh tăng độ tương phản cực nét cho Light Mode */
-      --glass-bg: rgba(255, 255, 255, 0.72);
+      --glass-bg: rgba(255, 255, 255, 0.75);
       --glass-border: rgba(255, 255, 255, 0.95);
       --glass-border-highlight: rgba(255, 255, 255, 1);
       --glass-shadow: 
@@ -72,13 +69,13 @@
       --text-quote: #0f172a;
       --text-author: #334155;
 
-      --pill-bg: rgba(255, 255, 255, 0.85);
+      --pill-bg: rgba(255, 255, 255, 0.88);
       --pill-border: rgba(2, 132, 199, 0.25);
       --pill-hover-bg: #ffffff;
       --pill-hover-border: #0284c7;
       --pill-hover-glow: 0 12px 30px rgba(14, 165, 233, 0.3);
 
-      --dock-bg: rgba(255, 255, 255, 0.82);
+      --dock-bg: rgba(255, 255, 255, 0.85);
       --dock-border: rgba(255, 255, 255, 1);
       --indicator-bg: linear-gradient(135deg, rgba(186, 230, 253, 0.95) 0%, rgba(125, 211, 252, 0.85) 100%);
       --indicator-border: rgba(2, 132, 199, 0.8);
@@ -111,7 +108,7 @@
       transition: background 0.5s ease;
     }
 
-    /* DYNAMIC BACKGROUND SPHERES */
+    /* BACKGROUND SPHERES */
     .ios26-bg-canvas {
       position: fixed;
       top: 0; left: 0;
@@ -126,48 +123,39 @@
       position: absolute;
       border-radius: 50%;
       filter: blur(40px);
-      mix-blend-mode: multiply;
       will-change: transform;
       animation: floatFluid 14s infinite ease-in-out alternate;
-    }
-
-    [data-theme="dark"] .liquid-orb {
-      mix-blend-mode: screen;
     }
 
     .orb-primary {
       width: 500px; height: 500px;
       top: -150px; left: -120px;
       background: radial-gradient(circle at 35% 35%, var(--orb-1) 0%, rgba(255,255,255,0.1) 50%, transparent 75%);
-      animation-duration: 12s;
     }
 
     .orb-secondary {
       width: 450px; height: 450px;
       bottom: -140px; right: -100px;
       background: radial-gradient(circle at 35% 35%, var(--orb-2) 0%, rgba(255,255,255,0.1) 50%, transparent 75%);
-      animation-duration: 10s;
     }
 
     .orb-accent {
       width: 350px; height: 350px;
       top: 35%; left: 25%;
       background: radial-gradient(circle at 35% 35%, var(--orb-3) 0%, rgba(255,255,255,0.1) 50%, transparent 75%);
-      animation-duration: 15s;
     }
 
     @keyframes floatFluid {
       0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
-      33% { transform: translate3d(50px, -40px, 0) scale(1.1) rotate(12deg); }
-      66% { transform: translate3d(-30px, 40px, 0) scale(0.9) rotate(-10deg); }
-      100% { transform: translate3d(40px, 20px, 0) scale(1.05) rotate(8deg); }
+      50% { transform: translate3d(40px, -30px, 0) scale(1.08) rotate(10deg); }
+      100% { transform: translate3d(-30px, 30px, 0) scale(0.92) rotate(-10deg); }
     }
 
     .glass-mesh-overlay {
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 0);
+      background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 0);
       background-size: 20px 20px;
       z-index: 2;
       pointer-events: none;
@@ -235,10 +223,7 @@
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    [data-theme="light"] .theme-toggle-track {
-      background: rgba(0, 0, 0, 0.06);
-    }
-
+    [data-theme="light"] .theme-toggle-track { background: rgba(0, 0, 0, 0.06); }
     .theme-toggle-track:hover { transform: scale(1.05); }
     .theme-toggle-track:active { transform: scale(0.95); }
 
@@ -262,17 +247,8 @@
       position: absolute;
     }
 
-    .icon-sun { 
-      opacity: 0; 
-      transform: scale(0.5) rotate(-90deg); 
-      color: #d97706;
-    }
-    
-    .icon-moon { 
-      opacity: 1; 
-      transform: scale(1) rotate(0deg); 
-      color: #ffffff;
-    }
+    .icon-sun { opacity: 0; transform: scale(0.5) rotate(-90deg); color: #d97706; }
+    .icon-moon { opacity: 1; transform: scale(1) rotate(0deg); color: #ffffff; }
 
     [data-theme="light"] .theme-orb-indicator {
       transform: translate3d(34px, 0, 0);
@@ -384,7 +360,7 @@
       pointer-events: none;
     }
 
-    /* VIEWPORT SLIDER (FIXED HEIGHT FLEXIBLE FIT) */
+    /* VIEWPORT SLIDER */
     .viewport-wrapper {
       width: 100%;
       overflow: hidden;
@@ -703,12 +679,10 @@
       </div>
 
       <div class="top-bar-controls">
-        <!-- NÚT ÂM NHẠC -->
         <button class="glass-btn-ios26 music-btn" id="music-toggle-btn" aria-label="Toggle Music">
           <i class="fa-solid fa-music" id="music-icon"></i>
         </button>
 
-        <!-- NÚT QR CODE -->
         <button class="glass-btn-ios26" id="open-qr-btn" aria-label="Open QR Code">
           <i class="fa-solid fa-qrcode"></i>
         </button>
@@ -718,7 +692,7 @@
     <!-- PROFILE HEADER -->
     <header class="profile-header">
       <div class="avatar-ring">
-        <img src="images/Huy.png" alt="Avatar Nhật Huy" loading="eager">
+        <img src="images/Huy.png" alt="Avatar Nhật Huy" onerror="this.src='https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png'">
       </div>
       <div class="profile-meta">
         <h1 class="profile-name">Nhật Huy</h1>
@@ -778,7 +752,7 @@
       <h3 class="qr-title">Scan QR Code</h3>
       <div class="qr-box-wrapper">
         <div id="qrcode-canvas"></div>
-        <img src="images/Huy.png" alt="Avatar" class="qr-avatar-center">
+        <img src="images/Huy.png" alt="Avatar" class="qr-avatar-center" onerror="this.src='https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png'">
       </div>
       <button class="btn-copy-link" id="copy-btn">
         <i class="fa-regular fa-copy"></i>
@@ -789,22 +763,44 @@
   </div>
 
   <!-- AUDIO ELEMENT -->
-  <audio id="bg-music" src="audio/neungayay.mp3" loop preload="auto"></audio>
+  <audio id="bg-music" src="audio/neungayay.mp3" preload="auto"></audio>
 
-  <script src="data.js"></script>
+  <!-- TÍCH HỢP TRỰC TIẾP DỮ LIỆU ĐỂ LOẠI BỎ LỖI CORS KHI CHẠY FILE CỤC BỘ -->
+  <script>
+    const bioData = {
+      profile: {
+        shareUrl: window.location.href
+      },
+      tabs: {
+        social: [
+          { title: "Facebook", url: "https://facebook.com", icon: "https://cdn-icons-png.flaticon.com/512/733/733547.png" },
+          { title: "Instagram", url: "https://instagram.com", icon: "https://cdn-icons-png.flaticon.com/512/733/733558.png" },
+          { title: "GitHub", url: "https://github.com", icon: "https://cdn-icons-png.flaticon.com/512/733/733553.png" }
+        ],
+        work: [
+          { title: "Email Contact", url: "mailto:example@gmail.com", icon: "https://cdn-icons-png.flaticon.com/512/732/732200.png" },
+          { title: "Portfolio", url: "#", icon: "https://cdn-icons-png.flaticon.com/512/1006/1006771.png" }
+        ]
+      }
+    };
+  </script>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      if (typeof bioData !== 'undefined' && bioData.tabs) {
-        renderLinks("social-links-list", bioData.tabs.social);
-        renderLinks("work-links-list", bioData.tabs.work);
-      }
+      try {
+        if (typeof bioData !== 'undefined' && bioData.tabs) {
+          renderLinks("social-links-list", bioData.tabs.social);
+          renderLinks("work-links-list", bioData.tabs.work);
+        }
 
-      initTabNavigation();
-      initThemeToggle();
-      initQRCodeModal();
-      initParallaxEffect();
-      initAudioPlayer(); // Nút phát nhạc độc lập
+        initTabNavigation();
+        initThemeToggle();
+        initQRCodeModal();
+        initParallaxEffect();
+        initAudioPlayer();
+      } catch (err) {
+        console.error("Lỗi khởi tạo hệ thống:", err);
+      }
     });
 
     function renderLinks(containerId, items) {
@@ -857,7 +853,6 @@
         btn.addEventListener("click", () => switchTab(i));
       });
 
-      // Ban đầu mở Tab 1 (Home)
       switchTab(1);
     }
 
@@ -874,4 +869,107 @@
       });
     }
 
-    function initQRCodeModal()
+    function initQRCodeModal() {
+      const openBtn = document.getElementById("open-qr-btn");
+      const closeBtn = document.getElementById("close-qr-btn");
+      const modal = document.getElementById("qr-modal");
+      const qrCanvas = document.getElementById("qrcode-canvas");
+      const copyBtn = document.getElementById("copy-btn");
+      const copyText = document.getElementById("copy-text");
+
+      const shareUrl = (typeof bioData !== 'undefined' && bioData.profile && bioData.profile.shareUrl) ? bioData.profile.shareUrl : window.location.href;
+      let qrGenerated = false;
+
+      function openModal() {
+        modal.classList.add("active");
+        modal.setAttribute("aria-hidden", "false");
+        if (!qrGenerated) {
+          try {
+            new QRCode(qrCanvas, {
+              text: shareUrl,
+              width: 150,
+              height: 150,
+              colorDark: "#030712",
+              colorLight: "#ffffff",
+              correctLevel: QRCode.CorrectLevel.H
+            });
+            qrGenerated = true;
+          } catch(e) {
+            console.error("Không thể tạo mã QR:", e);
+          }
+        }
+      }
+
+      function closeModal() {
+        modal.classList.remove("active");
+        modal.setAttribute("aria-hidden", "true");
+      }
+
+      openBtn.addEventListener("click", openModal);
+      closeBtn.addEventListener("click", closeModal);
+      modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+
+      copyBtn.addEventListener("click", () => {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+          copyText.textContent = "Copied!";
+          copyBtn.style.background = "#22c55e";
+
+          setTimeout(() => {
+            copyText.textContent = "Copy link";
+            copyBtn.style.background = "var(--text-sub)";
+          }, 2000);
+        }).catch(() => {
+          copyText.textContent = "Error!";
+        });
+      });
+    }
+
+    function initParallaxEffect() {
+      const card = document.getElementById("main-card");
+      if (!card || window.innerWidth < 768) return;
+
+      let ticking = false;
+      document.addEventListener("mousemove", (e) => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 55;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 55;
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    }
+
+    function initAudioPlayer() {
+      const musicBtn = document.getElementById("music-toggle-btn");
+      const musicIcon = document.getElementById("music-icon");
+      const audio = document.getElementById("bg-music");
+
+      if (!audio || !musicBtn) return;
+
+      audio.volume = 0.4;
+      let isPlaying = false;
+
+      musicBtn.addEventListener("click", () => {
+        if (isPlaying) {
+          audio.pause();
+          musicBtn.classList.remove("playing");
+          musicIcon.className = "fa-solid fa-music";
+          isPlaying = false;
+        } else {
+          audio.play().then(() => {
+            musicBtn.classList.add("playing");
+            musicIcon.className = "fa-solid fa-compact-disc";
+            isPlaying = true;
+          }).catch(err => {
+            console.log("Trình duyệt chặn hoặc chưa tìm thấy file nhạc:", err);
+            alert("Vui lòng đặt đúng file nhạc 'neungayay.mp3' vào thư mục 'audio' để phát nhạc!");
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>
