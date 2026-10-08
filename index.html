@@ -772,10 +772,7 @@
     </div>
   </div>
 
-  <!-- ==========================================================
-       VỊ TRÍ CHÈN THẺ AUDIO
-       Thay "audio/background.mp3" bằng đường dẫn tới file nhạc của bạn
-       ========================================================== -->
+  <!-- AUDIO ELEMENT -->
   <audio id="bg-music" src="audio/neungayay.mp3" loop preload="auto"></audio>
 
   <script src="data.js"></script>
@@ -952,7 +949,7 @@
       });
     }
 
-    // HÀM ĐIỀU KHIỂN BẬT / TẮT NHẠC
+    // HÀM ĐIỀU KHIỂN BẬT / TẮT NHẠC (CHỈ BẬT KHI BẤM NÚT)
     function initAudioPlayer() {
       const musicBtn = document.getElementById("music-toggle-btn");
       const musicIcon = document.getElementById("music-icon");
@@ -973,29 +970,13 @@
             musicBtn.classList.add("playing");
             musicIcon.className = "fa-solid fa-compact-disc";
           }).catch(err => {
-            console.log("Cần tương tác để phát nhạc:", err);
+            console.log("Không thể phát nhạc:", err);
           });
         }
         isPlaying = !isPlaying;
       }
 
       musicBtn.addEventListener("click", toggleMusic);
-
-      // Tự động phát nhạc ở lần nhấp/chạm màn hình đầu tiên
-      const enableAutoPlay = () => {
-        if (!isPlaying) {
-          audio.play().then(() => {
-            isPlaying = true;
-            musicBtn.classList.add("playing");
-            musicIcon.className = "fa-solid fa-compact-disc";
-          }).catch(() => {});
-        }
-        document.removeEventListener("click", enableAutoPlay);
-        document.removeEventListener("touchstart", enableAutoPlay);
-      };
-
-      document.addEventListener("click", enableAutoPlay, { once: true });
-      document.addEventListener("touchstart", enableAutoPlay, { once: true });
     }
   </script>
 </body>
