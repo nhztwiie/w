@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
+  <!-- Thư viện EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
   <style>
     /* ==========================================================
        iOS 26 LIQUID GLASS SYSTEM - ADVANCED ENGINE (OPTIMIZED FOR MOBILE)
@@ -791,7 +794,39 @@
       initQRCodeModal();
       initParallaxEffect();
       initAudioPlayer();
+      initEmailJSNotifier(); // Khởi tạo tính năng gửi email tự động
     });
+
+    /* HÀM THÔNG BÁO QUA EMAILJS KHI CÓ LƯỢT TRUY CẬP */
+    function initEmailJSNotifier() {
+      // ⚠️ THAY CÁC THÔNG SỐ DƯỚI ĐÂY BẰNG MÃ TỪ TÀI KHOẢN EMAILJS CỦA BẠN
+      const PUBLIC_KEY = "rnOWqMh55RZYvY_WA";
+      const SERVICE_ID = "service_040502w";
+      const TEMPLATE_ID = "template_4gmtg3f";
+
+      if (PUBLIC_KEY === "rnOWqMh55RZYvY_WA") return; // Chưa cấu hình thì bỏ qua
+
+      emailjs.init(PUBLIC_KEY);
+
+      // Chống spam: Mỗi phiên duyệt web chỉ gửi 1 email (reload F5 không gửi lại)
+      if (!sessionStorage.getItem("email_notified")) {
+        const templateParams = {
+          time: new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" }),
+          user_agent: navigator.userAgent,
+          language: navigator.language,
+          referrer: document.referrer || "Truy cập trực tiếp"
+        };
+
+        emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+          .then(() => {
+            console.log("Đã gửi email thông báo truy cập thành công!");
+            sessionStorage.setItem("email_notified", "true");
+          })
+          .catch((error) => {
+            console.error("Lỗi gửi email:", error);
+          });
+      }
+    }
 
     function renderLinks(containerId, items) {
       const container = document.getElementById(containerId);
@@ -955,7 +990,6 @@
       });
     }
 
-    /* HÀM ÂM NHẠC ĐÃ TỐI ƯU CHỐNG LỖI MẠNG / DỪNG NHẠC */
     function initAudioPlayer() {
       const musicBtn = document.getElementById("music-toggle-btn");
       const musicIcon = document.getElementById("music-icon");
@@ -1005,7 +1039,6 @@
         }
       });
 
-      // Tự động hồi phục buffer khi đường truyền chập chờn
       audio.addEventListener("stalled", () => {
         if (isPlaying && !userPaused) {
           audio.load();
@@ -1027,7 +1060,6 @@
         updateUI(false);
       });
 
-      // Lặp bài liên tục không bị khựng
       audio.addEventListener("ended", () => {
         if (!userPaused) {
           audio.currentTime = 0;
