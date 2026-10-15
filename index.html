@@ -19,70 +19,72 @@
 
   <style>
     /* ==========================================================
-        LIQUID GLASS - ADVANCED SYSTEM (OPTIMIZED)
+        ULTIMATE LIQUID GLASS ENGINE (PURE REFRACTIVE GLASS)
         ========================================================== */
     :root[data-theme="dark"] {
-      --bg-gradient: radial-gradient(circle at 50% 0%, #1e293b 0%, #090d16 60%, #020408 100%);
-      --glass-bg: rgba(15, 23, 42, 0.45);
-      --glass-border: rgba(255, 255, 255, 0.18);
-      --glass-border-highlight: rgba(255, 255, 255, 0.45);
+      --bg-gradient: radial-gradient(circle at 50% 0%, #1e293b 0%, #080d1a 60%, #02040a 100%);
+      
+      --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);
+      --glass-border: rgba(255, 255, 255, 0.22);
+      --glass-border-highlight: rgba(255, 255, 255, 0.65);
       --glass-shadow: 
-        0 30px 80px rgba(0, 0, 0, 0.7),
-        inset 0 1px 2px rgba(255, 255, 255, 0.4),
-        inset 0 -1px 2px rgba(0, 0, 0, 0.6);
-      --glass-glow: rgba(56, 189, 248, 0.35);
+        0 30px 90px rgba(0, 0, 0, 0.8),
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.5),
+        inset 0 -1.5px 3px rgba(0, 0, 0, 0.7);
+      --glass-glow: rgba(56, 189, 248, 0.45);
 
       --text-title: #ffffff;
       --text-sub: #38bdf8;
       --text-quote: #f8fafc;
       --text-author: #94a3b8;
 
-      --pill-bg: rgba(255, 255, 255, 0.06);
-      --pill-border: rgba(255, 255, 255, 0.15);
-      --pill-hover-bg: rgba(56, 189, 248, 0.16);
-      --pill-hover-border: rgba(56, 189, 248, 0.55);
-      --pill-hover-glow: 0 12px 35px rgba(56, 189, 248, 0.3);
+      --pill-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
+      --pill-border: rgba(255, 255, 255, 0.25);
+      --pill-hover-bg: linear-gradient(135deg, rgba(56, 189, 248, 0.25) 0%, rgba(129, 140, 248, 0.15) 100%);
+      --pill-hover-border: rgba(56, 189, 248, 0.7);
+      --pill-hover-glow: 0 12px 35px rgba(56, 189, 248, 0.35);
 
-      --dock-bg: rgba(15, 23, 42, 0.6);
-      --dock-border: rgba(255, 255, 255, 0.22);
-      --indicator-bg: linear-gradient(135deg, rgba(56, 189, 248, 0.4) 0%, rgba(129, 140, 248, 0.3) 100%);
-      --indicator-border: rgba(56, 189, 248, 0.7);
+      --dock-bg: rgba(15, 23, 42, 0.55);
+      --dock-border: rgba(255, 255, 255, 0.28);
+      --indicator-bg: linear-gradient(135deg, rgba(56, 189, 248, 0.5) 0%, rgba(129, 140, 248, 0.35) 100%);
+      --indicator-border: rgba(56, 189, 248, 0.8);
 
-      --orb-1: rgba(99, 102, 241, 0.65);
-      --orb-2: rgba(56, 189, 248, 0.55);
-      --orb-3: rgba(236, 72, 153, 0.45);
+      --orb-1: rgba(99, 102, 241, 0.7);
+      --orb-2: rgba(56, 189, 248, 0.6);
+      --orb-3: rgba(236, 72, 153, 0.5);
     }
 
     :root[data-theme="light"] {
-      --bg-gradient: radial-gradient(circle at 50% 0%, #e0f2fe 0%, #bae6fd 50%, #7dd3fc 100%);
-      --glass-bg: rgba(255, 255, 255, 0.5);
-      --glass-border: rgba(255, 255, 255, 0.85);
+      --bg-gradient: radial-gradient(circle at 50% 0%, #e0f2fe 0%, #bae6fd 50%, #38bdf8 100%);
+
+      --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.25) 100%);
+      --glass-border: rgba(255, 255, 255, 0.9);
       --glass-border-highlight: rgba(255, 255, 255, 1);
       --glass-shadow: 
-        0 25px 60px rgba(14, 165, 233, 0.2),
-        inset 0 1.5px 2px rgba(255, 255, 255, 0.9),
-        inset 0 -1.5px 3px rgba(14, 165, 233, 0.1);
-      --glass-glow: rgba(2, 132, 199, 0.25);
+        0 25px 65px rgba(14, 165, 233, 0.3),
+        inset 0 2px 3px rgba(255, 255, 255, 1),
+        inset 0 -2px 4px rgba(14, 165, 233, 0.2);
+      --glass-glow: rgba(2, 132, 199, 0.35);
 
       --text-title: #0f172a;
       --text-sub: #0284c7;
       --text-quote: #0f172a;
       --text-author: #475569;
 
-      --pill-bg: rgba(255, 255, 255, 0.7);
-      --pill-border: rgba(255, 255, 255, 0.9);
-      --pill-hover-bg: rgba(255, 255, 255, 0.95);
+      --pill-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.45) 100%);
+      --pill-border: rgba(255, 255, 255, 0.95);
+      --pill-hover-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(224, 242, 254, 0.8) 100%);
       --pill-hover-border: #0284c7;
-      --pill-hover-glow: 0 12px 30px rgba(14, 165, 233, 0.25);
+      --pill-hover-glow: 0 12px 30px rgba(14, 165, 233, 0.3);
 
       --dock-bg: rgba(255, 255, 255, 0.65);
-      --dock-border: rgba(255, 255, 255, 0.9);
-      --indicator-bg: linear-gradient(135deg, rgba(186, 230, 253, 0.9) 0%, rgba(125, 211, 252, 0.75) 100%);
-      --indicator-border: rgba(2, 132, 199, 0.6);
+      --dock-border: rgba(255, 255, 255, 0.95);
+      --indicator-bg: linear-gradient(135deg, rgba(186, 230, 253, 0.95) 0%, rgba(125, 211, 252, 0.8) 100%);
+      --indicator-border: rgba(2, 132, 199, 0.75);
 
-      --orb-1: rgba(14, 165, 233, 0.75);
-      --orb-2: rgba(56, 189, 248, 0.65);
-      --orb-3: rgba(244, 114, 182, 0.5);
+      --orb-1: rgba(14, 165, 233, 0.8);
+      --orb-2: rgba(56, 189, 248, 0.7);
+      --orb-3: rgba(244, 114, 182, 0.55);
     }
 
     * {
@@ -108,7 +110,7 @@
       transition: background 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* LIQUID BACKGROUND ORBS */
+    /* BACKGROUND ORBS */
     .ios26-bg-canvas {
       position: fixed;
       top: 0; left: 0;
@@ -123,7 +125,7 @@
     .liquid-orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(35px);
+      filter: blur(40px);
       mix-blend-mode: overlay;
       will-change: transform;
       animation: floatFluid 14s infinite ease-in-out alternate;
@@ -161,22 +163,22 @@
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0);
+      background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 0);
       background-size: 24px 24px;
       z-index: 2;
       pointer-events: none;
-      opacity: 0.4;
+      opacity: 0.35;
     }
 
-    /* MAIN LIQUID CARD CONTAINER */
+    /* MAIN CARD CONTAINER - DYNAMIC HEIGHT AUTO FIT */
     .liquid-card-ios26 {
       position: relative;
       z-index: 10;
       width: 100%;
       max-width: 414px;
       background: var(--glass-bg);
-      backdrop-filter: blur(24px) saturate(200%);
-      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      backdrop-filter: blur(32px) saturate(210%);
+      -webkit-backdrop-filter: blur(32px) saturate(210%);
       border: 1.5px solid var(--glass-border);
       border-radius: 44px;
       box-shadow: var(--glass-shadow);
@@ -188,11 +190,12 @@
       backface-visibility: hidden;
     }
 
+    /* LIQUID SHINE HIGHLIGHT */
     .liquid-card-ios26::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 1.5px;
+      height: 2px;
       background: linear-gradient(90deg, transparent, var(--glass-border-highlight), transparent);
       z-index: 15;
     }
@@ -224,8 +227,9 @@
       align-items: center;
       padding: 3px;
       cursor: pointer;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
@@ -285,9 +289,9 @@
       color: var(--text-title);
       font-size: 1.05rem;
       cursor: pointer;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.4);
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease;
     }
 
@@ -322,7 +326,7 @@
       width: 104px; height: 104px;
       border-radius: 50%;
       padding: 4px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.1) 100%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.15) 100%);
       border: 1.5px solid var(--glass-border);
       box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3), 0 0 35px var(--glass-glow);
       transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -398,69 +402,31 @@
       align-items: center;
     }
 
-    /* STATS GRID (LIQUID CARD STYLE NHƯ ẢNH MẪU) */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      width: 100%;
-      margin: 8px 0 16px;
-    }
-
-    .stat-box {
+    /* LIQUID GLASS QUOTE CARD */
+    .ios26-quote-card {
+      margin: 8px 0 12px;
+      padding: 26px 24px;
+      text-align: center;
       background: var(--pill-bg);
       border: 1.5px solid var(--pill-border);
-      border-radius: 22px;
-      padding: 16px 8px;
-      text-align: center;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.3);
+      border-radius: 32px;
+      width: 100%;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.35), 0 10px 25px rgba(0,0,0,0.15);
       transition: transform 0.3s ease, border-color 0.3s ease;
     }
 
-    .stat-box:hover {
-      transform: translateY(-3px);
-      border-color: var(--text-sub);
+    .ios26-quote-card:hover { 
+      transform: translate3d(0, -3px, 0); 
+      border-color: var(--glass-border-highlight);
     }
-
-    .stat-number {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--text-title);
-      letter-spacing: -0.02em;
-    }
-
-    .stat-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--text-author);
-      margin-top: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-    }
-
-    .ios26-quote-card {
-      margin: 8px 0 16px;
-      padding: 24px 22px;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1.5px solid var(--glass-border);
-      border-radius: 30px;
-      width: 100%;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.25);
-      transition: transform 0.3s ease;
-    }
-
-    .ios26-quote-card:hover { transform: translate3d(0, -3px, 0); }
 
     .quote-text {
-      font-size: 1.1rem;
+      font-size: 1.12rem;
       font-weight: 600;
       color: var(--text-quote);
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     .quote-author {
@@ -482,17 +448,17 @@
       position: relative;
       display: flex;
       align-items: center;
-      padding: 14px 20px;
+      padding: 15px 20px;
       background: var(--pill-bg);
       border: 1.5px solid var(--pill-border);
-      border-radius: 26px;
+      border-radius: 28px;
       text-decoration: none;
       color: var(--text-title);
       font-weight: 600;
       font-size: 0.95rem;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.35);
       overflow: hidden;
       transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
     }
@@ -502,7 +468,7 @@
       position: absolute;
       top: 0; left: -100%;
       width: 70%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
       transform: skewX(-20deg);
       transition: left 0.6s ease;
       pointer-events: none;
@@ -538,7 +504,7 @@
 
     .ios26-link-item:hover .link-arrow { transform: translate3d(4px, 0, 0); }
 
-    /* BOTTOM NAV DOCK */
+    /* BOTTOM NAV DOCK CAPSULE */
     .bottom-nav-container {
       padding: 6px 22px 22px;
       z-index: 30;
@@ -555,8 +521,8 @@
       border: 1.5px solid var(--dock-border);
       border-radius: 40px;
       padding: 6px;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.4), 0 20px 40px rgba(0, 0, 0, 0.4);
     }
 
@@ -568,7 +534,7 @@
       background: var(--indicator-bg);
       border: 1.5px solid var(--indicator-border);
       border-radius: 34px;
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.85);
       transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
       z-index: 1;
       will-change: transform;
@@ -607,9 +573,9 @@
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
-      background: rgba(3, 7, 18, 0.7);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(3, 7, 18, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -623,8 +589,8 @@
 
     .qr-glass-card {
       background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
       border: 1.5px solid var(--glass-border-highlight);
       border-radius: 40px;
       padding: 28px 24px;
@@ -704,7 +670,7 @@
 </head>
 <body>
 
-  <!-- BACKGROUND ORBS -->
+  <!-- BACKGROUND SPHERES -->
   <div class="ios26-bg-canvas">
     <div class="liquid-orb orb-primary"></div>
     <div class="liquid-orb orb-secondary"></div>
@@ -755,24 +721,8 @@
           <div class="links-list" id="social-links-list"></div>
         </section>
 
-        <!-- TAB 2: HOME (QUOTE & STATS) -->
+        <!-- TAB 2: HOME (QUOTE) -->
         <section class="tab-page" id="page-home">
-          <!-- Stats Grid chuẩn phong cách Liquid Glass từ ảnh mẫu -->
-          <div class="stats-grid">
-            <div class="stat-box">
-              <div class="stat-number">144</div>
-              <div class="stat-label">Projects</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-number">604</div>
-              <div class="stat-label">Likes</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-number">44</div>
-              <div class="stat-label">Comments</div>
-            </div>
-          </div>
-
           <div class="ios26-quote-card">
             <p class="quote-text">“<br>Even the darkest night will end,<br>and the sun will rise.</p>
             <span class="quote-author">Les Misérables - Victor Hugo</span>
@@ -886,6 +836,7 @@
           const currentTabPage = tabPages[index];
           const contentH = currentTabPage ? currentTabPage.scrollHeight : 0;
 
+          // Tính toán ôm sát theo đúng kích thước nội dung Tab đang chọn
           const totalH = topBarH + headerH + contentH + navH;
           mainCard.style.height = `${totalH}px`;
         });
@@ -1005,7 +956,7 @@
       });
     }
 
-    /* KHẮC PHỤC LỖI ÂM THANH: SỬ DỤNG AUDIOCONTEXT ĐỂ GIỮ TIẾN TRÌNH AUDIO ỔN ĐỊNH */
+    /* BẢO VỆ TIẾN TRÌNH ÂM THANH MƯỢT MÀ BẰNG AUDIOCONTEXT */
     function initAudioPlayer() {
       const musicBtn = document.getElementById("music-toggle-btn");
       const musicIcon = document.getElementById("music-icon");
@@ -1044,7 +995,7 @@
             musicIcon.className = "fa-solid fa-compact-disc";
             isPlaying = true;
           }).catch(err => {
-            console.log("Trình duyệt chặn phát tự động:", err);
+            console.log("Không thể tự động phát:", err);
           });
         }
       }
