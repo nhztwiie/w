@@ -19,7 +19,7 @@
 
   <style>
     /* ==========================================================
-        ULTIMATE LIQUID GLASS ENGINE (PURE REFRACTIVE GLASS)
+        LIQUID GLASS - ADVANCED SYSTEM (PURE REFRACTIVE GLASS)
         ========================================================== */
     :root[data-theme="dark"] {
       --bg-gradient: radial-gradient(circle at 50% 0%, #1e293b 0%, #080d1a 60%, #02040a 100%);
@@ -170,7 +170,7 @@
       opacity: 0.35;
     }
 
-    /* MAIN CARD CONTAINER - DYNAMIC HEIGHT AUTO FIT */
+    /* MAIN CARD CONTAINER */
     .liquid-card-ios26 {
       position: relative;
       z-index: 10;
@@ -190,7 +190,6 @@
       backface-visibility: hidden;
     }
 
-    /* LIQUID SHINE HIGHLIGHT */
     .liquid-card-ios26::before {
       content: '';
       position: absolute;
@@ -402,7 +401,7 @@
       align-items: center;
     }
 
-    /* LIQUID GLASS QUOTE CARD */
+    /* QUOTE CARD */
     .ios26-quote-card {
       margin: 8px 0 12px;
       padding: 26px 24px;
@@ -504,7 +503,7 @@
 
     .ios26-link-item:hover .link-arrow { transform: translate3d(4px, 0, 0); }
 
-    /* BOTTOM NAV DOCK CAPSULE */
+    /* BOTTOM NAV DOCK */
     .bottom-nav-container {
       padding: 6px 22px 22px;
       z-index: 30;
@@ -836,7 +835,6 @@
           const currentTabPage = tabPages[index];
           const contentH = currentTabPage ? currentTabPage.scrollHeight : 0;
 
-          // Tính toán ôm sát theo đúng kích thước nội dung Tab đang chọn
           const totalH = topBarH + headerH + contentH + navH;
           mainCard.style.height = `${totalH}px`;
         });
@@ -956,7 +954,7 @@
       });
     }
 
-    /* BẢO VỆ TIẾN TRÌNH ÂM THANH MƯỢT MÀ BẰNG AUDIOCONTEXT */
+    /* KHẮC PHỤC TRIỆT ĐỂ LỖI NHẠC CHẬP CHỜN, TỰ NGẮT BẰNG WEB AUDIO API & KEEP-ALIVE */
     function initAudioPlayer() {
       const musicBtn = document.getElementById("music-toggle-btn");
       const musicIcon = document.getElementById("music-icon");
@@ -995,12 +993,19 @@
             musicIcon.className = "fa-solid fa-compact-disc";
             isPlaying = true;
           }).catch(err => {
-            console.log("Không thể tự động phát:", err);
+            console.log("Trình duyệt chặn phát tự động:", err);
           });
         }
       }
 
       musicBtn.addEventListener("click", toggleMusic);
+
+      // Đảm bảo khi tab chuyển trạng thái ẩn/hiện, luồng audio không bị trình duyệt bóp băng thông/dừng ngầm
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden && isPlaying && audio.paused) {
+          audio.play().catch(() => {});
+        }
+      });
     }
   </script>
 </body>
