@@ -568,7 +568,7 @@
 
     [data-theme="light"] .nav-tab-btn.active i { color: #0284c7; }
 
-    /* MODAL QR CODE */
+    /* MODAL QR CODE & MAIL */
     .modal-backdrop {
       position: fixed;
       top: 0; left: 0;
@@ -697,6 +697,11 @@
           <i class="fa-solid fa-music" id="music-icon"></i>
         </button>
 
+        <!-- NÚT MAIL THU THẬP THÔNG TIN MỚI THÊM -->
+        <button class="glass-btn-ios26" id="collect-mail-btn" aria-label="Gửi mail liên hệ">
+          <i class="fa-solid fa-envelope"></i>
+        </button>
+
         <!-- NÚT QR CODE -->
         <button class="glass-btn-ios26" id="open-qr-btn" aria-label="Open QR Code">
           <i class="fa-solid fa-qrcode"></i>
@@ -794,21 +799,20 @@
       initQRCodeModal();
       initParallaxEffect();
       initAudioPlayer();
-      initEmailJSNotifier(); // Khởi tạo tính năng gửi email tự động
+      initEmailJSNotifier(); // Khởi tạo tính năng gửi email tự động khi vào trang
+      initInteractiveMailCollector(); // Khởi tạo tính năng tương tác khi bấm nút Mail
     });
 
-    /* HÀM THÔNG BÁO QUA EMAILJS KHI CÓ LƯỢT TRUY CẬP */
+    /* HÀM THÔNG BÁO QUA EMAILJS KHI CÓ LƯỢT TRUY CẬP TỰ ĐỘNG */
     function initEmailJSNotifier() {
-      // ⚠️ THAY CÁC THÔNG SỐ DƯỚI ĐÂY BẰNG MÃ TỪ TÀI KHOẢN EMAILJS CỦA BẠN
       const PUBLIC_KEY = "rnOWqMh55RZYvY_WA";
       const SERVICE_ID = "service_040502w";
       const TEMPLATE_ID = "template_dc22zks";
 
-      if (PUBLIC_KEY === "THAY_PUBLIC_KEY_CUA_BAN") return; // Chưa cấu hình thì bỏ qua
+      if (PUBLIC_KEY === "THAY_PUBLIC_KEY_CUA_BAN") return;
 
       emailjs.init(PUBLIC_KEY);
 
-      // Chống spam: Mỗi phiên duyệt web chỉ gửi 1 email (reload F5 không gửi lại)
       if (!sessionStorage.getItem("email_notified")) {
         const templateParams = {
           time: new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" }),
@@ -819,13 +823,47 @@
 
         emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
           .then(() => {
-            console.log("Đã gửi email thông báo truy cập thành công!");
             sessionStorage.setItem("email_notified", "true");
           })
           .catch((error) => {
             console.error("Lỗi gửi email:", error);
           });
       }
+    }
+
+    /* HÀM TƯƠNG TÁC KHI NHẤP VÀO ICON MAIL MỚI THÊM */
+    function initInteractiveMailCollector() {
+      const mailBtn = document.getElementById("collect-mail-btn");
+      if (!mailBtn) return;
+
+      mailBtn.addEventListener("click", () => {
+        // Yêu cầu người truy cập nhập email hoặc lời nhắn qua hộp thoại trình duyệt
+        const visitorEmail = prompt("Nhập email của bạn (hoặc lời nhắn) để kết nối với Nhật Huy:");
+        
+        if (visitorEmail && visitorEmail.trim() !== "") {
+          const PUBLIC_KEY = "rnOWqMh55RZYvY_WA";
+          const SERVICE_ID = "service_040502w";
+          const TEMPLATE_ID = "template_dc22zks";
+
+          emailjs.init(PUBLIC_KEY);
+
+          const templateParams = {
+            time: new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" }),
+            user_agent: navigator.userAgent,
+            language: navigator.language,
+            referrer: "Khách bấm nút Mail và để lại thông tin: " + visitorEmail
+          };
+
+          emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+            .then(() => {
+              alert("Cảm ơn bạn! Thông tin đã được gửi thành công đến Nhật Huy.");
+            })
+            .catch((error) => {
+              alert("Đã có lỗi xảy ra khi gửi. Vui lòng thử lại sau!");
+              console.error("Lỗi:", error);
+            });
+        }
+      });
     }
 
     function renderLinks(containerId, items) {
