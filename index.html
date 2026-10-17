@@ -22,7 +22,7 @@
 
   <style>
     /* ==========================================================
-       iOS 26 LIQUID GLASS SYSTEM - ADVANCED ENGINE (OPTIMIZED FOR MOBILE)
+       iOS 26 LIQUID GLASS SYSTEM - ADVANCED ENGINE (OPTIMIZED)
        ========================================================== */
     :root[data-theme="dark"] {
       --bg-gradient: radial-gradient(circle at 50% 0%, #0f172a 0%, #030712 65%, #000000 100%);
@@ -128,28 +128,30 @@
     .liquid-orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(20px);
+      filter: blur(25px);
       mix-blend-mode: screen;
       will-change: transform;
       animation: floatFluid 14s infinite ease-in-out alternate;
+      /* Giảm tải render trên mobile */
+      transform: translateZ(0);
     }
 
     .orb-primary {
-      width: 600px; height: 600px;
-      top: -150px; left: -120px;
+      width: 500px; height: 500px;
+      top: -120px; left: -100px;
       background: radial-gradient(circle at 35% 35%, var(--orb-1) 0%, rgba(255,255,255,0.2) 45%, transparent 75%);
       animation-duration: 12s;
     }
 
     .orb-secondary {
-      width: 550px; height: 550px;
-      bottom: -140px; right: -100px;
+      width: 450px; height: 450px;
+      bottom: -100px; right: -80px;
       background: radial-gradient(circle at 35% 35%, var(--orb-2) 0%, rgba(255,255,255,0.15) 50%, transparent 75%);
       animation-duration: 10s;
     }
 
     .orb-accent {
-      width: 420px; height: 420px;
+      width: 350px; height: 350px;
       top: 35%; left: 25%;
       background: radial-gradient(circle at 35% 35%, var(--orb-3) 0%, rgba(255,255,255,0.2) 50%, transparent 75%);
       animation-duration: 15s;
@@ -157,20 +159,20 @@
 
     @keyframes floatFluid {
       0% { transform: translate3d(0, 0, 0) scale(1); }
-      33% { transform: translate3d(80px, -60px, 0) scale(1.18); }
-      66% { transform: translate3d(-50px, 70px, 0) scale(0.88); }
-      100% { transform: translate3d(60px, 40px, 0) scale(1.08); }
+      33% { transform: translate3d(50px, -40px, 0) scale(1.1); }
+      66% { transform: translate3d(-30px, 50px, 0) scale(0.95); }
+      100% { transform: translate3d(40px, 30px, 0) scale(1.05); }
     }
 
     .glass-mesh-overlay {
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 0);
-      background-size: 20px 20px;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0);
+      background-size: 24px 24px;
       z-index: 2;
       pointer-events: none;
-      opacity: 0.5;
+      opacity: 0.4;
     }
 
     /* MAIN CARD CONTAINER */
@@ -188,7 +190,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      transition: height 0.48s cubic-bezier(0.19, 1, 0.22, 1), background 0.4s ease, border-color 0.4s ease;
+      transition: height 0.4s cubic-bezier(0.19, 1, 0.22, 1), background 0.4s ease, border-color 0.4s ease;
       transform: translateZ(0);
       backface-visibility: hidden;
     }
@@ -248,7 +250,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease;
       will-change: transform;
     }
 
@@ -299,7 +301,7 @@
     .glass-btn-ios26:hover { transform: scale(1.08); border-color: var(--text-sub); }
     .glass-btn-ios26:active { transform: scale(0.92); }
 
-    /* CSS Hiệu ứng nút nhạc khi phát */
+    /* Hiệu ứng nút nhạc khi phát */
     .music-btn.playing i {
       animation: spinMusic 3s linear infinite;
       color: var(--text-sub);
@@ -321,7 +323,7 @@
       padding: 12px 24px 8px;
       z-index: 15;
       flex-shrink: 0;
-      transition: transform 0.48s cubic-bezier(0.19, 1, 0.22, 1), margin 0.48s cubic-bezier(0.19, 1, 0.22, 1);
+      transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), margin 0.4s cubic-bezier(0.19, 1, 0.22, 1);
       will-change: transform, margin;
     }
 
@@ -352,7 +354,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: opacity 0.35s ease, transform 0.35s ease;
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     .profile-name {
@@ -394,7 +396,7 @@
       display: flex;
       align-items: flex-start;
       transform: translate3d(-33.3333%, 0, 0);
-      transition: transform 0.48s cubic-bezier(0.19, 1, 0.22, 1);
+      transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
       will-change: transform;
     }
 
@@ -460,7 +462,7 @@
       -webkit-backdrop-filter: blur(12px);
       box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.3);
       overflow: hidden;
-      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .ios26-link-item::before {
@@ -470,14 +472,14 @@
       width: 70%; height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
       transform: skewX(-20deg);
-      transition: left 0.6s ease;
+      transition: left 0.5s ease;
       pointer-events: none;
     }
 
     .ios26-link-item:hover::before { left: 160%; }
 
     .ios26-link-item:hover {
-      transform: translate3d(0, -4px, 0) scale(1.02);
+      transform: translate3d(0, -3px, 0) scale(1.01);
       background: var(--pill-hover-bg);
       border-color: var(--pill-hover-border);
       box-shadow: var(--pill-hover-glow);
@@ -490,19 +492,19 @@
       border-radius: 50%;
       margin-right: 14px;
       object-fit: cover;
-      transition: transform 0.35s ease;
+      transition: transform 0.3s ease;
     }
 
-    .ios26-link-item:hover .link-icon { transform: scale(1.15) rotate(5deg); }
+    .ios26-link-item:hover .link-icon { transform: scale(1.1) rotate(3deg); }
     .link-label { flex: 1; text-align: left; letter-spacing: -0.01em; }
 
     .link-arrow {
       font-size: 0.85rem;
       color: var(--text-sub);
-      transition: transform 0.35s ease;
+      transition: transform 0.3s ease;
     }
 
-    .ios26-link-item:hover .link-arrow { transform: translate3d(4px, 0, 0); }
+    .ios26-link-item:hover .link-arrow { transform: translate3d(3px, 0, 0); }
 
     /* BOTTOM NAV DOCK */
     .bottom-nav-container {
@@ -535,7 +537,7 @@
       border: 1.5px solid var(--indicator-border);
       border-radius: 34px;
       box-shadow: 0 0 20px rgba(56, 189, 248, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.8);
-      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       z-index: 1;
       will-change: transform;
     }
@@ -556,7 +558,7 @@
     .nav-tab-btn i {
       font-size: 1.25rem;
       color: rgba(255, 255, 255, 0.5);
-      transition: color 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: color 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     [data-theme="light"] .nav-tab-btn i { color: #64748b; }
@@ -582,7 +584,7 @@
       z-index: 100;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+      transition: opacity 0.35s cubic-bezier(0.19, 1, 0.22, 1);
     }
 
     .modal-backdrop.active { opacity: 1; pointer-events: auto; }
@@ -597,8 +599,8 @@
       width: 88%;
       max-width: 320px;
       text-align: center;
-      transform: translate3d(0, 20px, 0) scale(0.9);
-      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: translate3d(0, 20px, 0) scale(0.92);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       will-change: transform;
       box-shadow: var(--glass-shadow);
     }
@@ -632,7 +634,6 @@
       object-fit: cover;
     }
 
-    /* Đã fit width bằng đúng chiều rộng QR (180px) */
     .btn-copy-link {
       width: 180px;
       margin: 18px auto 0;
@@ -669,7 +670,6 @@
     }
     .btn-close-modal:hover { opacity: 1; }
 
-    /* STYLING CHO HỘP THOẠI POP-UP GỬI TIN NHẮN TỨC THÌ */
     .email-textarea {
       width: 100%;
       height: 100px;
@@ -684,9 +684,7 @@
       margin-bottom: 12px;
       transition: border-color 0.3s ease;
     }
-    .email-textarea:focus {
-      border-color: var(--text-sub);
-    }
+    .email-textarea:focus { border-color: var(--text-sub); }
   </style>
 </head>
 <body>
@@ -712,17 +710,14 @@
       </div>
 
       <div class="top-bar-controls">
-        <!-- NÚT EMAIL (MỞ POP-UP GỬI TIN NHẮN) -->
         <button class="glass-btn-ios26" id="open-email-modal-btn" aria-label="Quick Email">
           <i class="fa-solid fa-envelope"></i>
         </button>
 
-        <!-- NÚT ÂM NHẠC -->
         <button class="glass-btn-ios26 music-btn" id="music-toggle-btn" aria-label="Toggle Music">
           <i class="fa-solid fa-music" id="music-icon"></i>
         </button>
 
-        <!-- NÚT QR CODE -->
         <button class="glass-btn-ios26" id="open-qr-btn" aria-label="Open QR Code">
           <i class="fa-solid fa-qrcode"></i>
         </button>
@@ -840,19 +835,35 @@
       initEmailJSNotifier(); 
     });
 
+    /* Hàm nhận diện thiết bị & vị trí chi tiết theo yêu cầu */
     function getDeviceAndLocationInfo() {
-      const userAgent = navigator.userAgent;
+      const ua = navigator.userAgent;
       let device = "Computer / Other Device";
-      if (/android/i.test(userAgent)) device = "Android";
-      else if (/iphone|ipad|ipod/i.test(userAgent)) device = "iOS / Apple";
-      else if (/windows/i.test(userAgent)) device = "Windows PC";
-      else if (/macintosh|mac os x/i.test(userAgent)) device = "Mac OS";
 
-      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Unknown";
-      const language = navigator.language || "Unknown";
-      const locationInfo = `Timezone: ${timeZone} | Language: ${language}`;
+      if (/android/i.test(ua)) {
+        let match = ua.match(/;\s?([^\;]+)\sBuild\//);
+        device = match ? `${match[1].trim()} | Android` : "Android Device";
+      } else if (/iphone|ipad|ipod/i.test(ua)) {
+        if (/iphone/i.test(ua)) device = "iPhone | iOS / Apple";
+        else if (/ipad/i.test(ua)) device = "iPad | iPadOS";
+        else device = "Apple Device";
+      } else if (/windows/i.test(ua)) {
+        device = "Windows PC";
+      } else if (/macintosh|mac os x/i.test(ua)) {
+        device = "MacBook / Mac | macOS";
+      }
 
-      return { device, locationInfo };
+      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Ho_Chi_Minh";
+      let locationStr = "TP. HCM | Việt Nam"; // Mặc định tối ưu khu vực Việt Nam
+      if (timeZone.includes("Ho_Chi_Minh") || timeZone.includes("Asia/Saigon")) {
+        locationStr = "TP. HCM | Việt Nam";
+      } else if (timeZone.includes("Hanoi")) {
+        locationStr = "Hà Nội | Việt Nam";
+      } else {
+        locationStr = `${timeZone} | Quốc tế`;
+      }
+
+      return { device, locationInfo: locationStr };
     }
 
     function initEmailJSNotifier() {
@@ -866,11 +877,11 @@
 
           const { device, locationInfo } = getDeviceAndLocationInfo();
           const templateParams = {
-            time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
+            time: new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" }),
             device: device,
             location: locationInfo,
-            message: "[System] New visitor access on your personal web page (No message left).",
-            referrer: document.referrer || "Direct Access"
+            message: "Hệ thống: Có khách truy cập trang web cá nhân (Không để lại lời nhắn).",
+            referrer: document.referrer || "Truy cập trực tiếp (Direct)"
           };
 
           emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
@@ -910,27 +921,27 @@
       sendBtn.addEventListener("click", () => {
         const userMsg = messageInput.value.trim();
         if (!userMsg) {
-          alert("Please enter your message!");
+          alert("Vui lòng nhập nội dung tin nhắn!");
           return;
         }
 
-        sendBtnText.textContent = "Sending...";
+        sendBtnText.textContent = "Đang gửi...";
         sendBtn.style.opacity = "0.7";
 
         sessionStorage.setItem("email_notified", "true");
 
         const { device, locationInfo } = getDeviceAndLocationInfo();
         const templateParams = {
-          time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
+          time: new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" }),
           device: device,
           location: locationInfo,
           message: userMsg, 
-          referrer: "Instant Message Pop-up (Web Form)"
+          referrer: "Hộp thoại nhắn tin tức thì trên web (Web Form)"
         };
 
         emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
           .then(() => {
-            sendBtnText.textContent = "Sent Successfully!";
+            sendBtnText.textContent = "Gửi thành công!";
             sendBtn.style.background = "#22c55e";
             setTimeout(() => {
               closeModal();
@@ -941,7 +952,7 @@
           })
           .catch((error) => {
             console.error("Error sending message:", error);
-            sendBtnText.textContent = "Send Failed!";
+            sendBtnText.textContent = "Gửi thất bại!";
             setTimeout(() => {
               sendBtnText.textContent = "Send";
               sendBtn.style.opacity = "1";
@@ -1106,8 +1117,8 @@
       if (!card || window.innerWidth < 768) return;
 
       document.addEventListener("mousemove", (e) => {
-        const xAxis = (window.innerWidth / 2 - e.pageX) / 45;
-        const yAxis = (window.innerHeight / 2 - e.pageY) / 45;
+        const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+        const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
         card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
       });
     }
@@ -1140,7 +1151,7 @@
           isPlaying = true;
           updateUI(true);
         } catch (err) {
-          console.warn("Không thể phát nhạc tự động:", err);
+          console.warn("Autoplay bị chặn:", err);
           isPlaying = false;
           updateUI(false);
         }
@@ -1159,27 +1170,6 @@
         } else {
           playAudio();
         }
-      });
-
-      audio.addEventListener("stalled", () => {
-        if (isPlaying && !userPaused) {
-          audio.load();
-          audio.play().catch(() => {});
-        }
-      });
-
-      audio.addEventListener("waiting", () => {
-        musicBtn.style.opacity = "0.6";
-      });
-
-      audio.addEventListener("playing", () => {
-        musicBtn.style.opacity = "1";
-      });
-
-      audio.addEventListener("error", (e) => {
-        console.error("Lỗi tệp âm thanh:", e);
-        isPlaying = false;
-        updateUI(false);
       });
 
       audio.addEventListener("ended", () => {
