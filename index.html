@@ -132,7 +132,6 @@
       mix-blend-mode: screen;
       will-change: transform;
       animation: floatFluid 14s infinite ease-in-out alternate;
-      /* Giảm tải render trên mobile */
       transform: translateZ(0);
     }
 
@@ -840,21 +839,36 @@
       const ua = navigator.userAgent;
       let device = "Computer / Other Device";
 
-      if (/android/i.test(ua)) {
+      if (/iphone|ipad|ipod/i.test(ua)) {
+        if (/iphone/i.test(ua)) {
+          device = "iPhone | iOS | Apple";
+        } else if (/ipad/i.test(ua)) {
+          device = "iPad | iPadOS | Apple";
+        } else {
+          device = "Apple iOS Device";
+        }
+      } else if (/android/i.test(ua)) {
         let match = ua.match(/;\s?([^\;]+)\sBuild\//);
-        device = match ? `${match[1].trim()} | Android` : "Android Device";
-      } else if (/iphone|ipad|ipod/i.test(ua)) {
-        if (/iphone/i.test(ua)) device = "iPhone | iOS / Apple";
-        else if (/ipad/i.test(ua)) device = "iPad | iPadOS";
-        else device = "Apple Device";
+        if (match && match[1]) {
+          device = `${match[1].trim()} | Android`;
+        } else {
+          if (/samsung/i.test(ua)) {
+            device = "Samsung Galaxy | Android";
+          } else {
+            device = "Android Device | Android";
+          }
+        }
       } else if (/windows/i.test(ua)) {
-        device = "Windows PC";
+        if (/windows nt 10.0/i.test(ua)) device = "Windows PC | Windows 10/11";
+        else device = "Windows PC | Windows";
       } else if (/macintosh|mac os x/i.test(ua)) {
-        device = "MacBook / Mac | macOS";
+        device = "MacBook / Mac | macOS | Apple";
+      } else if (/linux/i.test(ua)) {
+        device = "Linux PC | Linux";
       }
 
       const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Ho_Chi_Minh";
-      let locationStr = "TP. HCM | Việt Nam"; // Mặc định tối ưu khu vực Việt Nam
+      let locationStr = "TP. HCM | Việt Nam";
       if (timeZone.includes("Ho_Chi_Minh") || timeZone.includes("Asia/Saigon")) {
         locationStr = "TP. HCM | Việt Nam";
       } else if (timeZone.includes("Hanoi")) {
