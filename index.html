@@ -632,8 +632,9 @@
       object-fit: cover;
     }
 
+    /* Đã fit width bằng đúng chiều rộng QR (180px) */
     .btn-copy-link {
-      width: 100%;
+      width: 180px;
       margin: 18px auto 0;
       padding: 12px;
       border: none;
@@ -711,7 +712,7 @@
       </div>
 
       <div class="top-bar-controls">
-        <!-- NÚT EMAIL (MỞ POP-UP GỬI TIN NHẮN) Ở GÓC TRÊN CÙNG -->
+        <!-- NÚT EMAIL (MỞ POP-UP GỬI TIN NHẮN) -->
         <button class="glass-btn-ios26" id="open-email-modal-btn" aria-label="Quick Email">
           <i class="fa-solid fa-envelope"></i>
         </button>
@@ -801,12 +802,12 @@
     </div>
   </div>
 
-  <!-- MODAL POP-UP GỬI TIN NHẮN TỨC THÌ (TIẾNG ANH) -->
+  <!-- MODAL POP-UP GỬI TIN NHẮN TỨC THÌ -->
   <div class="modal-backdrop" id="email-modal" role="dialog" aria-hidden="true">
     <div class="qr-glass-card">
       <h3 class="qr-title">Instant Message</h3>
       <textarea id="visitor-message" class="email-textarea" placeholder="Type your message to Nhat Huy..."></textarea>
-      <button class="btn-copy-link" id="send-instant-email-btn">
+      <button class="btn-copy-link" id="send-instant-email-btn" style="width: 100%;">
         <i class="fa-solid fa-paper-plane"></i>
         <span id="send-btn-text">Send</span>
       </button>
@@ -820,7 +821,6 @@
   <script src="data.js"></script>
 
   <script>
-    // Cấu hình EmailJS chung
     const PUBLIC_KEY = "rnOWqMh55RZYvY_WA";
     const SERVICE_ID = "service_040502w";
     const TEMPLATE_ID = "template_dc22zks";
@@ -837,10 +837,9 @@
       initEmailModal(); 
       initParallaxEffect();
       initAudioPlayer();
-      initEmailJSNotifier(); // Kiểm tra TH1: Người dùng chỉ truy cập web
+      initEmailJSNotifier(); 
     });
 
-    /* HÀM HỖ TRỢ: LẤY THÔNG TIN THIẾT BỊ VÀ ĐỊA ĐIỂM */
     function getDeviceAndLocationInfo() {
       const userAgent = navigator.userAgent;
       let device = "Computer / Other Device";
@@ -856,16 +855,14 @@
       return { device, locationInfo };
     }
 
-    /* TRƯỜNG HỢP 1: THÔNG BÁO KHI NGƯỜI DÙNG CHỈ TRUY CẬP WEB */
     function initEmailJSNotifier() {
       if (PUBLIC_KEY === "THAY_PUBLIC_KEY_CUA_BAN") return;
 
       emailjs.init(PUBLIC_KEY);
 
       if (!sessionStorage.getItem("email_notified")) {
-        // Trì hoãn 3 giây để tránh bị xung đột nếu người dùng vừa vào web đã gửi tin nhắn luôn (TH2)
         setTimeout(() => {
-          if (sessionStorage.getItem("email_notified")) return; // Nếu TH2 đã gửi thì bỏ qua
+          if (sessionStorage.getItem("email_notified")) return; 
 
           const { device, locationInfo } = getDeviceAndLocationInfo();
           const templateParams = {
@@ -878,7 +875,6 @@
 
           emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
             .then(() => {
-              console.log("Access notification email sent successfully!");
               sessionStorage.setItem("email_notified", "true");
             })
             .catch((error) => {
@@ -888,7 +884,6 @@
       }
     }
 
-    /* TRƯỜNG HỢP 2: THÔNG BÁO KHI VỪA TRUY CẬP VỪA GỬI TIN NHẮN (GỘP THÀNH 1 EMAIL DUY NHẤT) */
     function initEmailModal() {
       const openBtn = document.getElementById("open-email-modal-btn");
       const closeBtn = document.getElementById("close-email-modal-btn");
@@ -922,7 +917,6 @@
         sendBtnText.textContent = "Sending...";
         sendBtn.style.opacity = "0.7";
 
-        // Đánh dấu đã gửi thông báo để hủy bỏ TH1, đảm bảo chỉ nhận 1 mail duy nhất chứa nội dung tin nhắn
         sessionStorage.setItem("email_notified", "true");
 
         const { device, locationInfo } = getDeviceAndLocationInfo();
@@ -930,7 +924,7 @@
           time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
           device: device,
           location: locationInfo,
-          message: userMsg, // Nội dung tin nhắn chính thức từ khách
+          message: userMsg, 
           referrer: "Instant Message Pop-up (Web Form)"
         };
 
