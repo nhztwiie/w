@@ -568,7 +568,7 @@
 
     [data-theme="light"] .nav-tab-btn.active i { color: #0284c7; }
 
-    /* MODAL QR CODE & EMAIL POPUP */
+    /* MODAL CHUNG (QR CODE & EMAIL POPUP) */
     .modal-backdrop {
       position: fixed;
       top: 0; left: 0;
@@ -633,7 +633,7 @@
     }
 
     .btn-copy-link {
-      width: 180px;
+      width: 100%;
       margin: 18px auto 0;
       padding: 12px;
       border: none;
@@ -654,7 +654,7 @@
     .btn-copy-link:active { transform: scale(0.96); }
 
     .btn-close-modal {
-      margin-top: 14px;
+      margin-top: 10px;
       width: 100%;
       padding: 8px;
       border: none;
@@ -668,58 +668,24 @@
     }
     .btn-close-modal:hover { opacity: 1; }
 
-    /* STYLING CHO EMAIL POPUP FORM */
-    .email-form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      text-align: left;
-    }
-
-    .email-input, .email-textarea {
+    /* STYLING CHO HỘP THOẠI POP-UP GỬI TIN NHẮN TỨC THÌ */
+    .email-textarea {
       width: 100%;
-      padding: 12px 16px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1.5px solid var(--pill-border);
-      border-radius: 18px;
+      height: 100px;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1.5px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.05);
       color: var(--text-title);
       font-size: 0.9rem;
+      resize: none;
       outline: none;
+      margin-bottom: 12px;
       transition: border-color 0.3s ease;
     }
-
-    .email-input:focus, .email-textarea:focus {
+    .email-textarea:focus {
       border-color: var(--text-sub);
     }
-
-    .email-textarea {
-      resize: none;
-      height: 90px;
-    }
-
-    .email-input::placeholder, .email-textarea::placeholder {
-      color: var(--text-author);
-    }
-
-    .btn-send-email {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      background: var(--text-sub);
-      color: #ffffff;
-      font-weight: 700;
-      font-size: 0.9rem;
-      border-radius: 18px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: transform 0.25s ease, background 0.3s ease;
-    }
-
-    .btn-send-email:hover { transform: scale(1.02); }
-    .btn-send-email:active { transform: scale(0.98); }
   </style>
 </head>
 <body>
@@ -745,6 +711,11 @@
       </div>
 
       <div class="top-bar-controls">
+        <!-- NÚT EMAIL (MỞ POP-UP GỬI TIN NHẮN) -->
+        <button class="glass-btn-ios26" id="open-email-modal-btn" aria-label="Quick Email">
+          <i class="fa-solid fa-envelope"></i>
+        </button>
+
         <!-- NÚT ÂM NHẠC -->
         <button class="glass-btn-ios26 music-btn" id="music-toggle-btn" aria-label="Toggle Music">
           <i class="fa-solid fa-music" id="music-icon"></i>
@@ -806,8 +777,7 @@
           <i class="fa-solid fa-house"></i>
         </button>
 
-        <!-- NÚT EMAIL TRÊN DOCK (CLICK HIỆN POP-UP GỬI TIN NHẮN) -->
-        <button class="nav-tab-btn" id="open-email-popup-btn" data-index="2" aria-label="Email Popup">
+        <button class="nav-tab-btn" data-index="2" aria-label="Work">
           <i class="fa-solid fa-envelope"></i>
         </button>
       </nav>
@@ -831,19 +801,16 @@
     </div>
   </div>
 
-  <!-- MODAL POP-UP GỬI TIN NHẮN TỨC THÌ / ĐỊA CHỈ EMAIL -->
+  <!-- MODAL POP-UP GỬI TIN NHẮN TỨC THÌ -->
   <div class="modal-backdrop" id="email-modal" role="dialog" aria-hidden="true">
     <div class="qr-glass-card">
-      <h3 class="qr-title">Gửi tin nhắn nhanh</h3>
-      <form class="email-form" id="quick-message-form">
-        <input type="email" id="sender-email" class="email-input" placeholder="Địa chỉ email của bạn..." required>
-        <textarea id="sender-message" class="email-textarea" placeholder="Nhập nội dung tin nhắn gửi cho Huy..." required></textarea>
-        <button type="submit" class="btn-send-email" id="send-msg-btn">
-          <i class="fa-solid fa-paper-plane"></i>
-          <span id="send-btn-text">Gửi đi</span>
-        </button>
-      </form>
-      <button class="btn-close-modal" id="close-email-btn">Đóng</button>
+      <h3 class="qr-title">Gửi tin nhắn tức thì</h3>
+      <textarea id="visitor-message" class="email-textarea" placeholder="Nhập lời nhắn của bạn gửi tới Nhật Huy..."></textarea>
+      <button class="btn-copy-link" id="send-instant-email-btn">
+        <i class="fa-solid fa-paper-plane"></i>
+        <span id="send-btn-text">Gửi đi</span>
+      </button>
+      <button class="btn-close-modal" id="close-email-modal-btn">Đóng</button>
     </div>
   </div>
 
@@ -853,7 +820,7 @@
   <script src="data.js"></script>
 
   <script>
-    // ⚠️ CẤU HÌNH EMAILJS CHUNG
+    // Cấu hình EmailJS chung
     const PUBLIC_KEY = "rnOWqMh55RZYvY_WA";
     const SERVICE_ID = "service_040502w";
     const TEMPLATE_ID = "template_dc22zks";
@@ -867,117 +834,118 @@
       initTabNavigation();
       initThemeToggle();
       initQRCodeModal();
-      initEmailPopupModal(); // Khởi tạo pop-up gửi tin nhắn tức thì
+      initEmailModal(); // Khởi tạo tính năng pop-up gửi tin nhắn tức thì
       initParallaxEffect();
       initAudioPlayer();
       initEmailJSNotifier(); // Gửi thông báo tự động khi có người truy cập web
     });
 
-    /* HÀM THÔNG BÁO TỰ ĐỘNG KHI CÓ LƯỢT TRUY CẬP WEB QUA EMAILJS */
+    /* HÀM HỖ TRỢ: LẤY THÔNG TIN THIẾT BỊ VÀ ĐỊA ĐIỂM */
+    function getDeviceAndLocationInfo() {
+      const userAgent = navigator.userAgent;
+      let device = "Máy tính / Thiết bị khác";
+      if (/android/i.test(userAgent)) device = "Android";
+      else if (/iphone|ipad|ipod/i.test(userAgent)) device = "iOS / Apple";
+      else if (/windows/i.test(userAgent)) device = "Windows PC";
+      else if (/macintosh|mac os x/i.test(userAgent)) device = "Mac OS";
+
+      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Không xác định";
+      const language = navigator.language || "Không xác định";
+      const locationInfo = `Múi giờ: ${timeZone} | Ngôn ngữ: ${language}`;
+
+      return { device, locationInfo };
+    }
+
+    /* HÀM THÔNG BÁO TỰ ĐỘNG KHI CÓ LƯỢT TRUY CẬP */
     function initEmailJSNotifier() {
       if (PUBLIC_KEY === "THAY_PUBLIC_KEY_CUA_BAN") return;
+
       emailjs.init(PUBLIC_KEY);
 
-      // Chống spam: Mỗi phiên duyệt web chỉ gửi 1 thông báo truy cập tự động
       if (!sessionStorage.getItem("email_notified")) {
-        // Lấy thông tin thiết bị và địa điểm (qua múi giờ/ngôn ngữ)
-        const deviceName = navigator.userAgent;
-        const locationInfo = Intl.DateTimeFormat().resolvedOptions().timeZone || "Không xác định";
-
+        const { device, locationInfo } = getDeviceAndLocationInfo();
         const templateParams = {
           time: new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" }),
-          user_agent: deviceName,
+          device: device,
           location: locationInfo,
-          message: "Lượt truy cập trang web mới (Tự động từ hệ thống)",
-          source: document.referrer || "Truy cập trực tiếp",
-          sender_email: "hethong@truycap.com"
+          message: "[Hệ thống] Có lượt truy cập mới vào trang web cá nhân của bạn.",
+          referrer: document.referrer || "Truy cập trực tiếp"
         };
 
         emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
           .then(() => {
-            console.log("Đã gửi thông báo truy cập web thành công!");
+            console.log("Đã gửi email thông báo truy cập thành công!");
             sessionStorage.setItem("email_notified", "true");
           })
           .catch((error) => {
-            console.error("Lỗi gửi thông báo truy cập:", error);
+            console.error("Lỗi gửi email:", error);
           });
       }
     }
 
-    /* HÀM QUẢN LÝ MODAL POP-UP GỬI TIN NHẮN TỨC THÌ */
-    function initEmailPopupModal() {
-      const emailBtn = document.getElementById("open-email-popup-btn");
-      const emailModal = document.getElementById("email-modal");
-      const closeEmailBtn = document.getElementById("close-email-btn");
-      const form = document.getElementById("quick-message-form");
+    /* HÀM QUẢN LÝ POP-UP GỬI TIN NHẮN TỨC THÌ QUA ICON EMAIL */
+    function initEmailModal() {
+      const openBtn = document.getElementById("open-email-modal-btn");
+      const closeBtn = document.getElementById("close-email-modal-btn");
+      const modal = document.getElementById("email-modal");
+      const sendBtn = document.getElementById("send-instant-email-btn");
       const sendBtnText = document.getElementById("send-btn-text");
+      const messageInput = document.getElementById("visitor-message");
 
-      function openModal(e) {
-        // Ngăn chuyển tab khi click vào icon email ở thanh dock để mở pop-up
-        if (e) e.preventDefault(); 
-        emailModal.classList.add("active");
-        emailModal.setAttribute("aria-hidden", "false");
+      function openModal() {
+        modal.classList.add("active");
+        modal.setAttribute("aria-hidden", "false");
       }
 
       function closeModal() {
-        emailModal.classList.remove("active");
-        emailModal.setAttribute("aria-hidden", "true");
+        modal.classList.remove("active");
+        modal.setAttribute("aria-hidden", "true");
+        messageInput.value = "";
       }
 
-      // Khi nhấp vào icon email ở thanh điều hướng dưới
-      if (emailBtn) {
-        emailBtn.addEventListener("click", openModal);
-      }
+      openBtn.addEventListener("click", openModal);
+      closeBtn.addEventListener("click", closeModal);
+      modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
 
-      if (closeEmailBtn) {
-        closeEmailBtn.addEventListener("click", closeModal);
-      }
+      sendBtn.addEventListener("click", () => {
+        const userMsg = messageInput.value.trim();
+        if (!userMsg) {
+          alert("Vui lòng nhập nội dung tin nhắn!");
+          return;
+        }
 
-      if (emailModal) {
-        emailModal.addEventListener("click", (e) => { 
-          if (e.target === emailModal) closeModal(); 
-        });
-      }
+        sendBtnText.textContent = "Đang gửi...";
+        sendBtn.style.opacity = "0.7";
 
-      // Xử lý sự kiện submit form gửi tin nhắn tức thì từ người dùng
-      if (form) {
-        form.addEventListener("submit", (e) => {
-          e.preventDefault();
-          const senderEmail = document.getElementById("sender-email").value;
-          const senderMessage = document.getElementById("sender-message").value;
+        const { device, locationInfo } = getDeviceAndLocationInfo();
+        const templateParams = {
+          time: new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" }),
+          device: device,
+          location: locationInfo,
+          message: userMsg,
+          referrer: "Hộp thoại tin nhắn tức thì (Form Web)"
+        };
 
-          sendBtnText.textContent = "Đang gửi...";
-
-          const deviceName = navigator.userAgent;
-          const locationInfo = Intl.DateTimeFormat().resolvedOptions().timeZone || "Không xác định";
-
-          const templateParams = {
-            time: new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" }),
-            user_agent: deviceName,
-            location: locationInfo,
-            message: senderMessage,
-            sender_email: senderEmail,
-            source: "Form tin nhắn trực tiếp trên Bio"
-          };
-
-          emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
-            .then(() => {
-              sendBtnText.textContent = "Đã gửi thành công!";
-              setTimeout(() => {
-                closeModal();
-                form.reset();
-                sendBtnText.textContent = "Gửi đi";
-              }, 1500);
-            })
-            .catch((error) => {
-              console.error("Lỗi gửi tin nhắn:", error);
-              sendBtnText.textContent = "Lỗi, thử lại!";
-              setTimeout(() => {
-                sendBtnText.textContent = "Gửi đi";
-              }, 2000);
-            });
-        });
-      }
+        emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+          .then(() => {
+            sendBtnText.textContent = "Đã gửi thành công!";
+            sendBtn.style.background = "#22c55e";
+            setTimeout(() => {
+              closeModal();
+              sendBtnText.textContent = "Gửi đi";
+              sendBtn.style.background = "var(--text-sub)";
+              sendBtn.style.opacity = "1";
+            }, 1500);
+          })
+          .catch((error) => {
+            console.error("Lỗi gửi tin nhắn:", error);
+            sendBtnText.textContent = "Lỗi gửi!";
+            setTimeout(() => {
+              sendBtnText.textContent = "Gửi đi";
+              sendBtn.style.opacity = "1";
+            }, 2000);
+          });
+      });
     }
 
     function renderLinks(containerId, items) {
@@ -1047,11 +1015,8 @@
         adjustCardHeight(index);
       }
 
-      // Chỉ các nút điều hướng trang (trừ nút email ở index 2 nếu muốn mở modal thay vì chuyển trang hoàn toàn)
       navBtns.forEach((btn, i) => {
-        if(i !== 2) {
-          btn.addEventListener("click", () => switchTab(i));
-        }
+        btn.addEventListener("click", () => switchTab(i));
       });
 
       let resizeTimer;
