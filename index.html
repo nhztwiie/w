@@ -128,11 +128,10 @@
     .liquid-orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(25px);
+      filter: blur(20px);
       mix-blend-mode: screen;
       will-change: transform;
       animation: floatFluid 14s infinite ease-in-out alternate;
-      transform: translateZ(0);
     }
 
     .orb-primary {
@@ -159,7 +158,7 @@
     @keyframes floatFluid {
       0% { transform: translate3d(0, 0, 0) scale(1); }
       33% { transform: translate3d(50px, -40px, 0) scale(1.1); }
-      66% { transform: translate3d(-30px, 50px, 0) scale(0.95); }
+      66% { transform: translate3d(-30px, 50px, 0) scale(0.9); }
       100% { transform: translate3d(40px, 30px, 0) scale(1.05); }
     }
 
@@ -232,10 +231,9 @@
       cursor: pointer;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform 0.2s ease;
     }
 
-    .theme-toggle-track:hover { transform: scale(1.05); }
     .theme-toggle-track:active { transform: scale(0.95); }
 
     .theme-orb-indicator {
@@ -245,11 +243,11 @@
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #38bdf8 0%, #818cf8 100%);
       border: 1.5px solid #ffffff;
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease;
       will-change: transform;
     }
 
@@ -263,14 +261,12 @@
       opacity: 0; 
       transform: scale(0.5) rotate(-90deg); 
       color: #f59e0b;
-      text-shadow: 0 0 8px rgba(245, 158, 11, 0.7);
     }
     
     .icon-moon { 
       opacity: 1; 
       transform: scale(1) rotate(0deg); 
       color: #ffffff;
-      text-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
     }
 
     [data-theme="light"] .theme-orb-indicator {
@@ -293,14 +289,12 @@
       cursor: pointer;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.4);
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, opacity 0.3s ease;
+      box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.3);
+      transition: transform 0.2s ease, border-color 0.3s ease;
     }
 
-    .glass-btn-ios26:hover { transform: scale(1.08); border-color: var(--text-sub); }
     .glass-btn-ios26:active { transform: scale(0.92); }
 
-    /* Hiệu ứng nút nhạc khi phát */
     .music-btn.playing i {
       animation: spinMusic 3s linear infinite;
       color: var(--text-sub);
@@ -333,18 +327,15 @@
       padding: 4px;
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.1) 100%);
       border: 1.5px solid var(--glass-border);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3), 0 0 35px var(--glass-glow);
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3), 0 0 30px var(--glass-glow);
     }
-
-    .avatar-ring:hover { transform: scale(1.06) rotate(-2deg); }
 
     .avatar-ring img {
       width: 100%; height: 100%;
       object-fit: cover;
       border-radius: 50%;
       filter: grayscale(100%);
-      transition: filter 0.4s ease;
+      transition: filter 0.3s ease;
     }
 
     .avatar-ring:hover img { filter: grayscale(0%); }
@@ -417,11 +408,8 @@
       width: 100%;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.25);
-      transition: transform 0.3s ease;
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
     }
-
-    .ios26-quote-card:hover { transform: translate3d(0, -3px, 0); }
 
     .quote-text {
       font-size: 1.1rem;
@@ -459,26 +447,13 @@
       font-size: 0.95rem;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.3);
+      box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.2);
       overflow: hidden;
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.25s ease, background 0.3s ease, border-color 0.3s ease;
     }
-
-    .ios26-link-item::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 70%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      transform: skewX(-20deg);
-      transition: left 0.5s ease;
-      pointer-events: none;
-    }
-
-    .ios26-link-item:hover::before { left: 160%; }
 
     .ios26-link-item:hover {
-      transform: translate3d(0, -3px, 0) scale(1.01);
+      transform: translate3d(0, -2px, 0);
       background: var(--pill-hover-bg);
       border-color: var(--pill-hover-border);
       box-shadow: var(--pill-hover-glow);
@@ -491,19 +466,14 @@
       border-radius: 50%;
       margin-right: 14px;
       object-fit: cover;
-      transition: transform 0.3s ease;
     }
 
-    .ios26-link-item:hover .link-icon { transform: scale(1.1) rotate(3deg); }
     .link-label { flex: 1; text-align: left; letter-spacing: -0.01em; }
 
     .link-arrow {
       font-size: 0.85rem;
       color: var(--text-sub);
-      transition: transform 0.3s ease;
     }
-
-    .ios26-link-item:hover .link-arrow { transform: translate3d(3px, 0, 0); }
 
     /* BOTTOM NAV DOCK */
     .bottom-nav-container {
@@ -524,7 +494,7 @@
       padding: 6px;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.4), 0 20px 40px rgba(0, 0, 0, 0.4);
+      box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.3), 0 20px 40px rgba(0, 0, 0, 0.3);
     }
 
     .nav-indicator-pill {
@@ -535,8 +505,8 @@
       background: var(--indicator-bg);
       border: 1.5px solid var(--indicator-border);
       border-radius: 34px;
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.8);
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.7);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
       z-index: 1;
       will-change: transform;
     }
@@ -557,33 +527,33 @@
     .nav-tab-btn i {
       font-size: 1.25rem;
       color: rgba(255, 255, 255, 0.5);
-      transition: color 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: color 0.3s ease, transform 0.3s ease;
     }
 
     [data-theme="light"] .nav-tab-btn i { color: #64748b; }
 
     .nav-tab-btn.active i {
       color: var(--text-title);
-      transform: scale(1.2);
+      transform: scale(1.15);
     }
 
     [data-theme="light"] .nav-tab-btn.active i { color: #0284c7; }
 
-    /* MODAL CHUNG (QR CODE & EMAIL POPUP) */
+    /* MODAL CHUNG */
     .modal-backdrop {
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
       background: rgba(3, 7, 18, 0.7);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 100;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+      transition: opacity 0.3s ease;
     }
 
     .modal-backdrop.active { opacity: 1; pointer-events: auto; }
@@ -598,8 +568,8 @@
       width: 88%;
       max-width: 320px;
       text-align: center;
-      transform: translate3d(0, 20px, 0) scale(0.92);
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: translate3d(0, 15px, 0) scale(0.95);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
       will-change: transform;
       box-shadow: var(--glass-shadow);
     }
@@ -648,10 +618,9 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      transition: transform 0.25s ease, background 0.3s ease;
+      transition: transform 0.2s ease, background 0.3s ease;
     }
 
-    .btn-copy-link:hover { transform: scale(1.04); }
     .btn-copy-link:active { transform: scale(0.96); }
 
     .btn-close-modal {
@@ -665,7 +634,6 @@
       font-size: 0.88rem;
       cursor: pointer;
       opacity: 0.8;
-      transition: opacity 0.2s ease;
     }
     .btn-close-modal:hover { opacity: 1; }
 
@@ -829,55 +797,39 @@
       initThemeToggle();
       initQRCodeModal();
       initEmailModal(); 
-      initParallaxEffect();
       initAudioPlayer();
       initEmailJSNotifier(); 
     });
 
-    /* Hàm nhận diện thiết bị & vị trí chi tiết theo yêu cầu */
+    /* Hàm nhận diện chi tiết thiết bị & địa điểm chính xác theo yêu cầu */
     function getDeviceAndLocationInfo() {
       const ua = navigator.userAgent;
-      let device = "Computer / Other Device";
+      let device = "Desktop / Khác";
 
-      if (/iphone|ipad|ipod/i.test(ua)) {
-        if (/iphone/i.test(ua)) {
-          device = "iPhone | iOS | Apple";
-        } else if (/ipad/i.test(ua)) {
-          device = "iPad | iPadOS | Apple";
-        } else {
-          device = "Apple iOS Device";
-        }
-      } else if (/android/i.test(ua)) {
-        let match = ua.match(/;\s?([^\;]+)\sBuild\//);
-        if (match && match[1]) {
-          device = `${match[1].trim()} | Android`;
-        } else {
-          if (/samsung/i.test(ua)) {
-            device = "Samsung Galaxy | Android";
-          } else {
-            device = "Android Device | Android";
-          }
-        }
+      if (/android/i.test(ua)) {
+        let match = ua.match(/(?:SM-|Samsung-|Galaxy\s)([^\s)]+)/i);
+        let model = match ? match[0] : "Android Device";
+        device = `${model} | Android`;
+      } else if (/iphone|ipad|ipod/i.test(ua)) {
+        device = "iPhone / iOS / Apple";
       } else if (/windows/i.test(ua)) {
-        if (/windows nt 10.0/i.test(ua)) device = "Windows PC | Windows 10/11";
-        else device = "Windows PC | Windows";
+        device = "Windows PC | Desktop";
       } else if (/macintosh|mac os x/i.test(ua)) {
-        device = "MacBook / Mac | macOS | Apple";
-      } else if (/linux/i.test(ua)) {
-        device = "Linux PC | Linux";
+        device = "MacBook / Mac OS | Apple";
       }
 
       const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Ho_Chi_Minh";
-      let locationStr = "TP. HCM | Việt Nam";
-      if (timeZone.includes("Ho_Chi_Minh") || timeZone.includes("Asia/Saigon")) {
-        locationStr = "TP. HCM | Việt Nam";
-      } else if (timeZone.includes("Hanoi")) {
-        locationStr = "Hà Nội | Việt Nam";
+      const language = navigator.language || "vi-VN";
+      
+      // Xử lý địa điểm gọn gàng theo múi giờ / ngôn ngữ tương ứng
+      let location = "Việt Nam";
+      if (timeZone.includes("Ho_Chi_Minh") || timeZone.includes("Bangkok")) {
+        location = "TP. HCM | Việt Nam";
       } else {
-        locationStr = `${timeZone} | Quốc tế`;
+        location = `${timeZone} | ${language}`;
       }
 
-      return { device, locationInfo: locationStr };
+      return { device, location };
     }
 
     function initEmailJSNotifier() {
@@ -889,12 +841,12 @@
         setTimeout(() => {
           if (sessionStorage.getItem("email_notified")) return; 
 
-          const { device, locationInfo } = getDeviceAndLocationInfo();
+          const { device, location } = getDeviceAndLocationInfo();
           const templateParams = {
             time: new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" }),
             device: device,
-            location: locationInfo,
-            message: "Hệ thống: Có khách truy cập trang web cá nhân (Không để lại lời nhắn).",
+            location: location,
+            message: "[Hệ thống] Có lượt truy cập mới vào trang web cá nhân (Chưa để lại lời nhắn).",
             referrer: document.referrer || "Truy cập trực tiếp (Direct)"
           };
 
@@ -903,7 +855,7 @@
               sessionStorage.setItem("email_notified", "true");
             })
             .catch((error) => {
-              console.error("Error sending email:", error);
+              console.error("Lỗi gửi email:", error);
             });
         }, 3000);
       }
@@ -944,13 +896,13 @@
 
         sessionStorage.setItem("email_notified", "true");
 
-        const { device, locationInfo } = getDeviceAndLocationInfo();
+        const { device, location } = getDeviceAndLocationInfo();
         const templateParams = {
           time: new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" }),
           device: device,
-          location: locationInfo,
+          location: location,
           message: userMsg, 
-          referrer: "Hộp thoại nhắn tin tức thì trên web (Web Form)"
+          referrer: "Hộp thoại gửi tin nhắn trực tiếp trên Web"
         };
 
         emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
@@ -965,7 +917,7 @@
             }, 1500);
           })
           .catch((error) => {
-            console.error("Error sending message:", error);
+            console.error("Lỗi gửi tin nhắn:", error);
             sendBtnText.textContent = "Gửi thất bại!";
             setTimeout(() => {
               sendBtnText.textContent = "Send";
@@ -1113,7 +1065,7 @@
 
       copyBtn.addEventListener("click", () => {
         navigator.clipboard.writeText(shareUrl).then(() => {
-          copyText.textContent = "Copied!";
+          copyText.textContent = "Đã sao chép!";
           copyBtn.style.background = "#22c55e";
 
           setTimeout(() => {
@@ -1121,19 +1073,8 @@
             copyBtn.style.background = "var(--text-sub)";
           }, 2000);
         }).catch(() => {
-          copyText.textContent = "Error!";
+          copyText.textContent = "Lỗi!";
         });
-      });
-    }
-
-    function initParallaxEffect() {
-      const card = document.getElementById("main-card");
-      if (!card || window.innerWidth < 768) return;
-
-      document.addEventListener("mousemove", (e) => {
-        const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
-        const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
-        card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
       });
     }
 
@@ -1165,7 +1106,6 @@
           isPlaying = true;
           updateUI(true);
         } catch (err) {
-          console.warn("Autoplay bị chặn:", err);
           isPlaying = false;
           updateUI(false);
         }
