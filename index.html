@@ -711,7 +711,7 @@
       </div>
 
       <div class="top-bar-controls">
-        <!-- NÚT EMAIL (MỞ POP-UP GỬI TIN NHẮN) -->
+        <!-- NÚT EMAIL (MỞ POP-UP GỬI TIN NHẮN) Ở GÓC TRÊN CÙNG -->
         <button class="glass-btn-ios26" id="open-email-modal-btn" aria-label="Quick Email">
           <i class="fa-solid fa-envelope"></i>
         </button>
@@ -834,10 +834,10 @@
       initTabNavigation();
       initThemeToggle();
       initQRCodeModal();
-      initEmailModal(); // Khởi tạo tính năng pop-up gửi tin nhắn tức thì
+      initEmailModal(); 
       initParallaxEffect();
       initAudioPlayer();
-      initEmailJSNotifier(); // Gửi thông báo tự động khi có người truy cập web
+      initEmailJSNotifier(); // Kiểm tra TH1: Người dùng chỉ truy cập web
     });
 
     /* HÀM HỖ TRỢ: LẤY THÔNG TIN THIẾT BỊ VÀ ĐỊA ĐIỂM */
@@ -856,34 +856,39 @@
       return { device, locationInfo };
     }
 
-    /* HÀM THÔNG BÁO TỰ ĐỘNG KHI CÓ LƯỢT TRUY CẬP */
+    /* TRƯỜNG HỢP 1: THÔNG BÁO KHI NGƯỜI DÙNG CHỈ TRUY CẬP WEB */
     function initEmailJSNotifier() {
       if (PUBLIC_KEY === "THAY_PUBLIC_KEY_CUA_BAN") return;
 
       emailjs.init(PUBLIC_KEY);
 
       if (!sessionStorage.getItem("email_notified")) {
-        const { device, locationInfo } = getDeviceAndLocationInfo();
-        const templateParams = {
-          time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
-          device: device,
-          location: locationInfo,
-          message: "[System] New visitor access on your personal web page.",
-          referrer: document.referrer || "Direct Access"
-        };
+        // Trì hoãn 3 giây để tránh bị xung đột nếu người dùng vừa vào web đã gửi tin nhắn luôn (TH2)
+        setTimeout(() => {
+          if (sessionStorage.getItem("email_notified")) return; // Nếu TH2 đã gửi thì bỏ qua
 
-        emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
-          .then(() => {
-            console.log("Access notification email sent successfully!");
-            sessionStorage.setItem("email_notified", "true");
-          })
-          .catch((error) => {
-            console.error("Error sending email:", error);
-          });
+          const { device, locationInfo } = getDeviceAndLocationInfo();
+          const templateParams = {
+            time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
+            device: device,
+            location: locationInfo,
+            message: "[System] New visitor access on your personal web page (No message left).",
+            referrer: document.referrer || "Direct Access"
+          };
+
+          emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+            .then(() => {
+              console.log("Access notification email sent successfully!");
+              sessionStorage.setItem("email_notified", "true");
+            })
+            .catch((error) => {
+              console.error("Error sending email:", error);
+            });
+        }, 3000);
       }
     }
 
-    /* HÀM QUẢN LÝ POP-UP GỬI TIN NHẮN TỨC THÌ QUA ICON EMAIL */
+    /* TRƯỜNG HỢP 2: THÔNG BÁO KHI VỪA TRUY CẬP VỪA GỬI TIN NHẮN (GỘP THÀNH 1 EMAIL DUY NHẤT) */
     function initEmailModal() {
       const openBtn = document.getElementById("open-email-modal-btn");
       const closeBtn = document.getElementById("close-email-modal-btn");
@@ -917,12 +922,15 @@
         sendBtnText.textContent = "Sending...";
         sendBtn.style.opacity = "0.7";
 
+        // Đánh dấu đã gửi thông báo để hủy bỏ TH1, đảm bảo chỉ nhận 1 mail duy nhất chứa nội dung tin nhắn
+        sessionStorage.setItem("email_notified", "true");
+
         const { device, locationInfo } = getDeviceAndLocationInfo();
         const templateParams = {
           time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
           device: device,
           location: locationInfo,
-          message: userMsg,
+          message: userMsg, // Nội dung tin nhắn chính thức từ khách
           referrer: "Instant Message Pop-up (Web Form)"
         };
 
