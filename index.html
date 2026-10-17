@@ -801,16 +801,16 @@
     </div>
   </div>
 
-  <!-- MODAL POP-UP GỬI TIN NHẮN TỨC THÌ -->
+  <!-- MODAL POP-UP GỬI TIN NHẮN TỨC THÌ (ĐÃ ĐỔI SANG TIẾNG ANH) -->
   <div class="modal-backdrop" id="email-modal" role="dialog" aria-hidden="true">
     <div class="qr-glass-card">
-      <h3 class="qr-title">Gửi tin nhắn tức thì</h3>
-      <textarea id="visitor-message" class="email-textarea" placeholder="Nhập lời nhắn của bạn gửi tới Nhật Huy..."></textarea>
+      <h3 class="qr-title">Instant Message</h3>
+      <textarea id="visitor-message" class="email-textarea" placeholder="Type your message to Nhat Huy..."></textarea>
       <button class="btn-copy-link" id="send-instant-email-btn">
         <i class="fa-solid fa-paper-plane"></i>
-        <span id="send-btn-text">Gửi đi</span>
+        <span id="send-btn-text">Send</span>
       </button>
-      <button class="btn-close-modal" id="close-email-modal-btn">Đóng</button>
+      <button class="btn-close-modal" id="close-email-modal-btn">Close</button>
     </div>
   </div>
 
@@ -843,15 +843,15 @@
     /* HÀM HỖ TRỢ: LẤY THÔNG TIN THIẾT BỊ VÀ ĐỊA ĐIỂM */
     function getDeviceAndLocationInfo() {
       const userAgent = navigator.userAgent;
-      let device = "Máy tính / Thiết bị khác";
+      let device = "Computer / Other Device";
       if (/android/i.test(userAgent)) device = "Android";
       else if (/iphone|ipad|ipod/i.test(userAgent)) device = "iOS / Apple";
       else if (/windows/i.test(userAgent)) device = "Windows PC";
       else if (/macintosh|mac os x/i.test(userAgent)) device = "Mac OS";
 
-      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Không xác định";
-      const language = navigator.language || "Không xác định";
-      const locationInfo = `Múi giờ: ${timeZone} | Ngôn ngữ: ${language}`;
+      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Unknown";
+      const language = navigator.language || "Unknown";
+      const locationInfo = `Timezone: ${timeZone} | Language: ${language}`;
 
       return { device, locationInfo };
     }
@@ -865,20 +865,20 @@
       if (!sessionStorage.getItem("email_notified")) {
         const { device, locationInfo } = getDeviceAndLocationInfo();
         const templateParams = {
-          time: new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" }),
+          time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
           device: device,
           location: locationInfo,
-          message: "[Hệ thống] Có lượt truy cập mới vào trang web cá nhân của bạn.",
-          referrer: document.referrer || "Truy cập trực tiếp"
+          message: "[System] New visitor access on your personal web page.",
+          referrer: document.referrer || "Direct Access"
         };
 
         emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
           .then(() => {
-            console.log("Đã gửi email thông báo truy cập thành công!");
+            console.log("Access notification email sent successfully!");
             sessionStorage.setItem("email_notified", "true");
           })
           .catch((error) => {
-            console.error("Lỗi gửi email:", error);
+            console.error("Error sending email:", error);
           });
       }
     }
@@ -910,38 +910,38 @@
       sendBtn.addEventListener("click", () => {
         const userMsg = messageInput.value.trim();
         if (!userMsg) {
-          alert("Vui lòng nhập nội dung tin nhắn!");
+          alert("Please enter your message!");
           return;
         }
 
-        sendBtnText.textContent = "Đang gửi...";
+        sendBtnText.textContent = "Sending...";
         sendBtn.style.opacity = "0.7";
 
         const { device, locationInfo } = getDeviceAndLocationInfo();
         const templateParams = {
-          time: new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" }),
+          time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
           device: device,
           location: locationInfo,
           message: userMsg,
-          referrer: "Hộp thoại tin nhắn tức thì (Form Web)"
+          referrer: "Instant Message Pop-up (Web Form)"
         };
 
         emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
           .then(() => {
-            sendBtnText.textContent = "Đã gửi thành công!";
+            sendBtnText.textContent = "Sent Successfully!";
             sendBtn.style.background = "#22c55e";
             setTimeout(() => {
               closeModal();
-              sendBtnText.textContent = "Gửi đi";
+              sendBtnText.textContent = "Send";
               sendBtn.style.background = "var(--text-sub)";
               sendBtn.style.opacity = "1";
             }, 1500);
           })
           .catch((error) => {
-            console.error("Lỗi gửi tin nhắn:", error);
-            sendBtnText.textContent = "Lỗi gửi!";
+            console.error("Error sending message:", error);
+            sendBtnText.textContent = "Send Failed!";
             setTimeout(() => {
-              sendBtnText.textContent = "Gửi đi";
+              sendBtnText.textContent = "Send";
               sendBtn.style.opacity = "1";
             }, 2000);
           });
