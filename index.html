@@ -801,32 +801,116 @@
       initEmailJSNotifier(); 
     });
 
-    /* Hàm nhận diện chi tiết thiết bị & địa điểm chính xác */
+    /* Hàm nhận diện chi tiết chính xác thiết bị & địa điểm */
     function getDeviceAndLocationInfo() {
       const ua = navigator.userAgent;
-      let device = "Computer / Other Device";
+      let vendor = "Chưa xác định hãng";
+      let model = "Thiết bị không xác định";
+      let os = "Hệ điều hành không xác định";
+      let deviceType = "Desktop/Laptop";
 
-      if (/android/i.test(ua)) {
-        let match = ua.match(/(?:SM-|Samsung-|Galaxy\s)([^\s)]+)/i);
-        let model = match ? match[0] : "Android Device";
-        device = `${model} | Android`;
-      } else if (/iphone|ipad|ipod/i.test(ua)) {
-        device = "iPhone 18 Pro Max | iOS / Apple";
-      } else if (/windows/i.test(ua)) {
-        device = "Windows PC | Desktop";
-      } else if (/macintosh|mac os x/i.test(ua)) {
-        device = "MacBook / Mac OS | Apple";
+      // 1. Phân loại thiết bị cơ bản
+      const isMobile = /mobile/i.test(ua);
+      const isTablet = /tablet|ipad|playbook|silk/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      if (isTablet) {
+        deviceType = "Tablet";
+      } else if (isMobile) {
+        deviceType = "Mobile";
       }
+
+      // 2. Nhận diện Hệ Điều Hành (OS)
+      if (/android/i.test(ua)) {
+        const osMatch = ua.match(/Android\s+([\d.]+)/i);
+        os = `Android ${osMatch ? osMatch[1] : ''}`;
+      } else if (/iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+        const osMatch = ua.match(/OS\s+([\d_]+)/i);
+        const version = osMatch ? osMatch[1].replace(/_/g, '.') : '';
+        os = `iOS / iPadOS ${version}`;
+      } else if (/windows nt/i.test(ua)) {
+        if (/windows nt 10.0/i.test(ua)) os = "Windows 10 / 11";
+        else if (/windows nt 6.3/i.test(ua)) os = "Windows 8.1";
+        else if (/windows nt 6.1/i.test(ua)) os = "Windows 7";
+        else os = "Windows PC";
+      } else if (/macintosh|mac os x/i.test(ua)) {
+        const osMatch = ua.match(/Mac OS X\s+([\d_]+)/i);
+        const version = osMatch ? osMatch[1].replace(/_/g, '.') : '';
+        os = `macOS ${version}`;
+      } else if (/cros/i.test(ua)) {
+        os = "ChromeOS";
+      } else if (/linux/i.test(ua)) {
+        os = "Linux";
+      }
+
+      // 3. Nhận diện Hãng & Mã Thiết Bị (Brand & Model/Device Code)
+      if (/android/i.test(ua)) {
+        if (/samsung/i.test(ua) || /SM-/i.test(ua)) {
+          vendor = "Samsung";
+          const match = ua.match(/SM-[A-Z0-9]+/i);
+          model = match ? match[0] : "Samsung Galaxy";
+        } else if (/xiaomi|redmi|poco/i.test(ua) || /m2\d+|2\d+/i.test(ua)) {
+          vendor = "Xiaomi";
+          const match = ua.match(/(?:Mi|Redmi|POCO)\s+[\w\s]+|(?:21|22|23|24)\d+[A-Z]+/i);
+          model = match ? match[0] : "Xiaomi Device";
+        } else if (/oppo/i.test(ua) || /CPH\d+/i.test(ua)) {
+          vendor = "OPPO";
+          const match = ua.match(/CPH\d+/i);
+          model = match ? match[0] : "OPPO Device";
+        } else if (/vivo/i.test(ua) || /V2\d+/i.test(ua)) {
+          vendor = "Vivo";
+          const match = ua.match(/V2\d+[A-Z]*/i);
+          model = match ? match[0] : "Vivo Device";
+        } else if (/realme/i.test(ua) || /RMX\d+/i.test(ua)) {
+          vendor = "Realme";
+          const match = ua.match(/RMX\d+/i);
+          model = match ? match[0] : "Realme Device";
+        } else if (/pixel/i.test(ua)) {
+          vendor = "Google";
+          const match = ua.match(/Pixel\s+[\d\w\s]+/i);
+          model = match ? match[0] : "Google Pixel";
+        } else if (/huawei|honor/i.test(ua)) {
+          vendor = "Huawei / Honor";
+          const match = ua.match(/(?:HUAWEI|HONOR)\s+[\w-]+|[A-Z]{3}-[A-Z0-9]+/i);
+          model = match ? match[0] : "Huawei Device";
+        } else {
+          const genericMatch = ua.match(/Android[^;]+;\s*([^;)]+)\s*\)/i);
+          if (genericMatch && genericMatch[1]) {
+            model = genericMatch[1].trim();
+            if (model.includes("Build")) model = model.split("Build")[0].trim();
+          }
+        }
+      } else if (/iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+        vendor = "Apple";
+        if (/ipad/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+          model = "iPad";
+        } else if (/iphone/i.test(ua)) {
+          model = "iPhone";
+        } else {
+          model = "iPod Touch";
+        }
+      } else {
+        if (/windows/i.test(ua)) {
+          vendor = "PC / OEM";
+          model = "Windows Desktop/Laptop";
+        } else if (/macintosh/i.test(ua)) {
+          vendor = "Apple";
+          model = "Mac / MacBook";
+        } else {
+          vendor = "Khác";
+          model = "Máy tính cá nhân";
+        }
+      }
+
+      const deviceFullInfo = `Mã/Tên: ${model} | Hãng: ${vendor} | Hệ điều hành: ${os} (${deviceType})`;
 
       const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Ho_Chi_Minh";
-      const language = navigator.language || "en-US";
+      const language = navigator.language || "vi-VN";
       
-      let location = `Timezone: ${timeZone} | Language: ${language}`;
+      let location = `Timezone: ${timeZone} | Ngôn ngữ: ${language}`;
       if (timeZone.includes("Ho_Chi_Minh") || timeZone.includes("Bangkok")) {
-        location = `TP. HCM | Việt Nam (${timeZone})`;
+        location = `Việt Nam (${timeZone})`;
       }
 
-      return { device, location };
+      return { device: deviceFullInfo, location };
     }
 
     function initEmailJSNotifier() {
