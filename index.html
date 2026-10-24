@@ -45,7 +45,7 @@
       --pill-border: rgba(255, 255, 255, 0.2);
       --pill-hover-bg: rgba(56, 189, 248, 0.18);
       --pill-hover-border: rgba(56, 189, 248, 0.6);
-      --pill-hover-glow: 0 12px 35px rgba(56, 189, 248, 0.35);
+      --pill-hover-glow: 0 16px 40px rgba(56, 189, 248, 0.4);
 
       --dock-bg: rgba(15, 23, 42, 0.58);
       --dock-border: rgba(255, 255, 255, 0.25);
@@ -78,7 +78,7 @@
       --pill-border: rgba(255, 255, 255, 0.95);
       --pill-hover-bg: rgba(255, 255, 255, 0.98);
       --pill-hover-border: #0284c7;
-      --pill-hover-glow: 0 12px 30px rgba(14, 165, 233, 0.28);
+      --pill-hover-glow: 0 16px 35px rgba(14, 165, 233, 0.35);
 
       --dock-bg: rgba(255, 255, 255, 0.68);
       --dock-border: rgba(255, 255, 255, 0.95);
@@ -231,9 +231,10 @@
       cursor: pointer;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      transition: transform 0.2s ease;
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
+    .theme-toggle-track:hover { transform: scale(1.05); }
     .theme-toggle-track:active { transform: scale(0.95); }
 
     .theme-orb-indicator {
@@ -290,7 +291,15 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.3);
-      transition: transform 0.2s ease, border-color 0.3s ease;
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* HIỆU ỨNG ĐỘNG KHI DI CHUỘT VÀO NÚT ĐIỀU KHIỂN TOP BAR */
+    .glass-btn-ios26:hover {
+      transform: translateY(-3px) scale(1.08);
+      border-color: var(--text-sub);
+      background: var(--pill-hover-bg);
+      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.6);
     }
 
     .glass-btn-ios26:active { transform: scale(0.92); }
@@ -328,6 +337,13 @@
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.1) 100%);
       border: 1.5px solid var(--glass-border);
       box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3), 0 0 30px var(--glass-glow);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    }
+
+    /* Hiệu ứng khi di chuột vào avatar */
+    .avatar-ring:hover {
+      transform: scale(1.06) rotate(3deg);
+      box-shadow: 0 20px 45px rgba(56, 189, 248, 0.5), 0 0 40px var(--glass-glow);
     }
 
     .avatar-ring img {
@@ -335,10 +351,13 @@
       object-fit: cover;
       border-radius: 50%;
       filter: grayscale(100%);
-      transition: filter 0.3s ease;
+      transition: filter 0.4s ease, transform 0.4s ease;
     }
 
-    .avatar-ring:hover img { filter: grayscale(0%); }
+    .avatar-ring:hover img { 
+      filter: grayscale(0%); 
+      transform: scale(1.04);
+    }
 
     .profile-meta {
       display: flex;
@@ -353,6 +372,12 @@
       color: var(--text-title);
       margin-top: 12px;
       letter-spacing: -0.03em;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .profile-name:hover {
+      transform: scale(1.02);
+      color: var(--text-sub);
     }
 
     .profile-tagline {
@@ -398,6 +423,18 @@
       align-items: center;
     }
 
+    /* HIỆU ỨNG ĐỘNG XUẤT HIỆN NỘI DUNG */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .ios26-quote-card {
       margin: 8px 0 16px;
       padding: 24px 22px;
@@ -409,6 +446,15 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
+      animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Hiệu ứng khi di chuột vào thẻ Quote */
+    .ios26-quote-card:hover {
+      transform: translateY(-4px) scale(1.02);
+      border-color: var(--text-sub);
+      box-shadow: 0 15px 35px rgba(56, 189, 248, 0.2), inset 0 1px 3px rgba(255, 255, 255, 0.4);
     }
 
     .quote-text {
@@ -416,6 +462,7 @@
       font-weight: 600;
       color: var(--text-quote);
       line-height: 1.6;
+      transition: color 0.3s ease;
     }
 
     .quote-author {
@@ -433,6 +480,7 @@
       gap: 12px;
     }
 
+    /* HIỆU ỨNG ĐỘNG CHO CÁC LINK ITEM KHI DI CHUỘT VÀO */
     .ios26-link-item {
       position: relative;
       display: flex;
@@ -449,30 +497,55 @@
       -webkit-backdrop-filter: blur(12px);
       box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.2);
       overflow: hidden;
-      transition: transform 0.25s ease, background 0.3s ease, border-color 0.3s ease;
+      /* Hiệu ứng chuyển động mượt mà khi hover */
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     .ios26-link-item:hover {
-      transform: translate3d(0, -2px, 0);
+      transform: translateY(-5px) scale(1.03);
       background: var(--pill-hover-bg);
       border-color: var(--pill-hover-border);
       box-shadow: var(--pill-hover-glow);
     }
 
-    .ios26-link-item:active { transform: translate3d(0, 0, 0) scale(0.97); }
+    .ios26-link-item:active { transform: translateY(-1px) scale(0.97); }
 
     .link-icon {
       width: 36px; height: 36px;
       border-radius: 50%;
       margin-right: 14px;
       object-fit: cover;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .link-label { flex: 1; text-align: left; letter-spacing: -0.01em; }
+    /* Hiệu ứng icon phóng to và xoay nhẹ khi rê chuột vào từng mục liên kết */
+    .ios26-link-item:hover .link-icon {
+      transform: scale(1.15) rotate(6deg);
+    }
+
+    .link-label { 
+      flex: 1; 
+      text-align: left; 
+      letter-spacing: -0.01em; 
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    /* Dịch chuyển nhãn chữ sang phải một chút tạo cảm giác cuốn hút */
+    .ios26-link-item:hover .link-label {
+      transform: translateX(4px);
+      color: var(--text-sub);
+    }
 
     .link-arrow {
       font-size: 0.85rem;
       color: var(--text-sub);
+      transition: transform 0.3s ease;
+    }
+
+    /* Mũi tên trượt sang phải khi hover */
+    .ios26-link-item:hover .link-arrow {
+      transform: translateX(5px);
     }
 
     /* BOTTOM NAV DOCK */
@@ -522,6 +595,11 @@
       cursor: pointer;
       position: relative;
       z-index: 2;
+      transition: transform 0.25s ease;
+    }
+
+    .nav-tab-btn:hover {
+      transform: scale(1.1);
     }
 
     .nav-tab-btn i {
@@ -618,7 +696,12 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      transition: transform 0.2s ease, background 0.3s ease;
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-copy-link:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.4);
     }
 
     .btn-copy-link:active { transform: scale(0.96); }
@@ -634,8 +717,9 @@
       font-size: 0.88rem;
       cursor: pointer;
       opacity: 0.8;
+      transition: opacity 0.2s ease, transform 0.2s ease;
     }
-    .btn-close-modal:hover { opacity: 1; }
+    .btn-close-modal:hover { opacity: 1; transform: scale(1.05); }
 
     .email-textarea {
       width: 100%;
@@ -649,9 +733,12 @@
       resize: none;
       outline: none;
       margin-bottom: 12px;
-      transition: border-color 0.3s ease;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
-    .email-textarea:focus { border-color: var(--text-sub); }
+    .email-textarea:focus { 
+      border-color: var(--text-sub); 
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+    }
   </style>
 </head>
 <body>
@@ -851,7 +938,7 @@
         } else if (/oppo/i.test(ua) || /CPH\d+/i.test(ua)) {
           vendor = "OPPO";
           const match = ua.match(/CPH\d+/i);
-          model = match ? match[0] : "OPPO Device";
+          model = match ? match[0] : "CPH Device";
         } else if (/vivo/i.test(ua) || /V2\d+/i.test(ua)) {
           vendor = "Vivo";
           const match = ua.match(/V2\d+[A-Z]*/i);
@@ -1010,12 +1097,14 @@
       if (!container || !Array.isArray(items)) return;
 
       const fragment = document.createDocumentFragment();
-      items.forEach(item => {
+      items.forEach((item, index) => {
         const a = document.createElement('a');
         a.href = item.url || '#';
         a.target = "_blank";
         a.rel = "noopener noreferrer";
         a.className = "ios26-link-item";
+        // Tạo hiệu ứng xuất hiện lần lượt (staggered animation) cho từng mục
+        a.style.animationDelay = `${index * 0.08}s`;
         a.innerHTML = `
           <img src="${item.icon}" alt="${item.title}" class="link-icon" loading="lazy">
           <span class="link-label">${item.title}</span>
@@ -1156,7 +1245,6 @@
       });
     }
 
-    /* Hàm trình phát nhạc tự động phát & bật/tắt khi ấn nút */
     function initAudioPlayer() {
       const musicBtn = document.getElementById("music-toggle-btn");
       const musicIcon = document.getElementById("music-icon");
@@ -1165,7 +1253,7 @@
       if (!audio || !musicBtn) return;
 
       audio.volume = 0.4;
-      audio.loop = true; // Thuộc tính tự động lặp lại liên tục
+      audio.loop = true;
 
       let isPlaying = false;
       let userPaused = false;
@@ -1200,10 +1288,8 @@
         updateUI(false);
       }
 
-      // 1. Thử tự động phát ngay khi vào trang
       playAudio();
 
-      // 2. Xử lý mở nhạc ở lần chạm/click đầu tiên nếu trình duyệt chặn autoplay
       function handleFirstInteraction() {
         if (!isPlaying && !userPaused) {
           playAudio();
@@ -1214,9 +1300,8 @@
       document.addEventListener("click", handleFirstInteraction);
       document.addEventListener("touchstart", handleFirstInteraction);
 
-      // 3. Sự kiện bấm nút icon nhạc để Bật / Tắt (Phát / Dừng)
       musicBtn.addEventListener("click", (e) => {
-        e.stopPropagation(); // Ngăn sự kiện chạm lan ra document
+        e.stopPropagation();
         if (isPlaying) {
           pauseAudio();
         } else {
@@ -1224,7 +1309,6 @@
         }
       });
 
-      // 4. Giữ nhạc tiếp tục phát khi người dùng quay lại tab
       document.addEventListener("visibilitychange", () => {
         if (!document.hidden && isPlaying && !userPaused) {
           audio.play().catch(() => {});
