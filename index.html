@@ -777,7 +777,7 @@
     </div>
   </div>
 
-  <!-- AUDIO ELEMENT (Đã bật preload & loop nguyên bản) -->
+  <!-- AUDIO ELEMENT (Tự động lặp lại nguyên bản) -->
   <audio id="bg-music" src="audio/neungayay.mp3" loop preload="auto" crossorigin="anonymous"></audio>
 
   <script src="data.js"></script>
@@ -809,7 +809,6 @@
       let os = "Hệ điều hành không xác định";
       let deviceType = "Desktop/Laptop";
 
-      // 1. Phân loại thiết bị cơ bản
       const isMobile = /mobile/i.test(ua);
       const isTablet = /tablet|ipad|playbook|silk/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
       if (isTablet) {
@@ -818,7 +817,6 @@
         deviceType = "Mobile";
       }
 
-      // 2. Nhận diện Hệ Điều Hành (OS)
       if (/android/i.test(ua)) {
         const osMatch = ua.match(/Android\s+([\d.]+)/i);
         os = `Android ${osMatch ? osMatch[1] : ''}`;
@@ -841,7 +839,6 @@
         os = "Linux";
       }
 
-      // 3. Nhận diện Hãng & Mã Thiết Bị (Brand & Model/Device Code)
       if (/android/i.test(ua)) {
         if (/samsung/i.test(ua) || /SM-/i.test(ua)) {
           vendor = "Samsung";
@@ -1159,7 +1156,7 @@
       });
     }
 
-    /* Hàm trình phát nhạc được tối ưu chống ngắt quãng / chập chừng */
+    /* Hàm trình phát nhạc tự động phát & bật/tắt khi ấn nút */
     function initAudioPlayer() {
       const musicBtn = document.getElementById("music-toggle-btn");
       const musicIcon = document.getElementById("music-icon");
@@ -1168,7 +1165,8 @@
       if (!audio || !musicBtn) return;
 
       audio.volume = 0.4;
-      audio.loop = true; // Sử dụng loop chuẩn trình duyệt loại bỏ khựng đĩa/trễ nhịp
+      audio.loop = true; // Thuộc tính tự động lặp lại liên tục
+
       let isPlaying = false;
       let userPaused = false;
 
@@ -1189,7 +1187,7 @@
           isPlaying = true;
           updateUI(true);
         } catch (err) {
-          console.log("Audio play prevented:", err);
+          console.log("Autoplay bị trình duyệt chặn, chờ tương tác người dùng:", err);
           isPlaying = false;
           updateUI(false);
         }
@@ -1202,7 +1200,23 @@
         updateUI(false);
       }
 
-      musicBtn.addEventListener("click", () => {
+      // 1. Thử tự động phát ngay khi vào trang
+      playAudio();
+
+      // 2. Xử lý mở nhạc ở lần chạm/click đầu tiên nếu trình duyệt chặn autoplay
+      function handleFirstInteraction() {
+        if (!isPlaying && !userPaused) {
+          playAudio();
+        }
+        document.removeEventListener("click", handleFirstInteraction);
+        document.removeEventListener("touchstart", handleFirstInteraction);
+      }
+      document.addEventListener("click", handleFirstInteraction);
+      document.addEventListener("touchstart", handleFirstInteraction);
+
+      // 3. Sự kiện bấm nút icon nhạc để Bật / Tắt (Phát / Dừng)
+      musicBtn.addEventListener("click", (e) => {
+        e.stopPropagation(); // Ngăn sự kiện chạm lan ra document
         if (isPlaying) {
           pauseAudio();
         } else {
@@ -1210,7 +1224,7 @@
         }
       });
 
-      // Đảm bảo không bị tạm dừng vô lý khi chuyển tab trình duyệt
+      // 4. Giữ nhạc tiếp tục phát khi người dùng quay lại tab
       document.addEventListener("visibilitychange", () => {
         if (!document.hidden && isPlaying && !userPaused) {
           audio.play().catch(() => {});
