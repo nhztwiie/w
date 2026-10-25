@@ -855,9 +855,6 @@
     </div>
   </div>
 
-  <!-- AUDIO ELEMENT (Tối ưu hóa bộ đệm và tương thích di động) -->
-  <audio id="bg-music" src="audio/neungayay.mp3" loop preload="auto" x-webkit-airplay="allow"></audio>
-
   <script src="data.js"></script>
 
   <script>
@@ -1235,19 +1232,20 @@
       });
     }
 
-    /* ĐIỀU CHỈNH TRÌNH PHÁT NHẠC TỐI ƯU RIÊNG CHO MOBILE (KHẮC PHỤC CHẬP CHỜN & NGẮT QUÃNG) */
+    /* TRÌNH PHÁT NHẠC CAO CẤP DÙNG WEB AUDIO API (TƯƠNG THÍCH HOÀN HẢO DI ĐỘNG, KHÔNG BAO GIỜ CHẬP CHỜN) */
     function initAudioPlayer() {
       const musicBtn = document.getElementById("music-toggle-btn");
       const musicIcon = document.getElementById("music-icon");
-      const audio = document.getElementById("bg-music");
 
-      if (!audio || !musicBtn) return;
+      if (!musicBtn) return;
 
-      audio.volume = 0.4;
-      audio.loop = true;
-
+      let audioCtx = null;
+      let audioBuffer = null;
+      let sourceNode = null;
+      let gainNode = null;
       let isPlaying = false;
-      let userExplicitlyStopped = false; // Theo dõi hành động bấm nút của người dùng
+      let isLoaded = false;
+      let userStopped = false;
 
       function updateUI(playing) {
         if (playing) {
@@ -1259,64 +1257,87 @@
         }
       }
 
-      async function playAudio() {
+      // Tải file nhạc vào bộ nhớ đệm Buffer của trình duyệt
+      async function loadAudioFile() {
         try {
-          await audio.play();
-          isPlaying = true;
-          updateUI(true);
-        } catch (err) {
-          console.log("Trình duyệt di động chặn phát tự động, chờ thao tác chạm đầu tiên:", err);
-          isPlaying = false;
-          updateUI(false);
+          const response = await fetch("audio/neungayay.mp3");
+          const arrayBuffer = await response.arrayBuffer();
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+          isLoaded = true;
+        } catch (e) {
+          console.log("Lỗi tải tệp âm thanh:", e);
         }
       }
 
-      function pauseAudio() {
-        userExplicitlyStopped = true;
-        audio.pause();
+      function playSound() {
+        if (!isLoaded || !audioBuffer) return;
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+
+        if (sourceNode) {
+          try { sourceNode.stop(); } catch(e) {}
+        }
+
+        sourceNode = audioCtx.createBufferSource();
+        sourceNode.buffer = audioBuffer;
+        sourceNode.loop = true; // Tự động phát lặp lại liên tục mượt mà tuyệt đối
+
+        gainNode = audioCtx.createGain();
+        gainNode.gain.value = 0.4; // Đặt mức âm lượng ổn định
+
+        sourceNode.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        sourceNode.start(0);
+        isPlaying = true;
+        updateUI(true);
+      }
+
+      function stopSound() {
+        if (sourceNode) {
+          try { sourceNode.stop(); } catch(e) {}
+          sourceNode = null;
+        }
         isPlaying = false;
         updateUI(false);
       }
 
-      // Xử lý tự động lặp lại mượt mà khi kết thúc bài hát
-      audio.addEventListener('ended', () => {
-        audio.currentTime = 0;
-        if (!userExplicitlyStopped) {
-          audio.play().catch(err => console.log("Lỗi lặp lại trên di động:", err));
-        }
-      });
+      loadAudioFile();
 
-      // Bắt sự kiện chạm đầu tiên trên màn hình mobile để kích hoạt nhạc nếu bị trình duyệt chặn
-      const unlockAudioOnTouch = () => {
-        if (!isPlaying && !userExplicitlyStopped) {
-          playAudio();
+      // Kích hoạt âm thanh khi người dùng chạm đầu tiên trên màn hình mobile
+      const unlockAudio = async () => {
+        if (!isLoaded) await loadAudioFile();
+        if (audioCtx && audioCtx.state === 'suspended') {
+          await audioCtx.resume();
         }
-        document.removeEventListener("touchstart", unlockAudioOnTouch);
-        document.removeEventListener("click", unlockAudioOnTouch);
+        if (!isPlaying && !userStopped && isLoaded) {
+          playSound();
+        }
+        document.removeEventListener("touchstart", unlockAudio);
+        document.removeEventListener("click", unlockAudio);
       };
-      document.addEventListener("touchstart", unlockAudioOnTouch, { once: true });
-      document.addEventListener("click", unlockAudioOnTouch, { once: true });
 
-      // Gọi thử phát nhạc khi vừa tải trang
-      playAudio();
+      document.addEventListener("touchstart", unlockAudio, { once: true });
+      document.addEventListener("click", unlockAudio, { once: true });
 
-      // Chỉ thay đổi trạng thái khi người dùng nhấn trực tiếp vào nút nhạc
-      musicBtn.addEventListener("click", (e) => {
+      // Nút bật/tắt thủ công theo đúng yêu cầu
+      musicBtn.addEventListener("click", async (e) => {
         e.stopPropagation();
-        if (isPlaying) {
-          pauseAudio();
-        } else {
-          userExplicitlyStopped = false;
-          playAudio();
+        if (!isLoaded) {
+          await loadAudioFile();
         }
-      });
+        if (audioCtx && audioCtx.state === 'suspended') {
+          await audioCtx.resume();
+        }
 
-      // Khôi phục lại trạng thái phát khi người dùng quay lại tab/màn hình điện thoại
-      document.addEventListener("visibilitychange", () => {
-        if (!document.hidden && !isPlaying && !userExplicitlyStopped) {
-          audio.play().catch(() => {});
-          isPlaying = true;
-          updateUI(true);
+        if (isPlaying) {
+          userStopped = true;
+          stopSound();
+        } else {
+          userStopped = false;
+          playSound();
         }
       });
     }
