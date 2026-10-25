@@ -294,7 +294,6 @@
       transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
     }
 
-    /* HIỆU ỨNG ĐỘNG KHI DI CHUỘT VÀO NÚT ĐIỀU KHIỂN TOP BAR */
     .glass-btn-ios26:hover {
       transform: translateY(-3px) scale(1.08);
       border-color: var(--text-sub);
@@ -340,7 +339,6 @@
       transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
     }
 
-    /* Hiệu ứng khi di chuột vào avatar */
     .avatar-ring:hover {
       transform: scale(1.06) rotate(3deg);
       box-shadow: 0 20px 45px rgba(56, 189, 248, 0.5), 0 0 40px var(--glass-glow);
@@ -423,7 +421,6 @@
       align-items: center;
     }
 
-    /* HIỆU ỨNG ĐỘNG XUẤT HIỆN NỘI DUNG */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -450,7 +447,6 @@
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    /* Hiệu ứng khi di chuột vào thẻ Quote */
     .ios26-quote-card:hover {
       transform: translateY(-4px) scale(1.02);
       border-color: var(--text-sub);
@@ -480,7 +476,6 @@
       gap: 12px;
     }
 
-    /* HIỆU ỨNG ĐỘNG CHO CÁC LINK ITEM KHI DI CHUỘT VÀO */
     .ios26-link-item {
       position: relative;
       display: flex;
@@ -497,7 +492,6 @@
       -webkit-backdrop-filter: blur(12px);
       box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.2);
       overflow: hidden;
-      /* Hiệu ứng chuyển động mượt mà khi hover */
       transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
       animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
@@ -519,7 +513,6 @@
       transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    /* Hiệu ứng icon phóng to và xoay nhẹ khi rê chuột vào từng mục liên kết */
     .ios26-link-item:hover .link-icon {
       transform: scale(1.15) rotate(6deg);
     }
@@ -531,7 +524,6 @@
       transition: transform 0.3s ease, color 0.3s ease;
     }
 
-    /* Dịch chuyển nhãn chữ sang phải một chút tạo cảm giác cuốn hút */
     .ios26-link-item:hover .link-label {
       transform: translateX(4px);
       color: var(--text-sub);
@@ -543,7 +535,6 @@
       transition: transform 0.3s ease;
     }
 
-    /* Mũi tên trượt sang phải khi hover */
     .ios26-link-item:hover .link-arrow {
       transform: translateX(5px);
     }
@@ -864,7 +855,7 @@
     </div>
   </div>
 
-  <!-- AUDIO ELEMENT (Tự động lặp lại nguyên bản) -->
+  <!-- AUDIO ELEMENT (Tối ưu hóa bộ đệm, tự động lặp lại liên tục không ngắt quãng) -->
   <audio id="bg-music" src="audio/neungayay.mp3" loop preload="auto" crossorigin="anonymous"></audio>
 
   <script src="data.js"></script>
@@ -1103,7 +1094,6 @@
         a.target = "_blank";
         a.rel = "noopener noreferrer";
         a.className = "ios26-link-item";
-        // Tạo hiệu ứng xuất hiện lần lượt (staggered animation) cho từng mục
         a.style.animationDelay = `${index * 0.08}s`;
         a.innerHTML = `
           <img src="${item.icon}" alt="${item.title}" class="link-icon" loading="lazy">
@@ -1245,6 +1235,7 @@
       });
     }
 
+    /* ĐIỀU CHỈNH TRÌNH PHÁT NHẠC: MƯỢT MÀ, TỰ ĐỘNG PHÁT LẠI VÀ CHỈ ĐIỀU KHIỂN QUA NÚT BẤM CHÍNH XÁC */
     function initAudioPlayer() {
       const musicBtn = document.getElementById("music-toggle-btn");
       const musicIcon = document.getElementById("music-icon");
@@ -1256,7 +1247,6 @@
       audio.loop = true;
 
       let isPlaying = false;
-      let userPaused = false;
 
       function updateUI(playing) {
         if (playing) {
@@ -1270,48 +1260,38 @@
 
       async function playAudio() {
         try {
-          userPaused = false;
           await audio.play();
           isPlaying = true;
           updateUI(true);
         } catch (err) {
-          console.log("Autoplay bị trình duyệt chặn, chờ tương tác người dùng:", err);
+          console.log("Trình duyệt chặn phát tự động, chờ thao tác nhấn nút từ người dùng:", err);
           isPlaying = false;
           updateUI(false);
         }
       }
 
       function pauseAudio() {
-        userPaused = true;
         audio.pause();
         isPlaying = false;
         updateUI(false);
       }
 
+      // Xử lý sự kiện tự động lặp lại liên tục, mượt mà, không bị ngắt quãng
+      audio.addEventListener('ended', () => {
+        audio.currentTime = 0;
+        audio.play().catch(err => console.log("Lỗi lặp lại nhạc:", err));
+      });
+
+      // Tự động phát khi tải xong trang (nếu trình duyệt cho phép)
       playAudio();
 
-      function handleFirstInteraction() {
-        if (!isPlaying && !userPaused) {
-          playAudio();
-        }
-        document.removeEventListener("click", handleFirstInteraction);
-        document.removeEventListener("touchstart", handleFirstInteraction);
-      }
-      document.addEventListener("click", handleFirstInteraction);
-      document.addEventListener("touchstart", handleFirstInteraction);
-
+      // Chỉ thay đổi trạng thái Phát/Dừng khi người dùng nhấn trực tiếp vào nút điều khiển nhạc
       musicBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         if (isPlaying) {
           pauseAudio();
         } else {
           playAudio();
-        }
-      });
-
-      document.addEventListener("visibilitychange", () => {
-        if (!document.hidden && isPlaying && !userPaused) {
-          audio.play().catch(() => {});
         }
       });
     }
