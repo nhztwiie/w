@@ -190,16 +190,18 @@
       animation: fireflyFlap 8s infinite ease-in-out;
     }
 
-    .firefly:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; animation-duration: 9s; }
-    .firefly:nth-child(2) { top: 20%; left: 80%; animation-delay: 1.5s; animation-duration: 11s; }
-    .firefly:nth-child(3) { top: 40%; left: 30%; animation-delay: 3s; animation-duration: 8s; }
-    .firefly:nth-child(4) { top: 60%; left: 90%; animation-delay: 0.5s; animation-duration: 10s; }
-    .firefly:nth-child(5) { top: 75%; left: 20%; animation-delay: 4s; animation-duration: 12s; }
-    .firefly:nth-child(6) { top: 90%; left: 50%; animation-delay: 2s; animation-duration: 7s; }
-    .firefly:nth-child(7) { top: 15%; left: 55%; animation-delay: 2.5s; animation-duration: 9.5s; }
-    .firefly:nth-child(8) { top: 35%; left: 15%; animation-delay: 1s; animation-duration: 8.5s; }
-    .firefly:nth-child(9) { top: 55%; left: 70%; animation-delay: 3.5s; animation-duration: 10.5s; }
-    .firefly:nth-child(10) { top: 85%; left: 85%; animation-delay: 0.8s; animation-duration: 11.5s; }
+    .firefly:nth-child(1) { top: 12%; left: 8%; animation-delay: 0s; animation-duration: 9s; }
+    .firefly:nth-child(2) { top: 25%; left: 85%; animation-delay: 1.5s; animation-duration: 11s; }
+    .firefly:nth-child(3) { top: 45%; left: 22%; animation-delay: 3s; animation-duration: 8s; }
+    .firefly:nth-child(4) { top: 65%; left: 78%; animation-delay: 0.5s; animation-duration: 10s; }
+    .firefly:nth-child(5) { top: 82%; left: 15%; animation-delay: 4s; animation-duration: 12s; }
+    .firefly:nth-child(6) { top: 18%; left: 45%; animation-delay: 2s; animation-duration: 7s; }
+    .firefly:nth-child(7) { top: 38%; left: 65%; animation-delay: 2.5s; animation-duration: 9.5s; }
+    .firefly:nth-child(8) { top: 58%; left: 35%; animation-delay: 1s; animation-duration: 8.5s; }
+    .firefly:nth-child(9) { top: 78%; left: 55%; animation-delay: 3.5s; animation-duration: 10.5s; }
+    .firefly:nth-child(10) { top: 88%; left: 92%; animation-delay: 0.8s; animation-duration: 11.5s; }
+    .firefly:nth-child(11) { top: 5%; left: 70%; animation-delay: 1.2s; animation-duration: 9s; }
+    .firefly:nth-child(12) { top: 95%; left: 30%; animation-delay: 2.8s; animation-duration: 8s; }
 
     @keyframes fireflyFlap {
       0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.5); }
@@ -874,16 +876,19 @@
       <nav class="ios26-nav-dock">
         <div class="nav-indicator-pill" id="nav-indicator"></div>
         
+        <!-- Tab Social: Icon mạng xã hội / kết nối -->
         <button class="nav-tab-btn" data-index="0" aria-label="Social">
-          <i class="fa-solid fa-globe"></i>
+          <i class="fa-solid fa-share-nodes"></i>
         </button>
 
+        <!-- Tab Home: Icon trang chủ / quote -->
         <button class="nav-tab-btn active" data-index="1" aria-label="Home">
           <i class="fa-solid fa-house"></i>
         </button>
 
+        <!-- Tab Work: Icon cặp công sở đại diện cho công việc -->
         <button class="nav-tab-btn" data-index="2" aria-label="Work">
-          <i class="fa-solid fa-envelope"></i>
+          <i class="fa-solid fa-briefcase"></i>
         </button>
       </nav>
     </div>
