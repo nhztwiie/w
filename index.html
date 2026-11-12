@@ -45,7 +45,7 @@
 
   <style>
     /* ==========================================================
-       TITANIUM & LIQUID GLASS SYSTEM - ORGANIC FIREFLIES CANVAS
+       TITANIUM & LIQUID GLASS SYSTEM - SOFT WHITE FIREFLIES
        ========================================================== */
     :root[data-theme="dark"] {
       --bg-gradient: radial-gradient(circle at 50% 0%, #2a2d32 0%, #111317 65%, #08090a 100%);
@@ -146,7 +146,7 @@
       overflow: hidden;
     }
 
-    /* HTML5 CANVAS CHO ĐOM ĐÓM (HIỂN THỊ SẮC NÉT & MƯỢT MÀ) */
+    /* CANVAS ĐOM ĐÓM TRẮNG LỬNG LỜ */
     #firefly-canvas {
       position: fixed;
       top: 0; left: 0;
@@ -785,7 +785,7 @@
     <div class="liquid-orb orb-accent"></div>
   </div>
   
-  <!-- CANVAS ĐOM ĐÓM SINH HỌC -->
+  <!-- CANVAS ĐOM ĐÓM TRẮNG LỬNG LỜ -->
   <canvas id="firefly-canvas"></canvas>
   <div class="glass-mesh-overlay"></div>
 
@@ -921,13 +921,13 @@
       initEmailModal(); 
       initAudioPlayer();
       initEmailJSNotifier();
-      initOrganicFireflies(); 
+      initGentleWhiteFireflies(); 
     });
 
     /* ==========================================================
-       ORGANIC FIREFLY ENGINE (CANVAS 2D - 75 ĐOM ĐÓM SINH HỌC)
+       GENTLE WHITE FIREFLIES ENGINE (ĐOM ĐÓM NHỎ TRẮNG LỬNG LỜ)
        ========================================================== */
-    function initOrganicFireflies() {
+    function initGentleWhiteFireflies() {
       const canvas = document.getElementById('firefly-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
@@ -957,82 +957,63 @@
       }, { passive: true });
 
       window.addEventListener('touchend', () => {
-        setTimeout(() => { pointer.active = false; }, 1200);
+        setTimeout(() => { pointer.active = false; }, 1500);
       });
 
       window.addEventListener('mouseleave', () => {
         pointer.active = false;
       });
 
-      // Bảng màu phát sáng tự nhiên cho Dark Mode & Light Mode
-      const darkColors = [
-        { r: 255, g: 252, b: 220 }, // Trắng vàng ấm
-        { r: 254, g: 240, b: 138 }, // Vàng đom đóm
-        { r: 186, g: 230, b: 253 }, // Xanh băng nhẹ
-        { r: 255, g: 255, b: 255 }  // Trắng tinh khiết
-      ];
-
-      const lightColors = [
-        { r: 217, g: 119, b: 6 },   // Vàng hổ phách
-        { r: 71,  g: 85,  b: 105 }, // Xám xanh slate
-        { r: 14,  g: 116, b: 144 }, // Xanh ngọc trầm
-        { r: 161, g: 98,  b: 7 }    // Vàng đồng ấm
-      ];
-
       class Firefly {
         constructor() {
-          this.reset(true);
-        }
-
-        reset(initial = false) {
           this.x = Math.random() * width;
           this.y = Math.random() * height;
-          this.radius = 1.1 + Math.random() * 2.2; // Kích thước li ti ngẫu nhiên
-          this.vx = (Math.random() - 0.5) * 0.7;
-          this.vy = (Math.random() - 0.5) * 0.7;
+          // Kích thước nhỏ li ti (0.6px đến 1.5px)
+          this.radius = 0.6 + Math.random() * 0.9;
+          // Vận tốc trôi ban đầu rất chậm
+          this.vx = (Math.random() - 0.5) * 0.25;
+          this.vy = (Math.random() - 0.5) * 0.25;
           
-          // Tham số bay lượn hữu cơ (wander angle)
+          // Góc lửng lờ tự nhiên
           this.wanderAngle = Math.random() * Math.PI * 2;
-          this.wanderSpeed = 0.02 + Math.random() * 0.03;
-
-          // Tham số chớp nháy ánh sáng (pulse)
+          // Nhịp thở ánh sáng chậm rãi
           this.phase = Math.random() * Math.PI * 2;
-          this.pulseSpeed = 0.015 + Math.random() * 0.025;
-          this.colorIndex = Math.floor(Math.random() * 4);
+          this.pulseSpeed = 0.008 + Math.random() * 0.012;
         }
 
         update() {
-          // 1. Chuyển động bay lượn tự nhiên
-          this.wanderAngle += (Math.random() - 0.5) * 0.18;
-          this.vx += Math.cos(this.wanderAngle) * 0.018;
-          this.vy += Math.sin(this.wanderAngle) * 0.018;
+          // 1. Chuyển động lửng lờ rất nhẹ
+          this.wanderAngle += (Math.random() - 0.5) * 0.08;
+          this.vx += Math.cos(this.wanderAngle) * 0.004;
+          this.vy += Math.sin(this.wanderAngle) * 0.004;
 
-          // 2. Tương tác tụ lại tự nhiên khi có chuột/ngón tay
+          // 2. Tụ lại êm dịu khi di chuột / chạm màn hình
           if (pointer.active) {
             const dx = pointer.x - this.x;
             const dy = pointer.y - this.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            const attractRadius = 240; // Bán kính thu hút
+            const attractRadius = 220;
 
             if (dist < attractRadius) {
               const force = (attractRadius - dist) / attractRadius;
-              // Nếu ở quá gần tâm (< 35px), tạo quỹ đạo lượn vòng nhẹ thay vì đâm sầm vào 1 điểm
-              if (dist > 32) {
-                this.vx += (dx / dist) * force * 0.14;
-                this.vy += (dy / dist) * force * 0.14;
+              if (dist > 28) {
+                // Lực hút nhẹ nhàng, từ tốn
+                this.vx += (dx / dist) * force * 0.032;
+                this.vy += (dy / dist) * force * 0.032;
               } else {
-                this.vx += (-dy / dist) * 0.08;
-                this.vy += (dx / dist) * 0.08;
+                // Lượn vòng lửng lờ quanh con trỏ
+                this.vx += (-dy / dist) * 0.018;
+                this.vy += (dx / dist) * 0.018;
               }
             }
           }
 
-          // 3. Lực cản không khí (ma sát mềm) & giới hạn tốc độ tối đa
-          this.vx *= 0.965;
-          this.vy *= 0.965;
+          // 3. Lực cản không khí cao giúp đom đóm trôi êm, không giật cục
+          this.vx *= 0.975;
+          this.vy *= 0.975;
 
           const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-          const maxSpeed = pointer.active ? 2.6 : 1.1;
+          const maxSpeed = pointer.active ? 0.95 : 0.35; // Giới hạn tốc độ chậm rãi
           if (speed > maxSpeed) {
             this.vx = (this.vx / speed) * maxSpeed;
             this.vy = (this.vy / speed) * maxSpeed;
@@ -1041,48 +1022,50 @@
           this.x += this.vx;
           this.y += this.vy;
 
-          // Đi xuyên qua biên màn hình mượt mà
-          const pad = 20;
+          // Đi xuyên biên màn hình mượt mà
+          const pad = 15;
           if (this.x < -pad) this.x = width + pad;
           if (this.x > width + pad) this.x = -pad;
           if (this.y < -pad) this.y = height + pad;
           if (this.y > height + pad) this.y = -pad;
 
-          // Cập nhật nhịp chớp sáng
           this.phase += this.pulseSpeed;
         }
 
         draw(isLightTheme) {
-          // Cường độ sáng dao động hình sin (0.18 -> 1.0)
-          const glowFactor = 0.2 + 0.8 * ((Math.sin(this.phase) + 1) / 2);
-          const palette = isLightTheme ? lightColors : darkColors;
-          const c = palette[this.colorIndex];
+          // Cường độ sáng dịu nhẹ (0.15 -> 0.85)
+          const glowFactor = 0.15 + 0.7 * ((Math.sin(this.phase) + 1) / 2);
+          const glowRadius = this.radius * (4.5 + glowFactor * 2.5);
 
-          const glowRadius = this.radius * (4.5 + glowFactor * 3);
-
-          // Vẽ quầng sáng tỏa mềm (Radial Gradient)
+          // Vẽ quầng hào quang màu trắng tinh khiết
           const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowRadius);
-          grad.addColorStop(0, `rgba(${c.r}, ${c.g}, ${c.b}, ${glowFactor})`);
-          grad.addColorStop(0.35, `rgba(${c.r}, ${c.g}, ${c.b}, ${glowFactor * 0.45})`);
-          grad.addColorStop(1, `rgba(${c.r}, ${c.g}, ${c.b}, 0)`);
+          if (isLightTheme) {
+            // Trên nền sáng: lõi trắng sáng kết hợp quầng ánh bạc nhẹ để nổi bật
+            grad.addColorStop(0, `rgba(255, 255, 255, ${Math.min(1, glowFactor + 0.15)})`);
+            grad.addColorStop(0.45, `rgba(148, 163, 184, ${glowFactor * 0.45})`);
+            grad.addColorStop(1, `rgba(148, 163, 184, 0)`);
+          } else {
+            // Trên nền tối: ánh trắng thuần khiết lửng lờ
+            grad.addColorStop(0, `rgba(255, 255, 255, ${glowFactor})`);
+            grad.addColorStop(0.4, `rgba(255, 255, 255, ${glowFactor * 0.35})`);
+            grad.addColorStop(1, `rgba(255, 255, 255, 0)`);
+          }
 
           ctx.beginPath();
           ctx.arc(this.x, this.y, glowRadius, 0, Math.PI * 2);
           ctx.fillStyle = grad;
           ctx.fill();
 
-          // Vẽ lõi đom đóm sắc nét ở tâm
+          // Lõi trắng nhỏ ở tâm
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.radius * 0.65, 0, Math.PI * 2);
-          ctx.fillStyle = isLightTheme 
-            ? `rgba(${c.r}, ${c.g}, ${c.b}, ${0.5 + glowFactor * 0.5})` 
-            : `rgba(255, 255, 255, ${0.4 + glowFactor * 0.6})`;
+          ctx.fillStyle = `rgba(255, 255, 255, ${0.45 + glowFactor * 0.55})`;
           ctx.fill();
         }
       }
 
-      // Khởi tạo 75 hạt đom đóm
-      const fireflyCount = 75;
+      // 80 hạt đom đóm nhỏ li ti rải khắp không gian
+      const fireflyCount = 80;
       const fireflies = Array.from({ length: fireflyCount }, () => new Firefly());
 
       function renderLoop() {
