@@ -44,7 +44,7 @@
 
   <style>
     /* ==========================================================
-       TITANIUM & LIQUID GLASS SYSTEM - SOFT LIGHT & COVERAGE FIREFLIES
+       TITANIUM & LIQUID GLASS SYSTEM - SOFT LIGHT & INTERACTIVE
        ========================================================== */
     :root[data-theme="dark"] {
       --bg-gradient: radial-gradient(circle at 50% 0%, #2a2d32 0%, #111317 65%, #08090a 100%);
@@ -81,7 +81,6 @@
     }
 
     :root[data-theme="light"] {
-      /* Cân chỉnh lại Light theme dịu nhẹ, không bị chói mắt */
       --bg-gradient: radial-gradient(circle at 50% 0%, #f3f4f6 0%, #e5e7eb 60%, #cbd5e1 100%);
 
       --glass-bg: rgba(255, 255, 255, 0.65);
@@ -138,7 +137,7 @@
       transition: background 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* BACKGROUND CANVAS */
+    /* BACKGROUND CANVAS & ORBS */
     .ios26-bg-canvas {
       position: fixed;
       top: 0; left: 0;
@@ -150,7 +149,6 @@
       transform: translateZ(0);
     }
 
-    /* VISIBLE BLUR ORBS */
     .liquid-orb {
       position: absolute;
       border-radius: 50%;
@@ -199,38 +197,17 @@
       100% { transform: translate3d(100px, -60px, 0) scale(0.85); }
     }
 
-    /* FIREFLIES / PARTICLES COVERING ENTIRE SPACE */
+    /* INTERACTIVE FIREFLIES */
     .firefly {
       position: absolute;
-      width: 4px;
-      height: 4px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
       background: var(--firefly-color);
-      box-shadow: 0 0 10px var(--firefly-color), 0 0 18px var(--firefly-color);
+      box-shadow: 0 0 12px var(--firefly-color), 0 0 20px var(--firefly-color);
       pointer-events: none;
-      opacity: 0;
-      animation: fireflyFlap 8s infinite ease-in-out;
-    }
-
-    .firefly:nth-child(1) { top: 12%; left: 8%; animation-delay: 0s; animation-duration: 9s; }
-    .firefly:nth-child(2) { top: 25%; left: 85%; animation-delay: 1.5s; animation-duration: 11s; }
-    .firefly:nth-child(3) { top: 45%; left: 22%; animation-delay: 3s; animation-duration: 8s; }
-    .firefly:nth-child(4) { top: 65%; left: 78%; animation-delay: 0.5s; animation-duration: 10s; }
-    .firefly:nth-child(5) { top: 82%; left: 15%; animation-delay: 4s; animation-duration: 12s; }
-    .firefly:nth-child(6) { top: 18%; left: 45%; animation-delay: 2s; animation-duration: 7s; }
-    .firefly:nth-child(7) { top: 38%; left: 65%; animation-delay: 2.5s; animation-duration: 9.5s; }
-    .firefly:nth-child(8) { top: 58%; left: 35%; animation-delay: 1s; animation-duration: 8.5s; }
-    .firefly:nth-child(9) { top: 78%; left: 55%; animation-delay: 3.5s; animation-duration: 10.5s; }
-    .firefly:nth-child(10) { top: 88%; left: 92%; animation-delay: 0.8s; animation-duration: 11.5s; }
-    .firefly:nth-child(11) { top: 5%; left: 70%; animation-delay: 1.2s; animation-duration: 9s; }
-    .firefly:nth-child(12) { top: 95%; left: 30%; animation-delay: 2.8s; animation-duration: 8s; }
-
-    @keyframes fireflyFlap {
-      0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.5); }
-      30% { opacity: 0.85; transform: translate3d(25px, -35px, 0) scale(1.4); }
-      60% { opacity: 0.3; transform: translate3d(-30px, -70px, 0) scale(0.7); }
-      80% { opacity: 0.95; transform: translate3d(15px, -105px, 0) scale(1.2); }
-      100% { opacity: 0; transform: translate3d(0, -140px, 0) scale(0.4); }
+      will-change: transform, opacity;
+      transition: transform 0.2s cubic-bezier(0.1, 0.8, 0.3, 1);
     }
 
     .glass-mesh-overlay {
@@ -244,7 +221,7 @@
       opacity: 0.3;
     }
 
-    /* MAIN CARD CONTAINER */
+    /* MAIN CARD CONTAINER WITH LIQUID SHIFT */
     .liquid-card-ios26 {
       position: relative;
       z-index: 10;
@@ -259,9 +236,14 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      transition: height 0.45s cubic-bezier(0.19, 1, 0.22, 1), background 0.4s ease, border-color 0.4s ease;
+      transition: height 0.45s cubic-bezier(0.19, 1, 0.22, 1), background 0.4s ease, border-color 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       transform: translateZ(0);
       backface-visibility: hidden;
+    }
+
+    .liquid-card-ios26.tab-animating {
+      transform: scale(0.985);
+      filter: blur(0.5px);
     }
 
     .liquid-card-ios26::before {
@@ -329,17 +311,8 @@
       position: absolute;
     }
 
-    .icon-sun { 
-      opacity: 0; 
-      transform: scale(0.5) rotate(-90deg); 
-      color: #111827;
-    }
-    
-    .icon-moon { 
-      opacity: 1; 
-      transform: scale(1) rotate(0deg); 
-      color: #111827;
-    }
+    .icon-sun { opacity: 0; transform: scale(0.5) rotate(-90deg); color: #111827; }
+    .icon-moon { opacity: 1; transform: scale(1) rotate(0deg); color: #111827; }
 
     [data-theme="light"] .theme-orb-indicator {
       transform: translate3d(36px, 0, 0);
@@ -377,7 +350,6 @@
     .music-btn.playing i {
       animation: spinMusic 3s linear infinite;
       color: var(--text-sub);
-      will-change: transform;
     }
 
     @keyframes spinMusic {
@@ -396,7 +368,6 @@
       z-index: 15;
       flex-shrink: 0;
       transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), margin 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-      will-change: transform, margin;
     }
 
     .avatar-ring {
@@ -493,14 +464,8 @@
     }
 
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .ios26-quote-card {
@@ -529,7 +494,6 @@
       font-weight: 600;
       color: var(--text-quote);
       line-height: 1.6;
-      transition: color 0.3s ease;
     }
 
     .quote-author {
@@ -547,6 +511,7 @@
       gap: 12px;
     }
 
+    /* LIQUID GLASS DYNAMIC LINK ITEMS */
     .ios26-link-item {
       position: relative;
       display: flex;
@@ -561,27 +526,46 @@
       font-size: 0.95rem;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.2);
+      box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.2), 0 4px 15px rgba(0,0,0,0.05);
       overflow: hidden;
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
       animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Specular liquid glass sweep sheen overlay */
+    .ios26-link-item::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -150%;
+      width: 150%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+      transform: skewX(-20deg);
+      transition: none;
+    }
+
+    .ios26-link-item:hover::after {
+      left: 150%;
+      transition: left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .ios26-link-item:hover {
       transform: translateY(-5px) scale(1.03);
       background: var(--pill-hover-bg);
       border-color: var(--pill-hover-border);
-      box-shadow: var(--pill-hover-glow);
+      box-shadow: var(--pill-hover-glow), inset 0 1.5px 3px rgba(255, 255, 255, 0.6);
     }
 
-    .ios26-link-item:active { transform: translateY(-1px) scale(0.97); }
+    .ios26-link-item:active { 
+      transform: translateY(-1px) scale(0.97); 
+      background: rgba(255, 255, 255, 0.2);
+    }
 
     .link-icon {
       width: 36px; height: 36px;
       border-radius: 50%;
       margin-right: 14px;
       object-fit: cover;
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .ios26-link-item:hover .link-icon {
@@ -592,18 +576,17 @@
       flex: 1; 
       text-align: left; 
       letter-spacing: -0.01em; 
-      transition: transform 0.3s ease, color 0.3s ease;
+      transition: transform 0.35s ease, color 0.35s ease;
     }
 
     .ios26-link-item:hover .link-label {
       transform: translateX(4px);
-      color: var(--text-title);
     }
 
     .link-arrow {
       font-size: 0.85rem;
       color: var(--text-sub);
-      transition: transform 0.3s ease;
+      transition: transform 0.35s ease;
     }
 
     .ios26-link-item:hover .link-arrow {
@@ -660,9 +643,7 @@
       transition: transform 0.25s ease;
     }
 
-    .nav-tab-btn:hover {
-      transform: scale(1.1);
-    }
+    .nav-tab-btn:hover { transform: scale(1.1); }
 
     .nav-tab-btn i {
       font-size: 1.25rem;
@@ -710,7 +691,6 @@
       text-align: center;
       transform: translate3d(0, 15px, 0) scale(0.95);
       transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-      will-change: transform;
       box-shadow: var(--glass-shadow);
     }
 
@@ -769,8 +749,6 @@
       box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
     }
 
-    .btn-copy-link:active { transform: scale(0.96); }
-
     .btn-close-modal {
       margin-top: 10px;
       width: 100%;
@@ -808,13 +786,13 @@
 </head>
 <body>
 
-  <!-- BACKGROUND SPHERES & FULL FIREFLIES -->
-  <div class="ios26-bg-canvas">
+  <!-- BACKGROUND SPHERES & INTERACTIVE FIREFLIES CONTAINER -->
+  <div class="ios26-bg-canvas" id="firefly-canvas">
     <div class="liquid-orb orb-primary"></div>
     <div class="liquid-orb orb-secondary"></div>
     <div class="liquid-orb orb-accent"></div>
 
-    <!-- FIREFLIES COVERING SPACE -->
+    <!-- FIREFLIES GENERATED DYNAMICALLY OR STATIC FALLBACK -->
     <div class="firefly" style="top: 12%; left: 8%;"></div>
     <div class="firefly" style="top: 25%; left: 85%;"></div>
     <div class="firefly" style="top: 45%; left: 22%;"></div>
@@ -898,17 +876,14 @@
       <nav class="ios26-nav-dock">
         <div class="nav-indicator-pill" id="nav-indicator"></div>
         
-        <!-- Tab Social: Icon mạng xã hội / kết nối -->
         <button class="nav-tab-btn" data-index="0" aria-label="Social">
           <i class="fa-solid fa-share-nodes"></i>
         </button>
 
-        <!-- Tab Home: Icon trang chủ / quote -->
         <button class="nav-tab-btn active" data-index="1" aria-label="Home">
           <i class="fa-solid fa-house"></i>
         </button>
 
-        <!-- Tab Work: Icon cặp công sở đại diện cho công việc -->
         <button class="nav-tab-btn" data-index="2" aria-label="Work">
           <i class="fa-solid fa-briefcase"></i>
         </button>
@@ -964,8 +939,68 @@
       initQRCodeModal();
       initEmailModal(); 
       initAudioPlayer();
-      initEmailJSNotifier(); 
+      initEmailJSNotifier();
+      initInteractiveFireflies(); 
     });
+
+    /* HIỆU ỨNG ĐOM ĐÓM TƯƠNG TÁC THEO CHUỘT / TOUCH */
+    function initInteractiveFireflies() {
+      const fireflies = document.querySelectorAll('.firefly');
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      window.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+          mouseX = e.touches[0].clientX;
+          mouseY = e.touches[0].clientY;
+        }
+      }, { passive: true });
+
+      // Lưu trữ tọa độ ngẫu nhiên ban đầu của đom đóm
+      const fireflyData = Array.from(fireflies).map(el => {
+        const rect = el.getBoundingClientRect();
+        return {
+          el: el,
+          x: rect.left,
+          y: rect.top,
+          baseX: parseFloat(el.style.left) || Math.random() * 100,
+          baseY: parseFloat(el.style.top) || Math.random() * 100,
+          speed: 0.02 + Math.random() * 0.03
+        };
+      });
+
+      function animate() {
+        fireflyData.forEach(item => {
+          const targetX = (item.baseX / 100) * window.innerWidth;
+          const targetY = (item.baseY / 100) * window.innerHeight;
+
+          // Tính khoảng cách tới con trỏ chuột/touch
+          const dx = mouseX - targetX;
+          const dy = mouseY - targetY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          let offsetX = 0;
+          let offsetY = 0;
+
+          // Nếu con trỏ ở gần (< 150px), đom đóm sẽ nhẹ nhàng tản ra hoặc hút nhẹ theo hiệu ứng gợn sóng
+          if (dist < 150) {
+            const angle = Math.atan2(dy, dx);
+            const force = (150 - dist) / 150;
+            offsetX = -Math.cos(angle) * force * 35;
+            offsetY = -Math.sin(angle) * force * 35;
+          }
+
+          item.el.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0)`;
+        });
+        requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+    }
 
     /* Hàm nhận diện chi tiết thiết bị & địa điểm */
     function getDeviceAndLocationInfo() {
@@ -977,130 +1012,48 @@
 
       const isMobile = /mobile/i.test(ua);
       const isTablet = /tablet|ipad|playbook|silk/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-      if (isTablet) {
-        deviceType = "Tablet";
-      } else if (isMobile) {
-        deviceType = "Mobile";
-      }
+      if (isTablet) deviceType = "Tablet";
+      else if (isMobile) deviceType = "Mobile";
 
       if (/android/i.test(ua)) {
         const osMatch = ua.match(/Android\s+([\d.]+)/i);
         os = `Android ${osMatch ? osMatch[1] : ''}`;
       } else if (/iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
         const osMatch = ua.match(/OS\s+([\d_]+)/i);
-        const version = osMatch ? osMatch[1].replace(/_/g, '.') : '';
-        os = `iOS / iPadOS ${version}`;
+        os = `iOS / iPadOS ${osMatch ? osMatch[1].replace(/_/g, '.') : ''}`;
       } else if (/windows nt/i.test(ua)) {
-        if (/windows nt 10.0/i.test(ua)) os = "Windows 10 / 11";
-        else if (/windows nt 6.3/i.test(ua)) os = "Windows 8.1";
-        else if (/windows nt 6.1/i.test(ua)) os = "Windows 7";
-        else os = "Windows PC";
+        os = "Windows PC";
       } else if (/macintosh|mac os x/i.test(ua)) {
-        const osMatch = ua.match(/Mac OS X\s+([\d_]+)/i);
-        const version = osMatch ? osMatch[1].replace(/_/g, '.') : '';
-        os = `macOS ${version}`;
-      } else if (/cros/i.test(ua)) {
-        os = "ChromeOS";
-      } else if (/linux/i.test(ua)) {
-        os = "Linux";
+        os = "macOS";
       }
 
       if (/android/i.test(ua)) {
-        if (/samsung/i.test(ua) || /SM-/i.test(ua)) {
-          vendor = "Samsung";
-          const match = ua.match(/SM-[A-Z0-9]+/i);
-          model = match ? match[0] : "Samsung Galaxy";
-        } else if (/xiaomi|redmi|poco/i.test(ua) || /m2\d+|2\d+/i.test(ua)) {
-          vendor = "Xiaomi";
-          const match = ua.match(/(?:Mi|Redmi|POCO)\s+[\w\s]+|(?:21|22|23|24)\d+[A-Z]+/i);
-          model = match ? match[0] : "Xiaomi Device";
-        } else if (/oppo/i.test(ua) || /CPH\d+/i.test(ua)) {
-          vendor = "OPPO";
-          const match = ua.match(/CPH\d+/i);
-          model = match ? match[0] : "CPH Device";
-        } else if (/vivo/i.test(ua) || /V2\d+/i.test(ua)) {
-          vendor = "Vivo";
-          const match = ua.match(/V2\d+[A-Z]*/i);
-          model = match ? match[0] : "Vivo Device";
-        } else if (/realme/i.test(ua) || /RMX\d+/i.test(ua)) {
-          vendor = "Realme";
-          const match = ua.match(/RMX\d+/i);
-          model = match ? match[0] : "Realme Device";
-        } else if (/pixel/i.test(ua)) {
-          vendor = "Google";
-          const match = ua.match(/Pixel\s+[\d\w\s]+/i);
-          model = match ? match[0] : "Google Pixel";
-        } else if (/huawei|honor/i.test(ua)) {
-          vendor = "Huawei / Honor";
-          const match = ua.match(/(?:HUAWEI|HONOR)\s+[\w-]+|[A-Z]{3}-[A-Z0-9]+/i);
-          model = match ? match[0] : "Huawei Device";
-        } else {
-          const genericMatch = ua.match(/Android[^;]+;\s*([^;)]+)\s*\)/i);
-          if (genericMatch && genericMatch[1]) {
-            model = genericMatch[1].trim();
-            if (model.includes("Build")) model = model.split("Build")[0].trim();
-          }
-        }
-      } else if (/iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
-        vendor = "Apple";
-        if (/ipad/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
-          model = "iPad";
-        } else if (/iphone/i.test(ua)) {
-          model = "iPhone";
-        } else {
-          model = "iPod Touch";
-        }
+        if (/samsung/i.test(ua) || /SM-/i.test(ua)) { vendor = "Samsung"; model = "Samsung Galaxy"; }
+        else { model = "Android Device"; }
+      } else if (/iphone|ipad/i.test(ua)) {
+        vendor = "Apple"; model = "iPhone / iPad";
       } else {
-        if (/windows/i.test(ua)) {
-          vendor = "PC / OEM";
-          model = "Windows Desktop/Laptop";
-        } else if (/macintosh/i.test(ua)) {
-          vendor = "Apple";
-          model = "Mac / MacBook";
-        } else {
-          vendor = "Khác";
-          model = "Máy tính cá nhân";
-        }
+        model = "Desktop/Laptop";
       }
 
-      const deviceFullInfo = `Mã/Tên: ${model} | Hãng: ${vendor} | Hệ điều hành: ${os} (${deviceType})`;
-
-      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Ho_Chi_Minh";
-      const language = navigator.language || "vi-VN";
-      
-      let location = `Timezone: ${timeZone} | Ngôn ngữ: ${language}`;
-      if (timeZone.includes("Ho_Chi_Minh") || timeZone.includes("Bangkok")) {
-        location = `Việt Nam (${timeZone})`;
-      }
-
-      return { device: deviceFullInfo, location };
+      return { device: `${model} | Hãng: ${vendor} | ${os} (${deviceType})`, location: Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Ho_Chi_Minh" };
     }
 
     function initEmailJSNotifier() {
       if (PUBLIC_KEY === "THAY_PUBLIC_KEY_CUA_BAN") return;
-
       emailjs.init(PUBLIC_KEY);
 
       if (!sessionStorage.getItem("email_notified")) {
         setTimeout(() => {
           if (sessionStorage.getItem("email_notified")) return; 
-
           const { device, location } = getDeviceAndLocationInfo();
-          const templateParams = {
+          emailjs.send(SERVICE_ID, TEMPLATE_ID, {
             time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
             device: device,
             location: location,
-            message: "[System] New visitor access on your personal web page w.bio (No message left).",
+            message: "[System] New visitor access on w.bio",
             referrer: document.referrer || "Direct Access"
-          };
-
-          emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
-            .then(() => {
-              sessionStorage.setItem("email_notified", "true");
-            })
-            .catch((error) => {
-              console.error("Error sending email:", error);
-            });
+          }).then(() => sessionStorage.setItem("email_notified", "true")).catch(() => {});
         }, 3000);
       }
     }
@@ -1113,61 +1066,23 @@
       const sendBtnText = document.getElementById("send-btn-text");
       const messageInput = document.getElementById("visitor-message");
 
-      function openModal() {
-        modal.classList.add("active");
-        modal.setAttribute("aria-hidden", "false");
-      }
-
-      function closeModal() {
-        modal.classList.remove("active");
-        modal.setAttribute("aria-hidden", "true");
-        messageInput.value = "";
-      }
-
-      openBtn.addEventListener("click", openModal);
-      closeBtn.addEventListener("click", closeModal);
-      modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+      openBtn.addEventListener("click", () => { modal.classList.add("active"); modal.setAttribute("aria-hidden", "false"); });
+      closeBtn.addEventListener("click", () => { modal.classList.remove("active"); modal.setAttribute("aria-hidden", "true"); messageInput.value = ""; });
+      modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("active"); });
 
       sendBtn.addEventListener("click", () => {
         const userMsg = messageInput.value.trim();
-        if (!userMsg) {
-          alert("Please enter your message!");
-          return;
-        }
+        if (!userMsg) { alert("Please enter your message!"); return; }
 
         sendBtnText.textContent = "Sending...";
-        sendBtn.style.opacity = "0.7";
-
-        sessionStorage.setItem("email_notified", "true");
-
         const { device, location } = getDeviceAndLocationInfo();
-        const templateParams = {
+        emailjs.send(SERVICE_ID, TEMPLATE_ID, {
           time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
-          device: device,
-          location: location,
-          message: userMsg, 
-          referrer: "Instant Message Pop-up (Web Form)"
-        };
-
-        emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
-          .then(() => {
-            sendBtnText.textContent = "Sent Successfully!";
-            sendBtn.style.background = "#22c55e";
-            setTimeout(() => {
-              closeModal();
-              sendBtnText.textContent = "Send";
-              sendBtn.style.background = "rgba(255, 255, 255, 0.15)";
-              sendBtn.style.opacity = "1";
-            }, 1500);
-          })
-          .catch((error) => {
-            console.error("Error sending message:", error);
-            sendBtnText.textContent = "Send Failed!";
-            setTimeout(() => {
-              sendBtnText.textContent = "Send";
-              sendBtn.style.opacity = "1";
-            }, 2000);
-          });
+          device: device, location: location, message: userMsg, referrer: "Instant Message Pop-up"
+        }).then(() => {
+          sendBtnText.textContent = "Sent Successfully!";
+          setTimeout(() => { modal.classList.remove("active"); sendBtnText.textContent = "Send"; messageInput.value = ""; }, 1500);
+        }).catch(() => { sendBtnText.textContent = "Send Failed!"; setTimeout(() => sendBtnText.textContent = "Send", 2000); });
       });
     }
 
@@ -1190,7 +1105,6 @@
         `;
         fragment.appendChild(a);
       });
-
       container.innerHTML = '';
       container.appendChild(fragment);
     }
@@ -1211,16 +1125,16 @@
           const topBarH = topBarEl ? topBarEl.offsetHeight : 0;
           const headerH = profileHeaderEl ? profileHeaderEl.offsetHeight : 0;
           const navH = bottomNavEl ? bottomNavEl.offsetHeight : 0;
-          
-          const currentTabPage = tabPages[index];
-          const contentH = currentTabPage ? currentTabPage.scrollHeight : 0;
-
-          const totalH = topBarH + headerH + contentH + navH;
-          mainCard.style.height = `${totalH}px`;
+          const contentH = tabPages[index] ? tabPages[index].scrollHeight : 0;
+          mainCard.style.height = `${topBarH + headerH + contentH + navH}px`;
         });
       }
 
       function switchTab(index) {
+        // Hiệu ứng liquid glass thu phóng mượt mà khi chuyển tab
+        mainCard.classList.add("tab-animating");
+        setTimeout(() => mainCard.classList.remove("tab-animating"), 350);
+
         viewport.style.transform = `translate3d(-${index * 33.3333}%, 0, 0)`;
 
         const activeBtn = navBtns[index];
@@ -1230,33 +1144,20 @@
 
         navBtns.forEach((btn, i) => btn.classList.toggle("active", i === index));
 
-        if (index === 1) {
-          mainCard.classList.remove("compact-mode");
-        } else {
-          mainCard.classList.add("compact-mode");
-        }
+        if (index === 1) mainCard.classList.remove("compact-mode");
+        else mainCard.classList.add("compact-mode");
 
         adjustCardHeight(index);
       }
 
-      navBtns.forEach((btn, i) => {
-        btn.addEventListener("click", () => switchTab(i));
-      });
+      navBtns.forEach((btn, i) => btn.addEventListener("click", () => switchTab(i)));
 
-      let resizeTimer;
       window.addEventListener("resize", () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          const activeBtn = document.querySelector(".nav-tab-btn.active");
-          if (activeBtn) {
-            switchTab(parseInt(activeBtn.getAttribute("data-index") || "1"));
-          }
-        }, 100);
+        const activeBtn = document.querySelector(".nav-tab-btn.active");
+        if (activeBtn) switchTab(parseInt(activeBtn.getAttribute("data-index") || "1"));
       });
 
-      requestAnimationFrame(() => {
-        switchTab(1);
-      });
+      requestAnimationFrame(() => switchTab(1));
     }
 
     function initThemeToggle() {
@@ -1283,68 +1184,36 @@
       const shareUrl = (typeof bioData !== 'undefined' && bioData.profile && bioData.profile.shareUrl) ? bioData.profile.shareUrl : window.location.href;
       let qrGenerated = false;
 
-      function openModal() {
+      openBtn.addEventListener("click", () => {
         modal.classList.add("active");
         modal.setAttribute("aria-hidden", "false");
         if (!qrGenerated) {
-          new QRCode(qrCanvas, {
-            text: shareUrl,
-            width: 156,
-            height: 156,
-            colorDark: "#08090a",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H
-          });
+          new QRCode(qrCanvas, { text: shareUrl, width: 156, height: 156, colorDark: "#08090a", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H });
           qrGenerated = true;
         }
-      }
-
-      function closeModal() {
-        modal.classList.remove("active");
-        modal.setAttribute("aria-hidden", "true");
-      }
-
-      openBtn.addEventListener("click", openModal);
-      closeBtn.addEventListener("click", closeModal);
-      modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+      });
+      closeBtn.addEventListener("click", () => modal.classList.remove("active"));
+      modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("active"); });
 
       copyBtn.addEventListener("click", () => {
         navigator.clipboard.writeText(shareUrl).then(() => {
           copyText.textContent = "Copied!";
           copyBtn.style.background = "#22c55e";
-
-          setTimeout(() => {
-            copyText.textContent = "Copy link";
-            copyBtn.style.background = "rgba(255, 255, 255, 0.15)";
-          }, 2000);
-        }).catch(() => {
-          copyText.textContent = "Error!";
+          setTimeout(() => { copyText.textContent = "Copy link"; copyBtn.style.background = "rgba(255, 255, 255, 0.15)"; }, 2000);
         });
       });
     }
 
-    /* TRÌNH PHÁT NHẠC WEB AUDIO API - CHỈ PHÁT KHI ẤN NÚT THỦ CÔNG */
     function initAudioPlayer() {
       const musicBtn = document.getElementById("music-toggle-btn");
       const musicIcon = document.getElementById("music-icon");
-
       if (!musicBtn) return;
 
-      let audioCtx = null;
-      let audioBuffer = null;
-      let sourceNode = null;
-      let gainNode = null;
-      let isPlaying = false;
-      let isLoaded = false;
+      let audioCtx = null, audioBuffer = null, sourceNode = null, gainNode = null, isPlaying = false, isLoaded = false;
 
       function updateUI(playing) {
-        if (playing) {
-          musicBtn.classList.add("playing");
-          musicIcon.className = "fa-solid fa-compact-disc";
-        } else {
-          musicBtn.classList.remove("playing");
-          musicIcon.className = "fa-solid fa-music";
-        }
+        if (playing) { musicBtn.classList.add("playing"); musicIcon.className = "fa-solid fa-compact-disc"; }
+        else { musicBtn.classList.remove("playing"); musicIcon.className = "fa-solid fa-music"; }
       }
 
       async function loadAudioFile() {
@@ -1354,64 +1223,34 @@
           audioCtx = new (window.AudioContext || window.webkitAudioContext)();
           audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
           isLoaded = true;
-        } catch (e) {
-          console.log("Lỗi tải tệp âm thanh:", e);
-        }
+        } catch (e) { console.log("Audio load error:", e); }
       }
 
-      function playSound() {
-        if (!isLoaded || !audioBuffer) return;
-        if (audioCtx.state === 'suspended') {
-          audioCtx.resume();
-        }
-
-        if (sourceNode) {
-          try { sourceNode.stop(); } catch(e) {}
-        }
-
-        sourceNode = audioCtx.createBufferSource();
-        sourceNode.buffer = audioBuffer;
-        sourceNode.loop = true;
-
-        gainNode = audioCtx.createGain();
-        gainNode.gain.value = 0.4;
-
-        sourceNode.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-
-        sourceNode.start(0);
-        isPlaying = true;
-        updateUI(true);
-      }
-
-      function stopSound() {
-        if (sourceNode) {
-          try { sourceNode.stop(); } catch(e) {}
-          sourceNode = null;
-        }
-        isPlaying = false;
-        updateUI(false);
-      }
-
-      loadAudioFile();
-
-      // Chỉ lắng nghe sự kiện click trực tiếp lên nút bấm phát/dừng nhạc
       musicBtn.addEventListener("click", async (e) => {
         e.stopPropagation();
-        if (!isLoaded) {
-          await loadAudioFile();
-        }
-        if (audioCtx && audioCtx.state === 'suspended') {
-          await audioCtx.resume();
-        }
+        if (!isLoaded) await loadAudioFile();
+        if (audioCtx && audioCtx.state === 'suspended') await audioCtx.resume();
 
         if (isPlaying) {
-          stopSound();
+          if (sourceNode) { try { sourceNode.stop(); } catch(err) {} sourceNode = null; }
+          isPlaying = false;
+          updateUI(false);
         } else {
-          playSound();
+          if (!audioBuffer) return;
+          sourceNode = audioCtx.createBufferSource();
+          sourceNode.buffer = audioBuffer;
+          sourceNode.loop = true;
+          gainNode = audioCtx.createGain();
+          gainNode.gain.value = 0.4;
+          sourceNode.connect(gainNode);
+          gainNode.connect(audioCtx.destination);
+          sourceNode.start(0);
+          isPlaying = true;
+          updateUI(true);
         }
       });
     }
   </script>
 </body>
 </html>
+```[cite: 2]
