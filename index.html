@@ -195,18 +195,19 @@
       100% { transform: translate3d(100px, -60px, 0) scale(0.85); }
     }
 
-    /* MAGICAL FIREFLIES (ĐOM ĐÓM LUNG LINH HƠN 50 HẠT) */
+    /* MAGICAL FIREFLIES (HƠN 60 ĐOM ĐÓM LUNG LINH RÕ NÉT) */
     .firefly {
       position: absolute;
       border-radius: 50%;
       pointer-events: none;
       will-change: transform, opacity;
+      z-index: 3;
       animation: fireflyTwinkle var(--twinkle-duration, 3s) infinite ease-in-out;
     }
 
     @keyframes fireflyTwinkle {
-      0%, 100% { opacity: 0.15; transform: scale(0.7); }
-      50% { opacity: 0.95; transform: scale(1.4); filter: drop-shadow(0 0 10px currentColor); }
+      0%, 100% { opacity: 0.2; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.4); }
     }
 
     .glass-mesh-overlay {
@@ -927,12 +928,12 @@
       initMagicalFireflies(); 
     });
 
-    /* HỆ THỐNG HƠN 50 ĐOM ĐÓM LUNG LINH & TỤ LẠI TỰ NHIÊN THEO CON TRỎ */
+    /* HỆ THỐNG HƠN 60 ĐOM ĐÓM LUNG LINH & TỤ LẠI THEO CON TRỎ */
     function initMagicalFireflies() {
       const container = document.getElementById('firefly-canvas');
       if (!container) return;
 
-      const fireflyCount = 65; // Đặt số lượng lớn hơn 50 (65 hạt)
+      const fireflyCount = 65;
       const fireflies = [];
 
       let mouseX = window.innerWidth / 2;
@@ -955,23 +956,21 @@
 
       window.addEventListener('mouseleave', () => { isInside = false; });
 
-      // Tạo các hạt đom đóm với kích thước, vị trí và màu sắc ngẫu nhiên
       for (let i = 0; i < fireflyCount; i++) {
         const el = document.createElement('div');
         el.className = 'firefly';
 
-        const size = 2 + Math.random() * 4.5; // Kích thước đa dạng từ hạt li ti đến hạt vừa
+        const size = 3 + Math.random() * 4.5;
         const x = Math.random() * window.innerWidth;
         const y = Math.random() * window.innerHeight;
         
-        // Bảng màu lấp lánh (trắng sáng, vàng ấm, xanh ngọc dịu nhẹ)
         const colors = ['#ffffff', '#fffbeb', '#fef08a', '#e0f2fe', '#bae6fd', '#fbcfe8'];
         const color = colors[Math.floor(Math.random() * colors.length)];
 
         el.style.width = `${size}px`;
         el.style.height = `${size}px`;
         el.style.backgroundColor = color;
-        el.style.boxShadow = `0 0 ${size * 2.5}px ${color}, 0 0 ${size * 5}px ${color}`;
+        el.style.boxShadow = `0 0 ${size * 3}px ${color}, 0 0 ${size * 6}px ${color}`;
         el.style.setProperty('--twinkle-duration', `${2.5 + Math.random() * 3.5}s`);
 
         container.appendChild(el);
@@ -982,21 +981,18 @@
           y: y,
           baseX: x,
           baseY: y,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          angle: Math.random() * Math.PI * 2,
-          speed: 0.4 + Math.random() * 0.8
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: (Math.random() - 0.5) * 0.6,
+          angle: Math.random() * Math.PI * 2
         });
       }
 
-      // Vòng lặp chuyển động mượt mà (Animation Loop)
       function animate() {
         fireflies.forEach(f => {
-          f.angle += 0.015;
-          f.baseX += f.vx + Math.cos(f.angle) * 0.25;
-          f.baseY += f.vy + Math.sin(f.angle) * 0.25;
+          f.angle += 0.02;
+          f.baseX += f.vx + Math.cos(f.angle) * 0.3;
+          f.baseY += f.vy + Math.sin(f.angle) * 0.3;
 
-          // Vòng lặp biên màn hình
           if (f.baseX < 0) f.baseX = window.innerWidth;
           if (f.baseX > window.innerWidth) f.baseX = 0;
           if (f.baseY < 0) f.baseY = window.innerHeight;
@@ -1005,21 +1001,20 @@
           let targetX = f.baseX;
           let targetY = f.baseY;
 
-          // Hiệu ứng tụ lại tự nhiên khi chuột/touch ở gần (< 200px)
           if (isInside) {
             const dx = mouseX - f.baseX;
             const dy = mouseY - f.baseY;
             const dist = Math.sqrt(dx * dx + dy * dy);
 
-            if (dist < 200 && dist > 10) {
-              const pull = (200 - dist) / 200;
-              targetX += dx * pull * 0.4;
-              targetY += dy * pull * 0.4;
+            if (dist < 220 && dist > 5) {
+              const pull = (220 - dist) / 220;
+              targetX += dx * pull * 0.45;
+              targetY += dy * pull * 0.45;
             }
           }
 
-          f.x += (targetX - f.x) * 0.07;
-          f.y += (targetY - f.y) * 0.07;
+          f.x += (targetX - f.x) * 0.08;
+          f.y += (targetY - f.y) * 0.08;
 
           f.el.style.transform = `translate3d(${f.x}px, ${f.y}px, 0)`;
         });
