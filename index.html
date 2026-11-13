@@ -27,8 +27,6 @@
   <meta name="twitter:title" content="Nhật Huy | w.bio">
   <meta name="twitter:description" content="ung dung. — Contact me.">
   <meta name="twitter:image" content="https://nhztwiie.github.io/w/images/Huy.png">
-
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/email.png">
 
   <!-- Fonts: Plus Jakarta Sans -->
@@ -36,41 +34,44 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 
-  <!-- Icons & QRCode JS -->
+  <!-- Icons, QRCode JS & EmailJS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-  <!-- EmailJS SDK -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <!-- Motion One (~3.8KB lightweight physics/spring animation engine) -->
+  <script src="https://cdn.jsdelivr.net/npm/motion@10.16.4/dist/motion.js"></script>
 
   <style>
     /* ==========================================================
-       TITANIUM & LIQUID GLASS SYSTEM - SOFT WHITE FIREFLIES
+       TITANIUM & LIQUID GLASS SYSTEM - ENHANCED MOTION & LIGHTING
        ========================================================== */
     :root[data-theme="dark"] {
       --bg-gradient: radial-gradient(circle at 50% 0%, #2a2d32 0%, #111317 65%, #08090a 100%);
       
-      --glass-bg: rgba(255, 255, 255, 0.05);
-      --glass-border: rgba(255, 255, 255, 0.18);
+      --glass-bg: rgba(255, 255, 255, 0.045);
+      --glass-border: rgba(255, 255, 255, 0.16);
       --glass-border-highlight: rgba(255, 255, 255, 0.45);
       --glass-shadow: 
         0 30px 80px rgba(0, 0, 0, 0.8),
         inset 0 1px 2px rgba(255, 255, 255, 0.35),
         inset 0 -1px 2px rgba(0, 0, 0, 0.7);
-      --glass-glow: rgba(224, 224, 224, 0.15);
+      --glass-glow: rgba(255, 255, 255, 0.18);
+      --spotlight-color: rgba(255, 255, 255, 0.12);
+      --border-glow-color: rgba(255, 255, 255, 0.65);
 
       --text-title: #ffffff;
       --text-sub: #d1d5db;
       --text-quote: #f3f4f6;
       --text-author: #9ca3af;
 
-      --pill-bg: rgba(255, 255, 255, 0.06);
-      --pill-border: rgba(255, 255, 255, 0.18);
-      --pill-hover-bg: rgba(255, 255, 255, 0.14);
+      --pill-bg: rgba(255, 255, 255, 0.055);
+      --pill-border: rgba(255, 255, 255, 0.16);
+      --pill-hover-bg: rgba(255, 255, 255, 0.12);
       --pill-hover-border: rgba(255, 255, 255, 0.5);
-      --pill-hover-glow: 0 12px 32px rgba(255, 255, 255, 0.15);
+      --pill-hover-glow: 0 12px 32px rgba(255, 255, 255, 0.12);
 
-      --dock-bg: rgba(20, 22, 26, 0.5);
+      --dock-bg: rgba(20, 22, 26, 0.55);
       --dock-border: rgba(255, 255, 255, 0.2);
       --indicator-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, rgba(160, 160, 160, 0.18) 100%);
       --indicator-border: rgba(255, 255, 255, 0.45);
@@ -78,39 +79,45 @@
       --orb-1: rgba(255, 255, 255, 0.35);
       --orb-2: rgba(160, 170, 190, 0.4);
       --orb-3: rgba(210, 215, 225, 0.3);
+      --shimmer-highlight: #ffffff;
+      --shimmer-base: #9ca3af;
     }
 
     :root[data-theme="light"] {
-      --bg-gradient: radial-gradient(circle at 50% 0%, #f3f4f6 0%, #e5e7eb 60%, #cbd5e1 100%);
+      --bg-gradient: radial-gradient(circle at 50% 0%, #f8fafc 0%, #e2e8f0 60%, #cbd5e1 100%);
 
-      --glass-bg: rgba(255, 255, 255, 0.65);
+      --glass-bg: rgba(255, 255, 255, 0.68);
       --glass-border: rgba(255, 255, 255, 0.9);
       --glass-border-highlight: rgba(255, 255, 255, 1);
       --glass-shadow: 
-        0 25px 60px rgba(0, 0, 0, 0.08),
+        0 25px 60px rgba(15, 23, 42, 0.08),
         inset 0 1.5px 2px rgba(255, 255, 255, 0.95),
         inset 0 -1.5px 3px rgba(0, 0, 0, 0.03);
-      --glass-glow: rgba(0, 0, 0, 0.05);
+      --glass-glow: rgba(245, 158, 11, 0.18);
+      --spotlight-color: rgba(255, 255, 255, 0.65);
+      --border-glow-color: rgba(255, 255, 255, 1);
 
-      --text-title: #111827;
-      --text-sub: #4b5563;
-      --text-quote: #111827;
-      --text-author: #6b7280;
+      --text-title: #0f172a;
+      --text-sub: #475569;
+      --text-quote: #1e293b;
+      --text-author: #64748b;
 
-      --pill-bg: rgba(255, 255, 255, 0.75);
+      --pill-bg: rgba(255, 255, 255, 0.72);
       --pill-border: rgba(255, 255, 255, 0.95);
       --pill-hover-bg: rgba(255, 255, 255, 0.95);
-      --pill-hover-border: #9ca3af;
-      --pill-hover-glow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      --pill-hover-border: #94a3b8;
+      --pill-hover-glow: 0 12px 30px rgba(15, 23, 42, 0.08);
 
-      --dock-bg: rgba(255, 255, 255, 0.7);
+      --dock-bg: rgba(255, 255, 255, 0.72);
       --dock-border: rgba(255, 255, 255, 0.95);
-      --indicator-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(229, 231, 235, 0.85) 100%);
-      --indicator-border: rgba(156, 163, 175, 0.5);
+      --indicator-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(226, 232, 240, 0.85) 100%);
+      --indicator-border: rgba(148, 163, 184, 0.5);
 
       --orb-1: rgba(255, 255, 255, 0.9);
-      --orb-2: rgba(203, 213, 225, 0.6);
+      --orb-2: rgba(253, 230, 138, 0.45);
       --orb-3: rgba(226, 232, 240, 0.7);
+      --shimmer-highlight: #d97706;
+      --shimmer-base: #1e293b;
     }
 
     * {
@@ -133,89 +140,99 @@
       overflow-x: hidden;
       overflow-y: auto;
       padding: 24px 16px;
-      transition: background 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* BACKGROUND ORBS */
+    /* ==========================================================
+       VIEW TRANSITIONS API (CIRCULAR REVEAL - TELEGRAM/ANTFU STYLE)
+       ========================================================== */
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none;
+      mix-blend-mode: normal;
+    }
+    ::view-transition-old(root) { z-index: 1; }
+    ::view-transition-new(root) { z-index: 9999; }
+
+    /* ==========================================================
+       INTERACTIVE AMBIENT CANVAS & LIQUID ORBS
+       ========================================================== */
     .ios26-bg-canvas {
       position: fixed;
-      top: 0; left: 0;
+      inset: 0;
       width: 100vw; height: 100vh;
       z-index: 1;
       pointer-events: none;
       overflow: hidden;
     }
 
-    /* CANVAS ĐOM ĐÓM TRẮNG LỬNG LỜ */
-    #firefly-canvas {
+    #ambient-canvas {
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      z-index: 3;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 2;
       pointer-events: none;
     }
 
     .liquid-orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(25px);
+      filter: blur(32px);
       mix-blend-mode: overlay;
-      will-change: transform, opacity;
+      will-change: transform;
       opacity: 0.85;
     }
 
     .orb-primary {
       width: 420px; height: 420px;
       top: -80px; left: -60px;
-      background: radial-gradient(circle at 35% 35%, var(--orb-1) 0%, rgba(255,255,255,0.1) 60%, transparent 80%);
-      animation: floatFluid1 12s infinite ease-in-out alternate;
+      background: radial-gradient(circle at 35% 35%, var(--orb-1) 0%, transparent 75%);
+      animation: floatFluid1 14s infinite ease-in-out alternate;
     }
 
     .orb-secondary {
       width: 380px; height: 380px;
       bottom: -60px; right: -50px;
-      background: radial-gradient(circle at 35% 35%, var(--orb-2) 0%, rgba(255,255,255,0.08) 60%, transparent 80%);
-      animation: floatFluid2 15s infinite ease-in-out alternate;
+      background: radial-gradient(circle at 35% 35%, var(--orb-2) 0%, transparent 75%);
+      animation: floatFluid2 17s infinite ease-in-out alternate;
     }
 
     .orb-accent {
       width: 300px; height: 300px;
       top: 40%; left: 30%;
-      background: radial-gradient(circle at 35% 35%, var(--orb-3) 0%, rgba(255,255,255,0.1) 60%, transparent 80%);
-      animation: floatFluid3 10s infinite ease-in-out alternate;
+      background: radial-gradient(circle at 35% 35%, var(--orb-3) 0%, transparent 75%);
+      animation: floatFluid3 12s infinite ease-in-out alternate;
     }
 
     @keyframes floatFluid1 {
-      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
-      50% { transform: translate3d(120px, 80px, 0) scale(1.15) rotate(15deg); }
-      100% { transform: translate3d(40px, 140px, 0) scale(0.9) rotate(-10deg); }
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      100% { transform: translate3d(80px, 110px, 0) scale(1.1); }
     }
-
     @keyframes floatFluid2 {
-      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
-      50% { transform: translate3d(-100px, -90px, 0) scale(1.2) rotate(-20deg); }
-      100% { transform: translate3d(-40px, -150px, 0) scale(0.95) rotate(10deg); }
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      100% { transform: translate3d(-80px, -110px, 0) scale(1.15); }
     }
-
     @keyframes floatFluid3 {
       0% { transform: translate3d(0, 0, 0) scale(0.9); }
-      50% { transform: translate3d(-90px, 70px, 0) scale(1.25); }
-      100% { transform: translate3d(100px, -60px, 0) scale(0.85); }
+      100% { transform: translate3d(70px, -60px, 0) scale(1.15); }
     }
 
     .glass-mesh-overlay {
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
+      inset: 0;
       background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
       background-size: 20px 20px;
-      z-index: 2;
+      z-index: 3;
       pointer-events: none;
       opacity: 0.3;
     }
 
-    /* MAIN CARD CONTAINER */
+    /* ==========================================================
+       MAIN CARD + RAYCAST CURSOR SPOTLIGHT & BORDER GLOW
+       ========================================================== */
     .liquid-card-ios26 {
+      --mouse-x: 50%;
+      --mouse-y: 0%;
       position: relative;
       z-index: 10;
       width: 100%;
@@ -229,26 +246,58 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      transition: height 0.45s cubic-bezier(0.19, 1, 0.22, 1), background 0.4s ease, border-color 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: height 0.5s cubic-bezier(0.32, 0.72, 0, 1), background 0.4s ease, border-color 0.4s ease;
       transform: translateZ(0);
-      backface-visibility: hidden;
     }
 
-    .liquid-card-ios26.tab-animating {
-      transform: scale(0.985);
-      filter: blur(0.5px);
-    }
-
-    .liquid-card-ios26::before {
+    /* Raycast Surface Spotlight */
+    .liquid-card-ios26::after {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1.5px;
-      background: linear-gradient(90deg, transparent, var(--glass-border-highlight), transparent);
-      z-index: 15;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(
+        380px circle at var(--mouse-x) var(--mouse-y),
+        var(--spotlight-color),
+        transparent 75%
+      );
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 5;
     }
 
-    /* TOP BAR */
+    .liquid-card-ios26:hover::after {
+      opacity: 1;
+    }
+
+    /* Raycast Border Glow Mask */
+    .card-border-glow {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.5px;
+      background: radial-gradient(
+        260px circle at var(--mouse-x) var(--mouse-y),
+        var(--border-glow-color),
+        transparent 75%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 25;
+    }
+
+    .liquid-card-ios26:hover .card-border-glow {
+      opacity: 1;
+    }
+
+    /* ==========================================================
+       TOP BAR & HAPTIC BUTTONS
+       ========================================================== */
     .top-bar {
       padding: 20px 24px 6px;
       display: flex;
@@ -277,11 +326,11 @@
       cursor: pointer;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: transform 0.25s cubic-bezier(0.32, 0.72, 0, 1);
     }
 
-    .theme-toggle-track:hover { transform: scale(1.05); }
-    .theme-toggle-track:active { transform: scale(0.95); }
+    .theme-toggle-track:hover { transform: scale(1.04); }
+    .theme-toggle-track:active { transform: scale(0.96); }
 
     .theme-orb-indicator {
       position: absolute;
@@ -294,18 +343,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease;
-      will-change: transform;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease;
     }
 
     .orb-icon {
       font-size: 0.9rem;
       transition: opacity 0.3s ease, transform 0.3s ease;
       position: absolute;
+      color: #111827;
     }
 
-    .icon-sun { opacity: 0; transform: scale(0.5) rotate(-90deg); color: #111827; }
-    .icon-moon { opacity: 1; transform: scale(1) rotate(0deg); color: #111827; }
+    .icon-sun { opacity: 0; transform: scale(0.5) rotate(-90deg); }
+    .icon-moon { opacity: 1; transform: scale(1) rotate(0deg); }
 
     [data-theme="light"] .theme-orb-indicator {
       transform: translate3d(36px, 0, 0);
@@ -314,7 +363,11 @@
     [data-theme="light"] .icon-sun { opacity: 1; transform: scale(1) rotate(0deg); }
     [data-theme="light"] .icon-moon { opacity: 0; transform: scale(0.5) rotate(90deg); }
 
+    /* Haptic Feedback (:active scale 0.96) + Spotlight */
     .glass-btn-ios26 {
+      --btn-x: 50%;
+      --btn-y: 50%;
+      position: relative;
       width: 42px; height: 42px;
       border-radius: 18px;
       background: var(--pill-bg);
@@ -328,21 +381,32 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.3);
-      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      transition: transform 0.22s cubic-bezier(0.32, 0.72, 0, 1), border-color 0.3s ease, background 0.3s ease;
     }
 
+    .glass-btn-ios26::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(45px circle at var(--btn-x) var(--btn-y), var(--spotlight-color), transparent 80%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+
+    .glass-btn-ios26:hover::before { opacity: 1; }
     .glass-btn-ios26:hover {
-      transform: translateY(-3px) scale(1.08);
+      transform: translateY(-2px) scale(1.05);
       border-color: var(--text-sub);
       background: var(--pill-hover-bg);
-      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+    }
+    .glass-btn-ios26:active {
+      transform: scale(0.96);
     }
 
-    .glass-btn-ios26:active { transform: scale(0.92); }
-
     .music-btn.playing i {
-      animation: spinMusic 3s linear infinite;
-      color: var(--text-sub);
+      animation: spinMusic 3.5s linear infinite;
     }
 
     @keyframes spinMusic {
@@ -350,7 +414,9 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* PROFILE HEADER */
+    /* ==========================================================
+       PROFILE HEADER + AVATAR BREATHING & 3D TILT
+       ========================================================== */
     .profile-header {
       display: flex;
       flex-direction: column;
@@ -360,23 +426,49 @@
       padding: 12px 24px 8px;
       z-index: 15;
       flex-shrink: 0;
-      transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), margin 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+      perspective: 700px;
+      transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1), margin 0.45s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    .avatar-tilt-wrapper {
+      position: relative;
+      width: 106px;
+      height: 106px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+
+    /* Breathing Glow Halo */
+    .avatar-breathing-glow {
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--glass-border-highlight) 0%, transparent 70%);
+      filter: blur(12px);
+      z-index: 0;
+      pointer-events: none;
+      animation: avatarBreathing 4.5s ease-in-out infinite;
+    }
+
+    @keyframes avatarBreathing {
+      0%, 100% { transform: scale(0.92); opacity: 0.35; }
+      50% { transform: scale(1.12); opacity: 0.75; }
     }
 
     .avatar-ring {
       position: relative;
+      z-index: 1;
       width: 104px; height: 104px;
       border-radius: 50%;
       padding: 4px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.05) 100%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.08) 100%);
       border: 1.5px solid var(--glass-border);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3), 0 0 25px var(--glass-glow);
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-    }
-
-    .avatar-ring:hover {
-      transform: scale(1.06) rotate(3deg);
-      box-shadow: 0 20px 45px rgba(255, 255, 255, 0.2), 0 0 35px var(--glass-glow);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      will-change: transform;
     }
 
     .avatar-ring img {
@@ -384,19 +476,19 @@
       object-fit: cover;
       border-radius: 50%;
       filter: grayscale(100%);
-      transition: filter 0.4s ease, transform 0.4s ease;
+      transition: filter 0.5s ease, transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
     }
 
-    .avatar-ring:hover img { 
+    .avatar-tilt-wrapper:hover .avatar-ring img { 
       filter: grayscale(0%); 
-      transform: scale(1.04);
+      transform: scale(1.06);
     }
 
     .profile-meta {
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
     }
 
     .profile-name {
@@ -405,12 +497,6 @@
       color: var(--text-title);
       margin-top: 12px;
       letter-spacing: -0.03em;
-      transition: color 0.3s ease, transform 0.3s ease;
-    }
-
-    .profile-name:hover {
-      transform: scale(1.02);
-      color: var(--text-sub);
     }
 
     .profile-tagline {
@@ -432,11 +518,14 @@
       pointer-events: none;
     }
 
-    /* VIEWPORT SLIDER */
+    /* ==========================================================
+       SPRING TAB VIEWPORT & QUOTE BLUR REVEAL + TEXT SHIMMER
+       ========================================================== */
     .viewport-wrapper {
       width: 100%;
       overflow: hidden;
       flex: 1;
+      z-index: 12;
     }
 
     .viewport {
@@ -444,7 +533,7 @@
       display: flex;
       align-items: flex-start;
       transform: translate3d(-33.3333%, 0, 0);
-      transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+      transition: transform 0.52s cubic-bezier(0.32, 0.72, 0, 1);
       will-change: transform;
     }
 
@@ -454,11 +543,19 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.32, 0.72, 0, 1), filter 0.4s ease;
     }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
+    .tab-page.inactive-tab {
+      opacity: 0.35;
+      transform: scale(0.95);
+      filter: blur(4px);
+    }
+
+    .tab-page.active-tab {
+      opacity: 1;
+      transform: scale(1);
+      filter: blur(0px);
     }
 
     .ios26-quote-card {
@@ -472,21 +569,50 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
-      animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1), border-color 0.3s ease;
     }
 
     .ios26-quote-card:hover {
-      transform: translateY(-4px) scale(1.02);
-      border-color: var(--text-sub);
-      box-shadow: 0 15px 35px rgba(255, 255, 255, 0.08), inset 0 1px 3px rgba(255, 255, 255, 0.4);
+      transform: translateY(-3px);
+      border-color: var(--glass-border-highlight);
     }
 
     .quote-text {
       font-size: 1.1rem;
       font-weight: 600;
       color: var(--text-quote);
-      line-height: 1.6;
+      line-height: 1.65;
+    }
+
+    /* Blur Reveal Word Tokens */
+    .reveal-word {
+      display: inline-block;
+      opacity: 0;
+      filter: blur(8px);
+      transform: translateY(10px);
+      will-change: transform, opacity, filter;
+    }
+
+    /* Text Shimmer for "the sun will rise" */
+    .shimmer-sunrise {
+      background: linear-gradient(
+        110deg,
+        var(--shimmer-base) 20%,
+        var(--shimmer-highlight) 48%,
+        #fbbf24 52%,
+        var(--shimmer-base) 80%
+      );
+      background-size: 220% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textShimmerFlow 4.2s linear infinite;
+      font-weight: 700;
+    }
+
+    @keyframes textShimmerFlow {
+      0% { background-position: 200% center; }
+      100% { background-position: -200% center; }
     }
 
     .quote-author {
@@ -495,8 +621,13 @@
       color: var(--text-author);
       margin-top: 14px;
       display: block;
+      opacity: 0;
+      transform: translateY(6px);
     }
 
+    /* ==========================================================
+       LINKS LIST + SPOTLIGHT + HAPTIC PRESS
+       ========================================================== */
     .links-list {
       width: 100%;
       display: flex;
@@ -504,8 +635,9 @@
       gap: 12px;
     }
 
-    /* LIQUID GLASS DYNAMIC LINK ITEMS */
     .ios26-link-item {
+      --btn-x: 50%;
+      --btn-y: 50%;
       position: relative;
       display: flex;
       align-items: center;
@@ -519,37 +651,32 @@
       font-size: 0.95rem;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.2), 0 4px 15px rgba(0,0,0,0.05);
+      box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.2);
       overflow: hidden;
-      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-      animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      transition: transform 0.25s cubic-bezier(0.32, 0.72, 0, 1), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .ios26-link-item::after {
+    .ios26-link-item::before {
       content: '';
       position: absolute;
-      top: 0; left: -150%;
-      width: 150%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-      transform: skewX(-20deg);
-      transition: none;
+      inset: 0;
+      background: radial-gradient(180px circle at var(--btn-x) var(--btn-y), var(--spotlight-color), transparent 75%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
     }
 
-    .ios26-link-item:hover::after {
-      left: 150%;
-      transition: left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
+    .ios26-link-item:hover::before { opacity: 1; }
     .ios26-link-item:hover {
-      transform: translateY(-5px) scale(1.03);
+      transform: translateY(-3px) scale(1.015);
       background: var(--pill-hover-bg);
       border-color: var(--pill-hover-border);
-      box-shadow: var(--pill-hover-glow), inset 0 1.5px 3px rgba(255, 255, 255, 0.6);
+      box-shadow: var(--pill-hover-glow);
     }
 
-    .ios26-link-item:active { 
-      transform: translateY(-1px) scale(0.97); 
-      background: rgba(255, 255, 255, 0.2);
+    /* Haptic Feedback */
+    .ios26-link-item:active {
+      transform: scale(0.96);
     }
 
     .link-icon {
@@ -557,18 +684,18 @@
       border-radius: 50%;
       margin-right: 14px;
       object-fit: cover;
-      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
     }
 
     .ios26-link-item:hover .link-icon {
-      transform: scale(1.15) rotate(6deg);
+      transform: scale(1.12) rotate(5deg);
     }
 
     .link-label { 
       flex: 1; 
       text-align: left; 
       letter-spacing: -0.01em; 
-      transition: transform 0.35s ease, color 0.35s ease;
+      transition: transform 0.3s ease;
     }
 
     .ios26-link-item:hover .link-label {
@@ -578,14 +705,16 @@
     .link-arrow {
       font-size: 0.85rem;
       color: var(--text-sub);
-      transition: transform 0.35s ease;
+      transition: transform 0.3s ease;
     }
 
     .ios26-link-item:hover .link-arrow {
-      transform: translateX(5px);
+      transform: translateX(4px);
     }
 
-    /* BOTTOM NAV DOCK CAPSULE */
+    /* ==========================================================
+       APPLE MACOS DOCK (MAGNETIC MAGNIFICATION)
+       ========================================================== */
     .bottom-nav-container {
       padding: 6px 22px 22px;
       z-index: 30;
@@ -616,7 +745,7 @@
       border: 1.5px solid var(--indicator-border);
       border-radius: 34px;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.7);
-      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
       z-index: 1;
       will-change: transform;
     }
@@ -632,61 +761,72 @@
       cursor: pointer;
       position: relative;
       z-index: 2;
-      transition: transform 0.25s ease;
+      will-change: transform;
     }
 
-    .nav-tab-btn:hover { transform: scale(1.1); }
+    .nav-tab-btn:active {
+      transform: scale(0.96) !important;
+    }
 
     .nav-tab-btn i {
       font-size: 1.25rem;
-      color: rgba(255, 255, 255, 0.4);
-      transition: color 0.3s ease, transform 0.3s ease;
+      color: rgba(255, 255, 255, 0.45);
+      transition: color 0.3s ease;
+      pointer-events: none;
     }
 
-    [data-theme="light"] .nav-tab-btn i { color: #6b7280; }
+    [data-theme="light"] .nav-tab-btn i { color: #64748b; }
+    .nav-tab-btn.active i { color: var(--text-title); }
+    [data-theme="light"] .nav-tab-btn.active i { color: #0f172a; }
 
-    .nav-tab-btn.active i {
-      color: var(--text-title);
-      transform: scale(1.15);
-    }
-
-    [data-theme="light"] .nav-tab-btn.active i { color: #111827; }
-
-    /* MODAL SYSTEM */
+    /* ==========================================================
+       SPRING-BASED MODAL (LINEAR.APP & FAMILY.CO STYLE)
+       ========================================================== */
     .modal-backdrop {
       position: fixed;
-      top: 0; left: 0;
+      inset: 0;
       width: 100vw; height: 100vh;
-      background: rgba(0, 0, 0, 0.65);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 100;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.38s cubic-bezier(0.32, 0.72, 0, 1), backdrop-filter 0.38s cubic-bezier(0.32, 0.72, 0, 1), -webkit-backdrop-filter 0.38s cubic-bezier(0.32, 0.72, 0, 1);
     }
 
-    .modal-backdrop.active { opacity: 1; pointer-events: auto; }
+    .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
 
     .qr-glass-card {
       background: var(--glass-bg);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
       border: 1.5px solid var(--glass-border-highlight);
       border-radius: 40px;
       padding: 28px 24px;
       width: 88%;
       max-width: 320px;
       text-align: center;
-      transform: translate3d(0, 15px, 0) scale(0.95);
-      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: translate3d(0, 16px, 0) scale(0.95);
+      opacity: 0;
+      transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.35s ease;
+      will-change: transform, opacity;
       box-shadow: var(--glass-shadow);
     }
 
-    .modal-backdrop.active .qr-glass-card { transform: translate3d(0, 0, 0) scale(1); }
+    .modal-backdrop.active .qr-glass-card {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 1;
+    }
+
     .qr-title { font-size: 1.2rem; font-weight: 700; color: var(--text-title); margin-bottom: 18px; }
 
     .qr-box-wrapper {
@@ -732,14 +872,14 @@
       gap: 8px;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.22s cubic-bezier(0.32, 0.72, 0, 1), background 0.3s ease;
     }
 
     .btn-copy-link:hover {
-      transform: translateY(-2px) scale(1.03);
+      transform: translateY(-2px) scale(1.02);
       background: rgba(255, 255, 255, 0.25);
-      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
     }
+    .btn-copy-link:active { transform: scale(0.96); }
 
     .btn-close-modal {
       margin-top: 10px;
@@ -754,7 +894,8 @@
       opacity: 0.8;
       transition: opacity 0.2s ease, transform 0.2s ease;
     }
-    .btn-close-modal:hover { opacity: 1; transform: scale(1.05); }
+    .btn-close-modal:hover { opacity: 1; }
+    .btn-close-modal:active { transform: scale(0.96); }
 
     .email-textarea {
       width: 100%;
@@ -768,29 +909,29 @@
       resize: none;
       outline: none;
       margin-bottom: 12px;
+      user-select: text;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
     .email-textarea:focus { 
       border-color: var(--glass-border-highlight); 
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
     }
   </style>
 </head>
 <body>
 
-  <!-- BACKGROUND ORBS -->
+  <!-- BACKGROUND SPHERES & INTERACTIVE AMBIENT CANVAS -->
   <div class="ios26-bg-canvas">
     <div class="liquid-orb orb-primary"></div>
     <div class="liquid-orb orb-secondary"></div>
     <div class="liquid-orb orb-accent"></div>
   </div>
-  
-  <!-- CANVAS ĐOM ĐÓM TRẮNG LỬNG LỜ -->
-  <canvas id="firefly-canvas"></canvas>
+  <canvas id="ambient-canvas"></canvas>
   <div class="glass-mesh-overlay"></div>
 
   <!-- MAIN CARD CONTAINER -->
   <main class="liquid-card-ios26" id="main-card">
+    <div class="card-border-glow"></div>
     
     <!-- TOP BAR -->
     <div class="top-bar">
@@ -802,24 +943,27 @@
       </div>
 
       <div class="top-bar-controls">
-        <button class="glass-btn-ios26" id="open-email-modal-btn" aria-label="Quick Email">
+        <button class="glass-btn-ios26 spotlight-target" id="open-email-modal-btn" aria-label="Quick Email">
           <i class="fa-solid fa-envelope"></i>
         </button>
 
-        <button class="glass-btn-ios26 music-btn" id="music-toggle-btn" aria-label="Toggle Music">
+        <button class="glass-btn-ios26 spotlight-target music-btn" id="music-toggle-btn" aria-label="Toggle Music">
           <i class="fa-solid fa-music" id="music-icon"></i>
         </button>
 
-        <button class="glass-btn-ios26" id="open-qr-btn" aria-label="Open QR Code">
+        <button class="glass-btn-ios26 spotlight-target" id="open-qr-btn" aria-label="Open QR Code">
           <i class="fa-solid fa-qrcode"></i>
         </button>
       </div>
     </div>
 
-    <!-- PROFILE HEADER -->
+    <!-- PROFILE HEADER (AVATAR 3D TILT + BREATHING GLOW) -->
     <header class="profile-header">
-      <div class="avatar-ring">
-        <img src="images/Huy.png" alt="Avatar Nhật Huy" loading="eager">
+      <div class="avatar-tilt-wrapper" id="avatar-tilt">
+        <div class="avatar-breathing-glow"></div>
+        <div class="avatar-ring">
+          <img src="images/Huy.png" alt="Avatar Nhật Huy" loading="eager">
+        </div>
       </div>
       <div class="profile-meta">
         <h1 class="profile-name">Nhật Huy</h1>
@@ -832,29 +976,29 @@
       <div class="viewport" id="viewport">
 
         <!-- TAB 1: SOCIAL -->
-        <section class="tab-page" id="page-social">
+        <section class="tab-page inactive-tab" id="page-social">
           <div class="links-list" id="social-links-list"></div>
         </section>
 
-        <!-- TAB 2: HOME (QUOTE) -->
-        <section class="tab-page" id="page-home">
+        <!-- TAB 2: HOME (QUOTE WITH BLUR REVEAL & SHIMMER) -->
+        <section class="tab-page active-tab" id="page-home">
           <div class="ios26-quote-card">
-            <p class="quote-text">“<br>Even the darkest night will end,<br>and the sun will rise.</p>
-            <span class="quote-author">Les Misérables - Victor Hugo</span>
+            <p class="quote-text" id="quote-reveal-target">“<br>Even the darkest night will end,<br>and <span class="shimmer-sunrise">the sun will rise</span>.</p>
+            <span class="quote-author" id="quote-author-target">Les Misérables - Victor Hugo</span>
           </div>
         </section>
 
         <!-- TAB 3: WORK -->
-        <section class="tab-page" id="page-work">
+        <section class="tab-page inactive-tab" id="page-work">
           <div class="links-list" id="work-links-list"></div>
         </section>
 
       </div>
     </div>
 
-    <!-- NAVIGATION DOCK CAPSULE -->
+    <!-- NAVIGATION DOCK CAPSULE (MACOS MAGNETIC DOCK) -->
     <div class="bottom-nav-container">
-      <nav class="ios26-nav-dock">
+      <nav class="ios26-nav-dock" id="macos-dock">
         <div class="nav-indicator-pill" id="nav-indicator"></div>
         
         <button class="nav-tab-btn" data-index="0" aria-label="Social">
@@ -915,175 +1059,440 @@
         renderLinks("work-links-list", bioData.tabs.work);
       }
 
+      initCursorSpotlight();
+      initAvatarTilt3D();
+      initQuoteBlurReveal();
+      initMacOSDock();
+      initAmbientCanvas();
       initTabNavigation();
       initThemeToggle();
       initQRCodeModal();
       initEmailModal(); 
       initAudioPlayer();
-      initEmailJSNotifier();
-      initGentleWhiteFireflies(); 
+      initEmailJSNotifier(); 
     });
 
     /* ==========================================================
-       GENTLE WHITE FIREFLIES ENGINE (ĐOM ĐÓM NHỎ TRẮNG LỬNG LỜ)
+       1. RAYCAST CURSOR SPOTLIGHT & BORDER GLOW
        ========================================================== */
-    function initGentleWhiteFireflies() {
-      const canvas = document.getElementById('firefly-canvas');
+    function initCursorSpotlight() {
+      const mainCard = document.getElementById("main-card");
+      if (!mainCard) return;
+
+      mainCard.addEventListener("pointermove", (e) => {
+        const rect = mainCard.getBoundingClientRect();
+        mainCard.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+        mainCard.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+
+        const target = e.target.closest(".spotlight-target, .ios26-link-item");
+        if (target) {
+          const btnRect = target.getBoundingClientRect();
+          target.style.setProperty("--btn-x", `${e.clientX - btnRect.left}px`);
+          target.style.setProperty("--btn-y", `${e.clientY - btnRect.top}px`);
+        }
+      });
+    }
+
+    /* ==========================================================
+       2. AVATAR 3D PARALLAX TILT (MOTION ONE SPRING)
+       ========================================================== */
+    function initAvatarTilt3D() {
+      const wrapper = document.getElementById("avatar-tilt");
+      if (!wrapper) return;
+      const ring = wrapper.querySelector(".avatar-ring");
+      const animate = window.Motion?.animate;
+
+      wrapper.addEventListener("pointermove", (e) => {
+        const rect = wrapper.getBoundingClientRect();
+        const relX = (e.clientX - rect.left) / rect.width - 0.5;
+        const relY = (e.clientY - rect.top) / rect.height - 0.5;
+        const rotateY = relX * 26;
+        const rotateX = -relY * 26;
+
+        if (animate) {
+          animate(ring, { transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.06)` }, { duration: 0.2 });
+        } else {
+          ring.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.06)`;
+        }
+      });
+
+      wrapper.addEventListener("pointerleave", () => {
+        if (animate) {
+          animate(ring, { transform: `rotateX(0deg) rotateY(0deg) scale(1)` }, { duration: 0.5, easing: [0.32, 0.72, 0, 1] });
+        } else {
+          ring.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+        }
+      });
+    }
+
+    /* ==========================================================
+       3. QUOTE WORD-BY-WORD BLUR REVEAL (STRIPE / CRON STYLE)
+       ========================================================== */
+    function initQuoteBlurReveal() {
+      const quoteEl = document.getElementById("quote-reveal-target");
+      const authorEl = document.getElementById("quote-author-target");
+      if (!quoteEl) return;
+
+      const lines = [
+        [{ text: "“", shimmer: false }],
+        [
+          { text: "Even", shimmer: false },
+          { text: "the", shimmer: false },
+          { text: "darkest", shimmer: false },
+          { text: "night", shimmer: false },
+          { text: "will", shimmer: false },
+          { text: "end,", shimmer: false }
+        ],
+        [
+          { text: "and", shimmer: false },
+          { text: "the", shimmer: true },
+          { text: "sun", shimmer: true },
+          { text: "will", shimmer: true },
+          { text: "rise.", shimmer: true }
+        ]
+      ];
+
+      quoteEl.innerHTML = lines.map(line =>
+        line.map(w => `<span class="reveal-word ${w.shimmer ? 'shimmer-sunrise' : ''}">${w.text}</span>`).join(" ")
+      ).join("<br>");
+
+      triggerQuoteAnimation();
+    }
+
+    function triggerQuoteAnimation() {
+      const words = document.querySelectorAll("#quote-reveal-target .reveal-word");
+      const authorEl = document.getElementById("quote-author-target");
+      const animate = window.Motion?.animate;
+
+      words.forEach((word, idx) => {
+        if (animate) {
+          animate(
+            word,
+            { opacity: [0, 1], filter: ["blur(8px)", "blur(0px)"], transform: ["translateY(10px)", "translateY(0px)"] },
+            { duration: 0.65, delay: 0.08 + idx * 0.065, easing: [0.32, 0.72, 0, 1] }
+          );
+        } else {
+          word.style.opacity = "1";
+          word.style.filter = "blur(0px)";
+          word.style.transform = "translateY(0)";
+        }
+      });
+
+      if (authorEl && animate) {
+        animate(
+          authorEl,
+          { opacity: [0, 1], transform: ["translateY(6px)", "translateY(0px)"] },
+          { duration: 0.6, delay: 0.08 + words.length * 0.065, easing: [0.32, 0.72, 0, 1] }
+        );
+      } else if (authorEl) {
+        authorEl.style.opacity = "1";
+        authorEl.style.transform = "translateY(0)";
+      }
+    }
+
+    /* ==========================================================
+       4. APPLE MACOS DOCK (MAGNETIC MAGNIFICATION + NEIGHBOR PUSH)
+       ========================================================== */
+    function initMacOSDock() {
+      const dock = document.getElementById("macos-dock");
+      if (!dock) return;
+      const items = Array.from(dock.querySelectorAll(".nav-tab-btn"));
+
+      let mouseX = null;
+      const currentScales = items.map(() => 1);
+      const currentShifts = items.map(() => 0);
+
+      dock.addEventListener("pointermove", (e) => {
+        if (e.pointerType === "touch") return;
+        mouseX = e.clientX;
+      });
+
+      dock.addEventListener("pointerleave", () => {
+        mouseX = null;
+      });
+
+      function animateDock() {
+        const maxRadius = 115;
+        const maxScale = 1.38;
+
+        items.forEach((item, i) => {
+          let targetScale = 1;
+          let targetShift = 0;
+
+          if (mouseX !== null) {
+            const rect = item.getBoundingClientRect();
+            const center = rect.left + rect.width / 2;
+            const distance = mouseX - center;
+            const absDist = Math.abs(distance);
+
+            if (absDist < maxRadius) {
+              // Cosine bell curve interpolation
+              const influence = Math.cos((absDist / maxRadius) * (Math.PI / 2));
+              targetScale = 1 + (maxScale - 1) * influence;
+              // Push neighboring icons subtly away from cursor
+              targetShift = -Math.sign(distance) * Math.sin((absDist / maxRadius) * Math.PI) * 7;
+            }
+          }
+
+          // Smooth spring damping
+          currentScales[i] += (targetScale - currentScales[i]) * 0.22;
+          currentShifts[i] += (targetShift - currentShifts[i]) * 0.22;
+
+          const liftY = (currentScales[i] - 1) * -10;
+          item.style.transform = `translate3d(${currentShifts[i].toFixed(2)}px, ${liftY.toFixed(2)}px, 0) scale(${currentScales[i].toFixed(3)})`;
+        });
+
+        requestAnimationFrame(animateDock);
+      }
+
+      requestAnimationFrame(animateDock);
+    }
+
+    /* ==========================================================
+       5. INTERACTIVE AMBIENT CANVAS (FIREFLIES / WARM SUN BOKEH)
+       ========================================================== */
+    function initAmbientCanvas() {
+      const canvas = document.getElementById("ambient-canvas");
       if (!canvas) return;
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext("2d");
 
-      let width = canvas.width = window.innerWidth;
-      let height = canvas.height = window.innerHeight;
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+      const pointer = { x: -9999, y: -9999 };
 
-      window.addEventListener('resize', () => {
+      window.addEventListener("resize", () => {
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
       });
 
-      const pointer = { x: -9999, y: -9999, active: false };
-
-      window.addEventListener('mousemove', (e) => {
+      window.addEventListener("pointermove", (e) => {
         pointer.x = e.clientX;
         pointer.y = e.clientY;
-        pointer.active = true;
       });
 
-      window.addEventListener('touchmove', (e) => {
-        if (e.touches.length > 0) {
-          pointer.x = e.touches[0].clientX;
-          pointer.y = e.touches[0].clientY;
-          pointer.active = true;
-        }
-      }, { passive: true });
-
-      window.addEventListener('touchend', () => {
-        setTimeout(() => { pointer.active = false; }, 1500);
+      window.addEventListener("pointerleave", () => {
+        pointer.x = -9999;
+        pointer.y = -9999;
       });
 
-      window.addEventListener('mouseleave', () => {
-        pointer.active = false;
-      });
+      const particleCount = Math.min(38, Math.floor((width * height) / 28000));
+      const particles = Array.from({ length: particleCount }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: -0.15 - Math.random() * 0.3,
+        baseR: 1.5 + Math.random() * 2.5,
+        phase: Math.random() * Math.PI * 2,
+        speed: 0.015 + Math.random() * 0.02
+      }));
 
-      class Firefly {
-        constructor() {
-          this.x = Math.random() * width;
-          this.y = Math.random() * height;
-          // Kích thước nhỏ li ti (0.6px đến 1.5px)
-          this.radius = 0.6 + Math.random() * 0.9;
-          // Vận tốc trôi ban đầu rất chậm
-          this.vx = (Math.random() - 0.5) * 0.25;
-          this.vy = (Math.random() - 0.5) * 0.25;
-          
-          // Góc lửng lờ tự nhiên
-          this.wanderAngle = Math.random() * Math.PI * 2;
-          // Nhịp thở ánh sáng chậm rãi
-          this.phase = Math.random() * Math.PI * 2;
-          this.pulseSpeed = 0.008 + Math.random() * 0.012;
-        }
-
-        update() {
-          // 1. Chuyển động lửng lờ rất nhẹ
-          this.wanderAngle += (Math.random() - 0.5) * 0.08;
-          this.vx += Math.cos(this.wanderAngle) * 0.004;
-          this.vy += Math.sin(this.wanderAngle) * 0.004;
-
-          // 2. Tụ lại êm dịu khi di chuột / chạm màn hình
-          if (pointer.active) {
-            const dx = pointer.x - this.x;
-            const dy = pointer.y - this.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            const attractRadius = 220;
-
-            if (dist < attractRadius) {
-              const force = (attractRadius - dist) / attractRadius;
-              if (dist > 28) {
-                // Lực hút nhẹ nhàng, từ tốn
-                this.vx += (dx / dist) * force * 0.032;
-                this.vy += (dy / dist) * force * 0.032;
-              } else {
-                // Lượn vòng lửng lờ quanh con trỏ
-                this.vx += (-dy / dist) * 0.018;
-                this.vy += (dx / dist) * 0.018;
-              }
-            }
-          }
-
-          // 3. Lực cản không khí cao giúp đom đóm trôi êm, không giật cục
-          this.vx *= 0.975;
-          this.vy *= 0.975;
-
-          const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-          const maxSpeed = pointer.active ? 0.95 : 0.35; // Giới hạn tốc độ chậm rãi
-          if (speed > maxSpeed) {
-            this.vx = (this.vx / speed) * maxSpeed;
-            this.vy = (this.vy / speed) * maxSpeed;
-          }
-
-          this.x += this.vx;
-          this.y += this.vy;
-
-          // Đi xuyên biên màn hình mượt mà
-          const pad = 15;
-          if (this.x < -pad) this.x = width + pad;
-          if (this.x > width + pad) this.x = -pad;
-          if (this.y < -pad) this.y = height + pad;
-          if (this.y > height + pad) this.y = -pad;
-
-          this.phase += this.pulseSpeed;
-        }
-
-        draw(isLightTheme) {
-          // Cường độ sáng dịu nhẹ (0.15 -> 0.85)
-          const glowFactor = 0.15 + 0.7 * ((Math.sin(this.phase) + 1) / 2);
-          const glowRadius = this.radius * (4.5 + glowFactor * 2.5);
-
-          // Vẽ quầng hào quang màu trắng tinh khiết
-          const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowRadius);
-          if (isLightTheme) {
-            // Trên nền sáng: lõi trắng sáng kết hợp quầng ánh bạc nhẹ để nổi bật
-            grad.addColorStop(0, `rgba(255, 255, 255, ${Math.min(1, glowFactor + 0.15)})`);
-            grad.addColorStop(0.45, `rgba(148, 163, 184, ${glowFactor * 0.45})`);
-            grad.addColorStop(1, `rgba(148, 163, 184, 0)`);
-          } else {
-            // Trên nền tối: ánh trắng thuần khiết lửng lờ
-            grad.addColorStop(0, `rgba(255, 255, 255, ${glowFactor})`);
-            grad.addColorStop(0.4, `rgba(255, 255, 255, ${glowFactor * 0.35})`);
-            grad.addColorStop(1, `rgba(255, 255, 255, 0)`);
-          }
-
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, glowRadius, 0, Math.PI * 2);
-          ctx.fillStyle = grad;
-          ctx.fill();
-
-          // Lõi trắng nhỏ ở tâm
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.radius * 0.65, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${0.45 + glowFactor * 0.55})`;
-          ctx.fill();
-        }
-      }
-
-      // 80 hạt đom đóm nhỏ li ti rải khắp không gian
-      const fireflyCount = 80;
-      const fireflies = Array.from({ length: fireflyCount }, () => new Firefly());
-
-      function renderLoop() {
+      function draw() {
         ctx.clearRect(0, 0, width, height);
-        const isLightTheme = document.documentElement.getAttribute('data-theme') === 'light';
+        const isLight = document.documentElement.getAttribute("data-theme") === "light";
 
-        for (let i = 0; i < fireflies.length; i++) {
-          fireflies[i].update();
-          fireflies[i].draw(isLightTheme);
+        for (const p of particles) {
+          p.phase += p.speed;
+          p.x += p.vx + Math.sin(p.phase) * 0.25;
+          p.y += p.vy;
+
+          // Gentle cursor repulsion
+          const dx = p.x - pointer.x;
+          const dy = p.y - pointer.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 130 && dist > 0) {
+            const force = (130 - dist) / 130;
+            p.x += (dx / dist) * force * 2.2;
+            p.y += (dy / dist) * force * 2.2;
+          }
+
+          // Wrap edges smoothly
+          if (p.y < -20) { p.y = height + 20; p.x = Math.random() * width; }
+          if (p.x < -20) p.x = width + 20;
+          if (p.x > width + 20) p.x = -20;
+
+          const pulse = 0.45 + 0.55 * Math.sin(p.phase);
+
+          if (isLight) {
+            // Light mode: warm golden sun bokeh
+            const r = p.baseR * 3.8;
+            const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r);
+            grad.addColorStop(0, `rgba(251, 191, 36, ${0.42 * pulse})`);
+            grad.addColorStop(0.55, `rgba(245, 158, 11, ${0.18 * pulse})`);
+            grad.addColorStop(1, "rgba(251, 191, 36, 0)");
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+            ctx.fill();
+          } else {
+            // Dark mode: gentle glowing fireflies
+            const r = p.baseR * 2.4;
+            const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r);
+            grad.addColorStop(0, `rgba(255, 255, 255, ${0.9 * pulse})`);
+            grad.addColorStop(0.4, `rgba(226, 232, 240, ${0.35 * pulse})`);
+            grad.addColorStop(1, "rgba(255, 255, 255, 0)");
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+            ctx.fill();
+          }
         }
 
-        requestAnimationFrame(renderLoop);
+        requestAnimationFrame(draw);
       }
 
-      requestAnimationFrame(renderLoop);
+      requestAnimationFrame(draw);
     }
 
-    /* Hàm nhận diện chi tiết thiết bị & địa điểm */
+    /* ==========================================================
+       6. VIEW TRANSITIONS API FOR DARK/LIGHT THEME TOGGLE
+       ========================================================== */
+    function initThemeToggle() {
+      const toggle = document.getElementById("theme-toggle");
+      const savedTheme = localStorage.getItem("ios26-theme") || "dark";
+      document.documentElement.setAttribute("data-theme", savedTheme);
+
+      toggle.addEventListener("click", (e) => {
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+
+        const applyTheme = () => {
+          document.documentElement.setAttribute("data-theme", newTheme);
+          localStorage.setItem("ios26-theme", newTheme);
+        };
+
+        if (!document.startViewTransition) {
+          applyTheme();
+          return;
+        }
+
+        const rect = toggle.getBoundingClientRect();
+        const x = e.clientX || rect.left + rect.width / 2;
+        const y = e.clientY || rect.top + rect.height / 2;
+        const endRadius = Math.hypot(
+          Math.max(x, window.innerWidth - x),
+          Math.max(y, window.innerHeight - y)
+        );
+
+        const transition = document.startViewTransition(() => {
+          applyTheme();
+        });
+
+        transition.ready.then(() => {
+          document.documentElement.animate(
+            {
+              clipPath: [
+                `circle(0px at ${x}px ${y}px)`,
+                `circle(${endRadius}px at ${x}px ${y}px)`
+              ]
+            },
+            {
+              duration: 580,
+              easing: "cubic-bezier(0.32, 0.72, 0, 1)",
+              pseudoElement: "::view-transition-new(root)"
+            }
+          );
+        });
+      });
+    }
+
+    /* ==========================================================
+       7. TAB NAVIGATION (SPRING TRANSITIONS)
+       ========================================================== */
+    function initTabNavigation() {
+      const navBtns = document.querySelectorAll(".nav-tab-btn");
+      const indicator = document.getElementById("nav-indicator");
+      const viewport = document.getElementById("viewport");
+      const mainCard = document.getElementById("main-card");
+      const tabPages = document.querySelectorAll(".tab-page");
+
+      const topBarEl = document.querySelector(".top-bar");
+      const bottomNavEl = document.querySelector(".bottom-nav-container");
+      const profileHeaderEl = document.querySelector(".profile-header");
+
+      function adjustCardHeight(index) {
+        requestAnimationFrame(() => {
+          const topBarH = topBarEl ? topBarEl.offsetHeight : 0;
+          const headerH = profileHeaderEl ? profileHeaderEl.offsetHeight : 0;
+          const navH = bottomNavEl ? bottomNavEl.offsetHeight : 0;
+          
+          const currentTabPage = tabPages[index];
+          const contentH = currentTabPage ? currentTabPage.scrollHeight : 0;
+
+          const totalH = topBarH + headerH + contentH + navH;
+          mainCard.style.height = `${totalH}px`;
+        });
+      }
+
+      function switchTab(index) {
+        viewport.style.transform = `translate3d(-${index * 33.3333}%, 0, 0)`;
+
+        const activeBtn = navBtns[index];
+        if (activeBtn && indicator) {
+          indicator.style.transform = `translate3d(${activeBtn.offsetLeft - 6}px, 0, 0)`;
+        }
+
+        navBtns.forEach((btn, i) => btn.classList.toggle("active", i === index));
+        tabPages.forEach((page, i) => {
+          page.classList.toggle("active-tab", i === index);
+          page.classList.toggle("inactive-tab", i !== index);
+        });
+
+        if (index === 1) {
+          mainCard.classList.remove("compact-mode");
+          triggerQuoteAnimation();
+        } else {
+          mainCard.classList.add("compact-mode");
+        }
+
+        adjustCardHeight(index);
+      }
+
+      navBtns.forEach((btn, i) => {
+        btn.addEventListener("click", () => switchTab(i));
+      });
+
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          const activeBtn = document.querySelector(".nav-tab-btn.active");
+          if (activeBtn) {
+            switchTab(parseInt(activeBtn.getAttribute("data-index") || "1"));
+          }
+        }, 100);
+      });
+
+      requestAnimationFrame(() => {
+        switchTab(1);
+      });
+    }
+
+    function renderLinks(containerId, items) {
+      const container = document.getElementById(containerId);
+      if (!container || !Array.isArray(items)) return;
+
+      const fragment = document.createDocumentFragment();
+      items.forEach((item) => {
+        const a = document.createElement('a');
+        a.href = item.url || '#';
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.className = "ios26-link-item spotlight-target";
+        a.innerHTML = `
+          <img src="${item.icon}" alt="${item.title}" class="link-icon" loading="lazy">
+          <span class="link-label">${item.title}</span>
+          <i class="fa-solid fa-chevron-right link-arrow"></i>
+        `;
+        fragment.appendChild(a);
+      });
+
+      container.innerHTML = '';
+      container.appendChild(fragment);
+    }
+
+    /* ==========================================================
+       EXISTING FEATURES: DEVICE TRACKING, EMAILJS, QR & AUDIO
+       ========================================================== */
     function getDeviceAndLocationInfo() {
       const ua = navigator.userAgent;
       let vendor = "Chưa xác định hãng";
@@ -1101,23 +1510,78 @@
         os = `Android ${osMatch ? osMatch[1] : ''}`;
       } else if (/iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
         const osMatch = ua.match(/OS\s+([\d_]+)/i);
-        os = `iOS / iPadOS ${osMatch ? osMatch[1].replace(/_/g, '.') : ''}`;
+        const version = osMatch ? osMatch[1].replace(/_/g, '.') : '';
+        os = `iOS / iPadOS ${version}`;
       } else if (/windows nt/i.test(ua)) {
-        os = "Windows PC";
+        if (/windows nt 10.0/i.test(ua)) os = "Windows 10 / 11";
+        else if (/windows nt 6.3/i.test(ua)) os = "Windows 8.1";
+        else if (/windows nt 6.1/i.test(ua)) os = "Windows 7";
+        else os = "Windows PC";
       } else if (/macintosh|mac os x/i.test(ua)) {
-        os = "macOS";
+        const osMatch = ua.match(/Mac OS X\s+([\d_]+)/i);
+        const version = osMatch ? osMatch[1].replace(/_/g, '.') : '';
+        os = `macOS ${version}`;
+      } else if (/cros/i.test(ua)) {
+        os = "ChromeOS";
+      } else if (/linux/i.test(ua)) {
+        os = "Linux";
       }
 
       if (/android/i.test(ua)) {
-        if (/samsung/i.test(ua) || /SM-/i.test(ua)) { vendor = "Samsung"; model = "Samsung Galaxy"; }
-        else { model = "Android Device"; }
-      } else if (/iphone|ipad/i.test(ua)) {
-        vendor = "Apple"; model = "iPhone / iPad";
+        if (/samsung/i.test(ua) || /SM-/i.test(ua)) {
+          vendor = "Samsung";
+          const match = ua.match(/SM-[A-Z0-9]+/i);
+          model = match ? match[0] : "Samsung Galaxy";
+        } else if (/xiaomi|redmi|poco/i.test(ua) || /m2\d+|2\d+/i.test(ua)) {
+          vendor = "Xiaomi";
+          const match = ua.match(/(?:Mi|Redmi|POCO)\s+[\w\s]+|(?:21|22|23|24)\d+[A-Z]+/i);
+          model = match ? match[0] : "Xiaomi Device";
+        } else if (/oppo/i.test(ua) || /CPH\d+/i.test(ua)) {
+          vendor = "OPPO";
+          const match = ua.match(/CPH\d+/i);
+          model = match ? match[0] : "CPH Device";
+        } else if (/vivo/i.test(ua) || /V2\d+/i.test(ua)) {
+          vendor = "Vivo";
+          const match = ua.match(/V2\d+[A-Z]*/i);
+          model = match ? match[0] : "Vivo Device";
+        } else if (/realme/i.test(ua) || /RMX\d+/i.test(ua)) {
+          vendor = "Realme";
+          const match = ua.match(/RMX\d+/i);
+          model = match ? match[0] : "Realme Device";
+        } else if (/pixel/i.test(ua)) {
+          vendor = "Google";
+          const match = ua.match(/Pixel\s+[\d\w\s]+/i);
+          model = match ? match[0] : "Google Pixel";
+        } else if (/huawei|honor/i.test(ua)) {
+          vendor = "Huawei / Honor";
+          const match = ua.match(/(?:HUAWEI|HONOR)\s+[\w-]+|[A-Z]{3}-[A-Z0-9]+/i);
+          model = match ? match[0] : "Huawei Device";
+        } else {
+          const genericMatch = ua.match(/Android[^;]+;\s*([^;)]+)\s*\)/i);
+          if (genericMatch && genericMatch[1]) {
+            model = genericMatch[1].trim();
+            if (model.includes("Build")) model = model.split("Build")[0].trim();
+          }
+        }
+      } else if (/iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+        vendor = "Apple";
+        if (/ipad/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) model = "iPad";
+        else if (/iphone/i.test(ua)) model = "iPhone";
+        else model = "iPod Touch";
       } else {
-        model = "Desktop/Laptop";
+        if (/windows/i.test(ua)) { vendor = "PC / OEM"; model = "Windows Desktop/Laptop"; }
+        else if (/macintosh/i.test(ua)) { vendor = "Apple"; model = "Mac / MacBook"; }
+        else { vendor = "Khác"; model = "Máy tính cá nhân"; }
       }
 
-      return { device: `${model} | Hãng: ${vendor} | ${os} (${deviceType})`, location: Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Ho_Chi_Minh" };
+      const deviceFullInfo = `Mã/Tên: ${model} | Hãng: ${vendor} | Hệ điều hành: ${os} (${deviceType})`;
+      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Ho_Chi_Minh";
+      const language = navigator.language || "vi-VN";
+      let location = `Timezone: ${timeZone} | Ngôn ngữ: ${language}`;
+      if (timeZone.includes("Ho_Chi_Minh") || timeZone.includes("Bangkok")) {
+        location = `Việt Nam (${timeZone})`;
+      }
+      return { device: deviceFullInfo, location };
     }
 
     function initEmailJSNotifier() {
@@ -1128,13 +1592,17 @@
         setTimeout(() => {
           if (sessionStorage.getItem("email_notified")) return; 
           const { device, location } = getDeviceAndLocationInfo();
-          emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+          const templateParams = {
             time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
-            device: device,
-            location: location,
-            message: "[System] New visitor access on w.bio",
+            device,
+            location,
+            message: "[System] New visitor access on your personal web page w.bio (No message left).",
             referrer: document.referrer || "Direct Access"
-          }).then(() => sessionStorage.setItem("email_notified", "true")).catch(() => {});
+          };
+
+          emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+            .then(() => sessionStorage.setItem("email_notified", "true"))
+            .catch((error) => console.error("Error sending email:", error));
         }, 3000);
       }
     }
@@ -1147,109 +1615,60 @@
       const sendBtnText = document.getElementById("send-btn-text");
       const messageInput = document.getElementById("visitor-message");
 
-      openBtn.addEventListener("click", () => { modal.classList.add("active"); modal.setAttribute("aria-hidden", "false"); });
-      closeBtn.addEventListener("click", () => { modal.classList.remove("active"); modal.setAttribute("aria-hidden", "true"); messageInput.value = ""; });
-      modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("active"); });
+      function openModal() {
+        modal.classList.add("active");
+        modal.setAttribute("aria-hidden", "false");
+      }
+
+      function closeModal() {
+        modal.classList.remove("active");
+        modal.setAttribute("aria-hidden", "true");
+        messageInput.value = "";
+      }
+
+      openBtn.addEventListener("click", openModal);
+      closeBtn.addEventListener("click", closeModal);
+      modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
 
       sendBtn.addEventListener("click", () => {
         const userMsg = messageInput.value.trim();
-        if (!userMsg) { alert("Please enter your message!"); return; }
-
-        sendBtnText.textContent = "Sending...";
-        const { device, location } = getDeviceAndLocationInfo();
-        emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-          time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
-          device: device, location: location, message: userMsg, referrer: "Instant Message Pop-up"
-        }).then(() => {
-          sendBtnText.textContent = "Sent Successfully!";
-          setTimeout(() => { modal.classList.remove("active"); sendBtnText.textContent = "Send"; messageInput.value = ""; }, 1500);
-        }).catch(() => { sendBtnText.textContent = "Send Failed!"; setTimeout(() => sendBtnText.textContent = "Send", 2000); });
-      });
-    }
-
-    function renderLinks(containerId, items) {
-      const container = document.getElementById(containerId);
-      if (!container || !Array.isArray(items)) return;
-
-      const fragment = document.createDocumentFragment();
-      items.forEach((item, index) => {
-        const a = document.createElement('a');
-        a.href = item.url || '#';
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.className = "ios26-link-item";
-        a.style.animationDelay = `${index * 0.08}s`;
-        a.innerHTML = `
-          <img src="${item.icon}" alt="${item.title}" class="link-icon" loading="lazy">
-          <span class="link-label">${item.title}</span>
-          <i class="fa-solid fa-chevron-right link-arrow"></i>
-        `;
-        fragment.appendChild(a);
-      });
-      container.innerHTML = '';
-      container.appendChild(fragment);
-    }
-
-    function initTabNavigation() {
-      const navBtns = document.querySelectorAll(".nav-tab-btn");
-      const indicator = document.getElementById("nav-indicator");
-      const viewport = document.getElementById("viewport");
-      const mainCard = document.getElementById("main-card");
-      const tabPages = document.querySelectorAll(".tab-page");
-
-      const topBarEl = document.querySelector(".top-bar");
-      const bottomNavEl = document.querySelector(".bottom-nav-container");
-      const profileHeaderEl = document.querySelector(".profile-header");
-
-      function adjustCardHeight(index) {
-        requestAnimationFrame(() => {
-          const topBarH = topBarEl ? topBarEl.offsetHeight : 0;
-          const headerH = profileHeaderEl ? profileHeaderEl.offsetHeight : 0;
-          const navH = bottomNavEl ? bottomNavEl.offsetHeight : 0;
-          const contentH = tabPages[index] ? tabPages[index].scrollHeight : 0;
-          mainCard.style.height = `${topBarH + headerH + contentH + navH}px`;
-        });
-      }
-
-      function switchTab(index) {
-        mainCard.classList.add("tab-animating");
-        setTimeout(() => mainCard.classList.remove("tab-animating"), 350);
-
-        viewport.style.transform = `translate3d(-${index * 33.3333}%, 0, 0)`;
-
-        const activeBtn = navBtns[index];
-        if (activeBtn && indicator) {
-          indicator.style.transform = `translate3d(${activeBtn.offsetLeft - 6}px, 0, 0)`;
+        if (!userMsg) {
+          alert("Please enter your message!");
+          return;
         }
 
-        navBtns.forEach((btn, i) => btn.classList.toggle("active", i === index));
+        sendBtnText.textContent = "Sending...";
+        sendBtn.style.opacity = "0.7";
+        sessionStorage.setItem("email_notified", "true");
 
-        if (index === 1) mainCard.classList.remove("compact-mode");
-        else mainCard.classList.add("compact-mode");
+        const { device, location } = getDeviceAndLocationInfo();
+        const templateParams = {
+          time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
+          device,
+          location,
+          message: userMsg, 
+          referrer: "Instant Message Pop-up (Web Form)"
+        };
 
-        adjustCardHeight(index);
-      }
-
-      navBtns.forEach((btn, i) => btn.addEventListener("click", () => switchTab(i)));
-
-      window.addEventListener("resize", () => {
-        const activeBtn = document.querySelector(".nav-tab-btn.active");
-        if (activeBtn) switchTab(parseInt(activeBtn.getAttribute("data-index") || "1"));
-      });
-
-      requestAnimationFrame(() => switchTab(1));
-    }
-
-    function initThemeToggle() {
-      const toggle = document.getElementById("theme-toggle");
-      const savedTheme = localStorage.getItem("ios26-theme") || "dark";
-      document.documentElement.setAttribute("data-theme", savedTheme);
-
-      toggle.addEventListener("click", () => {
-        const currentTheme = document.documentElement.getAttribute("data-theme");
-        const newTheme = currentTheme === "light" ? "dark" : "light";
-        document.documentElement.setAttribute("data-theme", newTheme);
-        localStorage.setItem("ios26-theme", newTheme);
+        emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+          .then(() => {
+            sendBtnText.textContent = "Sent Successfully!";
+            sendBtn.style.background = "#22c55e";
+            setTimeout(() => {
+              closeModal();
+              sendBtnText.textContent = "Send";
+              sendBtn.style.background = "rgba(255, 255, 255, 0.15)";
+              sendBtn.style.opacity = "1";
+            }, 1500);
+          })
+          .catch((error) => {
+            console.error("Error sending message:", error);
+            sendBtnText.textContent = "Send Failed!";
+            setTimeout(() => {
+              sendBtnText.textContent = "Send";
+              sendBtn.style.opacity = "1";
+            }, 2000);
+          });
       });
     }
 
@@ -1264,22 +1683,41 @@
       const shareUrl = (typeof bioData !== 'undefined' && bioData.profile && bioData.profile.shareUrl) ? bioData.profile.shareUrl : window.location.href;
       let qrGenerated = false;
 
-      openBtn.addEventListener("click", () => {
+      function openModal() {
         modal.classList.add("active");
         modal.setAttribute("aria-hidden", "false");
         if (!qrGenerated) {
-          new QRCode(qrCanvas, { text: shareUrl, width: 156, height: 156, colorDark: "#08090a", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H });
+          new QRCode(qrCanvas, {
+            text: shareUrl,
+            width: 156,
+            height: 156,
+            colorDark: "#08090a",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+          });
           qrGenerated = true;
         }
-      });
-      closeBtn.addEventListener("click", () => modal.classList.remove("active"));
-      modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("active"); });
+      }
+
+      function closeModal() {
+        modal.classList.remove("active");
+        modal.setAttribute("aria-hidden", "true");
+      }
+
+      openBtn.addEventListener("click", openModal);
+      closeBtn.addEventListener("click", closeModal);
+      modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
 
       copyBtn.addEventListener("click", () => {
         navigator.clipboard.writeText(shareUrl).then(() => {
           copyText.textContent = "Copied!";
           copyBtn.style.background = "#22c55e";
-          setTimeout(() => { copyText.textContent = "Copy link"; copyBtn.style.background = "rgba(255, 255, 255, 0.15)"; }, 2000);
+          setTimeout(() => {
+            copyText.textContent = "Copy link";
+            copyBtn.style.background = "rgba(255, 255, 255, 0.15)";
+          }, 2000);
+        }).catch(() => {
+          copyText.textContent = "Error!";
         });
       });
     }
@@ -1289,11 +1727,21 @@
       const musicIcon = document.getElementById("music-icon");
       if (!musicBtn) return;
 
-      let audioCtx = null, audioBuffer = null, sourceNode = null, gainNode = null, isPlaying = false, isLoaded = false;
+      let audioCtx = null;
+      let audioBuffer = null;
+      let sourceNode = null;
+      let gainNode = null;
+      let isPlaying = false;
+      let isLoaded = false;
 
       function updateUI(playing) {
-        if (playing) { musicBtn.classList.add("playing"); musicIcon.className = "fa-solid fa-compact-disc"; }
-        else { musicBtn.classList.remove("playing"); musicIcon.className = "fa-solid fa-music"; }
+        if (playing) {
+          musicBtn.classList.add("playing");
+          musicIcon.className = "fa-solid fa-compact-disc";
+        } else {
+          musicBtn.classList.remove("playing");
+          musicIcon.className = "fa-solid fa-music";
+        }
       }
 
       async function loadAudioFile() {
@@ -1303,31 +1751,47 @@
           audioCtx = new (window.AudioContext || window.webkitAudioContext)();
           audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
           isLoaded = true;
-        } catch (e) { console.log("Audio load error:", e); }
+        } catch (e) {
+          console.log("Lỗi tải tệp âm thanh:", e);
+        }
       }
+
+      function playSound() {
+        if (!isLoaded || !audioBuffer) return;
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        if (sourceNode) { try { sourceNode.stop(); } catch(e) {} }
+
+        sourceNode = audioCtx.createBufferSource();
+        sourceNode.buffer = audioBuffer;
+        sourceNode.loop = true;
+
+        gainNode = audioCtx.createGain();
+        gainNode.gain.value = 0.4;
+
+        sourceNode.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        sourceNode.start(0);
+        isPlaying = true;
+        updateUI(true);
+      }
+
+      function stopSound() {
+        if (sourceNode) {
+          try { sourceNode.stop(); } catch(e) {}
+          sourceNode = null;
+        }
+        isPlaying = false;
+        updateUI(false);
+      }
+
+      loadAudioFile();
 
       musicBtn.addEventListener("click", async (e) => {
         e.stopPropagation();
         if (!isLoaded) await loadAudioFile();
         if (audioCtx && audioCtx.state === 'suspended') await audioCtx.resume();
-
-        if (isPlaying) {
-          if (sourceNode) { try { sourceNode.stop(); } catch(err) {} sourceNode = null; }
-          isPlaying = false;
-          updateUI(false);
-        } else {
-          if (!audioBuffer) return;
-          sourceNode = audioCtx.createBufferSource();
-          sourceNode.buffer = audioBuffer;
-          sourceNode.loop = true;
-          gainNode = audioCtx.createGain();
-          gainNode.gain.value = 0.4;
-          sourceNode.connect(gainNode);
-          gainNode.connect(audioCtx.destination);
-          sourceNode.start(0);
-          isPlaying = true;
-          updateUI(true);
-        }
+        if (isPlaying) stopSound();
+        else playSound();
       });
     }
   </script>
