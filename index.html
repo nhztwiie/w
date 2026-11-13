@@ -378,7 +378,7 @@
     [data-theme="light"] .icon-sun { opacity: 1; transform: scale(1) rotate(0deg); }
     [data-theme="light"] .icon-moon { opacity: 0; transform: scale(0.5) rotate(90deg); }
 
-    .glass-btn-ios26, .ios26-link-item, .btn-action-item {
+    .glass-btn-ios26, .ios26-link-item, .btn-action-item, .btn-download-icon {
       --btn-x: 50%;
       --btn-y: 50%;
       position: relative;
@@ -386,7 +386,7 @@
       transition: transform 0.28s var(--spring-easing), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .glass-btn-ios26::before, .ios26-link-item::before, .btn-action-item::before {
+    .glass-btn-ios26::before, .ios26-link-item::before, .btn-action-item::before, .btn-download-icon::before {
       content: '';
       position: absolute;
       inset: 0;
@@ -396,13 +396,14 @@
       pointer-events: none;
     }
 
-    .glass-btn-ios26:hover::before, .ios26-link-item:hover::before, .btn-action-item:hover::before {
+    .glass-btn-ios26:hover::before, .ios26-link-item:hover::before, .btn-action-item:hover::before, .btn-download-icon:hover::before {
       opacity: 1;
     }
 
     .glass-btn-ios26:active,
     .ios26-link-item:active,
     .btn-action-item:active,
+    .btn-download-icon:active,
     .nav-tab-btn:active {
       transform: scale(0.96) !important;
       transition-duration: 0.08s;
@@ -850,34 +851,53 @@
       object-fit: cover;
     }
 
-    /* Hàng chứa 2 nút tổng chiều rộng bằng đúng khung QR (180px) */
+    /* Hàng chứa 2 nút: Copy link + Icon Download, tổng chiều rộng 180px fit với khung QR */
     .qr-actions-row {
       width: 180px;
       margin: 18px auto 0;
       display: flex;
+      align-items: center;
       gap: 8px;
     }
 
     .btn-action-item {
       flex: 1;
-      padding: 12px 6px;
+      height: 44px;
+      padding: 0 12px;
       border: 1px solid var(--glass-border-highlight);
       background: rgba(255, 255, 255, 0.15);
       color: var(--text-title);
       font-weight: 700;
-      font-size: 0.82rem;
-      border-radius: 16px;
+      font-size: 0.85rem;
+      border-radius: 18px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 7px;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
     }
 
-    .btn-action-item:hover {
-      transform: translateY(-2px) scale(1.02);
+    .btn-download-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      border: 1px solid var(--glass-border-highlight);
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--text-title);
+      border-radius: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .btn-action-item:hover,
+    .btn-download-icon:hover {
+      transform: translateY(-2px) scale(1.03);
       background: rgba(255, 255, 255, 0.25);
       box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
     }
@@ -1026,15 +1046,18 @@
         <img src="images/Huy.png" alt="Avatar" class="qr-avatar-center">
       </div>
       
-      <!-- HÀNG 2 NÚT COPY & DOWNLOAD (Fit với bề ngang QR 180px) -->
+      <!-- HÀNG 2 NÚT: COPY LINK + ICON DOWNLOAD HIỆN ĐẠI (Fit 180px) -->
       <div class="qr-actions-row">
         <button class="btn-action-item" id="copy-btn">
           <i class="fa-regular fa-copy"></i>
-          <span id="copy-text">Copy</span>
+          <span id="copy-text">Copy link</span>
         </button>
-        <button class="btn-action-item" id="download-qr-btn">
-          <i class="fa-solid fa-download"></i>
-          <span>Download</span>
+        <button class="btn-download-icon" id="download-qr-btn" aria-label="Download QR" title="Download QR">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v12"/>
+            <path d="m7 10 5 5 5-5"/>
+            <path d="M5 19h14"/>
+          </svg>
         </button>
       </div>
 
@@ -1047,7 +1070,7 @@
     <div class="qr-glass-card">
       <h3 class="qr-title">Instant Message</h3>
       <textarea id="visitor-message" class="email-textarea" placeholder="Type your message to Nhat Huy..."></textarea>
-      <button class="btn-action-item" id="send-instant-email-btn" style="width: 100%; margin-top: 0;">
+      <button class="btn-action-item" id="send-instant-email-btn" style="width: 100%;">
         <i class="fa-solid fa-paper-plane"></i>
         <span id="send-btn-text">Send</span>
       </button>
@@ -1186,7 +1209,7 @@
       });
 
       document.addEventListener("mousemove", (e) => {
-        const target = e.target.closest(".glass-btn-ios26, .ios26-link-item, .btn-action-item");
+        const target = e.target.closest(".glass-btn-ios26, .ios26-link-item, .btn-action-item, .btn-download-icon");
         if (target) {
           const rect = target.getBoundingClientRect();
           target.style.setProperty("--btn-x", `${e.clientX - rect.left}px`);
@@ -1591,7 +1614,7 @@
           copyText.textContent = "Copied!";
           copyBtn.style.background = "#22c55e";
           setTimeout(() => {
-            copyText.textContent = "Copy";
+            copyText.textContent = "Copy link";
             copyBtn.style.background = "rgba(255, 255, 255, 0.15)";
           }, 2000);
         }).catch(() => {
@@ -1599,18 +1622,12 @@
         });
       });
 
-      // Tải xuống bức ảnh (1)
+      // Tải xuống file ảnh tên "w.bio_qr.jpg"
       downloadBtn.addEventListener("click", () => {
         const link = document.createElement('a');
-        link.download = 'QR-NhatHuy-Bio.jpg';
-        link.href = 'images/QR Code_Bio Link.jpg'; // Đường dẫn đến ảnh mẫu (1)
-        
-        // Dự phòng nếu ảnh trong canvas có sẵn
-        const qrImg = qrCanvas.querySelector('img');
-        if (!link.href && qrImg && qrImg.src) {
-          link.href = qrImg.src;
-        }
-        
+        link.download = 'w.bio_qr.jpg';
+        link.href = 'images/QR Code_Bio Link.jpg';
+
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
