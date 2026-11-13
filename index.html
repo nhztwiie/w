@@ -575,7 +575,7 @@
     }
 
     /* ==========================================================
-       QUOTE CARD: BLUR REVEAL & TEXT SHIMMER
+       QUOTE CARD: BLUR REVEAL & TEXT SHIMMER (FIXED NO-WRAP)
        ========================================================== */
     @keyframes blurReveal {
       0% {
@@ -597,7 +597,7 @@
 
     .ios26-quote-card {
       margin: 8px 0 16px;
-      padding: 24px 22px;
+      padding: 24px 16px;
       text-align: center;
       background: rgba(255, 255, 255, 0.03);
       border: 1.5px solid var(--glass-border);
@@ -616,9 +616,10 @@
     }
 
     .quote-text {
-      font-size: 1.1rem;
+      font-size: 0.98rem;
       font-weight: 700;
-      line-height: 1.65;
+      line-height: 1.8;
+      white-space: nowrap; /* Đảm bảo câu thơ không bị tự động ngắt dòng */
       background: linear-gradient(
         110deg,
         var(--shimmer-base) 30%,
@@ -1626,7 +1627,7 @@
       downloadBtn.addEventListener("click", () => {
         const link = document.createElement('a');
         link.download = 'w.bio_qr.jpg';
-        link.href = 'images/w.bio_qr.png';
+        link.href = 'images/QR Code_Bio Link.jpg';
 
         document.body.appendChild(link);
         link.click();
