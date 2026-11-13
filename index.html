@@ -127,14 +127,20 @@
       --orb-3: rgba(254, 243, 199, 0.45);
     }
 
-    /* VIEW TRANSITIONS API (CIRCULAR RIPPLE) */
-    ::view-transition-old(root),
-    ::view-transition-new(root) {
-      animation: none;
-      mix-blend-mode: normal;
+    /* CROSS-FADE & GLASS BLUR THEME TRANSITION */
+    body {
+      transition: background 0.6s ease;
     }
-    ::view-transition-old(root) { z-index: 1; }
-    ::view-transition-new(root) { z-index: 9999; }
+
+    .liquid-card-ios26 {
+      transition: height 0.52s var(--spring-easing), box-shadow 0.4s ease, background 0.5s ease, border-color 0.5s ease, transform 0.5s var(--silky-ease), opacity 0.5s var(--silky-ease);
+    }
+
+    .theme-transitioning {
+      opacity: 0 !important;
+      transform: scale(0.96) translateY(8px) !important;
+      filter: blur(8px);
+    }
 
     * {
       box-sizing: border-box;
@@ -186,6 +192,7 @@
       will-change: transform;
       opacity: 0.85;
       z-index: 1;
+      transition: background 0.6s ease;
     }
 
     .orb-primary {
@@ -249,7 +256,6 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      transition: height 0.52s var(--spring-easing), box-shadow 0.4s ease;
       transform: translateZ(0);
     }
 
@@ -619,7 +625,7 @@
       font-size: 0.98rem;
       font-weight: 700;
       line-height: 1.8;
-      white-space: nowrap; /* Đảm bảo câu thơ không bị tự động ngắt dòng */
+      white-space: nowrap;
       background: linear-gradient(
         110deg,
         var(--shimmer-base) 30%,
@@ -852,7 +858,6 @@
       object-fit: cover;
     }
 
-    /* Hàng chứa 2 nút: Copy link + Icon Download, tổng chiều rộng 180px fit với khung QR */
     .qr-actions-row {
       width: 180px;
       margin: 18px auto 0;
@@ -1047,7 +1052,6 @@
         <img src="images/Huy.png" alt="Avatar" class="qr-avatar-center">
       </div>
       
-      <!-- HÀNG 2 NÚT: COPY LINK + ICON DOWNLOAD HIỆN ĐẠI (Fit 180px) -->
       <div class="qr-actions-row">
         <button class="btn-action-item" id="copy-btn">
           <i class="fa-regular fa-copy"></i>
@@ -1430,54 +1434,30 @@
     }
 
     /* ==========================================================
-       4. VIEW TRANSITIONS API FOR DARK/LIGHT THEME TOGGLE
+       4. CROSS-FADE & GLASS BLUR THEME TOGGLE
        ========================================================== */
     function initThemeToggle() {
       const toggle = document.getElementById("theme-toggle");
+      const mainCard = document.getElementById("main-card");
       const savedTheme = localStorage.getItem("ios26-theme") || "dark";
       document.documentElement.setAttribute("data-theme", savedTheme);
 
-      toggle.addEventListener("click", (e) => {
+      toggle.addEventListener("click", () => {
         const currentTheme = document.documentElement.getAttribute("data-theme");
         const newTheme = currentTheme === "light" ? "dark" : "light";
 
-        const applyTheme = () => {
+        // Kích hoạt hiệu ứng mờ dần & thu nhỏ nhẹ (fade out & scale)
+        mainCard.classList.add("theme-transitioning");
+
+        setTimeout(() => {
           document.documentElement.setAttribute("data-theme", newTheme);
           localStorage.setItem("ios26-theme", newTheme);
-        };
 
-        if (!document.startViewTransition) {
-          applyTheme();
-          return;
-        }
-
-        const rect = toggle.getBoundingClientRect();
-        const x = e.clientX || rect.left + rect.width / 2;
-        const y = e.clientY || rect.top + rect.height / 2;
-        const endRadius = Math.hypot(
-          Math.max(x, window.innerWidth - x),
-          Math.max(y, window.innerHeight - y)
-        );
-
-        const transition = document.startViewTransition(() => {
-          applyTheme();
-        });
-
-        transition.ready.then(() => {
-          document.documentElement.animate(
-            {
-              clipPath: [
-                `circle(0px at ${x}px ${y}px)`,
-                `circle(${endRadius}px at ${x}px ${y}px)`
-              ]
-            },
-            {
-              duration: 580,
-              easing: "cubic-bezier(0.32, 0.72, 0, 1)",
-              pseudoElement: "::view-transition-new(root)"
-            }
-          );
-        });
+          // Gỡ hiệu ứng để thẻ kính hiện lên mượt mà với theme mới (fade in)
+          setTimeout(() => {
+            mainCard.classList.remove("theme-transitioning");
+          }, 50);
+        }, 250);
       });
     }
 
@@ -1623,10 +1603,9 @@
         });
       });
 
-      // Tải xuống file ảnh tên "w.bio_qr.jpg"
       downloadBtn.addEventListener("click", () => {
         const link = document.createElement('a');
-        link.download = 'w.bio_qr;
+        link.download = 'w.bio_qr';
         link.href = 'images/w.bio_qr.png';
 
         document.body.appendChild(link);
