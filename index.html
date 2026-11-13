@@ -45,23 +45,22 @@
 
   <style>
     /* ==========================================================
-       TITANIUM & LIQUID DROPLET GLASS SYSTEM
+       TITANIUM & LIQUID GLASS SYSTEM - WATER DROPLET PHYSICS
        ========================================================== */
     :root[data-theme="dark"] {
       --bg-gradient: radial-gradient(circle at 50% 0%, #2a2d32 0%, #111317 65%, #08090a 100%);
       
       --glass-bg: rgba(255, 255, 255, 0.05);
       --glass-border: rgba(255, 255, 255, 0.18);
-      --glass-border-highlight: rgba(255, 255, 255, 0.5);
+      --glass-border-highlight: rgba(255, 255, 255, 0.45);
       --glass-shadow: 
         0 30px 80px rgba(0, 0, 0, 0.8),
         inset 0 1.5px 3px rgba(255, 255, 255, 0.4),
-        inset 0 -2px 4px rgba(0, 0, 0, 0.65);
+        inset 0 -1.5px 3px rgba(0, 0, 0, 0.7);
       --glass-glow: rgba(224, 224, 224, 0.15);
 
       --spotlight-color: rgba(255, 255, 255, 0.11);
-      --spotlight-border: rgba(255, 255, 255, 0.6);
-      --droplet-ripple: rgba(255, 255, 255, 0.28);
+      --spotlight-border: rgba(255, 255, 255, 0.55);
 
       --text-title: #ffffff;
       --text-sub: #d1d5db;
@@ -71,13 +70,13 @@
       --pill-bg: rgba(255, 255, 255, 0.06);
       --pill-border: rgba(255, 255, 255, 0.18);
       --pill-hover-bg: rgba(255, 255, 255, 0.14);
-      --pill-hover-border: rgba(255, 255, 255, 0.52);
-      --pill-hover-glow: 0 14px 34px rgba(255, 255, 255, 0.14), inset 0 2px 3px rgba(255, 255, 255, 0.45);
+      --pill-hover-border: rgba(255, 255, 255, 0.5);
+      --pill-hover-glow: 0 12px 32px rgba(255, 255, 255, 0.15);
 
       --dock-bg: rgba(20, 22, 26, 0.55);
       --dock-border: rgba(255, 255, 255, 0.22);
-      --indicator-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(160, 160, 160, 0.16) 100%);
-      --indicator-border: rgba(255, 255, 255, 0.5);
+      --indicator-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, rgba(160, 160, 160, 0.18) 100%);
+      --indicator-border: rgba(255, 255, 255, 0.45);
 
       --orb-1: rgba(255, 255, 255, 0.35);
       --orb-2: rgba(160, 170, 190, 0.4);
@@ -86,41 +85,40 @@
     }
 
     :root[data-theme="light"] {
-      --bg-gradient: radial-gradient(circle at 50% 0%, #f0f7ff 0%, #e2ecf7 60%, #cbd9ea 100%);
+      --bg-gradient: radial-gradient(circle at 50% 0%, #f3f4f6 0%, #e5e7eb 60%, #cbd5e1 100%);
 
-      --glass-bg: rgba(255, 255, 255, 0.62);
-      --glass-border: rgba(255, 255, 255, 0.92);
+      --glass-bg: rgba(255, 255, 255, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.9);
       --glass-border-highlight: rgba(255, 255, 255, 1);
       --glass-shadow: 
-        0 25px 60px rgba(14, 116, 144, 0.09),
-        inset 0 2px 3px rgba(255, 255, 255, 0.98),
-        inset 0 -2px 4px rgba(14, 165, 233, 0.08);
-      --glass-glow: rgba(56, 189, 248, 0.15);
+        0 25px 60px rgba(0, 0, 0, 0.08),
+        inset 0 2px 4px rgba(255, 255, 255, 0.95),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.04);
+      --glass-glow: rgba(0, 0, 0, 0.05);
 
-      --spotlight-color: rgba(255, 255, 255, 0.72);
-      --spotlight-border: rgba(56, 189, 248, 0.65);
-      --droplet-ripple: rgba(56, 189, 248, 0.25);
+      --spotlight-color: rgba(255, 255, 255, 0.65);
+      --spotlight-border: rgba(107, 114, 128, 0.55);
 
-      --text-title: #0f172a;
-      --text-sub: #475569;
-      --text-quote: #0f172a;
-      --text-author: #64748b;
+      --text-title: #111827;
+      --text-sub: #4b5563;
+      --text-quote: #111827;
+      --text-author: #6b7280;
 
-      --pill-bg: rgba(255, 255, 255, 0.72);
+      --pill-bg: rgba(255, 255, 255, 0.75);
       --pill-border: rgba(255, 255, 255, 0.95);
-      --pill-hover-bg: rgba(255, 255, 255, 0.96);
-      --pill-hover-border: rgba(56, 189, 248, 0.55);
-      --pill-hover-glow: 0 12px 30px rgba(14, 165, 233, 0.12), inset 0 2px 3px rgba(255, 255, 255, 1);
+      --pill-hover-bg: rgba(255, 255, 255, 0.95);
+      --pill-hover-border: #9ca3af;
+      --pill-hover-glow: 0 12px 30px rgba(0, 0, 0, 0.08);
 
-      --dock-bg: rgba(255, 255, 255, 0.7);
+      --dock-bg: rgba(255, 255, 255, 0.72);
       --dock-border: rgba(255, 255, 255, 0.95);
-      --indicator-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(224, 242, 254, 0.85) 100%);
-      --indicator-border: rgba(125, 211, 252, 0.6);
+      --indicator-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(229, 231, 235, 0.85) 100%);
+      --indicator-border: rgba(156, 163, 175, 0.5);
 
-      --orb-1: rgba(255, 255, 255, 0.92);
-      --orb-2: rgba(186, 230, 253, 0.65);
-      --orb-3: rgba(224, 242, 254, 0.75);
-      --shimmer-beam: rgba(14, 165, 233, 0.9);
+      --orb-1: rgba(255, 255, 255, 0.9);
+      --orb-2: rgba(203, 213, 225, 0.6);
+      --orb-3: rgba(226, 232, 240, 0.7);
+      --shimmer-beam: rgba(245, 158, 11, 0.85);
     }
 
     /* VIEW TRANSITIONS API (CIRCULAR THEME REVEAL) */
@@ -154,7 +152,7 @@
       padding: 24px 16px;
     }
 
-    /* BACKGROUND CANVAS & LIQUID ORBS */
+    /* BACKGROUND CANVAS & ORBS */
     .ios26-bg-canvas {
       position: fixed;
       top: 0; left: 0;
@@ -174,13 +172,12 @@
       z-index: 2;
     }
 
-    /* GIỌT NƯỚC LỎNG CHUYỂN ĐỘNG HỮU CƠ (MORPHING LIQUID DROPLETS) */
     .liquid-orb {
       position: absolute;
-      border-radius: 54% 46% 42% 58% / 60% 45% 55% 40%;
-      filter: blur(26px);
+      border-radius: 50%;
+      filter: blur(28px);
       mix-blend-mode: overlay;
-      will-change: transform, border-radius;
+      will-change: transform, opacity;
       opacity: 0.85;
       z-index: 1;
     }
@@ -189,39 +186,39 @@
       width: 420px; height: 420px;
       top: -80px; left: -60px;
       background: radial-gradient(circle at 35% 35%, var(--orb-1) 0%, rgba(255,255,255,0.1) 60%, transparent 80%);
-      animation: floatFluid1 13s infinite ease-in-out alternate;
+      animation: floatFluid1 12s infinite ease-in-out alternate;
     }
 
     .orb-secondary {
       width: 380px; height: 380px;
       bottom: -60px; right: -50px;
       background: radial-gradient(circle at 35% 35%, var(--orb-2) 0%, rgba(255,255,255,0.08) 60%, transparent 80%);
-      animation: floatFluid2 16s infinite ease-in-out alternate;
+      animation: floatFluid2 15s infinite ease-in-out alternate;
     }
 
     .orb-accent {
       width: 300px; height: 300px;
       top: 40%; left: 30%;
       background: radial-gradient(circle at 35% 35%, var(--orb-3) 0%, rgba(255,255,255,0.1) 60%, transparent 80%);
-      animation: floatFluid3 11s infinite ease-in-out alternate;
+      animation: floatFluid3 10s infinite ease-in-out alternate;
     }
 
     @keyframes floatFluid1 {
-      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); border-radius: 54% 46% 42% 58% / 60% 45% 55% 40%; }
-      50% { transform: translate3d(110px, 75px, 0) scale(1.14) rotate(14deg); border-radius: 42% 58% 62% 38% / 45% 60% 40% 55%; }
-      100% { transform: translate3d(40px, 135px, 0) scale(0.92) rotate(-10deg); border-radius: 60% 40% 48% 52% / 52% 48% 60% 40%; }
+      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+      50% { transform: translate3d(120px, 80px, 0) scale(1.15) rotate(15deg); }
+      100% { transform: translate3d(40px, 140px, 0) scale(0.9) rotate(-10deg); }
     }
 
     @keyframes floatFluid2 {
-      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); border-radius: 48% 52% 58% 42% / 44% 56% 44% 56%; }
-      50% { transform: translate3d(-95px, -85px, 0) scale(1.18) rotate(-18deg); border-radius: 62% 38% 44% 56% / 58% 42% 56% 44%; }
-      100% { transform: translate3d(-40px, -145px, 0) scale(0.95) rotate(10deg); border-radius: 40% 60% 52% 48% / 48% 52% 40% 60%; }
+      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+      50% { transform: translate3d(-100px, -90px, 0) scale(1.2) rotate(-20deg); }
+      100% { transform: translate3d(-40px, -150px, 0) scale(0.95) rotate(10deg); }
     }
 
     @keyframes floatFluid3 {
-      0% { transform: translate3d(0, 0, 0) scale(0.9); border-radius: 50% 50% 40% 60% / 55% 45% 55% 45%; }
-      50% { transform: translate3d(-85px, 65px, 0) scale(1.22); border-radius: 40% 60% 55% 45% / 42% 58% 42% 58%; }
-      100% { transform: translate3d(95px, -55px, 0) scale(0.88); border-radius: 58% 42% 46% 54% / 50% 50% 58% 42%; }
+      0% { transform: translate3d(0, 0, 0) scale(0.9); }
+      50% { transform: translate3d(-90px, 70px, 0) scale(1.25); }
+      100% { transform: translate3d(100px, -60px, 0) scale(0.85); }
     }
 
     .glass-mesh-overlay {
@@ -236,11 +233,10 @@
     }
 
     /* ==========================================================
-       CURSOR SPOTLIGHT & BORDER GLOW + WATER DROPLET RIPPLE
+       CURSOR SPOTLIGHT & BORDER GLOW (RAYCAST / VERCEL)
        ========================================================== */
     .spotlight-surface {
       position: relative;
-      overflow: hidden;
       --mouse-x: -999px;
       --mouse-y: -999px;
     }
@@ -261,9 +257,7 @@
       z-index: 1;
     }
 
-    .spotlight-surface:hover::after {
-      opacity: 1;
-    }
+    .spotlight-surface:hover::after { opacity: 1; }
 
     .spotlight-border {
       position: absolute;
@@ -284,33 +278,9 @@
       z-index: 16;
     }
 
-    .spotlight-surface:hover > .spotlight-border {
-      opacity: 1;
-    }
+    .spotlight-surface:hover > .spotlight-border { opacity: 1; }
 
-    /* Sóng gợn giọt nước lan tỏa khi nhấn (Water Droplet Ripple) */
-    .water-ripple {
-      position: absolute;
-      border-radius: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      background: radial-gradient(circle, rgba(255,255,255,0.45) 0%, var(--droplet-ripple) 45%, transparent 72%);
-      pointer-events: none;
-      z-index: 25;
-      animation: dropletRippleAnim 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-
-    @keyframes dropletRippleAnim {
-      0% {
-        transform: translate(-50%, -50%) scale(0);
-        opacity: 0.9;
-      }
-      100% {
-        transform: translate(-50%, -50%) scale(3.2);
-        opacity: 0;
-      }
-    }
-
-    /* MAIN CARD CONTAINER (LIQUID DROPLET SURFACE) */
+    /* MAIN CARD CONTAINER - HIỆU ỨNG GIỌT NƯỚC VẬT LÝ */
     .liquid-card-ios26 {
       position: relative;
       z-index: 10;
@@ -325,19 +295,25 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      transition: height 0.55s cubic-bezier(0.32, 0.72, 0, 1), background 0.4s ease, border-color 0.4s ease;
+      transition: height 0.55s cubic-bezier(0.32, 0.72, 0, 1), background 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
       transform: translateZ(0);
       backface-visibility: hidden;
     }
 
-    /* Ánh phản quang đỉnh giọt nước (Specular Meniscus Highlight) */
+    /* Hiệu ứng uốn lượn giọt nước bám bề mặt khi rê chuột quanh viền */
+    .liquid-card-ios26:hover {
+      box-shadow: 
+        0 40px 100px rgba(0, 0, 0, 0.65),
+        inset 0 2px 5px rgba(255, 255, 255, 0.55),
+        inset 0 -2px 5px rgba(0, 0, 0, 0.6);
+    }
+
     .liquid-card-ios26::before {
       content: '';
       position: absolute;
-      top: 0; left: 8%; right: 8%;
-      height: 2px;
+      top: 0; left: 0; right: 0;
+      height: 1.5px;
       background: linear-gradient(90deg, transparent, var(--glass-border-highlight), transparent);
-      border-radius: 50%;
       z-index: 15;
     }
 
@@ -357,9 +333,9 @@
       gap: 10px;
     }
 
-    /* HAPTIC FEEDBACK & ĐỘ ĐÀN HỒI GIỌT NƯỚC CHO NÚT BẤM */
+    /* HAPTIC FEEDBACK (SCALE 0.96 KHI NHẤN) */
     .haptic-btn {
-      transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.25s cubic-bezier(0.32, 0.72, 0, 1), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
     }
     .haptic-btn:active {
       transform: scale(0.96) !important;
@@ -378,7 +354,6 @@
       cursor: pointer;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.25);
     }
 
     .theme-toggle-track:hover { transform: scale(1.04); }
@@ -390,7 +365,7 @@
       border-radius: 50%;
       background: linear-gradient(135deg, #e5e7eb 0%, #9ca3af 100%);
       border: 1.5px solid #ffffff;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25), inset 0 2px 3px rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -404,12 +379,12 @@
       position: absolute;
     }
 
-    .icon-sun { opacity: 0; transform: scale(0.5) rotate(-90deg); color: #0f172a; }
+    .icon-sun { opacity: 0; transform: scale(0.5) rotate(-90deg); color: #111827; }
     .icon-moon { opacity: 1; transform: scale(1) rotate(0deg); color: #111827; }
 
     [data-theme="light"] .theme-orb-indicator {
       transform: translate3d(36px, 0, 0);
-      background: linear-gradient(135deg, #ffffff 0%, #bae6fd 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #d1d5db 100%);
     }
     [data-theme="light"] .icon-sun { opacity: 1; transform: scale(1) rotate(0deg); }
     [data-theme="light"] .icon-moon { opacity: 0; transform: scale(0.5) rotate(90deg); }
@@ -427,14 +402,14 @@
       cursor: pointer;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.35), 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.3);
     }
 
     .glass-btn-ios26:hover {
       transform: translateY(-2px) scale(1.06);
       border-color: var(--text-sub);
       background: var(--pill-hover-bg);
-      box-shadow: var(--pill-hover-glow);
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.5);
     }
 
     .music-btn.playing i {
@@ -449,7 +424,7 @@
     }
 
     /* ==========================================================
-       PROFILE HEADER & AVATAR BREATHING + LIQUID DROPLET MORPH + TILT 3D
+       PROFILE HEADER & AVATAR BREATHING + TILT 3D SANG PHẢI
        ========================================================== */
     .profile-header {
       display: flex;
@@ -465,19 +440,12 @@
       will-change: transform, margin;
     }
 
-    /* Nhịp thở kết hợp độ căng bề mặt giọt nước (Surface Tension Morph) */
-    @keyframes avatarLiquidDroplet {
+    @keyframes avatarBreathing {
       0%, 100% {
-        border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
-        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28), 0 0 18px var(--glass-glow), inset 0 2px 4px rgba(255, 255, 255, 0.55);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3), 0 0 18px rgba(255, 255, 255, 0.12);
       }
-      33% {
-        border-radius: 53% 47% 48% 52% / 52% 53% 47% 48%;
-        box-shadow: 0 20px 44px rgba(0, 0, 0, 0.32), 0 0 32px rgba(255, 255, 255, 0.28), inset 0 2px 5px rgba(255, 255, 255, 0.7);
-      }
-      66% {
-        border-radius: 48% 52% 53% 47% / 47% 48% 52% 53%;
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3), 0 0 26px rgba(255, 255, 255, 0.22), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+      50% {
+        box-shadow: 0 20px 44px rgba(0, 0, 0, 0.35), 0 0 34px rgba(255, 255, 255, 0.32);
       }
     }
 
@@ -486,31 +454,18 @@
       width: 104px; height: 104px;
       border-radius: 50%;
       padding: 4px;
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.45) 100%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.08) 100%);
       border: 1.5px solid var(--glass-border);
-      animation: avatarLiquidDroplet 5.5s ease-in-out infinite;
+      animation: avatarBreathing 4.5s ease-in-out infinite;
       transform-style: preserve-3d;
       transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
       cursor: pointer;
     }
 
-    /* Điểm phản chiếu sáng trên giọt nước (Specular Water Glint) */
-    .avatar-ring::after {
-      content: '';
-      position: absolute;
-      top: 8px; left: 18px;
-      width: 24px; height: 10px;
-      border-radius: 50%;
-      background: radial-gradient(ellipse at center, rgba(255,255,255,0.75) 0%, transparent 75%);
-      transform: rotate(-28deg);
-      pointer-events: none;
-      z-index: 4;
-    }
-
     .avatar-ring img {
       width: 100%; height: 100%;
       object-fit: cover;
-      border-radius: inherit;
+      border-radius: 50%;
       filter: grayscale(100%);
       transition: filter 0.45s ease, transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
       pointer-events: none;
@@ -557,7 +512,7 @@
     }
 
     /* ==========================================================
-       SPRING-BASED VIEWPORT & TAB TRANSITIONS (LINEAR / FAMILY)
+       SPRING-BASED VIEWPORT & TAB TRANSITIONS
        ========================================================== */
     .viewport-wrapper {
       width: 100%;
@@ -597,7 +552,7 @@
     }
 
     /* ==========================================================
-       TEXT SHIMMER & BLUR REVEAL CHO QUOTE (STRIPE / CRON)
+       TEXT SHIMMER & BLUR REVEAL CHO QUOTE (KHÔI PHỤC HOÀN CHỈNH)
        ========================================================== */
     .ios26-quote-card {
       margin: 8px 0 16px;
@@ -609,14 +564,14 @@
       width: 100%;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      box-shadow: inset 0 1.5px 3px rgba(255, 255, 255, 0.25), 0 10px 25px rgba(0, 0, 0, 0.08);
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
       transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1), border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .ios26-quote-card:hover {
       transform: translateY(-3px) scale(1.015);
       border-color: var(--text-sub);
-      box-shadow: var(--pill-hover-glow);
+      box-shadow: 0 15px 35px rgba(255, 255, 255, 0.08), inset 0 1px 3px rgba(255, 255, 255, 0.4);
     }
 
     .quote-text {
@@ -674,7 +629,7 @@
       animation: wordBlurReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1.05s forwards;
     }
 
-    /* LINKS LIST (LIQUID DROPLET PILLS) */
+    /* LINKS LIST */
     .links-list {
       width: 100%;
       display: flex;
@@ -696,9 +651,9 @@
       font-size: 0.95rem;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.3), 0 6px 16px rgba(0, 0, 0, 0.06);
+      box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.2);
       overflow: hidden;
-      transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .ios26-link-item:hover {
@@ -717,13 +672,10 @@
       object-fit: cover;
       position: relative;
       z-index: 2;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
     }
 
-    .ios26-link-item:hover .link-icon {
-      transform: scale(1.12) rotate(5deg);
-    }
+    .ios26-link-item:hover .link-icon { transform: scale(1.12) rotate(5deg); }
 
     .link-label { 
       flex: 1; 
@@ -734,9 +686,7 @@
       transition: transform 0.3s ease, color 0.3s ease;
     }
 
-    .ios26-link-item:hover .link-label {
-      transform: translateX(4px);
-    }
+    .ios26-link-item:hover .link-label { transform: translateX(4px); }
 
     .link-arrow {
       font-size: 0.85rem;
@@ -746,12 +696,10 @@
       transition: transform 0.3s ease;
     }
 
-    .ios26-link-item:hover .link-arrow {
-      transform: translateX(5px);
-    }
+    .ios26-link-item:hover .link-arrow { transform: translateX(5px); }
 
     /* ==========================================================
-       APPLE MACOS MAGNETIC DOCK + LIQUID DROPLET INDICATOR
+       APPLE MACOS MAGNETIC DOCK (RESET KHI NHẤN XONG)
        ========================================================== */
     .bottom-nav-container {
       padding: 6px 22px 22px;
@@ -771,10 +719,9 @@
       padding: 6px;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.35), 0 20px 40px rgba(0, 0, 0, 0.35);
+      box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.3), 0 20px 40px rgba(0, 0, 0, 0.4);
     }
 
-    /* Giọt nước chỉ báo trượt & co giãn đàn hồi khi chuyển tab */
     .nav-indicator-pill {
       position: absolute;
       top: 6px; left: 6px;
@@ -783,21 +730,11 @@
       background: var(--indicator-bg);
       border: 1.5px solid var(--indicator-border);
       border-radius: 34px;
-      box-shadow: 0 0 16px rgba(255, 255, 255, 0.18), inset 0 2px 3px rgba(255, 255, 255, 0.75);
-      transition: transform 0.52s cubic-bezier(0.32, 0.72, 0, 1);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.7);
+      transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
       z-index: 1;
       will-change: transform;
       pointer-events: none;
-    }
-
-    .nav-indicator-pill.droplet-stretch {
-      animation: dropletPillStretch 0.48s cubic-bezier(0.32, 0.72, 0, 1);
-    }
-
-    @keyframes dropletPillStretch {
-      0% { border-radius: 34px; }
-      40% { border-radius: 26px 42px 42px 26px / 38px 30px 30px 38px; }
-      100% { border-radius: 34px; }
     }
 
     .nav-tab-btn {
@@ -821,12 +758,12 @@
       pointer-events: none;
     }
 
-    [data-theme="light"] .nav-tab-btn i { color: #64748b; }
+    [data-theme="light"] .nav-tab-btn i { color: #6b7280; }
     .nav-tab-btn.active i { color: var(--text-title); }
-    [data-theme="light"] .nav-tab-btn.active i { color: #0f172a; }
+    [data-theme="light"] .nav-tab-btn.active i { color: #111827; }
 
     /* ==========================================================
-       SPRING-BASED MODAL SYSTEM (LINEAR / FAMILY)
+       SPRING-BASED MODAL SYSTEM
        ========================================================== */
     .modal-backdrop {
       position: fixed;
@@ -923,8 +860,6 @@
       gap: 8px;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      overflow: hidden;
-      position: relative;
     }
 
     .btn-copy-link:hover {
@@ -985,7 +920,7 @@
     
     <!-- TOP BAR -->
     <div class="top-bar">
-      <div class="theme-toggle-track haptic-btn ripple-target" id="theme-toggle" role="button" aria-label="Toggle Theme">
+      <div class="theme-toggle-track haptic-btn" id="theme-toggle" role="button" aria-label="Toggle Theme">
         <div class="theme-orb-indicator">
           <i class="fa-solid fa-moon orb-icon icon-moon"></i>
           <i class="fa-solid fa-sun orb-icon icon-sun"></i>
@@ -993,17 +928,17 @@
       </div>
 
       <div class="top-bar-controls">
-        <button class="glass-btn-ios26 spotlight-surface haptic-btn ripple-target" id="open-email-modal-btn" aria-label="Quick Email">
+        <button class="glass-btn-ios26 spotlight-surface haptic-btn" id="open-email-modal-btn" aria-label="Quick Email">
           <div class="spotlight-border"></div>
           <i class="fa-solid fa-envelope"></i>
         </button>
 
-        <button class="glass-btn-ios26 spotlight-surface haptic-btn ripple-target music-btn" id="music-toggle-btn" aria-label="Toggle Music">
+        <button class="glass-btn-ios26 spotlight-surface haptic-btn music-btn" id="music-toggle-btn" aria-label="Toggle Music">
           <div class="spotlight-border"></div>
           <i class="fa-solid fa-music" id="music-icon"></i>
         </button>
 
-        <button class="glass-btn-ios26 spotlight-surface haptic-btn ripple-target" id="open-qr-btn" aria-label="Open QR Code">
+        <button class="glass-btn-ios26 spotlight-surface haptic-btn" id="open-qr-btn" aria-label="Open QR Code">
           <div class="spotlight-border"></div>
           <i class="fa-solid fa-qrcode"></i>
         </button>
@@ -1012,7 +947,7 @@
 
     <!-- PROFILE HEADER -->
     <header class="profile-header">
-      <div class="avatar-ring ripple-target" id="avatar-3d">
+      <div class="avatar-ring" id="avatar-3d">
         <img src="images/Huy.png" alt="Avatar Nhật Huy" loading="eager">
       </div>
       <div class="profile-meta">
@@ -1030,9 +965,9 @@
           <div class="links-list" id="social-links-list"></div>
         </section>
 
-        <!-- TAB 2: HOME (QUOTE) -->
+        <!-- TAB 2: HOME (QUOTE KHÔI PHỤC HOÀN CHỈNH) -->
         <section class="tab-page active-tab" id="page-home">
-          <div class="ios26-quote-card spotlight-surface ripple-target">
+          <div class="ios26-quote-card spotlight-surface">
             <div class="spotlight-border"></div>
             <p class="quote-text" id="animated-quote">“<br>Even the darkest night will end,<br>and the sun will rise.</p>
             <span class="quote-author">Les Misérables - Victor Hugo</span>
@@ -1077,7 +1012,7 @@
         <div id="qrcode-canvas"></div>
         <img src="images/Huy.png" alt="Avatar" class="qr-avatar-center">
       </div>
-      <button class="btn-copy-link haptic-btn ripple-target" id="copy-btn">
+      <button class="btn-copy-link haptic-btn" id="copy-btn">
         <i class="fa-regular fa-copy"></i>
         <span id="copy-text">Copy link</span>
       </button>
@@ -1091,7 +1026,7 @@
       <div class="spotlight-border"></div>
       <h3 class="qr-title">Instant Message</h3>
       <textarea id="visitor-message" class="email-textarea" placeholder="Type your message to Nhat Huy..."></textarea>
-      <button class="btn-copy-link haptic-btn ripple-target" id="send-instant-email-btn" style="width: 100%;">
+      <button class="btn-copy-link haptic-btn" id="send-instant-email-btn" style="width: 100%;">
         <i class="fa-solid fa-paper-plane"></i>
         <span id="send-btn-text">Send</span>
       </button>
@@ -1114,7 +1049,6 @@
 
       initQuoteBlurReveal();
       initSpotlightEffect();
-      initWaterDropletRipples();
       initMagneticDock();
       initAvatar3DTilt();
       initAmbientCanvas();
@@ -1128,7 +1062,7 @@
     });
 
     /* ==========================================================
-       1. TEXT SHIMMER & BLUR REVEAL CHO QUOTE
+       1. TEXT SHIMMER & BLUR REVEAL CHO QUOTE (KHÔI PHỤC HOÀN CHỈNH)
        ========================================================== */
     function initQuoteBlurReveal() {
       const quoteEl = document.getElementById("animated-quote");
@@ -1170,29 +1104,7 @@
     }
 
     /* ==========================================================
-       3. WATER DROPLET RIPPLE (HIỆU ỨNG GỢN SÓNG GIỌT NƯỚC KHI CHẠM)
-       ========================================================== */
-    function initWaterDropletRipples() {
-      document.addEventListener("pointerdown", (e) => {
-        const target = e.target.closest(".ripple-target");
-        if (!target) return;
-
-        const rect = target.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height) * 0.7;
-        const ripple = document.createElement("span");
-        ripple.className = "water-ripple";
-        ripple.style.width = `${size}px`;
-        ripple.style.height = `${size}px`;
-        ripple.style.left = `${e.clientX - rect.left}px`;
-        ripple.style.top = `${e.clientY - rect.top}px`;
-
-        target.appendChild(ripple);
-        ripple.addEventListener("animationend", () => ripple.remove());
-      });
-    }
-
-    /* ==========================================================
-       4. APPLE MACOS MAGNETIC DOCK (SPRING PHYSICS INTERPOLATION)
+       3. APPLE MACOS MAGNETIC DOCK (RESET KHI CLICK XONG)
        ========================================================== */
     function initMagneticDock() {
       const dock = document.getElementById("macos-dock");
@@ -1238,9 +1150,22 @@
         });
       });
 
+      // Hàm reset nhanh kích thước khi người dùng vừa click ấn xong
+      window.resetDockScales = function() {
+        springs.forEach((s) => {
+          s.targetScale = 1;
+          s.targetX = 0;
+          s.scale = 1;
+          s.x = 0;
+          s.vScale = 0;
+          s.vX = 0;
+        });
+        items.forEach(item => item.style.transform = 'translate3d(0px, 0px, 0) scale(1)');
+      };
+
       function animateDock() {
-        const stiffness = 0.18;
-        const damping = 0.72;
+        const stiffness = 0.22;
+        const damping = 0.68;
 
         items.forEach((item, idx) => {
           const s = springs[idx];
@@ -1262,7 +1187,7 @@
     }
 
     /* ==========================================================
-       5. AVATAR 3D TILT PARALLAX
+       4. AVATAR 3D TILT NGHIÊNG SANG PHẢI
        ========================================================== */
     function initAvatar3DTilt() {
       const avatar = document.getElementById("avatar-3d");
@@ -1272,8 +1197,9 @@
         const rect = avatar.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
-        const rotateX = (-y * 24).toFixed(2);
-        const rotateY = (x * 24).toFixed(2);
+        // Đảo dấu để góc xoay trục Y hướng sang phải (+)
+        const rotateX = (-y * 20).toFixed(2);
+        const rotateY = (x * 28 + 8).toFixed(2); // Offset mặc định lệch sang phải
         avatar.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.06)`;
       });
 
@@ -1283,9 +1209,7 @@
     }
 
     /* ==========================================================
-       6. INTERACTIVE AMBIENT CANVAS
-          - Dark Mode: Đom đóm / bụi sao tụ nhẹ theo chuột
-          - Light Mode: Đốm xanh bokeh kim cương lấp lánh
+       5. INTERACTIVE AMBIENT CANVAS (ĐỌM ĐÓM / BOKEH HOA TUYẾT XANH)
        ========================================================== */
     function initAmbientCanvas() {
       const canvas = document.getElementById("ambient-canvas");
@@ -1311,60 +1235,17 @@
         mouse.active = false;
       });
 
-      const particleCount = 40;
+      const particleCount = 42;
       const particles = Array.from({ length: particleCount }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45 - 0.15,
-        baseRadius: Math.random() * 2.2 + 1.2,
-        diamondSize: Math.random() * 14 + 7,
-        rotation: Math.random() * Math.PI,
-        rotSpeed: (Math.random() - 0.5) * 0.012,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4 - 0.12,
+        baseRadius: Math.random() * 2 + 1,
+        bokehRadius: Math.random() * 12 + 5,
         phase: Math.random() * Math.PI * 2,
         speedPhase: Math.random() * 0.02 + 0.01
       }));
-
-      function drawDiamondBokeh(ctx, x, y, size, rotation, alpha) {
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(rotation);
-
-        // Hào quang xanh mềm xung quanh bokeh kim cương
-        const glow = ctx.createRadialGradient(0, 0, 0, 0, 0, size * 1.45);
-        glow.addColorStop(0, `rgba(125, 211, 252, ${alpha * 0.85})`);
-        glow.addColorStop(0.55, `rgba(56, 189, 248, ${alpha * 0.35})`);
-        glow.addColorStop(1, "rgba(14, 165, 233, 0)");
-        ctx.fillStyle = glow;
-        ctx.beginPath();
-        ctx.arc(0, 0, size * 1.45, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Hình khối kim cương (Diamond facet) với ánh khúc xạ xanh ngọc
-        const w = size * 0.72;
-        const h = size;
-        const diamondGrad = ctx.createLinearGradient(-w, -h, w, h);
-        diamondGrad.addColorStop(0, `rgba(224, 242, 254, ${Math.min(1, alpha * 1.6)})`);
-        diamondGrad.addColorStop(0.5, `rgba(56, 189, 248, ${alpha * 0.95})`);
-        diamondGrad.addColorStop(1, `rgba(2, 132, 199, ${alpha * 0.7})`);
-
-        ctx.beginPath();
-        ctx.moveTo(0, -h);
-        ctx.lineTo(w, 0);
-        ctx.lineTo(0, h);
-        ctx.lineTo(-w, 0);
-        ctx.closePath();
-
-        ctx.fillStyle = diamondGrad;
-        ctx.fill();
-
-        // Viền cạnh kim cương bắt sáng
-        ctx.lineWidth = 0.8;
-        ctx.strokeStyle = `rgba(255, 255, 255, ${Math.min(0.95, alpha * 1.8)})`;
-        ctx.stroke();
-
-        ctx.restore();
-      }
 
       function renderCanvas() {
         ctx.clearRect(0, 0, width, height);
@@ -1372,17 +1253,15 @@
 
         particles.forEach((p) => {
           p.phase += p.speedPhase;
-          p.rotation += p.rotSpeed;
 
-          // Tụ nhẹ lại khi con trỏ chuột đi qua
           if (mouse.active) {
             const dx = mouse.x - p.x;
             const dy = mouse.y - p.y;
             const dist = Math.hypot(dx, dy);
-            const attractRadius = 210;
+            const attractRadius = 200;
 
-            if (dist < attractRadius && dist > 18) {
-              const force = (1 - dist / attractRadius) * 0.035;
+            if (dist < attractRadius && dist > 15) {
+              const force = (1 - dist / attractRadius) * 0.03;
               p.vx += (dx / dist) * force;
               p.vy += (dy / dist) * force;
             }
@@ -1390,9 +1269,8 @@
 
           p.vx *= 0.985;
           p.vy *= 0.985;
-
-          p.x += p.vx + Math.sin(p.phase) * 0.18;
-          p.y += p.vy + Math.cos(p.phase * 0.8) * 0.15;
+          p.x += p.vx + Math.sin(p.phase) * 0.15;
+          p.y += p.vy + Math.cos(p.phase * 0.8) * 0.12;
 
           if (p.x < -30) p.x = width + 30;
           if (p.x > width + 30) p.x = -30;
@@ -1402,9 +1280,9 @@
           const pulse = 0.5 + 0.5 * Math.sin(p.phase);
 
           if (isDark) {
-            // Dark Mode: Đom đóm / bụi sao lấp lánh
+            // Dark Mode: Đom đóm bụi sao
             const r = p.baseRadius * (0.8 + pulse * 0.5);
-            const alpha = 0.25 + pulse * 0.65;
+            const alpha = 0.25 + pulse * 0.6;
             const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 4);
             grad.addColorStop(0, `rgba(255, 250, 225, ${alpha})`);
             grad.addColorStop(0.4, `rgba(220, 230, 255, ${alpha * 0.45})`);
@@ -1415,10 +1293,18 @@
             ctx.fillStyle = grad;
             ctx.fill();
           } else {
-            // Light Mode: Đốm xanh bokeh kim cương
-            const size = p.diamondSize * (0.85 + pulse * 0.25);
-            const alpha = 0.18 + pulse * 0.28;
-            drawDiamondBokeh(ctx, p.x, p.y, size, p.rotation, alpha);
+            // Light Mode: Đốm xanh bokeh hoa tuyết li ti
+            const r = p.bokehRadius * (0.8 + pulse * 0.2);
+            const alpha = 0.1 + pulse * 0.15;
+            const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r);
+            grad.addColorStop(0, `rgba(186, 230, 253, ${alpha * 1.5})`);
+            grad.addColorStop(0.6, `rgba(125, 211, 252, ${alpha * 0.8})`);
+            grad.addColorStop(1, "rgba(255, 255, 255, 0)");
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+            ctx.fillStyle = grad;
+            ctx.fill();
           }
         });
 
@@ -1428,7 +1314,7 @@
     }
 
     /* ==========================================================
-       HỆ THỐNG NHẬN DIỆN THIẾT BỊ & EMAILJS (GIỮ NGUYÊN GỐC)
+       HỆ THỐNG NHẬN DIỆN THIẾT BỊ & EMAILJS
        ========================================================== */
     function getDeviceAndLocationInfo() {
       const ua = navigator.userAgent;
@@ -1447,78 +1333,25 @@
         os = `Android ${osMatch ? osMatch[1] : ''}`;
       } else if (/iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
         const osMatch = ua.match(/OS\s+([\d_]+)/i);
-        const version = osMatch ? osMatch[1].replace(/_/g, '.') : '';
-        os = `iOS / iPadOS ${version}`;
+        os = `iOS / iPadOS ${osMatch ? osMatch[1].replace(/_/g, '.') : ''}`;
       } else if (/windows nt/i.test(ua)) {
-        if (/windows nt 10.0/i.test(ua)) os = "Windows 10 / 11";
-        else if (/windows nt 6.3/i.test(ua)) os = "Windows 8.1";
-        else if (/windows nt 6.1/i.test(ua)) os = "Windows 7";
-        else os = "Windows PC";
+        os = /windows nt 10.0/i.test(ua) ? "Windows 10 / 11" : "Windows PC";
       } else if (/macintosh|mac os x/i.test(ua)) {
-        const osMatch = ua.match(/Mac OS X\s+([\d_]+)/i);
-        const version = osMatch ? osMatch[1].replace(/_/g, '.') : '';
-        os = `macOS ${version}`;
-      } else if (/cros/i.test(ua)) {
-        os = "ChromeOS";
-      } else if (/linux/i.test(ua)) {
-        os = "Linux";
+        os = "macOS";
       }
 
       if (/android/i.test(ua)) {
-        if (/samsung/i.test(ua) || /SM-/i.test(ua)) {
-          vendor = "Samsung";
-          const match = ua.match(/SM-[A-Z0-9]+/i);
-          model = match ? match[0] : "Samsung Galaxy";
-        } else if (/xiaomi|redmi|poco/i.test(ua) || /m2\d+|2\d+/i.test(ua)) {
-          vendor = "Xiaomi";
-          const match = ua.match(/(?:Mi|Redmi|POCO)\s+[\w\s]+|(?:21|22|23|24)\d+[A-Z]+/i);
-          model = match ? match[0] : "Xiaomi Device";
-        } else if (/oppo/i.test(ua) || /CPH\d+/i.test(ua)) {
-          vendor = "OPPO";
-          const match = ua.match(/CPH\d+/i);
-          model = match ? match[0] : "CPH Device";
-        } else if (/vivo/i.test(ua) || /V2\d+/i.test(ua)) {
-          vendor = "Vivo";
-          const match = ua.match(/V2\d+[A-Z]*/i);
-          model = match ? match[0] : "Vivo Device";
-        } else if (/realme/i.test(ua) || /RMX\d+/i.test(ua)) {
-          vendor = "Realme";
-          const match = ua.match(/RMX\d+/i);
-          model = match ? match[0] : "Realme Device";
-        } else if (/pixel/i.test(ua)) {
-          vendor = "Google";
-          const match = ua.match(/Pixel\s+[\d\w\s]+/i);
-          model = match ? match[0] : "Google Pixel";
-        } else if (/huawei|honor/i.test(ua)) {
-          vendor = "Huawei / Honor";
-          const match = ua.match(/(?:HUAWEI|HONOR)\s+[\w-]+|[A-Z]{3}-[A-Z0-9]+/i);
-          model = match ? match[0] : "Huawei Device";
-        } else {
-          const genericMatch = ua.match(/Android[^;]+;\s*([^;)]+)\s*\)/i);
-          if (genericMatch && genericMatch[1]) {
-            model = genericMatch[1].trim();
-            if (model.includes("Build")) model = model.split("Build")[0].trim();
-          }
-        }
-      } else if (/iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+        if (/samsung/i.test(ua) || /SM-/i.test(ua)) { vendor = "Samsung"; model = ua.match(/SM-[A-Z0-9]+/i)?.[0] || "Samsung Galaxy"; }
+        else { model = "Android Device"; }
+      } else if (/iphone|ipad|ipod/i.test(ua)) {
         vendor = "Apple";
-        if (/ipad/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) model = "iPad";
-        else if (/iphone/i.test(ua)) model = "iPhone";
-        else model = "iPod Touch";
-      } else {
-        if (/windows/i.test(ua)) { vendor = "PC / OEM"; model = "Windows Desktop/Laptop"; }
-        else if (/macintosh/i.test(ua)) { vendor = "Apple"; model = "Mac / MacBook"; }
-        else { vendor = "Khác"; model = "Máy tính cá nhân"; }
+        model = /ipad/i.test(ua) ? "iPad" : "iPhone";
       }
 
       const deviceFullInfo = `Mã/Tên: ${model} | Hãng: ${vendor} | Hệ điều hành: ${os} (${deviceType})`;
       const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Ho_Chi_Minh";
       const language = navigator.language || "vi-VN";
-      
-      let location = `Timezone: ${timeZone} | Ngôn ngữ: ${language}`;
-      if (timeZone.includes("Ho_Chi_Minh") || timeZone.includes("Bangkok")) {
-        location = `Việt Nam (${timeZone})`;
-      }
+      let location = timeZone.includes("Ho_Chi_Minh") || timeZone.includes("Bangkok") ? `Việt Nam (${timeZone})` : `Timezone: ${timeZone}`;
 
       return { device: deviceFullInfo, location };
     }
@@ -1530,19 +1363,14 @@
       if (!sessionStorage.getItem("email_notified")) {
         setTimeout(() => {
           if (sessionStorage.getItem("email_notified")) return; 
-
           const { device, location } = getDeviceAndLocationInfo();
-          const templateParams = {
+          emailjs.send(SERVICE_ID, TEMPLATE_ID, {
             time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
             device: device,
             location: location,
             message: "[System] New visitor access on your personal web page w.bio (No message left).",
             referrer: document.referrer || "Direct Access"
-          };
-
-          emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
-            .then(() => sessionStorage.setItem("email_notified", "true"))
-            .catch((error) => console.error("Error sending email:", error));
+          }).then(() => sessionStorage.setItem("email_notified", "true")).catch(() => {});
         }, 3000);
       }
     }
@@ -1555,16 +1383,8 @@
       const sendBtnText = document.getElementById("send-btn-text");
       const messageInput = document.getElementById("visitor-message");
 
-      function openModal() {
-        modal.classList.add("active");
-        modal.setAttribute("aria-hidden", "false");
-      }
-
-      function closeModal() {
-        modal.classList.remove("active");
-        modal.setAttribute("aria-hidden", "true");
-        messageInput.value = "";
-      }
+      function openModal() { modal.classList.add("active"); modal.setAttribute("aria-hidden", "false"); }
+      function closeModal() { modal.classList.remove("active"); modal.setAttribute("aria-hidden", "true"); messageInput.value = ""; }
 
       openBtn.addEventListener("click", openModal);
       closeBtn.addEventListener("click", closeModal);
@@ -1572,43 +1392,32 @@
 
       sendBtn.addEventListener("click", () => {
         const userMsg = messageInput.value.trim();
-        if (!userMsg) {
-          alert("Please enter your message!");
-          return;
-        }
+        if (!userMsg) { alert("Please enter your message!"); return; }
 
         sendBtnText.textContent = "Sending...";
         sendBtn.style.opacity = "0.7";
         sessionStorage.setItem("email_notified", "true");
 
         const { device, location } = getDeviceAndLocationInfo();
-        const templateParams = {
+        emailjs.send(SERVICE_ID, TEMPLATE_ID, {
           time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
           device: device,
           location: location,
           message: userMsg, 
           referrer: "Instant Message Pop-up (Web Form)"
-        };
-
-        emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
-          .then(() => {
-            sendBtnText.textContent = "Sent Successfully!";
-            sendBtn.style.background = "#22c55e";
-            setTimeout(() => {
-              closeModal();
-              sendBtnText.textContent = "Send";
-              sendBtn.style.background = "rgba(255, 255, 255, 0.15)";
-              sendBtn.style.opacity = "1";
-            }, 1500);
-          })
-          .catch((error) => {
-            console.error("Error sending message:", error);
-            sendBtnText.textContent = "Send Failed!";
-            setTimeout(() => {
-              sendBtnText.textContent = "Send";
-              sendBtn.style.opacity = "1";
-            }, 2000);
-          });
+        }).then(() => {
+          sendBtnText.textContent = "Sent Successfully!";
+          sendBtn.style.background = "#22c55e";
+          setTimeout(() => {
+            closeModal();
+            sendBtnText.textContent = "Send";
+            sendBtn.style.background = "rgba(255, 255, 255, 0.15)";
+            sendBtn.style.opacity = "1";
+          }, 1500);
+        }).catch(() => {
+          sendBtnText.textContent = "Send Failed!";
+          setTimeout(() => { sendBtnText.textContent = "Send"; sendBtn.style.opacity = "1"; }, 2000);
+        });
       });
     }
 
@@ -1622,7 +1431,7 @@
         a.href = item.url || '#';
         a.target = "_blank";
         a.rel = "noopener noreferrer";
-        a.className = "ios26-link-item spotlight-surface haptic-btn ripple-target";
+        a.className = "ios26-link-item spotlight-surface haptic-btn";
         a.innerHTML = `
           <div class="spotlight-border"></div>
           <img src="${item.icon}" alt="${item.title}" class="link-icon" loading="lazy">
@@ -1652,12 +1461,9 @@
           const topBarH = topBarEl ? topBarEl.offsetHeight : 0;
           const headerH = profileHeaderEl ? profileHeaderEl.offsetHeight : 0;
           const navH = bottomNavEl ? bottomNavEl.offsetHeight : 0;
-          
           const currentTabPage = tabPages[index];
           const contentH = currentTabPage ? currentTabPage.scrollHeight : 0;
-
-          const totalH = topBarH + headerH + contentH + navH;
-          mainCard.style.height = `${totalH}px`;
+          mainCard.style.height = `${topBarH + headerH + contentH + navH}px`;
         });
       }
 
@@ -1667,21 +1473,18 @@
         const activeBtn = navBtns[index];
         if (activeBtn && indicator) {
           indicator.style.transform = `translate3d(${activeBtn.offsetLeft - 6}px, 0, 0)`;
-          indicator.classList.remove("droplet-stretch");
-          void indicator.offsetWidth;
-          indicator.classList.add("droplet-stretch");
         }
 
         navBtns.forEach((btn, i) => btn.classList.toggle("active", i === index));
         tabPages.forEach((page, i) => page.classList.toggle("active-tab", i === index));
 
-        if (index === 1) {
-          mainCard.classList.remove("compact-mode");
-        } else {
-          mainCard.classList.add("compact-mode");
-        }
+        if (index === 1) mainCard.classList.remove("compact-mode");
+        else mainCard.classList.add("compact-mode");
 
         adjustCardHeight(index);
+
+        // Reset kích thước dock ngay sau khi click xong
+        if (window.resetDockScales) window.resetDockScales();
       }
 
       navBtns.forEach((btn, i) => {
@@ -1693,15 +1496,11 @@
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
           const activeBtn = document.querySelector(".nav-tab-btn.active");
-          if (activeBtn) {
-            switchTab(parseInt(activeBtn.getAttribute("data-index") || "1"));
-          }
+          if (activeBtn) switchTab(parseInt(activeBtn.getAttribute("data-index") || "1"));
         }, 100);
       });
 
-      requestAnimationFrame(() => {
-        switchTab(1);
-      });
+      requestAnimationFrame(() => switchTab(1));
     }
 
     /* ==========================================================
@@ -1734,9 +1533,7 @@
           Math.max(y, window.innerHeight - y)
         );
 
-        const transition = document.startViewTransition(() => {
-          applyTheme();
-        });
+        const transition = document.startViewTransition(() => { applyTheme(); });
 
         transition.ready.then(() => {
           document.documentElement.animate(
@@ -1783,10 +1580,7 @@
         }
       }
 
-      function closeModal() {
-        modal.classList.remove("active");
-        modal.setAttribute("aria-hidden", "true");
-      }
+      function closeModal() { modal.classList.remove("active"); modal.setAttribute("aria-hidden", "true"); }
 
       openBtn.addEventListener("click", openModal);
       closeBtn.addEventListener("click", closeModal);
@@ -1796,14 +1590,11 @@
         navigator.clipboard.writeText(shareUrl).then(() => {
           copyText.textContent = "Copied!";
           copyBtn.style.background = "#22c55e";
-
           setTimeout(() => {
             copyText.textContent = "Copy link";
             copyBtn.style.background = "rgba(255, 255, 255, 0.15)";
           }, 2000);
-        }).catch(() => {
-          copyText.textContent = "Error!";
-        });
+        }).catch(() => { copyText.textContent = "Error!"; });
       });
     }
 
@@ -1836,17 +1627,13 @@
           audioCtx = new (window.AudioContext || window.webkitAudioContext)();
           audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
           isLoaded = true;
-        } catch (e) {
-          console.log("Lỗi tải tệp âm thanh:", e);
-        }
+        } catch (e) { console.log("Lỗi tải tệp âm thanh:", e); }
       }
 
       function playSound() {
         if (!isLoaded || !audioBuffer) return;
         if (audioCtx.state === 'suspended') audioCtx.resume();
-        if (sourceNode) {
-          try { sourceNode.stop(); } catch(e) {}
-        }
+        if (sourceNode) { try { sourceNode.stop(); } catch(e) {} }
 
         sourceNode = audioCtx.createBufferSource();
         sourceNode.buffer = audioBuffer;
@@ -1864,10 +1651,7 @@
       }
 
       function stopSound() {
-        if (sourceNode) {
-          try { sourceNode.stop(); } catch(e) {}
-          sourceNode = null;
-        }
+        if (sourceNode) { try { sourceNode.stop(); } catch(e) {} sourceNode = null; }
         isPlaying = false;
         updateUI(false);
       }
@@ -1878,12 +1662,8 @@
         e.stopPropagation();
         if (!isLoaded) await loadAudioFile();
         if (audioCtx && audioCtx.state === 'suspended') await audioCtx.resume();
-
-        if (isPlaying) {
-          stopSound();
-        } else {
-          playSound();
-        }
+        if (isPlaying) stopSound();
+        else playSound();
       });
     }
   </script>
