@@ -121,7 +121,7 @@
       --shimmer-beam: rgba(245, 158, 11, 0.85);
     }
 
-    /* VIEW TRANSITIONS API (CIRCULAR THEME REVEAL) */
+    /* VIEW TRANSITIONS API */
     ::view-transition-old(root),
     ::view-transition-new(root) {
       animation: none;
@@ -232,9 +232,7 @@
       opacity: 0.3;
     }
 
-    /* ==========================================================
-       CURSOR SPOTLIGHT & BORDER GLOW (RAYCAST / VERCEL)
-       ========================================================== */
+    /* CURSOR SPOTLIGHT & BORDER GLOW */
     .spotlight-surface {
       position: relative;
       --mouse-x: -999px;
@@ -300,7 +298,6 @@
       backface-visibility: hidden;
     }
 
-    /* Hiệu ứng uốn lượn giọt nước bám bề mặt khi rê chuột quanh viền */
     .liquid-card-ios26:hover {
       box-shadow: 
         0 40px 100px rgba(0, 0, 0, 0.65),
@@ -333,7 +330,6 @@
       gap: 10px;
     }
 
-    /* HAPTIC FEEDBACK (SCALE 0.96 KHI NHẤN) */
     .haptic-btn {
       transition: transform 0.25s cubic-bezier(0.32, 0.72, 0, 1), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
     }
@@ -423,9 +419,7 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* ==========================================================
-       PROFILE HEADER & AVATAR BREATHING + TILT 3D SANG PHẢI
-       ========================================================== */
+    /* PROFILE HEADER & AVATAR 3D TILT SANG PHẢI */
     .profile-header {
       display: flex;
       flex-direction: column;
@@ -511,9 +505,7 @@
       pointer-events: none;
     }
 
-    /* ==========================================================
-       SPRING-BASED VIEWPORT & TAB TRANSITIONS
-       ========================================================== */
+    /* VIEWPORT SLIDER & TRANSITIONS */
     .viewport-wrapper {
       width: 100%;
       overflow: hidden;
@@ -551,9 +543,7 @@
       filter: blur(0px);
     }
 
-    /* ==========================================================
-       TEXT SHIMMER & BLUR REVEAL CHO QUOTE (KHÔI PHỤC HOÀN CHỈNH)
-       ========================================================== */
+    /* QUOTE CARD & BLUR REVEAL */
     .ios26-quote-card {
       margin: 8px 0 16px;
       padding: 24px 22px;
@@ -698,9 +688,7 @@
 
     .ios26-link-item:hover .link-arrow { transform: translateX(5px); }
 
-    /* ==========================================================
-       APPLE MACOS MAGNETIC DOCK (RESET KHI NHẤN XONG)
-       ========================================================== */
+    /* MACOS MAGNETIC DOCK */
     .bottom-nav-container {
       padding: 6px 22px 22px;
       z-index: 30;
@@ -762,9 +750,7 @@
     .nav-tab-btn.active i { color: var(--text-title); }
     [data-theme="light"] .nav-tab-btn.active i { color: #111827; }
 
-    /* ==========================================================
-       SPRING-BASED MODAL SYSTEM
-       ========================================================== */
+    /* SPRING-BASED MODALS */
     .modal-backdrop {
       position: fixed;
       top: 0; left: 0;
@@ -905,7 +891,7 @@
 </head>
 <body>
 
-  <!-- BACKGROUND SPHERES & INTERACTIVE AMBIENT CANVAS -->
+  <!-- BACKGROUND SPHERES & AMBIENT CANVAS -->
   <div class="ios26-bg-canvas">
     <div class="liquid-orb orb-primary"></div>
     <div class="liquid-orb orb-secondary"></div>
@@ -982,7 +968,7 @@
       </div>
     </div>
 
-    <!-- NAVIGATION DOCK CAPSULE (MACOS MAGNETIC DOCK) -->
+    <!-- NAVIGATION DOCK CAPSULE -->
     <div class="bottom-nav-container">
       <nav class="ios26-nav-dock" id="macos-dock">
         <div class="nav-indicator-pill" id="nav-indicator"></div>
@@ -1061,9 +1047,7 @@
       initEmailJSNotifier(); 
     });
 
-    /* ==========================================================
-       1. TEXT SHIMMER & BLUR REVEAL CHO QUOTE (KHÔI PHỤC HOÀN CHỈNH)
-       ========================================================== */
+    /* 1. TEXT SHIMMER & BLUR REVEAL CHO QUOTE */
     function initQuoteBlurReveal() {
       const quoteEl = document.getElementById("animated-quote");
       if (!quoteEl) return;
@@ -1087,9 +1071,7 @@
       quoteEl.innerHTML = `<span class="sunlight-shimmer-wrap">${htmlLines.join("<br>")}</span>`;
     }
 
-    /* ==========================================================
-       2. CURSOR SPOTLIGHT & BORDER GLOW (RAYCAST / VERCEL)
-       ========================================================== */
+    /* 2. CURSOR SPOTLIGHT & BORDER GLOW */
     function initSpotlightEffect() {
       document.addEventListener("mousemove", (e) => {
         const surfaces = document.querySelectorAll(".spotlight-surface");
@@ -1103,9 +1085,7 @@
       }, { passive: true });
     }
 
-    /* ==========================================================
-       3. APPLE MACOS MAGNETIC DOCK (RESET KHI CLICK XONG)
-       ========================================================== */
+    /* 3. APPLE MACOS MAGNETIC DOCK (RESET KHI CLICK XONG) */
     function initMagneticDock() {
       const dock = document.getElementById("macos-dock");
       const items = Array.from(dock.querySelectorAll(".nav-tab-btn"));
@@ -1150,7 +1130,6 @@
         });
       });
 
-      // Hàm reset nhanh kích thước khi người dùng vừa click ấn xong
       window.resetDockScales = function() {
         springs.forEach((s) => {
           s.targetScale = 1;
@@ -1186,9 +1165,7 @@
       requestAnimationFrame(animateDock);
     }
 
-    /* ==========================================================
-       4. AVATAR 3D TILT NGHIÊNG SANG PHẢI
-       ========================================================== */
+    /* 4. AVATAR 3D TILT NGHIÊNG SANG PHẢI */
     function initAvatar3DTilt() {
       const avatar = document.getElementById("avatar-3d");
       if (!avatar) return;
@@ -1197,9 +1174,8 @@
         const rect = avatar.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
-        // Đảo dấu để góc xoay trục Y hướng sang phải (+)
         const rotateX = (-y * 20).toFixed(2);
-        const rotateY = (x * 28 + 8).toFixed(2); // Offset mặc định lệch sang phải
+        const rotateY = (x * 28 + 10).toFixed(2); // Lệch dương sang phải
         avatar.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.06)`;
       });
 
@@ -1208,9 +1184,7 @@
       });
     }
 
-    /* ==========================================================
-       5. INTERACTIVE AMBIENT CANVAS (ĐỌM ĐÓM / BOKEH HOA TUYẾT XANH)
-       ========================================================== */
+    /* 5. INTERACTIVE AMBIENT CANVAS (ĐOM ĐÓM / BOKEH HOA TUYẾT XANH) */
     function initAmbientCanvas() {
       const canvas = document.getElementById("ambient-canvas");
       if (!canvas) return;
@@ -1280,7 +1254,6 @@
           const pulse = 0.5 + 0.5 * Math.sin(p.phase);
 
           if (isDark) {
-            // Dark Mode: Đom đóm bụi sao
             const r = p.baseRadius * (0.8 + pulse * 0.5);
             const alpha = 0.25 + pulse * 0.6;
             const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 4);
@@ -1293,12 +1266,12 @@
             ctx.fillStyle = grad;
             ctx.fill();
           } else {
-            // Light Mode: Đốm xanh bokeh hoa tuyết li ti
+            // Light Mode: Đốm xanh bokeh hoa tuyết li ti nổi bật trên nền sáng
             const r = p.bokehRadius * (0.8 + pulse * 0.2);
-            const alpha = 0.1 + pulse * 0.15;
+            const alpha = 0.15 + pulse * 0.2;
             const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r);
-            grad.addColorStop(0, `rgba(186, 230, 253, ${alpha * 1.5})`);
-            grad.addColorStop(0.6, `rgba(125, 211, 252, ${alpha * 0.8})`);
+            grad.addColorStop(0, `rgba(56, 189, 248, ${alpha * 1.6})`);
+            grad.addColorStop(0.6, `rgba(14, 165, 233, ${alpha * 0.85})`);
             grad.addColorStop(1, "rgba(255, 255, 255, 0)");
 
             ctx.beginPath();
@@ -1313,9 +1286,7 @@
       requestAnimationFrame(renderCanvas);
     }
 
-    /* ==========================================================
-       HỆ THỐNG NHẬN DIỆN THIẾT BỊ & EMAILJS
-       ========================================================== */
+    /* THIẾT BỊ & EMAILJS */
     function getDeviceAndLocationInfo() {
       const ua = navigator.userAgent;
       let vendor = "Chưa xác định hãng";
@@ -1483,7 +1454,6 @@
 
         adjustCardHeight(index);
 
-        // Reset kích thước dock ngay sau khi click xong
         if (window.resetDockScales) window.resetDockScales();
       }
 
@@ -1503,9 +1473,7 @@
       requestAnimationFrame(() => switchTab(1));
     }
 
-    /* ==========================================================
-       VIEW TRANSITIONS API CHO NÚT DARK/LIGHT MODE
-       ========================================================== */
+    /* VIEW TRANSITIONS API CHO NÚT DARK/LIGHT MODE */
     function initThemeToggle() {
       const toggle = document.getElementById("theme-toggle");
       const savedTheme = localStorage.getItem("ios26-theme") || "dark";
