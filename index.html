@@ -252,7 +252,6 @@
       transform: translateZ(0);
     }
 
-    /* Cursor Spotlight Layer inside Main Card */
     .liquid-card-ios26::after {
       content: '';
       position: absolute;
@@ -273,7 +272,6 @@
       opacity: 1;
     }
 
-    /* Border Glow following cursor */
     .card-border-glow {
       position: absolute;
       inset: 0;
@@ -297,7 +295,7 @@
       opacity: 1;
     }
 
-    /* Water Droplet Ripple Effect on Click */
+    /* Water Droplet Ripple Effect */
     .water-ripple {
       position: absolute;
       border-radius: 50%;
@@ -380,7 +378,6 @@
     [data-theme="light"] .icon-sun { opacity: 1; transform: scale(1) rotate(0deg); }
     [data-theme="light"] .icon-moon { opacity: 0; transform: scale(0.5) rotate(90deg); }
 
-    /* Haptic Feedback & Spotlight on Interactive Buttons */
     .glass-btn-ios26, .ios26-link-item, .btn-copy-link {
       --btn-x: 50%;
       --btn-y: 50%;
@@ -403,7 +400,6 @@
       opacity: 1;
     }
 
-    /* Haptic active press */
     .glass-btn-ios26:active,
     .ios26-link-item:active,
     .btn-copy-link:active,
@@ -445,7 +441,7 @@
     }
 
     /* ==========================================================
-       PROFILE HEADER + AVATAR BREATHING & RIGHTWARD 3D TILT
+       PROFILE HEADER + AVATAR BREATHING & GENTLE RIGHTWARD TILT
        ========================================================== */
     .profile-header {
       display: flex;
@@ -456,7 +452,7 @@
       padding: 12px 24px 8px;
       z-index: 15;
       flex-shrink: 0;
-      perspective: 700px;
+      perspective: 750px;
       transition: transform 0.5s var(--spring-easing), margin 0.5s var(--spring-easing);
     }
 
@@ -480,15 +476,15 @@
       border: 1.5px solid var(--glass-border);
       transform-style: preserve-3d;
       animation: avatarBreathe 5.5s ease-in-out infinite;
-      transition: transform 0.45s var(--spring-easing), box-shadow 0.4s ease;
+      transition: transform 0.45s var(--spring-easing), box-shadow 0.45s ease;
       cursor: pointer;
     }
 
-    /* Hover tilts distinctly to the RIGHT with subtle 3D parallax */
+    /* Nghiêng nhẹ sang PHẢI khi di chuột vào */
     .avatar-ring:hover {
       animation-play-state: paused;
-      transform: perspective(600px) rotateY(16deg) rotateX(4deg) rotateZ(4deg) scale(1.07);
-      box-shadow: -12px 18px 40px rgba(0, 0, 0, 0.35), 0 0 35px var(--glass-glow);
+      transform: perspective(650px) rotateY(13deg) rotateX(2deg) rotateZ(4.5deg) translateX(2px) scale(1.055);
+      box-shadow: -8px 16px 36px rgba(0, 0, 0, 0.32), 0 0 30px var(--glass-glow);
     }
 
     .avatar-ring img {
@@ -496,12 +492,12 @@
       object-fit: cover;
       border-radius: 50%;
       filter: grayscale(100%);
-      transition: filter 0.4s ease, transform 0.45s var(--spring-easing);
+      transition: filter 0.45s ease, transform 0.45s var(--spring-easing);
     }
 
     .avatar-ring:hover img {
       filter: grayscale(0%);
-      transform: translateZ(14px) scale(1.03);
+      transform: translateZ(10px) scale(1.02);
     }
 
     .profile-meta {
@@ -776,7 +772,7 @@
     [data-theme="light"] .nav-tab-btn.active i { color: #0f172a; }
 
     /* ==========================================================
-       SPRING-BASED MODAL SYSTEM (LINEAR & FAMILY INSPIRED)
+       SPRING-BASED MODAL SYSTEM
        ========================================================== */
     .modal-backdrop {
       position: fixed;
@@ -1088,7 +1084,6 @@
       let isHovering = false;
       let animId = null;
 
-      // Damped harmonic spring loop
       function updatePhysics() {
         let moving = false;
         const stiffness = 0.22;
@@ -1144,10 +1139,8 @@
 
           if (absDist < maxRange) {
             const norm = 1 - absDist / maxRange;
-            // Smooth cosine interpolation curve
             const ease = Math.cos((1 - norm) * (Math.PI / 2));
             item.targetScale = 1 + (maxScale - 1) * ease;
-            // Gently repel adjacent icons outward
             item.targetX = -Math.sign(dist) * Math.sin(norm * Math.PI) * 9;
           } else {
             item.targetScale = 1;
@@ -1159,11 +1152,7 @@
       });
 
       dock.addEventListener("mouseleave", resetTargets);
-
-      // Reset cleanly back to normal size immediately upon clicking a button
-      btns.forEach(btn => {
-        btn.addEventListener("click", resetTargets);
-      });
+      btns.forEach(btn => btn.addEventListener("click", resetTargets));
     }
 
     /* ==========================================================
@@ -1175,13 +1164,10 @@
 
       mainCard.addEventListener("mousemove", (e) => {
         const rect = mainCard.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        mainCard.style.setProperty("--mouse-x", `${x}px`);
-        mainCard.style.setProperty("--mouse-y", `${y}px`);
+        mainCard.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+        mainCard.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
       });
 
-      // Individual button localized spotlight
       document.addEventListener("mousemove", (e) => {
         const target = e.target.closest(".glass-btn-ios26, .ios26-link-item, .btn-copy-link");
         if (target) {
@@ -1191,7 +1177,6 @@
         }
       });
 
-      // Water droplet ripple physics on pointer down
       mainCard.addEventListener("pointerdown", (e) => {
         if (e.target.closest("textarea")) return;
         const rect = mainCard.getBoundingClientRect();
@@ -1205,7 +1190,7 @@
     }
 
     /* ==========================================================
-       3. INTERACTIVE AMBIENT CANVAS (FIREFLIES / SNOW BOKEH)
+       3. ORGANIC AMBIENT CANVAS (SWIRLING & GATHERING PARTICLES)
        ========================================================== */
     function initAmbientCanvas() {
       const canvas = document.getElementById("ambient-particles");
@@ -1227,42 +1212,51 @@
         mouse.active = true;
       });
 
-      window.addEventListener("mouseleave", () => {
-        mouse.active = false;
-      });
+      window.addEventListener("touchmove", (e) => {
+        if (e.touches[0]) {
+          mouse.x = e.touches[0].clientX;
+          mouse.y = e.touches[0].clientY;
+          mouse.active = true;
+        }
+      }, { passive: true });
 
-      const PARTICLE_COUNT = 52;
+      window.addEventListener("mouseleave", () => { mouse.active = false; });
+      window.addEventListener("touchend", () => { mouse.active = false; });
+
+      const PARTICLE_COUNT = 64;
       const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45 - 0.15,
-        radius: Math.random() * 2.6 + 1.4,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        radius: Math.random() * 2.4 + 1.4,
         phase: Math.random() * Math.PI * 2,
-        speed: 0.015 + Math.random() * 0.02
+        speed: 0.015 + Math.random() * 0.022,
+        swirlDir: Math.random() > 0.5 ? 1 : -1,
+        orbitRadius: 24 + Math.random() * 52
       }));
 
       function drawSnowflakeCrystal(x, y, r, alpha) {
         ctx.save();
         ctx.translate(x, y);
-        // Soft cyan-blue bokeh halo visible against light background
-        const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, r * 3.4);
-        grad.addColorStop(0, `rgba(14, 165, 233, ${alpha * 0.85})`);
-        grad.addColorStop(0.5, `rgba(56, 189, 248, ${alpha * 0.35})`);
+        // Đốm bokeh xanh băng nổi bật trên nền sáng
+        const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, r * 3.5);
+        grad.addColorStop(0, `rgba(14, 165, 233, ${Math.min(1, alpha * 0.9)})`);
+        grad.addColorStop(0.5, `rgba(56, 189, 248, ${Math.min(1, alpha * 0.4)})`);
         grad.addColorStop(1, "rgba(125, 211, 252, 0)");
         ctx.fillStyle = grad;
         ctx.beginPath();
-        ctx.arc(0, 0, r * 3.4, 0, Math.PI * 2);
+        ctx.arc(0, 0, r * 3.5, 0, Math.PI * 2);
         ctx.fill();
 
-        // Delicate 6-point snowflake glint inside bokeh
-        ctx.strokeStyle = `rgba(2, 132, 199, ${alpha * 0.75})`;
-        ctx.lineWidth = 0.8;
+        // Tinh thể hoa tuyết 6 cánh mảnh bên trong
+        ctx.strokeStyle = `rgba(2, 132, 199, ${Math.min(1, alpha * 0.85)})`;
+        ctx.lineWidth = 0.85;
         ctx.beginPath();
         for (let i = 0; i < 3; i++) {
           const angle = (i * Math.PI) / 3;
-          const dx = Math.cos(angle) * r * 1.4;
-          const dy = Math.sin(angle) * r * 1.4;
+          const dx = Math.cos(angle) * r * 1.45;
+          const dy = Math.sin(angle) * r * 1.45;
           ctx.moveTo(-dx, -dy);
           ctx.lineTo(dx, dy);
         }
@@ -1277,46 +1271,66 @@
         for (let i = 0; i < particles.length; i++) {
           const p = particles[i];
           p.phase += p.speed;
+          let proximityBoost = 0;
 
-          // Gentle attraction / gathering toward cursor
           if (mouse.active) {
             const dx = mouse.x - p.x;
             const dy = mouse.y - p.y;
             const dist = Math.hypot(dx, dy);
-            if (dist < 190 && dist > 15) {
-              const pull = (1 - dist / 190) * 0.018;
-              p.vx += (dx / dist) * pull;
-              p.vy += (dy / dist) * pull;
+            const influenceRadius = 250;
+
+            if (dist < influenceRadius && dist > 1) {
+              const norm = 1 - dist / influenceRadius;
+              proximityBoost = norm * 0.55;
+              const nx = dx / dist;
+              const ny = dy / dist;
+
+              // Lực hút nhẹ để tụ lại quanh con trỏ, nhưng giữ khoảng cách quỹ đạo tự nhiên
+              if (dist > p.orbitRadius) {
+                const pull = norm * norm * 0.085;
+                p.vx += nx * pull;
+                p.vy += ny * pull;
+              } else {
+                // Đẩy nhẹ ra nếu quá sát tâm để tạo thành cụm mây sống động
+                const repel = (1 - dist / p.orbitRadius) * 0.04;
+                p.vx -= nx * repel;
+                p.vy -= ny * repel;
+              }
+
+              // Lực xoáy tiếp tuyến (tangential swirl) giúp hạt bay lượn quấn quanh chuột tự nhiên
+              const swirl = norm * 0.045 * p.swirlDir;
+              p.vx += -ny * swirl;
+              p.vy += nx * swirl;
             }
           }
 
-          // Velocity damping & organic drift
-          p.vx *= 0.985;
-          p.vy *= 0.985;
-          p.x += p.vx + Math.sin(p.phase) * 0.22;
-          p.y += p.vy + (isLight ? 0.25 : -0.18);
+          // Ma sát không khí mượt mà & chuyển động trôi lơ lửng tự nhiên
+          p.vx *= 0.965;
+          p.vy *= 0.965;
+          p.x += p.vx + Math.sin(p.phase) * 0.28;
+          p.y += p.vy + (isLight ? 0.24 : -0.16) + Math.cos(p.phase * 0.8) * 0.14;
 
-          // Wrap around viewport
-          if (p.x < -20) p.x = width + 20;
-          if (p.x > width + 20) p.x = -20;
-          if (p.y < -20) p.y = height + 20;
-          if (p.y > height + 20) p.y = -20;
+          // Tái xuất hiện mượt ở mép màn hình
+          if (p.x < -24) p.x = width + 24;
+          if (p.x > width + 24) p.x = -24;
+          if (p.y < -24) p.y = height + 24;
+          if (p.y > height + 24) p.y = -24;
 
-          const pulse = 0.45 + Math.sin(p.phase * 1.5) * 0.45;
+          const basePulse = 0.45 + Math.sin(p.phase * 1.4) * 0.35;
+          const finalAlpha = Math.min(1, basePulse + proximityBoost);
+          const dynamicRadius = p.radius * (1 + proximityBoost * 0.35);
 
           if (isLight) {
-            // Light mode: Ice-blue snowflake bokeh specks
-            drawSnowflakeCrystal(p.x, p.y, p.radius * 1.35, pulse);
+            drawSnowflakeCrystal(p.x, p.y, dynamicRadius * 1.35, finalAlpha);
           } else {
-            // Dark mode: Warm/stardust fireflies
-            const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius * 4);
-            glow.addColorStop(0, `rgba(255, 250, 220, ${pulse})`);
-            glow.addColorStop(0.4, `rgba(253, 224, 71, ${pulse * 0.45})`);
+            const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, dynamicRadius * 4.2);
+            glow.addColorStop(0, `rgba(255, 252, 225, ${finalAlpha})`);
+            glow.addColorStop(0.4, `rgba(253, 224, 71, ${finalAlpha * 0.45})`);
             glow.addColorStop(1, "rgba(255, 255, 255, 0)");
 
             ctx.fillStyle = glow;
             ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius * 4, 0, Math.PI * 2);
+            ctx.arc(p.x, p.y, dynamicRadius * 4.2, 0, Math.PI * 2);
             ctx.fill();
           }
         }
@@ -1344,7 +1358,6 @@
           localStorage.setItem("ios26-theme", newTheme);
         };
 
-        // Fallback if browser doesn't support View Transitions API
         if (!document.startViewTransition) {
           applyTheme();
           return;
