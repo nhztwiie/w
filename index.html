@@ -378,7 +378,7 @@
     [data-theme="light"] .icon-sun { opacity: 1; transform: scale(1) rotate(0deg); }
     [data-theme="light"] .icon-moon { opacity: 0; transform: scale(0.5) rotate(90deg); }
 
-    .glass-btn-ios26, .ios26-link-item, .btn-copy-link {
+    .glass-btn-ios26, .ios26-link-item, .btn-action-item {
       --btn-x: 50%;
       --btn-y: 50%;
       position: relative;
@@ -386,7 +386,7 @@
       transition: transform 0.28s var(--spring-easing), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .glass-btn-ios26::before, .ios26-link-item::before, .btn-copy-link::before {
+    .glass-btn-ios26::before, .ios26-link-item::before, .btn-action-item::before {
       content: '';
       position: absolute;
       inset: 0;
@@ -396,13 +396,13 @@
       pointer-events: none;
     }
 
-    .glass-btn-ios26:hover::before, .ios26-link-item:hover::before, .btn-copy-link:hover::before {
+    .glass-btn-ios26:hover::before, .ios26-link-item:hover::before, .btn-action-item:hover::before {
       opacity: 1;
     }
 
     .glass-btn-ios26:active,
     .ios26-link-item:active,
-    .btn-copy-link:active,
+    .btn-action-item:active,
     .nav-tab-btn:active {
       transform: scale(0.96) !important;
       transition-duration: 0.08s;
@@ -481,7 +481,6 @@
       cursor: pointer;
     }
 
-    /* Xoay nghiêng nhẹ sang phải cực mượt mà cả lúc hover vào lẫn lúc rời chuột ra */
     .avatar-ring:hover {
       transform: translate3d(5px, -2px, 0) rotate(8.5deg) scale(1.055);
       box-shadow: 6px 16px 34px rgba(0, 0, 0, 0.3), 0 0 32px var(--glass-glow);
@@ -575,7 +574,7 @@
     }
 
     /* ==========================================================
-       QUOTE CARD: BLUR REVEAL & STRIPE/CRON TEXT SHIMMER
+       QUOTE CARD: BLUR REVEAL & TEXT SHIMMER
        ========================================================== */
     @keyframes blurReveal {
       0% {
@@ -851,26 +850,33 @@
       object-fit: cover;
     }
 
-    .btn-copy-link {
+    /* Hàng chứa 2 nút tổng chiều rộng bằng đúng khung QR (180px) */
+    .qr-actions-row {
       width: 180px;
       margin: 18px auto 0;
-      padding: 12px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-action-item {
+      flex: 1;
+      padding: 12px 6px;
       border: 1px solid var(--glass-border-highlight);
       background: rgba(255, 255, 255, 0.15);
       color: var(--text-title);
       font-weight: 700;
-      font-size: 0.9rem;
-      border-radius: 20px;
+      font-size: 0.82rem;
+      border-radius: 16px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
     }
 
-    .btn-copy-link:hover {
+    .btn-action-item:hover {
       transform: translateY(-2px) scale(1.02);
       background: rgba(255, 255, 255, 0.25);
       box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
@@ -1019,10 +1025,19 @@
         <div id="qrcode-canvas"></div>
         <img src="images/Huy.png" alt="Avatar" class="qr-avatar-center">
       </div>
-      <button class="btn-copy-link" id="copy-btn">
-        <i class="fa-regular fa-copy"></i>
-        <span id="copy-text">Copy link</span>
-      </button>
+      
+      <!-- HÀNG 2 NÚT COPY & DOWNLOAD (Fit với bề ngang QR 180px) -->
+      <div class="qr-actions-row">
+        <button class="btn-action-item" id="copy-btn">
+          <i class="fa-regular fa-copy"></i>
+          <span id="copy-text">Copy</span>
+        </button>
+        <button class="btn-action-item" id="download-qr-btn">
+          <i class="fa-solid fa-download"></i>
+          <span>Download</span>
+        </button>
+      </div>
+
       <button class="btn-close-modal" id="close-qr-btn">Close</button>
     </div>
   </div>
@@ -1032,7 +1047,7 @@
     <div class="qr-glass-card">
       <h3 class="qr-title">Instant Message</h3>
       <textarea id="visitor-message" class="email-textarea" placeholder="Type your message to Nhat Huy..."></textarea>
-      <button class="btn-copy-link" id="send-instant-email-btn" style="width: 100%;">
+      <button class="btn-action-item" id="send-instant-email-btn" style="width: 100%; margin-top: 0;">
         <i class="fa-solid fa-paper-plane"></i>
         <span id="send-btn-text">Send</span>
       </button>
@@ -1171,7 +1186,7 @@
       });
 
       document.addEventListener("mousemove", (e) => {
-        const target = e.target.closest(".glass-btn-ios26, .ios26-link-item, .btn-copy-link");
+        const target = e.target.closest(".glass-btn-ios26, .ios26-link-item, .btn-action-item");
         if (target) {
           const rect = target.getBoundingClientRect();
           target.style.setProperty("--btn-x", `${e.clientX - rect.left}px`);
@@ -1192,7 +1207,7 @@
     }
 
     /* ==========================================================
-       3. INTERACTIVE AMBIENT CANVAS: FIREFLIES & FALLING LEAVES
+       3. INTERACTIVE AMBIENT CANVAS
        ========================================================== */
     function initAmbientCanvas() {
       const canvas = document.getElementById("ambient-particles");
@@ -1226,11 +1241,11 @@
       window.addEventListener("touchend", () => { mouse.active = false; });
 
       const LEAF_PALETTES = [
-        { main: "#4ade80", edge: "#15803d", vein: "#dcfce7" }, // Xanh lá non tươi
-        { main: "#22c55e", edge: "#166534", vein: "#bbf7d0" }, // Xanh lục bảo
-        { main: "#84cc16", edge: "#4d7c0f", vein: "#ecfccb" }, // Xanh rêu tươi
-        { main: "#e09f3e", edge: "#b45309", vein: "#fef3c7" }, // Vàng mật ong
-        { main: "#ea580c", edge: "#9a3412", vein: "#ffedd5" }  // Cam lá phong ấm
+        { main: "#4ade80", edge: "#15803d", vein: "#dcfce7" },
+        { main: "#22c55e", edge: "#166534", vein: "#bbf7d0" },
+        { main: "#84cc16", edge: "#4d7c0f", vein: "#ecfccb" },
+        { main: "#e09f3e", edge: "#b45309", vein: "#fef3c7" },
+        { main: "#ea580c", edge: "#9a3412", vein: "#ffedd5" }
       ];
 
       const PARTICLE_COUNT = 54;
@@ -1539,6 +1554,7 @@
       const qrCanvas = document.getElementById("qrcode-canvas");
       const copyBtn = document.getElementById("copy-btn");
       const copyText = document.getElementById("copy-text");
+      const downloadBtn = document.getElementById("download-qr-btn");
 
       const shareUrl = (typeof bioData !== 'undefined' && bioData.profile && bioData.profile.shareUrl)
         ? bioData.profile.shareUrl
@@ -1575,12 +1591,29 @@
           copyText.textContent = "Copied!";
           copyBtn.style.background = "#22c55e";
           setTimeout(() => {
-            copyText.textContent = "Copy link";
+            copyText.textContent = "Copy";
             copyBtn.style.background = "rgba(255, 255, 255, 0.15)";
           }, 2000);
         }).catch(() => {
           copyText.textContent = "Error!";
         });
+      });
+
+      // Tải xuống bức ảnh (1)
+      downloadBtn.addEventListener("click", () => {
+        const link = document.createElement('a');
+        link.download = 'QR-NhatHuy-Bio.jpg';
+        link.href = 'images/QR Code_Bio Link.jpg'; // Đường dẫn đến ảnh mẫu (1)
+        
+        // Dự phòng nếu ảnh trong canvas có sẵn
+        const qrImg = qrCanvas.querySelector('img');
+        if (!link.href && qrImg && qrImg.src) {
+          link.href = qrImg.src;
+        }
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
       });
     }
 
