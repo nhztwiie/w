@@ -27,6 +27,8 @@
   <meta name="twitter:title" content="Nhật Huy | w.bio">
   <meta name="twitter:description" content="ung dung. — Contact me.">
   <meta name="twitter:image" content="https://nhztwiie.github.io/w/images/Huy.png">
+
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/email.png">
 
   <!-- Fonts: Plus Jakarta Sans -->
@@ -34,13 +36,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 
-  <!-- Icons, QRCode JS & EmailJS -->
+  <!-- Icons & QRCode JS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-  <!-- Motion One (~3.8KB lightweight physics/spring animation engine) -->
-  <script src="https://cdn.jsdelivr.net/npm/motion@10.16.4/dist/motion.js"></script>
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
   <style>
     /* ==========================================================
@@ -49,75 +50,88 @@
     :root[data-theme="dark"] {
       --bg-gradient: radial-gradient(circle at 50% 0%, #2a2d32 0%, #111317 65%, #08090a 100%);
       
-      --glass-bg: rgba(255, 255, 255, 0.045);
-      --glass-border: rgba(255, 255, 255, 0.16);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.18);
       --glass-border-highlight: rgba(255, 255, 255, 0.45);
       --glass-shadow: 
         0 30px 80px rgba(0, 0, 0, 0.8),
         inset 0 1px 2px rgba(255, 255, 255, 0.35),
         inset 0 -1px 2px rgba(0, 0, 0, 0.7);
-      --glass-glow: rgba(255, 255, 255, 0.18);
-      --spotlight-color: rgba(255, 255, 255, 0.12);
-      --border-glow-color: rgba(255, 255, 255, 0.65);
+      --glass-glow: rgba(224, 224, 224, 0.15);
+
+      --spotlight-color: rgba(255, 255, 255, 0.11);
+      --spotlight-border: rgba(255, 255, 255, 0.55);
 
       --text-title: #ffffff;
       --text-sub: #d1d5db;
       --text-quote: #f3f4f6;
       --text-author: #9ca3af;
 
-      --pill-bg: rgba(255, 255, 255, 0.055);
-      --pill-border: rgba(255, 255, 255, 0.16);
-      --pill-hover-bg: rgba(255, 255, 255, 0.12);
+      --pill-bg: rgba(255, 255, 255, 0.06);
+      --pill-border: rgba(255, 255, 255, 0.18);
+      --pill-hover-bg: rgba(255, 255, 255, 0.14);
       --pill-hover-border: rgba(255, 255, 255, 0.5);
-      --pill-hover-glow: 0 12px 32px rgba(255, 255, 255, 0.12);
+      --pill-hover-glow: 0 12px 32px rgba(255, 255, 255, 0.15);
 
       --dock-bg: rgba(20, 22, 26, 0.55);
-      --dock-border: rgba(255, 255, 255, 0.2);
+      --dock-border: rgba(255, 255, 255, 0.22);
       --indicator-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, rgba(160, 160, 160, 0.18) 100%);
       --indicator-border: rgba(255, 255, 255, 0.45);
 
       --orb-1: rgba(255, 255, 255, 0.35);
       --orb-2: rgba(160, 170, 190, 0.4);
       --orb-3: rgba(210, 215, 225, 0.3);
-      --shimmer-highlight: #ffffff;
-      --shimmer-base: #9ca3af;
+      --shimmer-beam: rgba(255, 255, 255, 0.95);
     }
 
     :root[data-theme="light"] {
-      --bg-gradient: radial-gradient(circle at 50% 0%, #f8fafc 0%, #e2e8f0 60%, #cbd5e1 100%);
+      --bg-gradient: radial-gradient(circle at 50% 0%, #f3f4f6 0%, #e5e7eb 60%, #cbd5e1 100%);
 
-      --glass-bg: rgba(255, 255, 255, 0.68);
+      --glass-bg: rgba(255, 255, 255, 0.65);
       --glass-border: rgba(255, 255, 255, 0.9);
       --glass-border-highlight: rgba(255, 255, 255, 1);
       --glass-shadow: 
-        0 25px 60px rgba(15, 23, 42, 0.08),
+        0 25px 60px rgba(0, 0, 0, 0.08),
         inset 0 1.5px 2px rgba(255, 255, 255, 0.95),
         inset 0 -1.5px 3px rgba(0, 0, 0, 0.03);
-      --glass-glow: rgba(245, 158, 11, 0.18);
+      --glass-glow: rgba(0, 0, 0, 0.05);
+
       --spotlight-color: rgba(255, 255, 255, 0.65);
-      --border-glow-color: rgba(255, 255, 255, 1);
+      --spotlight-border: rgba(107, 114, 128, 0.55);
 
-      --text-title: #0f172a;
-      --text-sub: #475569;
-      --text-quote: #1e293b;
-      --text-author: #64748b;
+      --text-title: #111827;
+      --text-sub: #4b5563;
+      --text-quote: #111827;
+      --text-author: #6b7280;
 
-      --pill-bg: rgba(255, 255, 255, 0.72);
+      --pill-bg: rgba(255, 255, 255, 0.75);
       --pill-border: rgba(255, 255, 255, 0.95);
       --pill-hover-bg: rgba(255, 255, 255, 0.95);
-      --pill-hover-border: #94a3b8;
-      --pill-hover-glow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      --pill-hover-border: #9ca3af;
+      --pill-hover-glow: 0 12px 30px rgba(0, 0, 0, 0.08);
 
       --dock-bg: rgba(255, 255, 255, 0.72);
       --dock-border: rgba(255, 255, 255, 0.95);
-      --indicator-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(226, 232, 240, 0.85) 100%);
-      --indicator-border: rgba(148, 163, 184, 0.5);
+      --indicator-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(229, 231, 235, 0.85) 100%);
+      --indicator-border: rgba(156, 163, 175, 0.5);
 
       --orb-1: rgba(255, 255, 255, 0.9);
-      --orb-2: rgba(253, 230, 138, 0.45);
+      --orb-2: rgba(203, 213, 225, 0.6);
       --orb-3: rgba(226, 232, 240, 0.7);
-      --shimmer-highlight: #d97706;
-      --shimmer-base: #1e293b;
+      --shimmer-beam: rgba(245, 158, 11, 0.85);
+    }
+
+    /* VIEW TRANSITIONS API (CIRCULAR THEME REVEAL) */
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none;
+      mix-blend-mode: normal;
+    }
+    ::view-transition-old(root) {
+      z-index: 1;
+    }
+    ::view-transition-new(root) {
+      z-index: 9999;
     }
 
     * {
@@ -142,97 +156,142 @@
       padding: 24px 16px;
     }
 
-    /* ==========================================================
-       VIEW TRANSITIONS API (CIRCULAR REVEAL - TELEGRAM/ANTFU STYLE)
-       ========================================================== */
-    ::view-transition-old(root),
-    ::view-transition-new(root) {
-      animation: none;
-      mix-blend-mode: normal;
-    }
-    ::view-transition-old(root) { z-index: 1; }
-    ::view-transition-new(root) { z-index: 9999; }
-
-    /* ==========================================================
-       INTERACTIVE AMBIENT CANVAS & LIQUID ORBS
-       ========================================================== */
+    /* BACKGROUND CANVAS & ORBS */
     .ios26-bg-canvas {
       position: fixed;
-      inset: 0;
+      top: 0; left: 0;
       width: 100vw; height: 100vh;
       z-index: 1;
       pointer-events: none;
       overflow: hidden;
+      contain: strict;
+      transform: translateZ(0);
     }
 
     #ambient-canvas {
-      position: fixed;
+      position: absolute;
       inset: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       z-index: 2;
-      pointer-events: none;
     }
 
     .liquid-orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(32px);
+      filter: blur(28px);
       mix-blend-mode: overlay;
-      will-change: transform;
+      will-change: transform, opacity;
       opacity: 0.85;
+      z-index: 1;
     }
 
     .orb-primary {
       width: 420px; height: 420px;
       top: -80px; left: -60px;
-      background: radial-gradient(circle at 35% 35%, var(--orb-1) 0%, transparent 75%);
-      animation: floatFluid1 14s infinite ease-in-out alternate;
+      background: radial-gradient(circle at 35% 35%, var(--orb-1) 0%, rgba(255,255,255,0.1) 60%, transparent 80%);
+      animation: floatFluid1 12s infinite ease-in-out alternate;
     }
 
     .orb-secondary {
       width: 380px; height: 380px;
       bottom: -60px; right: -50px;
-      background: radial-gradient(circle at 35% 35%, var(--orb-2) 0%, transparent 75%);
-      animation: floatFluid2 17s infinite ease-in-out alternate;
+      background: radial-gradient(circle at 35% 35%, var(--orb-2) 0%, rgba(255,255,255,0.08) 60%, transparent 80%);
+      animation: floatFluid2 15s infinite ease-in-out alternate;
     }
 
     .orb-accent {
       width: 300px; height: 300px;
       top: 40%; left: 30%;
-      background: radial-gradient(circle at 35% 35%, var(--orb-3) 0%, transparent 75%);
-      animation: floatFluid3 12s infinite ease-in-out alternate;
+      background: radial-gradient(circle at 35% 35%, var(--orb-3) 0%, rgba(255,255,255,0.1) 60%, transparent 80%);
+      animation: floatFluid3 10s infinite ease-in-out alternate;
     }
 
     @keyframes floatFluid1 {
-      0% { transform: translate3d(0, 0, 0) scale(1); }
-      100% { transform: translate3d(80px, 110px, 0) scale(1.1); }
+      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+      50% { transform: translate3d(120px, 80px, 0) scale(1.15) rotate(15deg); }
+      100% { transform: translate3d(40px, 140px, 0) scale(0.9) rotate(-10deg); }
     }
+
     @keyframes floatFluid2 {
-      0% { transform: translate3d(0, 0, 0) scale(1); }
-      100% { transform: translate3d(-80px, -110px, 0) scale(1.15); }
+      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+      50% { transform: translate3d(-100px, -90px, 0) scale(1.2) rotate(-20deg); }
+      100% { transform: translate3d(-40px, -150px, 0) scale(0.95) rotate(10deg); }
     }
+
     @keyframes floatFluid3 {
       0% { transform: translate3d(0, 0, 0) scale(0.9); }
-      100% { transform: translate3d(70px, -60px, 0) scale(1.15); }
+      50% { transform: translate3d(-90px, 70px, 0) scale(1.25); }
+      100% { transform: translate3d(100px, -60px, 0) scale(0.85); }
     }
 
     .glass-mesh-overlay {
       position: fixed;
-      inset: 0;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
       background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
       background-size: 20px 20px;
-      z-index: 3;
+      z-index: 2;
       pointer-events: none;
       opacity: 0.3;
     }
 
     /* ==========================================================
-       MAIN CARD + RAYCAST CURSOR SPOTLIGHT & BORDER GLOW
+       CURSOR SPOTLIGHT & BORDER GLOW SYSTEM (RAYCAST / VERCEL)
        ========================================================== */
+    .spotlight-surface {
+      position: relative;
+      --mouse-x: -999px;
+      --mouse-y: -999px;
+    }
+
+    /* Quầng sáng nội bề mặt */
+    .spotlight-surface::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(
+        260px circle at var(--mouse-x) var(--mouse-y),
+        var(--spotlight-color),
+        transparent 80%
+      );
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .spotlight-surface:hover::after {
+      opacity: 1;
+    }
+
+    /* Viền sáng theo con trỏ chuột (Border Glow) */
+    .spotlight-border {
+      position: absolute;
+      inset: -1.5px;
+      border-radius: inherit;
+      padding: 1.5px;
+      background: radial-gradient(
+        200px circle at var(--mouse-x) var(--mouse-y),
+        var(--spotlight-border),
+        transparent 75%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+      z-index: 16;
+    }
+
+    .spotlight-surface:hover > .spotlight-border {
+      opacity: 1;
+    }
+
+    /* MAIN CARD CONTAINER */
     .liquid-card-ios26 {
-      --mouse-x: 50%;
-      --mouse-y: 0%;
       position: relative;
       z-index: 10;
       width: 100%;
@@ -246,58 +305,21 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      transition: height 0.5s cubic-bezier(0.32, 0.72, 0, 1), background 0.4s ease, border-color 0.4s ease;
+      transition: height 0.55s cubic-bezier(0.32, 0.72, 0, 1), background 0.4s ease, border-color 0.4s ease;
       transform: translateZ(0);
+      backface-visibility: hidden;
     }
 
-    /* Raycast Surface Spotlight */
-    .liquid-card-ios26::after {
+    .liquid-card-ios26::before {
       content: '';
       position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: radial-gradient(
-        380px circle at var(--mouse-x) var(--mouse-y),
-        var(--spotlight-color),
-        transparent 75%
-      );
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-      z-index: 5;
+      top: 0; left: 0; right: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--glass-border-highlight), transparent);
+      z-index: 15;
     }
 
-    .liquid-card-ios26:hover::after {
-      opacity: 1;
-    }
-
-    /* Raycast Border Glow Mask */
-    .card-border-glow {
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 1.5px;
-      background: radial-gradient(
-        260px circle at var(--mouse-x) var(--mouse-y),
-        var(--border-glow-color),
-        transparent 75%
-      );
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-      z-index: 25;
-    }
-
-    .liquid-card-ios26:hover .card-border-glow {
-      opacity: 1;
-    }
-
-    /* ==========================================================
-       TOP BAR & HAPTIC BUTTONS
-       ========================================================== */
+    /* TOP BAR */
     .top-bar {
       padding: 20px 24px 6px;
       display: flex;
@@ -313,6 +335,14 @@
       gap: 10px;
     }
 
+    /* HAPTIC FEEDBACK CHO TẤT CẢ NÚT BẤM */
+    .haptic-btn {
+      transition: transform 0.25s cubic-bezier(0.32, 0.72, 0, 1), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .haptic-btn:active {
+      transform: scale(0.96) !important;
+    }
+
     .theme-toggle-track {
       position: relative;
       width: 78px;
@@ -326,11 +356,9 @@
       cursor: pointer;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      transition: transform 0.25s cubic-bezier(0.32, 0.72, 0, 1);
     }
 
     .theme-toggle-track:hover { transform: scale(1.04); }
-    .theme-toggle-track:active { transform: scale(0.96); }
 
     .theme-orb-indicator {
       position: absolute;
@@ -343,18 +371,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease;
+      transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1), background 0.4s ease;
+      will-change: transform;
     }
 
     .orb-icon {
       font-size: 0.9rem;
       transition: opacity 0.3s ease, transform 0.3s ease;
       position: absolute;
-      color: #111827;
     }
 
-    .icon-sun { opacity: 0; transform: scale(0.5) rotate(-90deg); }
-    .icon-moon { opacity: 1; transform: scale(1) rotate(0deg); }
+    .icon-sun { opacity: 0; transform: scale(0.5) rotate(-90deg); color: #111827; }
+    .icon-moon { opacity: 1; transform: scale(1) rotate(0deg); color: #111827; }
 
     [data-theme="light"] .theme-orb-indicator {
       transform: translate3d(36px, 0, 0);
@@ -363,11 +391,7 @@
     [data-theme="light"] .icon-sun { opacity: 1; transform: scale(1) rotate(0deg); }
     [data-theme="light"] .icon-moon { opacity: 0; transform: scale(0.5) rotate(90deg); }
 
-    /* Haptic Feedback (:active scale 0.96) + Spotlight */
     .glass-btn-ios26 {
-      --btn-x: 50%;
-      --btn-y: 50%;
-      position: relative;
       width: 42px; height: 42px;
       border-radius: 18px;
       background: var(--pill-bg);
@@ -381,32 +405,19 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.3);
-      overflow: hidden;
-      transition: transform 0.22s cubic-bezier(0.32, 0.72, 0, 1), border-color 0.3s ease, background 0.3s ease;
     }
 
-    .glass-btn-ios26::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(45px circle at var(--btn-x) var(--btn-y), var(--spotlight-color), transparent 80%);
-      opacity: 0;
-      transition: opacity 0.25s ease;
-      pointer-events: none;
-    }
-
-    .glass-btn-ios26:hover::before { opacity: 1; }
     .glass-btn-ios26:hover {
-      transform: translateY(-2px) scale(1.05);
+      transform: translateY(-2px) scale(1.06);
       border-color: var(--text-sub);
       background: var(--pill-hover-bg);
-    }
-    .glass-btn-ios26:active {
-      transform: scale(0.96);
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.5);
     }
 
     .music-btn.playing i {
-      animation: spinMusic 3.5s linear infinite;
+      animation: spinMusic 3s linear infinite;
+      color: var(--text-sub);
+      will-change: transform;
     }
 
     @keyframes spinMusic {
@@ -415,7 +426,7 @@
     }
 
     /* ==========================================================
-       PROFILE HEADER + AVATAR BREATHING & 3D TILT
+       PROFILE HEADER & AVATAR BREATHING + TILT 3D
        ========================================================== */
     .profile-header {
       display: flex;
@@ -426,49 +437,31 @@
       padding: 12px 24px 8px;
       z-index: 15;
       flex-shrink: 0;
-      perspective: 700px;
-      transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1), margin 0.45s cubic-bezier(0.32, 0.72, 0, 1);
-    }
-
-    .avatar-tilt-wrapper {
-      position: relative;
-      width: 106px;
-      height: 106px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transform-style: preserve-3d;
-      cursor: pointer;
-    }
-
-    /* Breathing Glow Halo */
-    .avatar-breathing-glow {
-      position: absolute;
-      inset: -8px;
-      border-radius: 50%;
-      background: radial-gradient(circle, var(--glass-border-highlight) 0%, transparent 70%);
-      filter: blur(12px);
-      z-index: 0;
-      pointer-events: none;
-      animation: avatarBreathing 4.5s ease-in-out infinite;
+      perspective: 800px;
+      transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1), margin 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+      will-change: transform, margin;
     }
 
     @keyframes avatarBreathing {
-      0%, 100% { transform: scale(0.92); opacity: 0.35; }
-      50% { transform: scale(1.12); opacity: 0.75; }
+      0%, 100% {
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3), 0 0 18px rgba(255, 255, 255, 0.12);
+      }
+      50% {
+        box-shadow: 0 20px 44px rgba(0, 0, 0, 0.35), 0 0 34px rgba(255, 255, 255, 0.32);
+      }
     }
 
     .avatar-ring {
       position: relative;
-      z-index: 1;
       width: 104px; height: 104px;
       border-radius: 50%;
       padding: 4px;
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.08) 100%);
       border: 1.5px solid var(--glass-border);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
-      overflow: hidden;
-      will-change: transform;
+      animation: avatarBreathing 4.5s ease-in-out infinite;
+      transform-style: preserve-3d;
+      transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+      cursor: pointer;
     }
 
     .avatar-ring img {
@@ -476,19 +469,20 @@
       object-fit: cover;
       border-radius: 50%;
       filter: grayscale(100%);
-      transition: filter 0.5s ease, transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+      transition: filter 0.45s ease, transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+      pointer-events: none;
     }
 
-    .avatar-tilt-wrapper:hover .avatar-ring img { 
+    .avatar-ring:hover img { 
       filter: grayscale(0%); 
-      transform: scale(1.06);
+      transform: translateZ(12px) scale(1.03);
     }
 
     .profile-meta {
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+      transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
     }
 
     .profile-name {
@@ -497,6 +491,7 @@
       color: var(--text-title);
       margin-top: 12px;
       letter-spacing: -0.03em;
+      transition: color 0.3s ease, transform 0.3s ease;
     }
 
     .profile-tagline {
@@ -519,13 +514,13 @@
     }
 
     /* ==========================================================
-       SPRING TAB VIEWPORT & QUOTE BLUR REVEAL + TEXT SHIMMER
+       SPRING-BASED VIEWPORT & TAB TRANSITIONS (LINEAR / FAMILY)
        ========================================================== */
     .viewport-wrapper {
       width: 100%;
       overflow: hidden;
       flex: 1;
-      z-index: 12;
+      z-index: 10;
     }
 
     .viewport {
@@ -533,7 +528,7 @@
       display: flex;
       align-items: flex-start;
       transform: translate3d(-33.3333%, 0, 0);
-      transition: transform 0.52s cubic-bezier(0.32, 0.72, 0, 1);
+      transition: transform 0.55s cubic-bezier(0.32, 0.72, 0, 1);
       will-change: transform;
     }
 
@@ -543,13 +538,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.32, 0.72, 0, 1), filter 0.4s ease;
-    }
-
-    .tab-page.inactive-tab {
-      opacity: 0.35;
+      opacity: 0.45;
       transform: scale(0.95);
       filter: blur(4px);
+      transition: 
+        opacity 0.45s cubic-bezier(0.32, 0.72, 0, 1),
+        transform 0.55s cubic-bezier(0.32, 0.72, 0, 1),
+        filter 0.45s ease;
     }
 
     .tab-page.active-tab {
@@ -558,6 +553,9 @@
       filter: blur(0px);
     }
 
+    /* ==========================================================
+       TEXT SHIMMER & BLUR REVEAL CHO QUOTE (STRIPE / CRON)
+       ========================================================== */
     .ios26-quote-card {
       margin: 8px 0 16px;
       padding: 24px 22px;
@@ -569,12 +567,13 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
-      transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1), border-color 0.3s ease;
+      transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1), border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .ios26-quote-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--glass-border-highlight);
+      transform: translateY(-3px) scale(1.015);
+      border-color: var(--text-sub);
+      box-shadow: 0 15px 35px rgba(255, 255, 255, 0.08), inset 0 1px 3px rgba(255, 255, 255, 0.4);
     }
 
     .quote-text {
@@ -584,35 +583,42 @@
       line-height: 1.65;
     }
 
-    /* Blur Reveal Word Tokens */
+    /* Từng từ xuất hiện với Blur Reveal + Sunlight Shimmer */
     .reveal-word {
       display: inline-block;
       opacity: 0;
       filter: blur(8px);
       transform: translateY(10px);
-      will-change: transform, opacity, filter;
+      animation: wordBlurReveal 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
-    /* Text Shimmer for "the sun will rise" */
-    .shimmer-sunrise {
+    @keyframes wordBlurReveal {
+      to {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateY(0);
+      }
+    }
+
+    /* Hiệu ứng vệt nắng ấm lướt qua câu trích dẫn */
+    .sunlight-shimmer-wrap {
+      display: inline;
       background: linear-gradient(
         110deg,
-        var(--shimmer-base) 20%,
-        var(--shimmer-highlight) 48%,
-        #fbbf24 52%,
-        var(--shimmer-base) 80%
+        var(--text-quote) 35%,
+        var(--shimmer-beam) 50%,
+        var(--text-quote) 65%
       );
-      background-size: 220% auto;
+      background-size: 250% 100%;
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: textShimmerFlow 4.2s linear infinite;
-      font-weight: 700;
+      animation: sunSweep 5.5s ease-in-out infinite;
     }
 
-    @keyframes textShimmerFlow {
-      0% { background-position: 200% center; }
-      100% { background-position: -200% center; }
+    @keyframes sunSweep {
+      0%, 15% { background-position: 120% 0; }
+      55%, 100% { background-position: -120% 0; }
     }
 
     .quote-author {
@@ -622,12 +628,12 @@
       margin-top: 14px;
       display: block;
       opacity: 0;
+      filter: blur(4px);
       transform: translateY(6px);
+      animation: wordBlurReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1.05s forwards;
     }
 
-    /* ==========================================================
-       LINKS LIST + SPOTLIGHT + HAPTIC PRESS
-       ========================================================== */
+    /* LINKS LIST */
     .links-list {
       width: 100%;
       display: flex;
@@ -636,8 +642,6 @@
     }
 
     .ios26-link-item {
-      --btn-x: 50%;
-      --btn-y: 50%;
       position: relative;
       display: flex;
       align-items: center;
@@ -653,37 +657,25 @@
       -webkit-backdrop-filter: blur(16px);
       box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.2);
       overflow: hidden;
-      transition: transform 0.25s cubic-bezier(0.32, 0.72, 0, 1), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .ios26-link-item::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(180px circle at var(--btn-x) var(--btn-y), var(--spotlight-color), transparent 75%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    }
-
-    .ios26-link-item:hover::before { opacity: 1; }
     .ios26-link-item:hover {
-      transform: translateY(-3px) scale(1.015);
+      transform: translateY(-4px) scale(1.025);
       background: var(--pill-hover-bg);
       border-color: var(--pill-hover-border);
       box-shadow: var(--pill-hover-glow);
     }
 
-    /* Haptic Feedback */
-    .ios26-link-item:active {
-      transform: scale(0.96);
-    }
+    .ios26-link-item:active { transform: translateY(-1px) scale(0.96) !important; }
 
     .link-icon {
       width: 36px; height: 36px;
       border-radius: 50%;
       margin-right: 14px;
       object-fit: cover;
+      position: relative;
+      z-index: 2;
       transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
     }
 
@@ -695,7 +687,9 @@
       flex: 1; 
       text-align: left; 
       letter-spacing: -0.01em; 
-      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 2;
+      transition: transform 0.3s ease, color 0.3s ease;
     }
 
     .ios26-link-item:hover .link-label {
@@ -705,15 +699,17 @@
     .link-arrow {
       font-size: 0.85rem;
       color: var(--text-sub);
+      position: relative;
+      z-index: 2;
       transition: transform 0.3s ease;
     }
 
     .ios26-link-item:hover .link-arrow {
-      transform: translateX(4px);
+      transform: translateX(5px);
     }
 
     /* ==========================================================
-       APPLE MACOS DOCK (MAGNETIC MAGNIFICATION)
+       APPLE MACOS MAGNETIC DOCK (RAUNO FREIBERG / PACO COURSEY)
        ========================================================== */
     .bottom-nav-container {
       padding: 6px 22px 22px;
@@ -745,9 +741,10 @@
       border: 1.5px solid var(--indicator-border);
       border-radius: 34px;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.7);
-      transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
+      transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
       z-index: 1;
       will-change: transform;
+      pointer-events: none;
     }
 
     .nav-tab-btn {
@@ -764,10 +761,6 @@
       will-change: transform;
     }
 
-    .nav-tab-btn:active {
-      transform: scale(0.96) !important;
-    }
-
     .nav-tab-btn i {
       font-size: 1.25rem;
       color: rgba(255, 255, 255, 0.45);
@@ -775,16 +768,20 @@
       pointer-events: none;
     }
 
-    [data-theme="light"] .nav-tab-btn i { color: #64748b; }
-    .nav-tab-btn.active i { color: var(--text-title); }
-    [data-theme="light"] .nav-tab-btn.active i { color: #0f172a; }
+    [data-theme="light"] .nav-tab-btn i { color: #6b7280; }
+
+    .nav-tab-btn.active i {
+      color: var(--text-title);
+    }
+
+    [data-theme="light"] .nav-tab-btn.active i { color: #111827; }
 
     /* ==========================================================
-       SPRING-BASED MODAL (LINEAR.APP & FAMILY.CO STYLE)
+       SPRING-BASED MODAL SYSTEM (LINEAR / FAMILY)
        ========================================================== */
     .modal-backdrop {
       position: fixed;
-      inset: 0;
+      top: 0; left: 0;
       width: 100vw; height: 100vh;
       background: rgba(0, 0, 0, 0.55);
       backdrop-filter: blur(0px);
@@ -795,11 +792,14 @@
       z-index: 100;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.38s cubic-bezier(0.32, 0.72, 0, 1), backdrop-filter 0.38s cubic-bezier(0.32, 0.72, 0, 1), -webkit-backdrop-filter 0.38s cubic-bezier(0.32, 0.72, 0, 1);
+      transition: 
+        opacity 0.4s cubic-bezier(0.32, 0.72, 0, 1),
+        backdrop-filter 0.45s cubic-bezier(0.32, 0.72, 0, 1),
+        -webkit-backdrop-filter 0.45s cubic-bezier(0.32, 0.72, 0, 1);
     }
 
-    .modal-backdrop.active {
-      opacity: 1;
+    .modal-backdrop.active { 
+      opacity: 1; 
       pointer-events: auto;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -815,16 +815,18 @@
       width: 88%;
       max-width: 320px;
       text-align: center;
-      transform: translate3d(0, 16px, 0) scale(0.95);
       opacity: 0;
-      transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.35s ease;
+      transform: translate3d(0, 12px, 0) scale(0.95);
+      transition: 
+        transform 0.5s cubic-bezier(0.32, 0.72, 0, 1),
+        opacity 0.35s cubic-bezier(0.32, 0.72, 0, 1);
       will-change: transform, opacity;
       box-shadow: var(--glass-shadow);
     }
 
-    .modal-backdrop.active .qr-glass-card {
-      transform: translate3d(0, 0, 0) scale(1);
+    .modal-backdrop.active .qr-glass-card { 
       opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1); 
     }
 
     .qr-title { font-size: 1.2rem; font-weight: 700; color: var(--text-title); margin-bottom: 18px; }
@@ -872,14 +874,13 @@
       gap: 8px;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      transition: transform 0.22s cubic-bezier(0.32, 0.72, 0, 1), background 0.3s ease;
     }
 
     .btn-copy-link:hover {
       transform: translateY(-2px) scale(1.02);
       background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
     }
-    .btn-copy-link:active { transform: scale(0.96); }
 
     .btn-close-modal {
       margin-top: 10px;
@@ -892,10 +893,8 @@
       font-size: 0.88rem;
       cursor: pointer;
       opacity: 0.8;
-      transition: opacity 0.2s ease, transform 0.2s ease;
     }
     .btn-close-modal:hover { opacity: 1; }
-    .btn-close-modal:active { transform: scale(0.96); }
 
     .email-textarea {
       width: 100%;
@@ -914,7 +913,7 @@
     }
     .email-textarea:focus { 
       border-color: var(--glass-border-highlight); 
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
     }
   </style>
 </head>
@@ -925,17 +924,17 @@
     <div class="liquid-orb orb-primary"></div>
     <div class="liquid-orb orb-secondary"></div>
     <div class="liquid-orb orb-accent"></div>
+    <canvas id="ambient-canvas"></canvas>
   </div>
-  <canvas id="ambient-canvas"></canvas>
   <div class="glass-mesh-overlay"></div>
 
   <!-- MAIN CARD CONTAINER -->
-  <main class="liquid-card-ios26" id="main-card">
-    <div class="card-border-glow"></div>
+  <main class="liquid-card-ios26 spotlight-surface" id="main-card">
+    <div class="spotlight-border"></div>
     
     <!-- TOP BAR -->
     <div class="top-bar">
-      <div class="theme-toggle-track" id="theme-toggle" role="button" aria-label="Toggle Theme">
+      <div class="theme-toggle-track haptic-btn" id="theme-toggle" role="button" aria-label="Toggle Theme">
         <div class="theme-orb-indicator">
           <i class="fa-solid fa-moon orb-icon icon-moon"></i>
           <i class="fa-solid fa-sun orb-icon icon-sun"></i>
@@ -943,27 +942,27 @@
       </div>
 
       <div class="top-bar-controls">
-        <button class="glass-btn-ios26 spotlight-target" id="open-email-modal-btn" aria-label="Quick Email">
+        <button class="glass-btn-ios26 spotlight-surface haptic-btn" id="open-email-modal-btn" aria-label="Quick Email">
+          <div class="spotlight-border"></div>
           <i class="fa-solid fa-envelope"></i>
         </button>
 
-        <button class="glass-btn-ios26 spotlight-target music-btn" id="music-toggle-btn" aria-label="Toggle Music">
+        <button class="glass-btn-ios26 spotlight-surface haptic-btn music-btn" id="music-toggle-btn" aria-label="Toggle Music">
+          <div class="spotlight-border"></div>
           <i class="fa-solid fa-music" id="music-icon"></i>
         </button>
 
-        <button class="glass-btn-ios26 spotlight-target" id="open-qr-btn" aria-label="Open QR Code">
+        <button class="glass-btn-ios26 spotlight-surface haptic-btn" id="open-qr-btn" aria-label="Open QR Code">
+          <div class="spotlight-border"></div>
           <i class="fa-solid fa-qrcode"></i>
         </button>
       </div>
     </div>
 
-    <!-- PROFILE HEADER (AVATAR 3D TILT + BREATHING GLOW) -->
+    <!-- PROFILE HEADER -->
     <header class="profile-header">
-      <div class="avatar-tilt-wrapper" id="avatar-tilt">
-        <div class="avatar-breathing-glow"></div>
-        <div class="avatar-ring">
-          <img src="images/Huy.png" alt="Avatar Nhật Huy" loading="eager">
-        </div>
+      <div class="avatar-ring" id="avatar-3d">
+        <img src="images/Huy.png" alt="Avatar Nhật Huy" loading="eager">
       </div>
       <div class="profile-meta">
         <h1 class="profile-name">Nhật Huy</h1>
@@ -976,20 +975,21 @@
       <div class="viewport" id="viewport">
 
         <!-- TAB 1: SOCIAL -->
-        <section class="tab-page inactive-tab" id="page-social">
+        <section class="tab-page" id="page-social">
           <div class="links-list" id="social-links-list"></div>
         </section>
 
-        <!-- TAB 2: HOME (QUOTE WITH BLUR REVEAL & SHIMMER) -->
+        <!-- TAB 2: HOME (QUOTE) -->
         <section class="tab-page active-tab" id="page-home">
-          <div class="ios26-quote-card">
-            <p class="quote-text" id="quote-reveal-target">“<br>Even the darkest night will end,<br>and <span class="shimmer-sunrise">the sun will rise</span>.</p>
-            <span class="quote-author" id="quote-author-target">Les Misérables - Victor Hugo</span>
+          <div class="ios26-quote-card spotlight-surface">
+            <div class="spotlight-border"></div>
+            <p class="quote-text" id="animated-quote">“<br>Even the darkest night will end,<br>and the sun will rise.</p>
+            <span class="quote-author">Les Misérables - Victor Hugo</span>
           </div>
         </section>
 
         <!-- TAB 3: WORK -->
-        <section class="tab-page inactive-tab" id="page-work">
+        <section class="tab-page" id="page-work">
           <div class="links-list" id="work-links-list"></div>
         </section>
 
@@ -1001,15 +1001,15 @@
       <nav class="ios26-nav-dock" id="macos-dock">
         <div class="nav-indicator-pill" id="nav-indicator"></div>
         
-        <button class="nav-tab-btn" data-index="0" aria-label="Social">
+        <button class="nav-tab-btn haptic-btn" data-index="0" aria-label="Social">
           <i class="fa-solid fa-share-nodes"></i>
         </button>
 
-        <button class="nav-tab-btn active" data-index="1" aria-label="Home">
+        <button class="nav-tab-btn haptic-btn active" data-index="1" aria-label="Home">
           <i class="fa-solid fa-house"></i>
         </button>
 
-        <button class="nav-tab-btn" data-index="2" aria-label="Work">
+        <button class="nav-tab-btn haptic-btn" data-index="2" aria-label="Work">
           <i class="fa-solid fa-briefcase"></i>
         </button>
       </nav>
@@ -1019,30 +1019,32 @@
 
   <!-- MODAL QR CODE -->
   <div class="modal-backdrop" id="qr-modal" role="dialog" aria-hidden="true">
-    <div class="qr-glass-card">
+    <div class="qr-glass-card spotlight-surface">
+      <div class="spotlight-border"></div>
       <h3 class="qr-title">Scan QR Code</h3>
       <div class="qr-box-wrapper">
         <div id="qrcode-canvas"></div>
         <img src="images/Huy.png" alt="Avatar" class="qr-avatar-center">
       </div>
-      <button class="btn-copy-link" id="copy-btn">
+      <button class="btn-copy-link haptic-btn" id="copy-btn">
         <i class="fa-regular fa-copy"></i>
         <span id="copy-text">Copy link</span>
       </button>
-      <button class="btn-close-modal" id="close-qr-btn">Close</button>
+      <button class="btn-close-modal haptic-btn" id="close-qr-btn">Close</button>
     </div>
   </div>
 
   <!-- MODAL POP-UP GỬI TIN NHẮN TỨC THÌ -->
   <div class="modal-backdrop" id="email-modal" role="dialog" aria-hidden="true">
-    <div class="qr-glass-card">
+    <div class="qr-glass-card spotlight-surface">
+      <div class="spotlight-border"></div>
       <h3 class="qr-title">Instant Message</h3>
       <textarea id="visitor-message" class="email-textarea" placeholder="Type your message to Nhat Huy..."></textarea>
-      <button class="btn-copy-link" id="send-instant-email-btn" style="width: 100%;">
+      <button class="btn-copy-link haptic-btn" id="send-instant-email-btn" style="width: 100%;">
         <i class="fa-solid fa-paper-plane"></i>
         <span id="send-btn-text">Send</span>
       </button>
-      <button class="btn-close-modal" id="close-email-modal-btn">Close</button>
+      <button class="btn-close-modal haptic-btn" id="close-email-modal-btn">Close</button>
     </div>
   </div>
 
@@ -1059,11 +1061,12 @@
         renderLinks("work-links-list", bioData.tabs.work);
       }
 
-      initCursorSpotlight();
-      initAvatarTilt3D();
       initQuoteBlurReveal();
-      initMacOSDock();
+      initSpotlightEffect();
+      initMagneticDock();
+      initAvatar3DTilt();
       initAmbientCanvas();
+
       initTabNavigation();
       initThemeToggle();
       initQRCodeModal();
@@ -1073,183 +1076,144 @@
     });
 
     /* ==========================================================
-       1. RAYCAST CURSOR SPOTLIGHT & BORDER GLOW
-       ========================================================== */
-    function initCursorSpotlight() {
-      const mainCard = document.getElementById("main-card");
-      if (!mainCard) return;
-
-      mainCard.addEventListener("pointermove", (e) => {
-        const rect = mainCard.getBoundingClientRect();
-        mainCard.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
-        mainCard.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
-
-        const target = e.target.closest(".spotlight-target, .ios26-link-item");
-        if (target) {
-          const btnRect = target.getBoundingClientRect();
-          target.style.setProperty("--btn-x", `${e.clientX - btnRect.left}px`);
-          target.style.setProperty("--btn-y", `${e.clientY - btnRect.top}px`);
-        }
-      });
-    }
-
-    /* ==========================================================
-       2. AVATAR 3D PARALLAX TILT (MOTION ONE SPRING)
-       ========================================================== */
-    function initAvatarTilt3D() {
-      const wrapper = document.getElementById("avatar-tilt");
-      if (!wrapper) return;
-      const ring = wrapper.querySelector(".avatar-ring");
-      const animate = window.Motion?.animate;
-
-      wrapper.addEventListener("pointermove", (e) => {
-        const rect = wrapper.getBoundingClientRect();
-        const relX = (e.clientX - rect.left) / rect.width - 0.5;
-        const relY = (e.clientY - rect.top) / rect.height - 0.5;
-        const rotateY = relX * 26;
-        const rotateX = -relY * 26;
-
-        if (animate) {
-          animate(ring, { transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.06)` }, { duration: 0.2 });
-        } else {
-          ring.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.06)`;
-        }
-      });
-
-      wrapper.addEventListener("pointerleave", () => {
-        if (animate) {
-          animate(ring, { transform: `rotateX(0deg) rotateY(0deg) scale(1)` }, { duration: 0.5, easing: [0.32, 0.72, 0, 1] });
-        } else {
-          ring.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
-        }
-      });
-    }
-
-    /* ==========================================================
-       3. QUOTE WORD-BY-WORD BLUR REVEAL (STRIPE / CRON STYLE)
+       1. TEXT SHIMMER & BLUR REVEAL CHO QUOTE
        ========================================================== */
     function initQuoteBlurReveal() {
-      const quoteEl = document.getElementById("quote-reveal-target");
-      const authorEl = document.getElementById("quote-author-target");
+      const quoteEl = document.getElementById("animated-quote");
       if (!quoteEl) return;
 
       const lines = [
-        [{ text: "“", shimmer: false }],
-        [
-          { text: "Even", shimmer: false },
-          { text: "the", shimmer: false },
-          { text: "darkest", shimmer: false },
-          { text: "night", shimmer: false },
-          { text: "will", shimmer: false },
-          { text: "end,", shimmer: false }
-        ],
-        [
-          { text: "and", shimmer: false },
-          { text: "the", shimmer: true },
-          { text: "sun", shimmer: true },
-          { text: "will", shimmer: true },
-          { text: "rise.", shimmer: true }
-        ]
+        "“",
+        "Even the darkest night will end,",
+        "and the sun will rise."
       ];
 
-      quoteEl.innerHTML = lines.map(line =>
-        line.map(w => `<span class="reveal-word ${w.shimmer ? 'shimmer-sunrise' : ''}">${w.text}</span>`).join(" ")
-      ).join("<br>");
-
-      triggerQuoteAnimation();
-    }
-
-    function triggerQuoteAnimation() {
-      const words = document.querySelectorAll("#quote-reveal-target .reveal-word");
-      const authorEl = document.getElementById("quote-author-target");
-      const animate = window.Motion?.animate;
-
-      words.forEach((word, idx) => {
-        if (animate) {
-          animate(
-            word,
-            { opacity: [0, 1], filter: ["blur(8px)", "blur(0px)"], transform: ["translateY(10px)", "translateY(0px)"] },
-            { duration: 0.65, delay: 0.08 + idx * 0.065, easing: [0.32, 0.72, 0, 1] }
-          );
-        } else {
-          word.style.opacity = "1";
-          word.style.filter = "blur(0px)";
-          word.style.transform = "translateY(0)";
-        }
+      let wordIndex = 0;
+      const htmlLines = lines.map((line) => {
+        const words = line.split(" ");
+        return words.map((word) => {
+          const delay = (wordIndex * 0.075).toFixed(3);
+          wordIndex++;
+          return `<span class="reveal-word" style="animation-delay: ${delay}s">${word}</span>`;
+        }).join(" ");
       });
 
-      if (authorEl && animate) {
-        animate(
-          authorEl,
-          { opacity: [0, 1], transform: ["translateY(6px)", "translateY(0px)"] },
-          { duration: 0.6, delay: 0.08 + words.length * 0.065, easing: [0.32, 0.72, 0, 1] }
-        );
-      } else if (authorEl) {
-        authorEl.style.opacity = "1";
-        authorEl.style.transform = "translateY(0)";
-      }
+      quoteEl.innerHTML = `<span class="sunlight-shimmer-wrap">${htmlLines.join("<br>")}</span>`;
     }
 
     /* ==========================================================
-       4. APPLE MACOS DOCK (MAGNETIC MAGNIFICATION + NEIGHBOR PUSH)
+       2. CURSOR SPOTLIGHT & BORDER GLOW (RAYCAST / VERCEL)
        ========================================================== */
-    function initMacOSDock() {
+    function initSpotlightEffect() {
+      document.addEventListener("mousemove", (e) => {
+        const surfaces = document.querySelectorAll(".spotlight-surface");
+        surfaces.forEach((surface) => {
+          const rect = surface.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          surface.style.setProperty("--mouse-x", `${x}px`);
+          surface.style.setProperty("--mouse-y", `${y}px`);
+        });
+      }, { passive: true });
+    }
+
+    /* ==========================================================
+       3. APPLE MACOS MAGNETIC DOCK (SPRING PHYSICS INTERPOLATION)
+       ========================================================== */
+    function initMagneticDock() {
       const dock = document.getElementById("macos-dock");
-      if (!dock) return;
       const items = Array.from(dock.querySelectorAll(".nav-tab-btn"));
+      if (!dock || items.length === 0) return;
 
-      let mouseX = null;
-      const currentScales = items.map(() => 1);
-      const currentShifts = items.map(() => 0);
+      // Trạng thái spring vật lý cho từng icon (scale & translateX)
+      const springs = items.map(() => ({
+        scale: 1,
+        targetScale: 1,
+        vScale: 0,
+        x: 0,
+        targetX: 0,
+        vX: 0
+      }));
 
-      dock.addEventListener("pointermove", (e) => {
-        if (e.pointerType === "touch") return;
-        mouseX = e.clientX;
-      });
+      const maxDistance = 120;
+      const maxScale = 1.38;
+      const maxPush = 10;
 
-      dock.addEventListener("pointerleave", () => {
-        mouseX = null;
-      });
+      dock.addEventListener("mousemove", (e) => {
+        const mouseX = e.clientX;
+        items.forEach((item, idx) => {
+          const rect = item.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const diff = mouseX - centerX;
+          const dist = Math.abs(diff);
 
-      function animateDock() {
-        const maxRadius = 115;
-        const maxScale = 1.38;
-
-        items.forEach((item, i) => {
-          let targetScale = 1;
-          let targetShift = 0;
-
-          if (mouseX !== null) {
-            const rect = item.getBoundingClientRect();
-            const center = rect.left + rect.width / 2;
-            const distance = mouseX - center;
-            const absDist = Math.abs(distance);
-
-            if (absDist < maxRadius) {
-              // Cosine bell curve interpolation
-              const influence = Math.cos((absDist / maxRadius) * (Math.PI / 2));
-              targetScale = 1 + (maxScale - 1) * influence;
-              // Push neighboring icons subtly away from cursor
-              targetShift = -Math.sign(distance) * Math.sin((absDist / maxRadius) * Math.PI) * 7;
-            }
+          if (dist < maxDistance) {
+            // Nội suy Cosine mượt mà kiểu macOS Dock
+            const ratio = Math.cos((dist / maxDistance) * (Math.PI / 2));
+            springs[idx].targetScale = 1 + (maxScale - 1) * ratio;
+            // Đẩy nhẹ các icon bên cạnh ra hai phía
+            springs[idx].targetX = -Math.sign(diff) * Math.sin((dist / maxDistance) * Math.PI) * maxPush;
+          } else {
+            springs[idx].targetScale = 1;
+            springs[idx].targetX = 0;
           }
+        });
+      });
 
-          // Smooth spring damping
-          currentScales[i] += (targetScale - currentScales[i]) * 0.22;
-          currentShifts[i] += (targetShift - currentShifts[i]) * 0.22;
+      dock.addEventListener("mouseleave", () => {
+        springs.forEach((s) => {
+          s.targetScale = 1;
+          s.targetX = 0;
+        });
+      });
 
-          const liftY = (currentScales[i] - 1) * -10;
-          item.style.transform = `translate3d(${currentShifts[i].toFixed(2)}px, ${liftY.toFixed(2)}px, 0) scale(${currentScales[i].toFixed(3)})`;
+      // Vòng lặp Spring Physics (stiffness: 0.18, damping: 0.72)
+      function animateDock() {
+        const stiffness = 0.18;
+        const damping = 0.72;
+
+        items.forEach((item, idx) => {
+          const s = springs[idx];
+          const forceScale = (s.targetScale - s.scale) * stiffness;
+          s.vScale = (s.vScale + forceScale) * damping;
+          s.scale += s.vScale;
+
+          const forceX = (s.targetX - s.x) * stiffness;
+          s.vX = (s.vX + forceX) * damping;
+          s.x += s.vX;
+
+          const translateY = -(s.scale - 1) * 14;
+          item.style.transform = `translate3d(${s.x.toFixed(2)}px, ${translateY.toFixed(2)}px, 0) scale(${s.scale.toFixed(3)})`;
         });
 
         requestAnimationFrame(animateDock);
       }
-
       requestAnimationFrame(animateDock);
     }
 
     /* ==========================================================
-       5. INTERACTIVE AMBIENT CANVAS (FIREFLIES / WARM SUN BOKEH)
+       4. AVATAR 3D TILT PARALLAX
+       ========================================================== */
+    function initAvatar3DTilt() {
+      const avatar = document.getElementById("avatar-3d");
+      if (!avatar) return;
+
+      avatar.addEventListener("mousemove", (e) => {
+        const rect = avatar.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        const rotateX = (-y * 24).toFixed(2);
+        const rotateY = (x * 24).toFixed(2);
+        avatar.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.06)`;
+      });
+
+      avatar.addEventListener("mouseleave", () => {
+        avatar.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+      });
+    }
+
+    /* ==========================================================
+       5. INTERACTIVE AMBIENT CANVAS (ĐOM ĐÓM TỤ LẠI / ĐỐM NẮNG BOKEH)
        ========================================================== */
     function initAmbientCanvas() {
       const canvas = document.getElementById("ambient-canvas");
@@ -1258,240 +1222,107 @@
 
       let width = (canvas.width = window.innerWidth);
       let height = (canvas.height = window.innerHeight);
-      const pointer = { x: -9999, y: -9999 };
 
       window.addEventListener("resize", () => {
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
       });
 
-      window.addEventListener("pointermove", (e) => {
-        pointer.x = e.clientX;
-        pointer.y = e.clientY;
+      const mouse = { x: -9999, y: -9999, active: false };
+      window.addEventListener("mousemove", (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        mouse.active = true;
+      }, { passive: true });
+
+      window.addEventListener("mouseleave", () => {
+        mouse.active = false;
       });
 
-      window.addEventListener("pointerleave", () => {
-        pointer.x = -9999;
-        pointer.y = -9999;
-      });
-
-      const particleCount = Math.min(38, Math.floor((width * height) / 28000));
+      const particleCount = 38;
       const particles = Array.from({ length: particleCount }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: -0.15 - Math.random() * 0.3,
-        baseR: 1.5 + Math.random() * 2.5,
+        vx: (Math.random() - 0.5) * 0.45,
+        vy: (Math.random() - 0.5) * 0.45 - 0.15,
+        baseRadius: Math.random() * 2.2 + 1.2,
+        bokehRadius: Math.random() * 14 + 6,
         phase: Math.random() * Math.PI * 2,
-        speed: 0.015 + Math.random() * 0.02
+        speedPhase: Math.random() * 0.02 + 0.01
       }));
 
-      function draw() {
+      function renderCanvas() {
         ctx.clearRect(0, 0, width, height);
-        const isLight = document.documentElement.getAttribute("data-theme") === "light";
+        const isDark = document.documentElement.getAttribute("data-theme") === "dark";
 
-        for (const p of particles) {
-          p.phase += p.speed;
-          p.x += p.vx + Math.sin(p.phase) * 0.25;
-          p.y += p.vy;
+        particles.forEach((p) => {
+          p.phase += p.speedPhase;
 
-          // Gentle cursor repulsion
-          const dx = p.x - pointer.x;
-          const dy = p.y - pointer.y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < 130 && dist > 0) {
-            const force = (130 - dist) / 130;
-            p.x += (dx / dist) * force * 2.2;
-            p.y += (dy / dist) * force * 2.2;
+          // Lực hút nhẹ tụ lại khi con trỏ chuột đi qua
+          if (mouse.active) {
+            const dx = mouse.x - p.x;
+            const dy = mouse.y - p.y;
+            const dist = Math.hypot(dx, dy);
+            const attractRadius = 210;
+
+            if (dist < attractRadius && dist > 18) {
+              const force = (1 - dist / attractRadius) * 0.035;
+              p.vx += (dx / dist) * force;
+              p.vy += (dy / dist) * force;
+            }
           }
 
-          // Wrap edges smoothly
-          if (p.y < -20) { p.y = height + 20; p.x = Math.random() * width; }
-          if (p.x < -20) p.x = width + 20;
-          if (p.x > width + 20) p.x = -20;
+          // Ma sát nhẹ giữ chuyển động ung dung, chậm rãi
+          p.vx *= 0.985;
+          p.vy *= 0.985;
 
-          const pulse = 0.45 + 0.55 * Math.sin(p.phase);
+          // Duy trì trôi lơ lửng tự nhiên
+          p.x += p.vx + Math.sin(p.phase) * 0.18;
+          p.y += p.vy + Math.cos(p.phase * 0.8) * 0.15;
 
-          if (isLight) {
-            // Light mode: warm golden sun bokeh
-            const r = p.baseR * 3.8;
-            const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r);
-            grad.addColorStop(0, `rgba(251, 191, 36, ${0.42 * pulse})`);
-            grad.addColorStop(0.55, `rgba(245, 158, 11, ${0.18 * pulse})`);
-            grad.addColorStop(1, "rgba(251, 191, 36, 0)");
-            ctx.fillStyle = grad;
+          if (p.x < -30) p.x = width + 30;
+          if (p.x > width + 30) p.x = -30;
+          if (p.y < -30) p.y = height + 30;
+          if (p.y > height + 30) p.y = -30;
+
+          const pulse = 0.5 + 0.5 * Math.sin(p.phase);
+
+          if (isDark) {
+            // Dark Mode: Đom đóm / bụi sao lấp lánh
+            const r = p.baseRadius * (0.8 + pulse * 0.5);
+            const alpha = 0.25 + pulse * 0.65;
+            const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 4);
+            grad.addColorStop(0, `rgba(255, 250, 225, ${alpha})`);
+            grad.addColorStop(0.4, `rgba(220, 230, 255, ${alpha * 0.45})`);
+            grad.addColorStop(1, "rgba(255, 255, 255, 0)");
+
             ctx.beginPath();
-            ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+            ctx.arc(p.x, p.y, r * 4, 0, Math.PI * 2);
+            ctx.fillStyle = grad;
             ctx.fill();
           } else {
-            // Dark mode: gentle glowing fireflies
-            const r = p.baseR * 2.4;
+            // Light Mode: Đốm nắng bokeh ấm áp
+            const r = p.bokehRadius * (0.85 + pulse * 0.25);
+            const alpha = 0.12 + pulse * 0.18;
             const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r);
-            grad.addColorStop(0, `rgba(255, 255, 255, ${0.9 * pulse})`);
-            grad.addColorStop(0.4, `rgba(226, 232, 240, ${0.35 * pulse})`);
+            grad.addColorStop(0, `rgba(255, 236, 179, ${alpha * 1.4})`);
+            grad.addColorStop(0.6, `rgba(253, 224, 71, ${alpha * 0.7})`);
             grad.addColorStop(1, "rgba(255, 255, 255, 0)");
-            ctx.fillStyle = grad;
+
             ctx.beginPath();
             ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+            ctx.fillStyle = grad;
             ctx.fill();
           }
-        }
+        });
 
-        requestAnimationFrame(draw);
+        requestAnimationFrame(renderCanvas);
       }
-
-      requestAnimationFrame(draw);
+      requestAnimationFrame(renderCanvas);
     }
 
     /* ==========================================================
-       6. VIEW TRANSITIONS API FOR DARK/LIGHT THEME TOGGLE
-       ========================================================== */
-    function initThemeToggle() {
-      const toggle = document.getElementById("theme-toggle");
-      const savedTheme = localStorage.getItem("ios26-theme") || "dark";
-      document.documentElement.setAttribute("data-theme", savedTheme);
-
-      toggle.addEventListener("click", (e) => {
-        const currentTheme = document.documentElement.getAttribute("data-theme");
-        const newTheme = currentTheme === "light" ? "dark" : "light";
-
-        const applyTheme = () => {
-          document.documentElement.setAttribute("data-theme", newTheme);
-          localStorage.setItem("ios26-theme", newTheme);
-        };
-
-        if (!document.startViewTransition) {
-          applyTheme();
-          return;
-        }
-
-        const rect = toggle.getBoundingClientRect();
-        const x = e.clientX || rect.left + rect.width / 2;
-        const y = e.clientY || rect.top + rect.height / 2;
-        const endRadius = Math.hypot(
-          Math.max(x, window.innerWidth - x),
-          Math.max(y, window.innerHeight - y)
-        );
-
-        const transition = document.startViewTransition(() => {
-          applyTheme();
-        });
-
-        transition.ready.then(() => {
-          document.documentElement.animate(
-            {
-              clipPath: [
-                `circle(0px at ${x}px ${y}px)`,
-                `circle(${endRadius}px at ${x}px ${y}px)`
-              ]
-            },
-            {
-              duration: 580,
-              easing: "cubic-bezier(0.32, 0.72, 0, 1)",
-              pseudoElement: "::view-transition-new(root)"
-            }
-          );
-        });
-      });
-    }
-
-    /* ==========================================================
-       7. TAB NAVIGATION (SPRING TRANSITIONS)
-       ========================================================== */
-    function initTabNavigation() {
-      const navBtns = document.querySelectorAll(".nav-tab-btn");
-      const indicator = document.getElementById("nav-indicator");
-      const viewport = document.getElementById("viewport");
-      const mainCard = document.getElementById("main-card");
-      const tabPages = document.querySelectorAll(".tab-page");
-
-      const topBarEl = document.querySelector(".top-bar");
-      const bottomNavEl = document.querySelector(".bottom-nav-container");
-      const profileHeaderEl = document.querySelector(".profile-header");
-
-      function adjustCardHeight(index) {
-        requestAnimationFrame(() => {
-          const topBarH = topBarEl ? topBarEl.offsetHeight : 0;
-          const headerH = profileHeaderEl ? profileHeaderEl.offsetHeight : 0;
-          const navH = bottomNavEl ? bottomNavEl.offsetHeight : 0;
-          
-          const currentTabPage = tabPages[index];
-          const contentH = currentTabPage ? currentTabPage.scrollHeight : 0;
-
-          const totalH = topBarH + headerH + contentH + navH;
-          mainCard.style.height = `${totalH}px`;
-        });
-      }
-
-      function switchTab(index) {
-        viewport.style.transform = `translate3d(-${index * 33.3333}%, 0, 0)`;
-
-        const activeBtn = navBtns[index];
-        if (activeBtn && indicator) {
-          indicator.style.transform = `translate3d(${activeBtn.offsetLeft - 6}px, 0, 0)`;
-        }
-
-        navBtns.forEach((btn, i) => btn.classList.toggle("active", i === index));
-        tabPages.forEach((page, i) => {
-          page.classList.toggle("active-tab", i === index);
-          page.classList.toggle("inactive-tab", i !== index);
-        });
-
-        if (index === 1) {
-          mainCard.classList.remove("compact-mode");
-          triggerQuoteAnimation();
-        } else {
-          mainCard.classList.add("compact-mode");
-        }
-
-        adjustCardHeight(index);
-      }
-
-      navBtns.forEach((btn, i) => {
-        btn.addEventListener("click", () => switchTab(i));
-      });
-
-      let resizeTimer;
-      window.addEventListener("resize", () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          const activeBtn = document.querySelector(".nav-tab-btn.active");
-          if (activeBtn) {
-            switchTab(parseInt(activeBtn.getAttribute("data-index") || "1"));
-          }
-        }, 100);
-      });
-
-      requestAnimationFrame(() => {
-        switchTab(1);
-      });
-    }
-
-    function renderLinks(containerId, items) {
-      const container = document.getElementById(containerId);
-      if (!container || !Array.isArray(items)) return;
-
-      const fragment = document.createDocumentFragment();
-      items.forEach((item) => {
-        const a = document.createElement('a');
-        a.href = item.url || '#';
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.className = "ios26-link-item spotlight-target";
-        a.innerHTML = `
-          <img src="${item.icon}" alt="${item.title}" class="link-icon" loading="lazy">
-          <span class="link-label">${item.title}</span>
-          <i class="fa-solid fa-chevron-right link-arrow"></i>
-        `;
-        fragment.appendChild(a);
-      });
-
-      container.innerHTML = '';
-      container.appendChild(fragment);
-    }
-
-    /* ==========================================================
-       EXISTING FEATURES: DEVICE TRACKING, EMAILJS, QR & AUDIO
+       HỆ THỐNG NHẬN DIỆN THIẾT BỊ & EMAILJS (GIỮ NGUYÊN GỐC)
        ========================================================== */
     function getDeviceAndLocationInfo() {
       const ua = navigator.userAgent;
@@ -1502,8 +1333,11 @@
 
       const isMobile = /mobile/i.test(ua);
       const isTablet = /tablet|ipad|playbook|silk/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-      if (isTablet) deviceType = "Tablet";
-      else if (isMobile) deviceType = "Mobile";
+      if (isTablet) {
+        deviceType = "Tablet";
+      } else if (isMobile) {
+        deviceType = "Mobile";
+      }
 
       if (/android/i.test(ua)) {
         const osMatch = ua.match(/Android\s+([\d.]+)/i);
@@ -1565,22 +1399,35 @@
         }
       } else if (/iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
         vendor = "Apple";
-        if (/ipad/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) model = "iPad";
-        else if (/iphone/i.test(ua)) model = "iPhone";
-        else model = "iPod Touch";
+        if (/ipad/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+          model = "iPad";
+        } else if (/iphone/i.test(ua)) {
+          model = "iPhone";
+        } else {
+          model = "iPod Touch";
+        }
       } else {
-        if (/windows/i.test(ua)) { vendor = "PC / OEM"; model = "Windows Desktop/Laptop"; }
-        else if (/macintosh/i.test(ua)) { vendor = "Apple"; model = "Mac / MacBook"; }
-        else { vendor = "Khác"; model = "Máy tính cá nhân"; }
+        if (/windows/i.test(ua)) {
+          vendor = "PC / OEM";
+          model = "Windows Desktop/Laptop";
+        } else if (/macintosh/i.test(ua)) {
+          vendor = "Apple";
+          model = "Mac / MacBook";
+        } else {
+          vendor = "Khác";
+          model = "Máy tính cá nhân";
+        }
       }
 
       const deviceFullInfo = `Mã/Tên: ${model} | Hãng: ${vendor} | Hệ điều hành: ${os} (${deviceType})`;
       const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Ho_Chi_Minh";
       const language = navigator.language || "vi-VN";
+      
       let location = `Timezone: ${timeZone} | Ngôn ngữ: ${language}`;
       if (timeZone.includes("Ho_Chi_Minh") || timeZone.includes("Bangkok")) {
         location = `Việt Nam (${timeZone})`;
       }
+
       return { device: deviceFullInfo, location };
     }
 
@@ -1591,11 +1438,12 @@
       if (!sessionStorage.getItem("email_notified")) {
         setTimeout(() => {
           if (sessionStorage.getItem("email_notified")) return; 
+
           const { device, location } = getDeviceAndLocationInfo();
           const templateParams = {
             time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
-            device,
-            location,
+            device: device,
+            location: location,
             message: "[System] New visitor access on your personal web page w.bio (No message left).",
             referrer: document.referrer || "Direct Access"
           };
@@ -1644,8 +1492,8 @@
         const { device, location } = getDeviceAndLocationInfo();
         const templateParams = {
           time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
-          device,
-          location,
+          device: device,
+          location: location,
           message: userMsg, 
           referrer: "Instant Message Pop-up (Web Form)"
         };
@@ -1669,6 +1517,147 @@
               sendBtn.style.opacity = "1";
             }, 2000);
           });
+      });
+    }
+
+    function renderLinks(containerId, items) {
+      const container = document.getElementById(containerId);
+      if (!container || !Array.isArray(items)) return;
+
+      const fragment = document.createDocumentFragment();
+      items.forEach((item) => {
+        const a = document.createElement('a');
+        a.href = item.url || '#';
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.className = "ios26-link-item spotlight-surface haptic-btn";
+        a.innerHTML = `
+          <div class="spotlight-border"></div>
+          <img src="${item.icon}" alt="${item.title}" class="link-icon" loading="lazy">
+          <span class="link-label">${item.title}</span>
+          <i class="fa-solid fa-chevron-right link-arrow"></i>
+        `;
+        fragment.appendChild(a);
+      });
+
+      container.innerHTML = '';
+      container.appendChild(fragment);
+    }
+
+    function initTabNavigation() {
+      const navBtns = document.querySelectorAll(".nav-tab-btn");
+      const indicator = document.getElementById("nav-indicator");
+      const viewport = document.getElementById("viewport");
+      const mainCard = document.getElementById("main-card");
+      const tabPages = document.querySelectorAll(".tab-page");
+
+      const topBarEl = document.querySelector(".top-bar");
+      const bottomNavEl = document.querySelector(".bottom-nav-container");
+      const profileHeaderEl = document.querySelector(".profile-header");
+
+      function adjustCardHeight(index) {
+        requestAnimationFrame(() => {
+          const topBarH = topBarEl ? topBarEl.offsetHeight : 0;
+          const headerH = profileHeaderEl ? profileHeaderEl.offsetHeight : 0;
+          const navH = bottomNavEl ? bottomNavEl.offsetHeight : 0;
+          
+          const currentTabPage = tabPages[index];
+          const contentH = currentTabPage ? currentTabPage.scrollHeight : 0;
+
+          const totalH = topBarH + headerH + contentH + navH;
+          mainCard.style.height = `${totalH}px`;
+        });
+      }
+
+      function switchTab(index) {
+        viewport.style.transform = `translate3d(-${index * 33.3333}%, 0, 0)`;
+
+        const activeBtn = navBtns[index];
+        if (activeBtn && indicator) {
+          indicator.style.transform = `translate3d(${activeBtn.offsetLeft - 6}px, 0, 0)`;
+        }
+
+        navBtns.forEach((btn, i) => btn.classList.toggle("active", i === index));
+        tabPages.forEach((page, i) => page.classList.toggle("active-tab", i === index));
+
+        if (index === 1) {
+          mainCard.classList.remove("compact-mode");
+        } else {
+          mainCard.classList.add("compact-mode");
+        }
+
+        adjustCardHeight(index);
+      }
+
+      navBtns.forEach((btn, i) => {
+        btn.addEventListener("click", () => switchTab(i));
+      });
+
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          const activeBtn = document.querySelector(".nav-tab-btn.active");
+          if (activeBtn) {
+            switchTab(parseInt(activeBtn.getAttribute("data-index") || "1"));
+          }
+        }, 100);
+      });
+
+      requestAnimationFrame(() => {
+        switchTab(1);
+      });
+    }
+
+    /* ==========================================================
+       VIEW TRANSITIONS API CHO NÚT DARK/LIGHT MODE (TELEGRAM / ANTFU)
+       ========================================================== */
+    function initThemeToggle() {
+      const toggle = document.getElementById("theme-toggle");
+      const savedTheme = localStorage.getItem("ios26-theme") || "dark";
+      document.documentElement.setAttribute("data-theme", savedTheme);
+
+      toggle.addEventListener("click", (e) => {
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+
+        const applyTheme = () => {
+          document.documentElement.setAttribute("data-theme", newTheme);
+          localStorage.setItem("ios26-theme", newTheme);
+        };
+
+        if (!document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          applyTheme();
+          return;
+        }
+
+        const rect = toggle.getBoundingClientRect();
+        const x = e.clientX || (rect.left + rect.width / 2);
+        const y = e.clientY || (rect.top + rect.height / 2);
+        const endRadius = Math.hypot(
+          Math.max(x, window.innerWidth - x),
+          Math.max(y, window.innerHeight - y)
+        );
+
+        const transition = document.startViewTransition(() => {
+          applyTheme();
+        });
+
+        transition.ready.then(() => {
+          document.documentElement.animate(
+            {
+              clipPath: [
+                `circle(0px at ${x}px ${y}px)`,
+                `circle(${endRadius}px at ${x}px ${y}px)`
+              ]
+            },
+            {
+              duration: 550,
+              easing: "cubic-bezier(0.32, 0.72, 0, 1)",
+              pseudoElement: "::view-transition-new(root)"
+            }
+          );
+        });
       });
     }
 
@@ -1712,6 +1701,7 @@
         navigator.clipboard.writeText(shareUrl).then(() => {
           copyText.textContent = "Copied!";
           copyBtn.style.background = "#22c55e";
+
           setTimeout(() => {
             copyText.textContent = "Copy link";
             copyBtn.style.background = "rgba(255, 255, 255, 0.15)";
@@ -1759,7 +1749,9 @@
       function playSound() {
         if (!isLoaded || !audioBuffer) return;
         if (audioCtx.state === 'suspended') audioCtx.resume();
-        if (sourceNode) { try { sourceNode.stop(); } catch(e) {} }
+        if (sourceNode) {
+          try { sourceNode.stop(); } catch(e) {}
+        }
 
         sourceNode = audioCtx.createBufferSource();
         sourceNode.buffer = audioBuffer;
@@ -1770,6 +1762,7 @@
 
         sourceNode.connect(gainNode);
         gainNode.connect(audioCtx.destination);
+
         sourceNode.start(0);
         isPlaying = true;
         updateUI(true);
@@ -1790,8 +1783,12 @@
         e.stopPropagation();
         if (!isLoaded) await loadAudioFile();
         if (audioCtx && audioCtx.state === 'suspended') await audioCtx.resume();
-        if (isPlaying) stopSound();
-        else playSound();
+
+        if (isPlaying) {
+          stopSound();
+        } else {
+          playSound();
+        }
       });
     }
   </script>
