@@ -90,40 +90,40 @@
     }
 
     :root[data-theme="light"] {
-      --bg-gradient: radial-gradient(circle at 50% 0%, #fcfaf7 0%, #f1ece4 60%, #e4dcd0 100%);
+      --bg-gradient: radial-gradient(circle at 50% 0%, #f6f8f5 0%, #e9efe7 60%, #d8e2d4 100%);
       --glass-bg: rgba(255, 255, 255, 0.65);
       --glass-border: rgba(255, 255, 255, 0.88);
       --glass-border-highlight: rgba(255, 255, 255, 1);
       --glass-shadow: 
-        0 25px 60px rgba(45, 32, 18, 0.08),
+        0 25px 60px rgba(32, 45, 35, 0.08),
         inset 0 2px 3px rgba(255, 255, 255, 0.95),
-        inset 0 -2px 4px rgba(45, 32, 18, 0.04);
-      --glass-glow: rgba(217, 119, 6, 0.14);
+        inset 0 -2px 4px rgba(32, 45, 35, 0.04);
+      --glass-glow: rgba(34, 197, 94, 0.12);
 
-      --spotlight-surface: rgba(245, 158, 11, 0.08);
-      --spotlight-border: rgba(217, 119, 6, 0.5);
+      --spotlight-surface: rgba(34, 197, 94, 0.08);
+      --spotlight-border: rgba(22, 163, 74, 0.5);
 
-      --text-title: #1c1917;
-      --text-sub: #57534e;
-      --text-quote: #1c1917;
-      --text-author: #78716c;
-      --shimmer-highlight: #d97706;
-      --shimmer-base: rgba(28, 25, 23, 0.72);
+      --text-title: #141f16;
+      --text-sub: #4b5c4f;
+      --text-quote: #141f16;
+      --text-author: #657569;
+      --shimmer-highlight: #16a34a;
+      --shimmer-base: rgba(20, 31, 22, 0.72);
 
       --pill-bg: rgba(255, 255, 255, 0.75);
       --pill-border: rgba(255, 255, 255, 0.95);
       --pill-hover-bg: rgba(255, 255, 255, 0.96);
-      --pill-hover-border: #fcd34d;
-      --pill-hover-glow: 0 12px 30px rgba(217, 119, 6, 0.12);
+      --pill-hover-border: #86efac;
+      --pill-hover-glow: 0 12px 30px rgba(34, 197, 94, 0.12);
 
       --dock-bg: rgba(255, 255, 255, 0.74);
       --dock-border: rgba(255, 255, 255, 0.95);
-      --indicator-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(254, 243, 199, 0.85) 100%);
-      --indicator-border: rgba(251, 191, 36, 0.55);
+      --indicator-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(220, 252, 231, 0.85) 100%);
+      --indicator-border: rgba(134, 239, 172, 0.6);
 
       --orb-1: rgba(255, 255, 255, 0.92);
-      --orb-2: rgba(253, 230, 138, 0.45);
-      --orb-3: rgba(254, 215, 170, 0.5);
+      --orb-2: rgba(187, 247, 208, 0.5);
+      --orb-3: rgba(254, 243, 199, 0.45);
     }
 
     /* VIEW TRANSITIONS API (CIRCULAR RIPPLE) */
@@ -372,7 +372,7 @@
 
     [data-theme="light"] .theme-orb-indicator {
       transform: translate3d(36px, 0, 0);
-      background: linear-gradient(135deg, #ffffff 0%, #fef3c7 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #dcfce7 100%);
     }
     [data-theme="light"] .icon-sun { opacity: 1; transform: scale(1) rotate(0deg); }
     [data-theme="light"] .icon-moon { opacity: 0; transform: scale(0.5) rotate(90deg); }
@@ -440,7 +440,7 @@
     }
 
     /* ==========================================================
-       PROFILE HEADER + AVATAR BREATHING & RIGHTWARD TILT ON HOVER
+       PROFILE HEADER + AVATAR BREATHING & RIGHTWARD TILT (FLAT 2D)
        ========================================================== */
     .profile-header {
       display: flex;
@@ -451,7 +451,6 @@
       padding: 12px 24px 8px;
       z-index: 15;
       flex-shrink: 0;
-      perspective: 800px;
       transition: transform 0.5s var(--spring-easing), margin 0.5s var(--spring-easing);
     }
 
@@ -474,17 +473,16 @@
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.08) 100%);
       border: 1.5px solid var(--glass-border);
       transform-origin: center center;
-      transform-style: preserve-3d;
       animation: avatarBreathe 5.5s ease-in-out infinite;
       transition: transform 0.45s var(--spring-easing), box-shadow 0.45s ease;
       cursor: pointer;
     }
 
-    /* Nghiêng nhẹ sang PHẢI rõ rệt khi di chuột vào */
+    /* NGHIÊNG NHẸ SANG PHẢI MƯỢT MÀ, KHÔNG CẦN NGHIÊNG 3D */
     .avatar-ring:hover {
       animation: none;
-      transform: perspective(650px) rotateY(18deg) rotateX(3deg) rotateZ(7deg) translateX(4px) scale(1.06);
-      box-shadow: -10px 18px 38px rgba(0, 0, 0, 0.34), 0 0 32px var(--glass-glow);
+      transform: rotate(8deg) translateX(6px) scale(1.06);
+      box-shadow: 6px 14px 32px rgba(0, 0, 0, 0.3), 0 0 30px var(--glass-glow);
     }
 
     .avatar-ring img {
@@ -497,7 +495,7 @@
 
     .avatar-ring:hover img {
       filter: grayscale(0%);
-      transform: translateZ(12px) scale(1.02);
+      transform: scale(1.02);
     }
 
     .profile-meta {
@@ -767,9 +765,9 @@
       transition: color 0.3s ease;
     }
 
-    [data-theme="light"] .nav-tab-btn i { color: #78716c; }
+    [data-theme="light"] .nav-tab-btn i { color: #657569; }
     .nav-tab-btn.active i { color: var(--text-title); }
-    [data-theme="light"] .nav-tab-btn.active i { color: #1c1917; }
+    [data-theme="light"] .nav-tab-btn.active i { color: #141f16; }
 
     /* ==========================================================
        SPRING-BASED MODAL SYSTEM
@@ -1190,7 +1188,7 @@
     }
 
     /* ==========================================================
-       3. INTERACTIVE AMBIENT CANVAS: FIREFLIES & FALLING AUTUMN LEAVES
+       3. INTERACTIVE AMBIENT CANVAS: FIREFLIES & FALLING LEAVES (MIXED GREEN & AUTUMN)
        ========================================================== */
     function initAmbientCanvas() {
       const canvas = document.getElementById("ambient-particles");
@@ -1223,13 +1221,13 @@
       window.addEventListener("mouseleave", () => { mouse.active = false; });
       window.addEventListener("touchend", () => { mouse.active = false; });
 
-      // Bảng màu lá thu tự nhiên (Vàng mật ong, Cam ấm, Hổ phách, Đỏ cam đất)
-      const AUTUMN_PALETTES = [
+      // Bảng màu lá cây tự nhiên xen lẫn lá thu (Xanh non, Xanh lục bảo, Xanh rêu, Vàng mật ong, Cam đất)
+      const LEAF_PALETTES = [
+        { main: "#4ade80", edge: "#15803d", vein: "#dcfce7" }, // Xanh lá non tươi
+        { main: "#22c55e", edge: "#166534", vein: "#bbf7d0" }, // Xanh lục bảo
+        { main: "#84cc16", edge: "#4d7c0f", vein: "#ecfccb" }, // Xanh rêu tươi
         { main: "#e09f3e", edge: "#b45309", vein: "#fef3c7" }, // Vàng mật ong
-        { main: "#d97706", edge: "#92400e", vein: "#fde68a" }, // Vàng hổ phách
-        { main: "#ea580c", edge: "#9a3412", vein: "#ffedd5" }, // Cam lá phong
-        { main: "#c2410c", edge: "#7c2d12", vein: "#fed7aa" }, // Đỏ cam đất
-        { main: "#eab308", edge: "#a16207", vein: "#fef9c3" }  // Vàng nắng thu
+        { main: "#ea580c", edge: "#9a3412", vein: "#ffedd5" }  // Cam lá phong ấm
       ];
 
       const PARTICLE_COUNT = 54;
@@ -1250,28 +1248,24 @@
         speed: 0.015 + Math.random() * 0.02,
         swirlDir: Math.random() > 0.5 ? 1 : -1,
         orbitRadius: 28 + Math.random() * 54,
-        palette: AUTUMN_PALETTES[Math.floor(Math.random() * AUTUMN_PALETTES.length)]
+        palette: LEAF_PALETTES[Math.floor(Math.random() * LEAF_PALETTES.length)]
       }));
 
-      // Vẽ chiếc lá thu tự nhiên với hiệu ứng lật 3D theo gió và gân lá
-      function drawAutumnLeaf(p, alpha) {
+      function drawNaturalLeaf(p, alpha) {
         ctx.save();
         ctx.translate(p.x, p.y);
         ctx.rotate(p.rotation);
 
-        // Mô phỏng độ nghiêng 3D khi lá chao lượn trong gió
         const tiltScale = 0.55 + 0.45 * Math.abs(Math.cos(p.flipPhase));
         ctx.scale(1, tiltScale);
 
         const s = p.leafSize;
         ctx.globalAlpha = Math.min(0.95, alpha + 0.25);
 
-        // Đổ bóng mềm nhẹ giúp lá nổi bật tự nhiên trên nền sáng
-        ctx.shadowColor = "rgba(120, 53, 15, 0.18)";
+        ctx.shadowColor = "rgba(20, 31, 22, 0.16)";
         ctx.shadowBlur = 6;
         ctx.shadowOffsetY = 3;
 
-        // Thân lá thu bầu nhọn hai đầu tự nhiên
         const grad = ctx.createLinearGradient(-s, -s * 0.5, s, s * 0.5);
         grad.addColorStop(0, p.palette.main);
         grad.addColorStop(1, p.palette.edge);
@@ -1284,10 +1278,9 @@
         ctx.closePath();
         ctx.fill();
 
-        // Tắt shadow khi vẽ cuống và gân lá mảnh
         ctx.shadowColor = "transparent";
 
-        // Cuống lá nhỏ
+        // Cuống lá
         ctx.strokeStyle = p.palette.edge;
         ctx.lineWidth = 1;
         ctx.beginPath();
@@ -1295,14 +1288,13 @@
         ctx.quadraticCurveTo(-s * 1.45, s * 0.15, -s * 1.6, s * 0.25);
         ctx.stroke();
 
-        // Gân chính & gân phụ tinh tế
+        // Gân lá
         ctx.strokeStyle = p.palette.vein;
         ctx.lineWidth = 0.65;
         ctx.globalAlpha = Math.min(0.75, alpha * 0.8);
         ctx.beginPath();
         ctx.moveTo(-s * 1.05, 0);
         ctx.lineTo(s * 1.0, 0);
-        // Hai cặp gân phụ chéo
         ctx.moveTo(-s * 0.3, 0);
         ctx.lineTo(s * 0.1, -s * 0.35);
         ctx.moveTo(-s * 0.3, 0);
@@ -1338,7 +1330,6 @@
               const nx = dx / dist;
               const ny = dy / dist;
 
-              // Tụ lại tự nhiên quanh con trỏ chuột
               if (dist > p.orbitRadius) {
                 const pull = norm * norm * 0.085;
                 p.vx += nx * pull;
@@ -1349,7 +1340,6 @@
                 p.vy -= ny * repel;
               }
 
-              // Luồng gió xoáy nhẹ giúp lá và đom đóm lượn vòng sinh động
               const swirl = norm * 0.045 * p.swirlDir;
               p.vx += -ny * swirl;
               p.vy += nx * swirl;
@@ -1361,18 +1351,15 @@
           p.vy *= 0.965;
 
           if (isLight) {
-            // Chuyển động lá thu rơi chao lượn nhẹ nhàng theo làn gió ngang
             const windSway = Math.sin(p.phase * 1.2) * p.swayAmp;
             p.x += p.vx + windSway;
             p.y += p.vy + 0.55 + Math.cos(p.phase) * 0.15;
             p.rotation += p.rotSpeed + windSway * 0.02;
           } else {
-            // Chuyển động đom đóm bay lơ lửng trong đêm
             p.x += p.vx + Math.sin(p.phase) * 0.28;
             p.y += p.vy - 0.16 + Math.cos(p.phase * 0.8) * 0.14;
           }
 
-          // Tái xuất hiện mượt ở mép màn hình
           if (p.x < -30) p.x = width + 30;
           if (p.x > width + 30) p.x = -30;
           if (p.y < -30) p.y = height + 30;
@@ -1382,7 +1369,7 @@
           const finalAlpha = Math.min(1, basePulse + proximityBoost);
 
           if (isLight) {
-            drawAutumnLeaf(p, finalAlpha);
+            drawNaturalLeaf(p, finalAlpha);
           } else {
             const dynamicRadius = p.radius * (1 + proximityBoost * 0.35);
             const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, dynamicRadius * 4.2);
