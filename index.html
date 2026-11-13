@@ -27,8 +27,6 @@
   <meta name="twitter:title" content="Nhật Huy | w.bio">
   <meta name="twitter:description" content="ung dung. — Contact me.">
   <meta name="twitter:image" content="https://nhztwiie.github.io/w/images/Huy.png">
-
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/email.png">
 
   <!-- Fonts: Plus Jakarta Sans -->
@@ -45,83 +43,90 @@
 
   <style>
     /* ==========================================================
-       TITANIUM & LIQUID GLASS SYSTEM - WATER DROPLET PHYSICS
+       TITANIUM & LIQUID GLASS SYSTEM - PHYSICS, SPOTLIGHT & SHIMMER
        ========================================================== */
+    :root {
+      --spring-easing: cubic-bezier(0.32, 0.72, 0, 1);
+      --liquid-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --mouse-x: 50%;
+      --mouse-y: 50%;
+    }
+
     :root[data-theme="dark"] {
       --bg-gradient: radial-gradient(circle at 50% 0%, #2a2d32 0%, #111317 65%, #08090a 100%);
-      
-      --glass-bg: rgba(255, 255, 255, 0.05);
-      --glass-border: rgba(255, 255, 255, 0.18);
+      --glass-bg: rgba(255, 255, 255, 0.045);
+      --glass-border: rgba(255, 255, 255, 0.16);
       --glass-border-highlight: rgba(255, 255, 255, 0.45);
       --glass-shadow: 
         0 30px 80px rgba(0, 0, 0, 0.8),
-        inset 0 1.5px 3px rgba(255, 255, 255, 0.4),
-        inset 0 -1.5px 3px rgba(0, 0, 0, 0.7);
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.35),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.65);
       --glass-glow: rgba(224, 224, 224, 0.15);
 
-      --spotlight-color: rgba(255, 255, 255, 0.11);
+      --spotlight-surface: rgba(255, 255, 255, 0.08);
       --spotlight-border: rgba(255, 255, 255, 0.55);
 
       --text-title: #ffffff;
       --text-sub: #d1d5db;
       --text-quote: #f3f4f6;
       --text-author: #9ca3af;
+      --shimmer-highlight: #ffffff;
+      --shimmer-base: rgba(243, 244, 246, 0.55);
 
       --pill-bg: rgba(255, 255, 255, 0.06);
-      --pill-border: rgba(255, 255, 255, 0.18);
-      --pill-hover-bg: rgba(255, 255, 255, 0.14);
+      --pill-border: rgba(255, 255, 255, 0.16);
+      --pill-hover-bg: rgba(255, 255, 255, 0.12);
       --pill-hover-border: rgba(255, 255, 255, 0.5);
-      --pill-hover-glow: 0 12px 32px rgba(255, 255, 255, 0.15);
+      --pill-hover-glow: 0 12px 32px rgba(255, 255, 255, 0.12);
 
       --dock-bg: rgba(20, 22, 26, 0.55);
-      --dock-border: rgba(255, 255, 255, 0.22);
-      --indicator-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, rgba(160, 160, 160, 0.18) 100%);
+      --dock-border: rgba(255, 255, 255, 0.2);
+      --indicator-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, rgba(160, 160, 160, 0.16) 100%);
       --indicator-border: rgba(255, 255, 255, 0.45);
 
-      --orb-1: rgba(255, 255, 255, 0.35);
-      --orb-2: rgba(160, 170, 190, 0.4);
-      --orb-3: rgba(210, 215, 225, 0.3);
-      --shimmer-beam: rgba(255, 255, 255, 0.95);
+      --orb-1: rgba(255, 255, 255, 0.32);
+      --orb-2: rgba(160, 170, 190, 0.35);
+      --orb-3: rgba(210, 215, 225, 0.28);
     }
 
     :root[data-theme="light"] {
-      --bg-gradient: radial-gradient(circle at 50% 0%, #f3f4f6 0%, #e5e7eb 60%, #cbd5e1 100%);
-
-      --glass-bg: rgba(255, 255, 255, 0.65);
-      --glass-border: rgba(255, 255, 255, 0.9);
+      --bg-gradient: radial-gradient(circle at 50% 0%, #f8fafc 0%, #e2e8f0 60%, #cbd5e1 100%);
+      --glass-bg: rgba(255, 255, 255, 0.62);
+      --glass-border: rgba(255, 255, 255, 0.85);
       --glass-border-highlight: rgba(255, 255, 255, 1);
       --glass-shadow: 
-        0 25px 60px rgba(0, 0, 0, 0.08),
-        inset 0 2px 4px rgba(255, 255, 255, 0.95),
-        inset 0 -2px 4px rgba(0, 0, 0, 0.04);
-      --glass-glow: rgba(0, 0, 0, 0.05);
+        0 25px 60px rgba(15, 23, 42, 0.08),
+        inset 0 2px 3px rgba(255, 255, 255, 0.95),
+        inset 0 -2px 4px rgba(15, 23, 42, 0.04);
+      --glass-glow: rgba(56, 189, 248, 0.12);
 
-      --spotlight-color: rgba(255, 255, 255, 0.65);
-      --spotlight-border: rgba(107, 114, 128, 0.55);
+      --spotlight-surface: rgba(56, 189, 248, 0.09);
+      --spotlight-border: rgba(14, 165, 233, 0.55);
 
-      --text-title: #111827;
-      --text-sub: #4b5563;
-      --text-quote: #111827;
-      --text-author: #6b7280;
+      --text-title: #0f172a;
+      --text-sub: #475569;
+      --text-quote: #0f172a;
+      --text-author: #64748b;
+      --shimmer-highlight: #0284c7;
+      --shimmer-base: rgba(15, 23, 42, 0.72);
 
-      --pill-bg: rgba(255, 255, 255, 0.75);
+      --pill-bg: rgba(255, 255, 255, 0.72);
       --pill-border: rgba(255, 255, 255, 0.95);
       --pill-hover-bg: rgba(255, 255, 255, 0.95);
-      --pill-hover-border: #9ca3af;
-      --pill-hover-glow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      --pill-hover-border: #7dd3fc;
+      --pill-hover-glow: 0 12px 30px rgba(14, 165, 233, 0.12);
 
       --dock-bg: rgba(255, 255, 255, 0.72);
       --dock-border: rgba(255, 255, 255, 0.95);
-      --indicator-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(229, 231, 235, 0.85) 100%);
-      --indicator-border: rgba(156, 163, 175, 0.5);
+      --indicator-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(224, 242, 254, 0.88) 100%);
+      --indicator-border: rgba(125, 211, 252, 0.6);
 
-      --orb-1: rgba(255, 255, 255, 0.9);
-      --orb-2: rgba(203, 213, 225, 0.6);
-      --orb-3: rgba(226, 232, 240, 0.7);
-      --shimmer-beam: rgba(245, 158, 11, 0.85);
+      --orb-1: rgba(255, 255, 255, 0.92);
+      --orb-2: rgba(186, 230, 253, 0.65);
+      --orb-3: rgba(224, 242, 254, 0.75);
     }
 
-    /* VIEW TRANSITIONS API */
+    /* VIEW TRANSITIONS API (CIRCULAR RIPPLE) */
     ::view-transition-old(root),
     ::view-transition-new(root) {
       animation: none;
@@ -152,19 +157,19 @@
       padding: 24px 16px;
     }
 
-    /* BACKGROUND CANVAS & ORBS */
+    /* INTERACTIVE AMBIENT CANVAS & LIQUID ORBS */
     .ios26-bg-canvas {
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
       z-index: 1;
       pointer-events: none;
       overflow: hidden;
       contain: strict;
-      transform: translateZ(0);
     }
 
-    #ambient-canvas {
+    #ambient-particles {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -177,7 +182,7 @@
       border-radius: 50%;
       filter: blur(28px);
       mix-blend-mode: overlay;
-      will-change: transform, opacity;
+      will-change: transform;
       opacity: 0.85;
       z-index: 1;
     }
@@ -186,45 +191,39 @@
       width: 420px; height: 420px;
       top: -80px; left: -60px;
       background: radial-gradient(circle at 35% 35%, var(--orb-1) 0%, rgba(255,255,255,0.1) 60%, transparent 80%);
-      animation: floatFluid1 12s infinite ease-in-out alternate;
+      animation: floatFluid1 14s infinite ease-in-out alternate;
     }
 
     .orb-secondary {
       width: 380px; height: 380px;
       bottom: -60px; right: -50px;
       background: radial-gradient(circle at 35% 35%, var(--orb-2) 0%, rgba(255,255,255,0.08) 60%, transparent 80%);
-      animation: floatFluid2 15s infinite ease-in-out alternate;
+      animation: floatFluid2 16s infinite ease-in-out alternate;
     }
 
     .orb-accent {
       width: 300px; height: 300px;
       top: 40%; left: 30%;
       background: radial-gradient(circle at 35% 35%, var(--orb-3) 0%, rgba(255,255,255,0.1) 60%, transparent 80%);
-      animation: floatFluid3 10s infinite ease-in-out alternate;
+      animation: floatFluid3 11s infinite ease-in-out alternate;
     }
 
     @keyframes floatFluid1 {
-      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
-      50% { transform: translate3d(120px, 80px, 0) scale(1.15) rotate(15deg); }
-      100% { transform: translate3d(40px, 140px, 0) scale(0.9) rotate(-10deg); }
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      100% { transform: translate3d(90px, 110px, 0) scale(1.12); }
     }
-
     @keyframes floatFluid2 {
-      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
-      50% { transform: translate3d(-100px, -90px, 0) scale(1.2) rotate(-20deg); }
-      100% { transform: translate3d(-40px, -150px, 0) scale(0.95) rotate(10deg); }
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      100% { transform: translate3d(-80px, -110px, 0) scale(1.15); }
     }
-
     @keyframes floatFluid3 {
-      0% { transform: translate3d(0, 0, 0) scale(0.9); }
-      50% { transform: translate3d(-90px, 70px, 0) scale(1.25); }
-      100% { transform: translate3d(100px, -60px, 0) scale(0.85); }
+      0% { transform: translate3d(0, 0, 0) scale(0.92); }
+      100% { transform: translate3d(80px, -60px, 0) scale(1.18); }
     }
 
     .glass-mesh-overlay {
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
+      inset: 0;
       background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
       background-size: 20px 20px;
       z-index: 2;
@@ -232,53 +231,9 @@
       opacity: 0.3;
     }
 
-    /* CURSOR SPOTLIGHT & BORDER GLOW */
-    .spotlight-surface {
-      position: relative;
-      --mouse-x: -999px;
-      --mouse-y: -999px;
-    }
-
-    .spotlight-surface::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: radial-gradient(
-        260px circle at var(--mouse-x) var(--mouse-y),
-        var(--spotlight-color),
-        transparent 80%
-      );
-      opacity: 0;
-      transition: opacity 0.35s ease;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .spotlight-surface:hover::after { opacity: 1; }
-
-    .spotlight-border {
-      position: absolute;
-      inset: -1.5px;
-      border-radius: inherit;
-      padding: 1.5px;
-      background: radial-gradient(
-        200px circle at var(--mouse-x) var(--mouse-y),
-        var(--spotlight-border),
-        transparent 75%
-      );
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0;
-      transition: opacity 0.35s ease;
-      pointer-events: none;
-      z-index: 16;
-    }
-
-    .spotlight-surface:hover > .spotlight-border { opacity: 1; }
-
-    /* MAIN CARD CONTAINER - HIỆU ỨNG GIỌT NƯỚC VẬT LÝ */
+    /* ==========================================================
+       MAIN CARD CONTAINER + SPOTLIGHT & WATER DROPLET PHYSICS
+       ========================================================== */
     .liquid-card-ios26 {
       position: relative;
       z-index: 10;
@@ -293,25 +248,70 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      transition: height 0.55s cubic-bezier(0.32, 0.72, 0, 1), background 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+      transition: height 0.52s var(--spring-easing), box-shadow 0.4s ease;
       transform: translateZ(0);
-      backface-visibility: hidden;
     }
 
-    .liquid-card-ios26:hover {
-      box-shadow: 
-        0 40px 100px rgba(0, 0, 0, 0.65),
-        inset 0 2px 5px rgba(255, 255, 255, 0.55),
-        inset 0 -2px 5px rgba(0, 0, 0, 0.6);
-    }
-
-    .liquid-card-ios26::before {
+    /* Cursor Spotlight Layer inside Main Card */
+    .liquid-card-ios26::after {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1.5px;
-      background: linear-gradient(90deg, transparent, var(--glass-border-highlight), transparent);
-      z-index: 15;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(
+        420px circle at var(--mouse-x) var(--mouse-y),
+        var(--spotlight-surface),
+        transparent 65%
+      );
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .liquid-card-ios26:hover::after {
+      opacity: 1;
+    }
+
+    /* Border Glow following cursor */
+    .card-border-glow {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.5px;
+      background: radial-gradient(
+        280px circle at var(--mouse-x) var(--mouse-y),
+        var(--spotlight-border),
+        transparent 70%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      z-index: 25;
+    }
+
+    .liquid-card-ios26:hover .card-border-glow {
+      opacity: 1;
+    }
+
+    /* Water Droplet Ripple Effect on Click */
+    .water-ripple {
+      position: absolute;
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.05) 60%, transparent 100%);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      pointer-events: none;
+      animation: dropletExpand 0.75s var(--spring-easing) forwards;
+      z-index: 50;
+    }
+
+    @keyframes dropletExpand {
+      0% { width: 0; height: 0; opacity: 0.9; }
+      100% { width: 220px; height: 220px; opacity: 0; }
     }
 
     /* TOP BAR */
@@ -330,13 +330,6 @@
       gap: 10px;
     }
 
-    .haptic-btn {
-      transition: transform 0.25s cubic-bezier(0.32, 0.72, 0, 1), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-    }
-    .haptic-btn:active {
-      transform: scale(0.96) !important;
-    }
-
     .theme-toggle-track {
       position: relative;
       width: 78px;
@@ -350,9 +343,11 @@
       cursor: pointer;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
+      transition: transform 0.25s var(--spring-easing);
     }
 
     .theme-toggle-track:hover { transform: scale(1.04); }
+    .theme-toggle-track:active { transform: scale(0.95); }
 
     .theme-orb-indicator {
       position: absolute;
@@ -365,25 +360,57 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1), background 0.4s ease;
-      will-change: transform;
+      transition: transform 0.45s var(--liquid-bounce), background 0.4s ease;
     }
 
     .orb-icon {
       font-size: 0.9rem;
       transition: opacity 0.3s ease, transform 0.3s ease;
       position: absolute;
+      color: #111827;
     }
 
-    .icon-sun { opacity: 0; transform: scale(0.5) rotate(-90deg); color: #111827; }
-    .icon-moon { opacity: 1; transform: scale(1) rotate(0deg); color: #111827; }
+    .icon-sun { opacity: 0; transform: scale(0.5) rotate(-90deg); }
+    .icon-moon { opacity: 1; transform: scale(1) rotate(0deg); }
 
     [data-theme="light"] .theme-orb-indicator {
       transform: translate3d(36px, 0, 0);
-      background: linear-gradient(135deg, #ffffff 0%, #d1d5db 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
     }
     [data-theme="light"] .icon-sun { opacity: 1; transform: scale(1) rotate(0deg); }
     [data-theme="light"] .icon-moon { opacity: 0; transform: scale(0.5) rotate(90deg); }
+
+    /* Haptic Feedback & Spotlight on Interactive Buttons */
+    .glass-btn-ios26, .ios26-link-item, .btn-copy-link {
+      --btn-x: 50%;
+      --btn-y: 50%;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.28s var(--spring-easing), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glass-btn-ios26::before, .ios26-link-item::before, .btn-copy-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(90px circle at var(--btn-x) var(--btn-y), rgba(255, 255, 255, 0.28), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+
+    .glass-btn-ios26:hover::before, .ios26-link-item:hover::before, .btn-copy-link:hover::before {
+      opacity: 1;
+    }
+
+    /* Haptic active press */
+    .glass-btn-ios26:active,
+    .ios26-link-item:active,
+    .btn-copy-link:active,
+    .nav-tab-btn:active {
+      transform: scale(0.96) !important;
+      transition-duration: 0.08s;
+    }
 
     .glass-btn-ios26 {
       width: 42px; height: 42px;
@@ -403,15 +430,13 @@
 
     .glass-btn-ios26:hover {
       transform: translateY(-2px) scale(1.06);
-      border-color: var(--text-sub);
+      border-color: var(--glass-border-highlight);
       background: var(--pill-hover-bg);
-      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.5);
     }
 
     .music-btn.playing i {
       animation: spinMusic 3s linear infinite;
       color: var(--text-sub);
-      will-change: transform;
     }
 
     @keyframes spinMusic {
@@ -419,7 +444,9 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* PROFILE HEADER & AVATAR 3D TILT SANG PHẢI */
+    /* ==========================================================
+       PROFILE HEADER + AVATAR BREATHING & RIGHTWARD 3D TILT
+       ========================================================== */
     .profile-header {
       display: flex;
       flex-direction: column;
@@ -429,17 +456,18 @@
       padding: 12px 24px 8px;
       z-index: 15;
       flex-shrink: 0;
-      perspective: 800px;
-      transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1), margin 0.5s cubic-bezier(0.32, 0.72, 0, 1);
-      will-change: transform, margin;
+      perspective: 700px;
+      transition: transform 0.5s var(--spring-easing), margin 0.5s var(--spring-easing);
     }
 
-    @keyframes avatarBreathing {
+    @keyframes avatarBreathe {
       0%, 100% {
-        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3), 0 0 18px rgba(255, 255, 255, 0.12);
+        transform: scale(1) translateY(0px);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28), 0 0 22px var(--glass-glow);
       }
       50% {
-        box-shadow: 0 20px 44px rgba(0, 0, 0, 0.35), 0 0 34px rgba(255, 255, 255, 0.32);
+        transform: scale(1.028) translateY(-3px);
+        box-shadow: 0 22px 44px rgba(0, 0, 0, 0.35), 0 0 34px var(--glass-glow);
       }
     }
 
@@ -450,10 +478,17 @@
       padding: 4px;
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.08) 100%);
       border: 1.5px solid var(--glass-border);
-      animation: avatarBreathing 4.5s ease-in-out infinite;
       transform-style: preserve-3d;
-      transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+      animation: avatarBreathe 5.5s ease-in-out infinite;
+      transition: transform 0.45s var(--spring-easing), box-shadow 0.4s ease;
       cursor: pointer;
+    }
+
+    /* Hover tilts distinctly to the RIGHT with subtle 3D parallax */
+    .avatar-ring:hover {
+      animation-play-state: paused;
+      transform: perspective(600px) rotateY(16deg) rotateX(4deg) rotateZ(4deg) scale(1.07);
+      box-shadow: -12px 18px 40px rgba(0, 0, 0, 0.35), 0 0 35px var(--glass-glow);
     }
 
     .avatar-ring img {
@@ -461,20 +496,19 @@
       object-fit: cover;
       border-radius: 50%;
       filter: grayscale(100%);
-      transition: filter 0.45s ease, transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
-      pointer-events: none;
+      transition: filter 0.4s ease, transform 0.45s var(--spring-easing);
     }
 
-    .avatar-ring:hover img { 
-      filter: grayscale(0%); 
-      transform: translateZ(12px) scale(1.03);
+    .avatar-ring:hover img {
+      filter: grayscale(0%);
+      transform: translateZ(14px) scale(1.03);
     }
 
     .profile-meta {
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
+      transition: opacity 0.35s var(--spring-easing), transform 0.35s var(--spring-easing);
     }
 
     .profile-name {
@@ -483,7 +517,6 @@
       color: var(--text-title);
       margin-top: 12px;
       letter-spacing: -0.03em;
-      transition: color 0.3s ease, transform 0.3s ease;
     }
 
     .profile-tagline {
@@ -495,7 +528,7 @@
     }
 
     .liquid-card-ios26.compact-mode .profile-header {
-      transform: translate3d(0, 0, 0) scale(0.8);
+      transform: scale(0.8);
       margin-bottom: -58px;
     }
 
@@ -505,7 +538,9 @@
       pointer-events: none;
     }
 
-    /* VIEWPORT SLIDER & TRANSITIONS */
+    /* ==========================================================
+       SPRING-BASED TAB VIEWPORT & BLUR TRANSITIONS
+       ========================================================== */
     .viewport-wrapper {
       width: 100%;
       overflow: hidden;
@@ -518,7 +553,7 @@
       display: flex;
       align-items: flex-start;
       transform: translate3d(-33.3333%, 0, 0);
-      transition: transform 0.55s cubic-bezier(0.32, 0.72, 0, 1);
+      transition: transform 0.56s var(--spring-easing);
       will-change: transform;
     }
 
@@ -530,11 +565,11 @@
       align-items: center;
       opacity: 0.45;
       transform: scale(0.95);
-      filter: blur(4px);
+      filter: blur(6px);
       transition: 
-        opacity 0.45s cubic-bezier(0.32, 0.72, 0, 1),
-        transform 0.55s cubic-bezier(0.32, 0.72, 0, 1),
-        filter 0.45s ease;
+        opacity 0.5s var(--spring-easing),
+        transform 0.55s var(--spring-easing),
+        filter 0.5s var(--spring-easing);
     }
 
     .tab-page.active-tab {
@@ -543,7 +578,27 @@
       filter: blur(0px);
     }
 
-    /* QUOTE CARD & BLUR REVEAL */
+    /* ==========================================================
+       QUOTE CARD: BLUR REVEAL & STRIPE/CRON TEXT SHIMMER
+       ========================================================== */
+    @keyframes blurReveal {
+      0% {
+        opacity: 0;
+        filter: blur(12px);
+        transform: translateY(10px) scale(0.97);
+      }
+      100% {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes textShimmer {
+      0% { background-position: 200% center; }
+      100% { background-position: -200% center; }
+    }
+
     .ios26-quote-card {
       margin: 8px 0 16px;
       padding: 24px 22px;
@@ -555,56 +610,32 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
-      transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.35s var(--spring-easing), border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .ios26-quote-card:hover {
       transform: translateY(-3px) scale(1.015);
-      border-color: var(--text-sub);
-      box-shadow: 0 15px 35px rgba(255, 255, 255, 0.08), inset 0 1px 3px rgba(255, 255, 255, 0.4);
+      border-color: var(--glass-border-highlight);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12), inset 0 1px 3px rgba(255, 255, 255, 0.4);
     }
 
     .quote-text {
       font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text-quote);
+      font-weight: 700;
       line-height: 1.65;
-    }
-
-    .reveal-word {
-      display: inline-block;
-      opacity: 0;
-      filter: blur(8px);
-      transform: translateY(10px);
-      animation: wordBlurReveal 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-
-    @keyframes wordBlurReveal {
-      to {
-        opacity: 1;
-        filter: blur(0px);
-        transform: translateY(0);
-      }
-    }
-
-    .sunlight-shimmer-wrap {
-      display: inline;
       background: linear-gradient(
         110deg,
-        var(--text-quote) 35%,
-        var(--shimmer-beam) 50%,
-        var(--text-quote) 65%
+        var(--shimmer-base) 30%,
+        var(--shimmer-highlight) 50%,
+        var(--shimmer-base) 70%
       );
-      background-size: 250% 100%;
+      background-size: 250% auto;
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: sunSweep 5.5s ease-in-out infinite;
-    }
-
-    @keyframes sunSweep {
-      0%, 15% { background-position: 120% 0; }
-      55%, 100% { background-position: -120% 0; }
+      animation: 
+        blurReveal 0.95s var(--spring-easing) forwards,
+        textShimmer 5.5s linear infinite;
     }
 
     .quote-author {
@@ -614,9 +645,7 @@
       margin-top: 14px;
       display: block;
       opacity: 0;
-      filter: blur(4px);
-      transform: translateY(6px);
-      animation: wordBlurReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1.05s forwards;
+      animation: blurReveal 0.95s var(--spring-easing) 0.22s forwards;
     }
 
     /* LINKS LIST */
@@ -628,7 +657,6 @@
     }
 
     .ios26-link-item {
-      position: relative;
       display: flex;
       align-items: center;
       padding: 14px 20px;
@@ -642,53 +670,51 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.2);
-      overflow: hidden;
-      transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .ios26-link-item:hover {
-      transform: translateY(-4px) scale(1.025);
+      transform: translateY(-4px) scale(1.02);
       background: var(--pill-hover-bg);
       border-color: var(--pill-hover-border);
       box-shadow: var(--pill-hover-glow);
     }
-
-    .ios26-link-item:active { transform: translateY(-1px) scale(0.96) !important; }
 
     .link-icon {
       width: 36px; height: 36px;
       border-radius: 50%;
       margin-right: 14px;
       object-fit: cover;
-      position: relative;
-      z-index: 2;
-      transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+      transition: transform 0.35s var(--liquid-bounce);
     }
 
-    .ios26-link-item:hover .link-icon { transform: scale(1.12) rotate(5deg); }
-
-    .link-label { 
-      flex: 1; 
-      text-align: left; 
-      letter-spacing: -0.01em; 
-      position: relative;
-      z-index: 2;
-      transition: transform 0.3s ease, color 0.3s ease;
+    .ios26-link-item:hover .link-icon {
+      transform: scale(1.14) rotate(6deg);
     }
 
-    .ios26-link-item:hover .link-label { transform: translateX(4px); }
+    .link-label {
+      flex: 1;
+      text-align: left;
+      letter-spacing: -0.01em;
+      transition: transform 0.3s var(--spring-easing);
+    }
+
+    .ios26-link-item:hover .link-label {
+      transform: translateX(4px);
+    }
 
     .link-arrow {
       font-size: 0.85rem;
       color: var(--text-sub);
-      position: relative;
-      z-index: 2;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s var(--spring-easing);
     }
 
-    .ios26-link-item:hover .link-arrow { transform: translateX(5px); }
+    .ios26-link-item:hover .link-arrow {
+      transform: translateX(5px);
+    }
 
-    /* MACOS MAGNETIC DOCK */
+    /* ==========================================================
+       APPLE MACOS MAGNETIC MAGNIFICATION DOCK (<nav>)
+       ========================================================== */
     .bottom-nav-container {
       padding: 6px 22px 22px;
       z-index: 30;
@@ -707,7 +733,7 @@
       padding: 6px;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.3), 0 20px 40px rgba(0, 0, 0, 0.4);
+      box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.3), 0 20px 40px rgba(0, 0, 0, 0.35);
     }
 
     .nav-indicator-pill {
@@ -719,10 +745,9 @@
       border: 1.5px solid var(--indicator-border);
       border-radius: 34px;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.7);
-      transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+      transition: transform 0.5s var(--spring-easing);
       z-index: 1;
       will-change: transform;
-      pointer-events: none;
     }
 
     .nav-tab-btn {
@@ -736,25 +761,26 @@
       cursor: pointer;
       position: relative;
       z-index: 2;
-      will-change: transform;
     }
 
     .nav-tab-btn i {
       font-size: 1.25rem;
       color: rgba(255, 255, 255, 0.45);
+      display: inline-block;
+      will-change: transform;
       transition: color 0.3s ease;
-      pointer-events: none;
     }
 
-    [data-theme="light"] .nav-tab-btn i { color: #6b7280; }
+    [data-theme="light"] .nav-tab-btn i { color: #64748b; }
     .nav-tab-btn.active i { color: var(--text-title); }
-    [data-theme="light"] .nav-tab-btn.active i { color: #111827; }
+    [data-theme="light"] .nav-tab-btn.active i { color: #0f172a; }
 
-    /* SPRING-BASED MODALS */
+    /* ==========================================================
+       SPRING-BASED MODAL SYSTEM (LINEAR & FAMILY INSPIRED)
+       ========================================================== */
     .modal-backdrop {
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
+      inset: 0;
       background: rgba(0, 0, 0, 0.55);
       backdrop-filter: blur(0px);
       -webkit-backdrop-filter: blur(0px);
@@ -765,13 +791,13 @@
       opacity: 0;
       pointer-events: none;
       transition: 
-        opacity 0.4s cubic-bezier(0.32, 0.72, 0, 1),
-        backdrop-filter 0.45s cubic-bezier(0.32, 0.72, 0, 1),
-        -webkit-backdrop-filter 0.45s cubic-bezier(0.32, 0.72, 0, 1);
+        opacity 0.4s var(--spring-easing),
+        backdrop-filter 0.45s var(--spring-easing),
+        -webkit-backdrop-filter 0.45s var(--spring-easing);
     }
 
-    .modal-backdrop.active { 
-      opacity: 1; 
+    .modal-backdrop.active {
+      opacity: 1;
       pointer-events: auto;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -788,17 +814,17 @@
       max-width: 320px;
       text-align: center;
       opacity: 0;
-      transform: translate3d(0, 12px, 0) scale(0.95);
+      transform: scale(0.95) translateY(10px);
       transition: 
-        transform 0.5s cubic-bezier(0.32, 0.72, 0, 1),
-        opacity 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+        transform 0.5s var(--spring-easing),
+        opacity 0.4s var(--spring-easing);
       will-change: transform, opacity;
       box-shadow: var(--glass-shadow);
     }
 
-    .modal-backdrop.active .qr-glass-card { 
+    .modal-backdrop.active .qr-glass-card {
       opacity: 1;
-      transform: translate3d(0, 0, 0) scale(1); 
+      transform: scale(1) translateY(0);
     }
 
     .qr-title { font-size: 1.2rem; font-weight: 700; color: var(--text-title); margin-bottom: 18px; }
@@ -813,7 +839,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
     }
 
     #qrcode-canvas { width: 100% !important; height: 100% !important; display: flex; justify-content: center; align-items: center; }
@@ -851,7 +877,7 @@
     .btn-copy-link:hover {
       transform: translateY(-2px) scale(1.02);
       background: rgba(255, 255, 255, 0.25);
-      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
     }
 
     .btn-close-modal {
@@ -865,8 +891,10 @@
       font-size: 0.88rem;
       cursor: pointer;
       opacity: 0.8;
+      transition: opacity 0.2s ease, transform 0.2s var(--spring-easing);
     }
-    .btn-close-modal:hover { opacity: 1; }
+    .btn-close-modal:hover { opacity: 1; transform: scale(1.04); }
+    .btn-close-modal:active { transform: scale(0.96); }
 
     .email-textarea {
       width: 100%;
@@ -874,7 +902,7 @@
       padding: 12px;
       border-radius: 16px;
       border: 1.5px solid var(--glass-border);
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.06);
       color: var(--text-title);
       font-size: 0.9rem;
       resize: none;
@@ -883,30 +911,30 @@
       user-select: text;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
-    .email-textarea:focus { 
-      border-color: var(--glass-border-highlight); 
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    .email-textarea:focus {
+      border-color: var(--glass-border-highlight);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
     }
   </style>
 </head>
 <body>
 
-  <!-- BACKGROUND SPHERES & AMBIENT CANVAS -->
+  <!-- BACKGROUND SPHERES & INTERACTIVE AMBIENT CANVAS -->
   <div class="ios26-bg-canvas">
     <div class="liquid-orb orb-primary"></div>
     <div class="liquid-orb orb-secondary"></div>
     <div class="liquid-orb orb-accent"></div>
-    <canvas id="ambient-canvas"></canvas>
+    <canvas id="ambient-particles"></canvas>
   </div>
   <div class="glass-mesh-overlay"></div>
 
   <!-- MAIN CARD CONTAINER -->
-  <main class="liquid-card-ios26 spotlight-surface" id="main-card">
-    <div class="spotlight-border"></div>
-    
+  <main class="liquid-card-ios26" id="main-card">
+    <div class="card-border-glow"></div>
+
     <!-- TOP BAR -->
     <div class="top-bar">
-      <div class="theme-toggle-track haptic-btn" id="theme-toggle" role="button" aria-label="Toggle Theme">
+      <div class="theme-toggle-track" id="theme-toggle" role="button" aria-label="Toggle Theme">
         <div class="theme-orb-indicator">
           <i class="fa-solid fa-moon orb-icon icon-moon"></i>
           <i class="fa-solid fa-sun orb-icon icon-sun"></i>
@@ -914,18 +942,15 @@
       </div>
 
       <div class="top-bar-controls">
-        <button class="glass-btn-ios26 spotlight-surface haptic-btn" id="open-email-modal-btn" aria-label="Quick Email">
-          <div class="spotlight-border"></div>
+        <button class="glass-btn-ios26" id="open-email-modal-btn" aria-label="Quick Email">
           <i class="fa-solid fa-envelope"></i>
         </button>
 
-        <button class="glass-btn-ios26 spotlight-surface haptic-btn music-btn" id="music-toggle-btn" aria-label="Toggle Music">
-          <div class="spotlight-border"></div>
+        <button class="glass-btn-ios26 music-btn" id="music-toggle-btn" aria-label="Toggle Music">
           <i class="fa-solid fa-music" id="music-icon"></i>
         </button>
 
-        <button class="glass-btn-ios26 spotlight-surface haptic-btn" id="open-qr-btn" aria-label="Open QR Code">
-          <div class="spotlight-border"></div>
+        <button class="glass-btn-ios26" id="open-qr-btn" aria-label="Open QR Code">
           <i class="fa-solid fa-qrcode"></i>
         </button>
       </div>
@@ -933,7 +958,7 @@
 
     <!-- PROFILE HEADER -->
     <header class="profile-header">
-      <div class="avatar-ring" id="avatar-3d">
+      <div class="avatar-ring">
         <img src="images/Huy.png" alt="Avatar Nhật Huy" loading="eager">
       </div>
       <div class="profile-meta">
@@ -951,11 +976,10 @@
           <div class="links-list" id="social-links-list"></div>
         </section>
 
-        <!-- TAB 2: HOME (QUOTE KHÔI PHỤC HOÀN CHỈNH) -->
+        <!-- TAB 2: HOME (QUOTE) -->
         <section class="tab-page active-tab" id="page-home">
-          <div class="ios26-quote-card spotlight-surface">
-            <div class="spotlight-border"></div>
-            <p class="quote-text" id="animated-quote">“<br>Even the darkest night will end,<br>and the sun will rise.</p>
+          <div class="ios26-quote-card">
+            <p class="quote-text">“<br>Even the darkest night will end,<br>and the sun will rise.</p>
             <span class="quote-author">Les Misérables - Victor Hugo</span>
           </div>
         </section>
@@ -970,18 +994,18 @@
 
     <!-- NAVIGATION DOCK CAPSULE -->
     <div class="bottom-nav-container">
-      <nav class="ios26-nav-dock" id="macos-dock">
+      <nav class="ios26-nav-dock" id="nav-dock">
         <div class="nav-indicator-pill" id="nav-indicator"></div>
         
-        <button class="nav-tab-btn haptic-btn" data-index="0" aria-label="Social">
+        <button class="nav-tab-btn" data-index="0" aria-label="Social">
           <i class="fa-solid fa-share-nodes"></i>
         </button>
 
-        <button class="nav-tab-btn haptic-btn active" data-index="1" aria-label="Home">
+        <button class="nav-tab-btn active" data-index="1" aria-label="Home">
           <i class="fa-solid fa-house"></i>
         </button>
 
-        <button class="nav-tab-btn haptic-btn" data-index="2" aria-label="Work">
+        <button class="nav-tab-btn" data-index="2" aria-label="Work">
           <i class="fa-solid fa-briefcase"></i>
         </button>
       </nav>
@@ -991,32 +1015,30 @@
 
   <!-- MODAL QR CODE -->
   <div class="modal-backdrop" id="qr-modal" role="dialog" aria-hidden="true">
-    <div class="qr-glass-card spotlight-surface">
-      <div class="spotlight-border"></div>
+    <div class="qr-glass-card">
       <h3 class="qr-title">Scan QR Code</h3>
       <div class="qr-box-wrapper">
         <div id="qrcode-canvas"></div>
         <img src="images/Huy.png" alt="Avatar" class="qr-avatar-center">
       </div>
-      <button class="btn-copy-link haptic-btn" id="copy-btn">
+      <button class="btn-copy-link" id="copy-btn">
         <i class="fa-regular fa-copy"></i>
         <span id="copy-text">Copy link</span>
       </button>
-      <button class="btn-close-modal haptic-btn" id="close-qr-btn">Close</button>
+      <button class="btn-close-modal" id="close-qr-btn">Close</button>
     </div>
   </div>
 
   <!-- MODAL POP-UP GỬI TIN NHẮN TỨC THÌ -->
   <div class="modal-backdrop" id="email-modal" role="dialog" aria-hidden="true">
-    <div class="qr-glass-card spotlight-surface">
-      <div class="spotlight-border"></div>
+    <div class="qr-glass-card">
       <h3 class="qr-title">Instant Message</h3>
       <textarea id="visitor-message" class="email-textarea" placeholder="Type your message to Nhat Huy..."></textarea>
-      <button class="btn-copy-link haptic-btn" id="send-instant-email-btn" style="width: 100%;">
+      <button class="btn-copy-link" id="send-instant-email-btn" style="width: 100%;">
         <i class="fa-solid fa-paper-plane"></i>
         <span id="send-btn-text">Send</span>
       </button>
-      <button class="btn-close-modal haptic-btn" id="close-email-modal-btn">Close</button>
+      <button class="btn-close-modal" id="close-email-modal-btn">Close</button>
     </div>
   </div>
 
@@ -1033,260 +1055,473 @@
         renderLinks("work-links-list", bioData.tabs.work);
       }
 
-      initQuoteBlurReveal();
-      initSpotlightEffect();
       initMagneticDock();
-      initAvatar3DTilt();
+      initSpotlightAndDroplets();
       initAmbientCanvas();
-
       initTabNavigation();
       initThemeToggle();
       initQRCodeModal();
-      initEmailModal(); 
+      initEmailModal();
       initAudioPlayer();
-      initEmailJSNotifier(); 
+      initEmailJSNotifier();
     });
 
-    /* 1. TEXT SHIMMER & BLUR REVEAL CHO QUOTE */
-    function initQuoteBlurReveal() {
-      const quoteEl = document.getElementById("animated-quote");
-      if (!quoteEl) return;
-
-      const lines = [
-        "“",
-        "Even the darkest night will end,",
-        "and the sun will rise."
-      ];
-
-      let wordIndex = 0;
-      const htmlLines = lines.map((line) => {
-        const words = line.split(" ");
-        return words.map((word) => {
-          const delay = (wordIndex * 0.075).toFixed(3);
-          wordIndex++;
-          return `<span class="reveal-word" style="animation-delay: ${delay}s">${word}</span>`;
-        }).join(" ");
-      });
-
-      quoteEl.innerHTML = `<span class="sunlight-shimmer-wrap">${htmlLines.join("<br>")}</span>`;
-    }
-
-    /* 2. CURSOR SPOTLIGHT & BORDER GLOW */
-    function initSpotlightEffect() {
-      document.addEventListener("mousemove", (e) => {
-        const surfaces = document.querySelectorAll(".spotlight-surface");
-        surfaces.forEach((surface) => {
-          const rect = surface.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          surface.style.setProperty("--mouse-x", `${x}px`);
-          surface.style.setProperty("--mouse-y", `${y}px`);
-        });
-      }, { passive: true });
-    }
-
-    /* 3. APPLE MACOS MAGNETIC DOCK (RESET KHI CLICK XONG) */
+    /* ==========================================================
+       1. APPLE MACOS DOCK (MAGNETIC SPRING MAGNIFICATION)
+       ========================================================== */
     function initMagneticDock() {
-      const dock = document.getElementById("macos-dock");
-      const items = Array.from(dock.querySelectorAll(".nav-tab-btn"));
-      if (!dock || items.length === 0) return;
+      const dock = document.getElementById("nav-dock");
+      const btns = Array.from(dock.querySelectorAll(".nav-tab-btn"));
+      if (!dock || !btns.length) return;
 
-      const springs = items.map(() => ({
+      const items = btns.map(btn => ({
+        btn,
+        icon: btn.querySelector("i"),
         scale: 1,
         targetScale: 1,
-        vScale: 0,
         x: 0,
         targetX: 0,
+        vScale: 0,
         vX: 0
       }));
 
-      const maxDistance = 120;
-      const maxScale = 1.38;
-      const maxPush = 10;
+      let isHovering = false;
+      let animId = null;
 
-      dock.addEventListener("mousemove", (e) => {
-        const mouseX = e.clientX;
-        items.forEach((item, idx) => {
-          const rect = item.getBoundingClientRect();
-          const centerX = rect.left + rect.width / 2;
-          const diff = mouseX - centerX;
-          const dist = Math.abs(diff);
-
-          if (dist < maxDistance) {
-            const ratio = Math.cos((dist / maxDistance) * (Math.PI / 2));
-            springs[idx].targetScale = 1 + (maxScale - 1) * ratio;
-            springs[idx].targetX = -Math.sign(diff) * Math.sin((dist / maxDistance) * Math.PI) * maxPush;
-          } else {
-            springs[idx].targetScale = 1;
-            springs[idx].targetX = 0;
-          }
-        });
-      });
-
-      dock.addEventListener("mouseleave", () => {
-        springs.forEach((s) => {
-          s.targetScale = 1;
-          s.targetX = 0;
-        });
-      });
-
-      window.resetDockScales = function() {
-        springs.forEach((s) => {
-          s.targetScale = 1;
-          s.targetX = 0;
-          s.scale = 1;
-          s.x = 0;
-          s.vScale = 0;
-          s.vX = 0;
-        });
-        items.forEach(item => item.style.transform = 'translate3d(0px, 0px, 0) scale(1)');
-      };
-
-      function animateDock() {
+      // Damped harmonic spring loop
+      function updatePhysics() {
+        let moving = false;
         const stiffness = 0.22;
         const damping = 0.68;
 
-        items.forEach((item, idx) => {
-          const s = springs[idx];
-          const forceScale = (s.targetScale - s.scale) * stiffness;
-          s.vScale = (s.vScale + forceScale) * damping;
-          s.scale += s.vScale;
+        items.forEach(item => {
+          const fScale = (item.targetScale - item.scale) * stiffness;
+          item.vScale = (item.vScale + fScale) * damping;
+          item.scale += item.vScale;
 
-          const forceX = (s.targetX - s.x) * stiffness;
-          s.vX = (s.vX + forceX) * damping;
-          s.x += s.vX;
+          const fX = (item.targetX - item.x) * stiffness;
+          item.vX = (item.vX + fX) * damping;
+          item.x += item.vX;
 
-          const translateY = -(s.scale - 1) * 14;
-          item.style.transform = `translate3d(${s.x.toFixed(2)}px, ${translateY.toFixed(2)}px, 0) scale(${s.scale.toFixed(3)})`;
+          if (Math.abs(item.targetScale - item.scale) > 0.001 || Math.abs(item.vScale) > 0.001 ||
+              Math.abs(item.targetX - item.x) > 0.01 || Math.abs(item.vX) > 0.01) {
+            moving = true;
+          } else {
+            item.scale = item.targetScale;
+            item.x = item.targetX;
+          }
+
+          const liftY = -(item.scale - 1) * 14;
+          item.icon.style.transform = `translate3d(${item.x.toFixed(2)}px, ${liftY.toFixed(2)}px, 0) scale(${item.scale.toFixed(3)})`;
         });
 
-        requestAnimationFrame(animateDock);
+        if (moving || isHovering) {
+          animId = requestAnimationFrame(updatePhysics);
+        } else {
+          animId = null;
+        }
       }
-      requestAnimationFrame(animateDock);
-    }
 
-    /* 4. AVATAR 3D TILT NGHIÊNG SANG PHẢI */
-    function initAvatar3DTilt() {
-      const avatar = document.getElementById("avatar-3d");
-      if (!avatar) return;
+      function resetTargets() {
+        isHovering = false;
+        items.forEach(item => {
+          item.targetScale = 1;
+          item.targetX = 0;
+        });
+        if (!animId) animId = requestAnimationFrame(updatePhysics);
+      }
 
-      avatar.addEventListener("mousemove", (e) => {
-        const rect = avatar.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        const rotateX = (-y * 20).toFixed(2);
-        const rotateY = (x * 28 + 10).toFixed(2); // Lệch dương sang phải
-        avatar.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.06)`;
+      dock.addEventListener("mousemove", (e) => {
+        isHovering = true;
+        const maxRange = 135;
+        const maxScale = 1.48;
+
+        items.forEach(item => {
+          const rect = item.btn.getBoundingClientRect();
+          const center = rect.left + rect.width / 2;
+          const dist = e.clientX - center;
+          const absDist = Math.abs(dist);
+
+          if (absDist < maxRange) {
+            const norm = 1 - absDist / maxRange;
+            // Smooth cosine interpolation curve
+            const ease = Math.cos((1 - norm) * (Math.PI / 2));
+            item.targetScale = 1 + (maxScale - 1) * ease;
+            // Gently repel adjacent icons outward
+            item.targetX = -Math.sign(dist) * Math.sin(norm * Math.PI) * 9;
+          } else {
+            item.targetScale = 1;
+            item.targetX = 0;
+          }
+        });
+
+        if (!animId) animId = requestAnimationFrame(updatePhysics);
       });
 
-      avatar.addEventListener("mouseleave", () => {
-        avatar.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+      dock.addEventListener("mouseleave", resetTargets);
+
+      // Reset cleanly back to normal size immediately upon clicking a button
+      btns.forEach(btn => {
+        btn.addEventListener("click", resetTargets);
       });
     }
 
-    /* 5. INTERACTIVE AMBIENT CANVAS (ĐOM ĐÓM / BOKEH HOA TUYẾT XANH) */
+    /* ==========================================================
+       2. CURSOR SPOTLIGHT, BORDER GLOW & WATER DROPLET RIPPLES
+       ========================================================== */
+    function initSpotlightAndDroplets() {
+      const mainCard = document.getElementById("main-card");
+      if (!mainCard) return;
+
+      mainCard.addEventListener("mousemove", (e) => {
+        const rect = mainCard.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        mainCard.style.setProperty("--mouse-x", `${x}px`);
+        mainCard.style.setProperty("--mouse-y", `${y}px`);
+      });
+
+      // Individual button localized spotlight
+      document.addEventListener("mousemove", (e) => {
+        const target = e.target.closest(".glass-btn-ios26, .ios26-link-item, .btn-copy-link");
+        if (target) {
+          const rect = target.getBoundingClientRect();
+          target.style.setProperty("--btn-x", `${e.clientX - rect.left}px`);
+          target.style.setProperty("--btn-y", `${e.clientY - rect.top}px`);
+        }
+      });
+
+      // Water droplet ripple physics on pointer down
+      mainCard.addEventListener("pointerdown", (e) => {
+        if (e.target.closest("textarea")) return;
+        const rect = mainCard.getBoundingClientRect();
+        const ripple = document.createElement("span");
+        ripple.className = "water-ripple";
+        ripple.style.left = `${e.clientX - rect.left}px`;
+        ripple.style.top = `${e.clientY - rect.top}px`;
+        mainCard.appendChild(ripple);
+        ripple.addEventListener("animationend", () => ripple.remove());
+      });
+    }
+
+    /* ==========================================================
+       3. INTERACTIVE AMBIENT CANVAS (FIREFLIES / SNOW BOKEH)
+       ========================================================== */
     function initAmbientCanvas() {
-      const canvas = document.getElementById("ambient-canvas");
+      const canvas = document.getElementById("ambient-particles");
       if (!canvas) return;
       const ctx = canvas.getContext("2d");
 
-      let width = (canvas.width = window.innerWidth);
-      let height = (canvas.height = window.innerHeight);
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+      const mouse = { x: -9999, y: -9999, active: false };
 
       window.addEventListener("resize", () => {
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
       });
 
-      const mouse = { x: -9999, y: -9999, active: false };
       window.addEventListener("mousemove", (e) => {
         mouse.x = e.clientX;
         mouse.y = e.clientY;
         mouse.active = true;
-      }, { passive: true });
+      });
 
       window.addEventListener("mouseleave", () => {
         mouse.active = false;
       });
 
-      const particleCount = 42;
-      const particles = Array.from({ length: particleCount }, () => ({
+      const PARTICLE_COUNT = 52;
+      const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4 - 0.12,
-        baseRadius: Math.random() * 2 + 1,
-        bokehRadius: Math.random() * 12 + 5,
+        vx: (Math.random() - 0.5) * 0.45,
+        vy: (Math.random() - 0.5) * 0.45 - 0.15,
+        radius: Math.random() * 2.6 + 1.4,
         phase: Math.random() * Math.PI * 2,
-        speedPhase: Math.random() * 0.02 + 0.01
+        speed: 0.015 + Math.random() * 0.02
       }));
 
-      function renderCanvas() {
+      function drawSnowflakeCrystal(x, y, r, alpha) {
+        ctx.save();
+        ctx.translate(x, y);
+        // Soft cyan-blue bokeh halo visible against light background
+        const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, r * 3.4);
+        grad.addColorStop(0, `rgba(14, 165, 233, ${alpha * 0.85})`);
+        grad.addColorStop(0.5, `rgba(56, 189, 248, ${alpha * 0.35})`);
+        grad.addColorStop(1, "rgba(125, 211, 252, 0)");
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(0, 0, r * 3.4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Delicate 6-point snowflake glint inside bokeh
+        ctx.strokeStyle = `rgba(2, 132, 199, ${alpha * 0.75})`;
+        ctx.lineWidth = 0.8;
+        ctx.beginPath();
+        for (let i = 0; i < 3; i++) {
+          const angle = (i * Math.PI) / 3;
+          const dx = Math.cos(angle) * r * 1.4;
+          const dy = Math.sin(angle) * r * 1.4;
+          ctx.moveTo(-dx, -dy);
+          ctx.lineTo(dx, dy);
+        }
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function animate() {
         ctx.clearRect(0, 0, width, height);
-        const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+        const isLight = document.documentElement.getAttribute("data-theme") === "light";
 
-        particles.forEach((p) => {
-          p.phase += p.speedPhase;
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.phase += p.speed;
 
+          // Gentle attraction / gathering toward cursor
           if (mouse.active) {
             const dx = mouse.x - p.x;
             const dy = mouse.y - p.y;
             const dist = Math.hypot(dx, dy);
-            const attractRadius = 200;
-
-            if (dist < attractRadius && dist > 15) {
-              const force = (1 - dist / attractRadius) * 0.03;
-              p.vx += (dx / dist) * force;
-              p.vy += (dy / dist) * force;
+            if (dist < 190 && dist > 15) {
+              const pull = (1 - dist / 190) * 0.018;
+              p.vx += (dx / dist) * pull;
+              p.vy += (dy / dist) * pull;
             }
           }
 
+          // Velocity damping & organic drift
           p.vx *= 0.985;
           p.vy *= 0.985;
-          p.x += p.vx + Math.sin(p.phase) * 0.15;
-          p.y += p.vy + Math.cos(p.phase * 0.8) * 0.12;
+          p.x += p.vx + Math.sin(p.phase) * 0.22;
+          p.y += p.vy + (isLight ? 0.25 : -0.18);
 
-          if (p.x < -30) p.x = width + 30;
-          if (p.x > width + 30) p.x = -30;
-          if (p.y < -30) p.y = height + 30;
-          if (p.y > height + 30) p.y = -30;
+          // Wrap around viewport
+          if (p.x < -20) p.x = width + 20;
+          if (p.x > width + 20) p.x = -20;
+          if (p.y < -20) p.y = height + 20;
+          if (p.y > height + 20) p.y = -20;
 
-          const pulse = 0.5 + 0.5 * Math.sin(p.phase);
+          const pulse = 0.45 + Math.sin(p.phase * 1.5) * 0.45;
 
-          if (isDark) {
-            const r = p.baseRadius * (0.8 + pulse * 0.5);
-            const alpha = 0.25 + pulse * 0.6;
-            const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 4);
-            grad.addColorStop(0, `rgba(255, 250, 225, ${alpha})`);
-            grad.addColorStop(0.4, `rgba(220, 230, 255, ${alpha * 0.45})`);
-            grad.addColorStop(1, "rgba(255, 255, 255, 0)");
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, r * 4, 0, Math.PI * 2);
-            ctx.fillStyle = grad;
-            ctx.fill();
+          if (isLight) {
+            // Light mode: Ice-blue snowflake bokeh specks
+            drawSnowflakeCrystal(p.x, p.y, p.radius * 1.35, pulse);
           } else {
-            // Light Mode: Đốm xanh bokeh hoa tuyết li ti nổi bật trên nền sáng
-            const r = p.bokehRadius * (0.8 + pulse * 0.2);
-            const alpha = 0.15 + pulse * 0.2;
-            const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r);
-            grad.addColorStop(0, `rgba(56, 189, 248, ${alpha * 1.6})`);
-            grad.addColorStop(0.6, `rgba(14, 165, 233, ${alpha * 0.85})`);
-            grad.addColorStop(1, "rgba(255, 255, 255, 0)");
+            // Dark mode: Warm/stardust fireflies
+            const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius * 4);
+            glow.addColorStop(0, `rgba(255, 250, 220, ${pulse})`);
+            glow.addColorStop(0.4, `rgba(253, 224, 71, ${pulse * 0.45})`);
+            glow.addColorStop(1, "rgba(255, 255, 255, 0)");
 
+            ctx.fillStyle = glow;
             ctx.beginPath();
-            ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-            ctx.fillStyle = grad;
+            ctx.arc(p.x, p.y, p.radius * 4, 0, Math.PI * 2);
             ctx.fill();
           }
-        });
+        }
 
-        requestAnimationFrame(renderCanvas);
+        requestAnimationFrame(animate);
       }
-      requestAnimationFrame(renderCanvas);
+
+      animate();
     }
 
-    /* THIẾT BỊ & EMAILJS */
+    /* ==========================================================
+       4. VIEW TRANSITIONS API FOR DARK/LIGHT THEME TOGGLE
+       ========================================================== */
+    function initThemeToggle() {
+      const toggle = document.getElementById("theme-toggle");
+      const savedTheme = localStorage.getItem("ios26-theme") || "dark";
+      document.documentElement.setAttribute("data-theme", savedTheme);
+
+      toggle.addEventListener("click", (e) => {
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+
+        const applyTheme = () => {
+          document.documentElement.setAttribute("data-theme", newTheme);
+          localStorage.setItem("ios26-theme", newTheme);
+        };
+
+        // Fallback if browser doesn't support View Transitions API
+        if (!document.startViewTransition) {
+          applyTheme();
+          return;
+        }
+
+        const rect = toggle.getBoundingClientRect();
+        const x = e.clientX || rect.left + rect.width / 2;
+        const y = e.clientY || rect.top + rect.height / 2;
+        const endRadius = Math.hypot(
+          Math.max(x, window.innerWidth - x),
+          Math.max(y, window.innerHeight - y)
+        );
+
+        const transition = document.startViewTransition(() => {
+          applyTheme();
+        });
+
+        transition.ready.then(() => {
+          document.documentElement.animate(
+            {
+              clipPath: [
+                `circle(0px at ${x}px ${y}px)`,
+                `circle(${endRadius}px at ${x}px ${y}px)`
+              ]
+            },
+            {
+              duration: 580,
+              easing: "cubic-bezier(0.32, 0.72, 0, 1)",
+              pseudoElement: "::view-transition-new(root)"
+            }
+          );
+        });
+      });
+    }
+
+    /* ==========================================================
+       5. SPRING TAB NAVIGATION & STATE SYNC
+       ========================================================== */
+    function initTabNavigation() {
+      const navBtns = document.querySelectorAll(".nav-tab-btn");
+      const indicator = document.getElementById("nav-indicator");
+      const viewport = document.getElementById("viewport");
+      const mainCard = document.getElementById("main-card");
+      const tabPages = document.querySelectorAll(".tab-page");
+
+      const topBarEl = document.querySelector(".top-bar");
+      const bottomNavEl = document.querySelector(".bottom-nav-container");
+      const profileHeaderEl = document.querySelector(".profile-header");
+
+      function adjustCardHeight(index) {
+        requestAnimationFrame(() => {
+          const topBarH = topBarEl ? topBarEl.offsetHeight : 0;
+          const headerH = profileHeaderEl ? profileHeaderEl.offsetHeight : 0;
+          const navH = bottomNavEl ? bottomNavEl.offsetHeight : 0;
+          const currentTabPage = tabPages[index];
+          const contentH = currentTabPage ? currentTabPage.scrollHeight : 0;
+
+          mainCard.style.height = `${topBarH + headerH + contentH + navH}px`;
+        });
+      }
+
+      function switchTab(index) {
+        viewport.style.transform = `translate3d(-${index * 33.3333}%, 0, 0)`;
+
+        const activeBtn = navBtns[index];
+        if (activeBtn && indicator) {
+          indicator.style.transform = `translate3d(${activeBtn.offsetLeft - 6}px, 0, 0)`;
+        }
+
+        navBtns.forEach((btn, i) => btn.classList.toggle("active", i === index));
+        tabPages.forEach((page, i) => page.classList.toggle("active-tab", i === index));
+
+        if (index === 1) {
+          mainCard.classList.remove("compact-mode");
+        } else {
+          mainCard.classList.add("compact-mode");
+        }
+
+        adjustCardHeight(index);
+      }
+
+      navBtns.forEach((btn, i) => {
+        btn.addEventListener("click", () => switchTab(i));
+      });
+
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          const activeBtn = document.querySelector(".nav-tab-btn.active");
+          if (activeBtn) {
+            switchTab(parseInt(activeBtn.getAttribute("data-index") || "1", 10));
+          }
+        }, 100);
+      });
+
+      requestAnimationFrame(() => switchTab(1));
+    }
+
+    function renderLinks(containerId, items) {
+      const container = document.getElementById(containerId);
+      if (!container || !Array.isArray(items)) return;
+
+      const fragment = document.createDocumentFragment();
+      items.forEach((item) => {
+        const a = document.createElement('a');
+        a.href = item.url || '#';
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.className = "ios26-link-item";
+        a.innerHTML = `
+          <img src="${item.icon}" alt="${item.title}" class="link-icon" loading="lazy">
+          <span class="link-label">${item.title}</span>
+          <i class="fa-solid fa-chevron-right link-arrow"></i>
+        `;
+        fragment.appendChild(a);
+      });
+
+      container.innerHTML = '';
+      container.appendChild(fragment);
+    }
+
+    /* ==========================================================
+       6. MODALS, EMAILJS & AUDIO PLAYER
+       ========================================================== */
+    function initQRCodeModal() {
+      const openBtn = document.getElementById("open-qr-btn");
+      const closeBtn = document.getElementById("close-qr-btn");
+      const modal = document.getElementById("qr-modal");
+      const qrCanvas = document.getElementById("qrcode-canvas");
+      const copyBtn = document.getElementById("copy-btn");
+      const copyText = document.getElementById("copy-text");
+
+      const shareUrl = (typeof bioData !== 'undefined' && bioData.profile && bioData.profile.shareUrl)
+        ? bioData.profile.shareUrl
+        : window.location.href;
+      let qrGenerated = false;
+
+      function openModal() {
+        modal.classList.add("active");
+        modal.setAttribute("aria-hidden", "false");
+        if (!qrGenerated) {
+          new QRCode(qrCanvas, {
+            text: shareUrl,
+            width: 156,
+            height: 156,
+            colorDark: "#08090a",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+          });
+          qrGenerated = true;
+        }
+      }
+
+      function closeModal() {
+        modal.classList.remove("active");
+        modal.setAttribute("aria-hidden", "true");
+      }
+
+      openBtn.addEventListener("click", openModal);
+      closeBtn.addEventListener("click", closeModal);
+      modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+
+      copyBtn.addEventListener("click", () => {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+          copyText.textContent = "Copied!";
+          copyBtn.style.background = "#22c55e";
+          setTimeout(() => {
+            copyText.textContent = "Copy link";
+            copyBtn.style.background = "rgba(255, 255, 255, 0.15)";
+          }, 2000);
+        }).catch(() => {
+          copyText.textContent = "Error!";
+        });
+      });
+    }
+
     function getDeviceAndLocationInfo() {
       const ua = navigator.userAgent;
       let vendor = "Chưa xác định hãng";
@@ -1308,40 +1543,62 @@
       } else if (/windows nt/i.test(ua)) {
         os = /windows nt 10.0/i.test(ua) ? "Windows 10 / 11" : "Windows PC";
       } else if (/macintosh|mac os x/i.test(ua)) {
-        os = "macOS";
-      }
+        const osMatch = ua.match(/Mac OS X\s+([\d_]+)/i);
+        os = `macOS ${osMatch ? osMatch[1].replace(/_/g, '.') : ''}`;
+      } else if (/cros/i.test(ua)) os = "ChromeOS";
+      else if (/linux/i.test(ua)) os = "Linux";
 
       if (/android/i.test(ua)) {
-        if (/samsung/i.test(ua) || /SM-/i.test(ua)) { vendor = "Samsung"; model = ua.match(/SM-[A-Z0-9]+/i)?.[0] || "Samsung Galaxy"; }
-        else { model = "Android Device"; }
-      } else if (/iphone|ipad|ipod/i.test(ua)) {
+        if (/samsung|SM-/i.test(ua)) {
+          vendor = "Samsung";
+          const match = ua.match(/SM-[A-Z0-9]+/i);
+          model = match ? match[0] : "Samsung Galaxy";
+        } else if (/xiaomi|redmi|poco/i.test(ua)) {
+          vendor = "Xiaomi";
+          model = "Xiaomi Device";
+        } else if (/oppo|CPH\d+/i.test(ua)) {
+          vendor = "OPPO";
+          model = "OPPO Device";
+        } else if (/vivo|V2\d+/i.test(ua)) {
+          vendor = "Vivo";
+          model = "Vivo Device";
+        }
+      } else if (/iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
         vendor = "Apple";
-        model = /ipad/i.test(ua) ? "iPad" : "iPhone";
+        model = (/ipad/i.test(ua) || navigator.maxTouchPoints > 1) ? "iPad" : "iPhone";
+      } else if (/macintosh/i.test(ua)) {
+        vendor = "Apple";
+        model = "Mac / MacBook";
       }
 
-      const deviceFullInfo = `Mã/Tên: ${model} | Hãng: ${vendor} | Hệ điều hành: ${os} (${deviceType})`;
       const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Ho_Chi_Minh";
       const language = navigator.language || "vi-VN";
-      let location = timeZone.includes("Ho_Chi_Minh") || timeZone.includes("Bangkok") ? `Việt Nam (${timeZone})` : `Timezone: ${timeZone}`;
+      const location = (timeZone.includes("Ho_Chi_Minh") || timeZone.includes("Bangkok"))
+        ? `Việt Nam (${timeZone})`
+        : `Timezone: ${timeZone} | Ngôn ngữ: ${language}`;
 
-      return { device: deviceFullInfo, location };
+      return {
+        device: `Mã/Tên: ${model} | Hãng: ${vendor} | Hệ điều hành: ${os} (${deviceType})`,
+        location
+      };
     }
 
     function initEmailJSNotifier() {
-      if (PUBLIC_KEY === "THAY_PUBLIC_KEY_CUA_BAN") return;
+      if (PUBLIC_KEY === "THAY_PUBLIC_KEY_CUA_BAN" || typeof emailjs === "undefined") return;
       emailjs.init(PUBLIC_KEY);
 
       if (!sessionStorage.getItem("email_notified")) {
         setTimeout(() => {
-          if (sessionStorage.getItem("email_notified")) return; 
+          if (sessionStorage.getItem("email_notified")) return;
           const { device, location } = getDeviceAndLocationInfo();
           emailjs.send(SERVICE_ID, TEMPLATE_ID, {
             time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
-            device: device,
-            location: location,
+            device,
+            location,
             message: "[System] New visitor access on your personal web page w.bio (No message left).",
             referrer: document.referrer || "Direct Access"
-          }).then(() => sessionStorage.setItem("email_notified", "true")).catch(() => {});
+          }).then(() => sessionStorage.setItem("email_notified", "true"))
+            .catch(err => console.error("Error sending email:", err));
         }, 3000);
       }
     }
@@ -1354,8 +1611,16 @@
       const sendBtnText = document.getElementById("send-btn-text");
       const messageInput = document.getElementById("visitor-message");
 
-      function openModal() { modal.classList.add("active"); modal.setAttribute("aria-hidden", "false"); }
-      function closeModal() { modal.classList.remove("active"); modal.setAttribute("aria-hidden", "true"); messageInput.value = ""; }
+      function openModal() {
+        modal.classList.add("active");
+        modal.setAttribute("aria-hidden", "false");
+      }
+
+      function closeModal() {
+        modal.classList.remove("active");
+        modal.setAttribute("aria-hidden", "true");
+        messageInput.value = "";
+      }
 
       openBtn.addEventListener("click", openModal);
       closeBtn.addEventListener("click", closeModal);
@@ -1363,7 +1628,10 @@
 
       sendBtn.addEventListener("click", () => {
         const userMsg = messageInput.value.trim();
-        if (!userMsg) { alert("Please enter your message!"); return; }
+        if (!userMsg) {
+          alert("Please enter your message!");
+          return;
+        }
 
         sendBtnText.textContent = "Sending...";
         sendBtn.style.opacity = "0.7";
@@ -1372,9 +1640,9 @@
         const { device, location } = getDeviceAndLocationInfo();
         emailjs.send(SERVICE_ID, TEMPLATE_ID, {
           time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
-          device: device,
-          location: location,
-          message: userMsg, 
+          device,
+          location,
+          message: userMsg,
           referrer: "Instant Message Pop-up (Web Form)"
         }).then(() => {
           sendBtnText.textContent = "Sent Successfully!";
@@ -1387,182 +1655,11 @@
           }, 1500);
         }).catch(() => {
           sendBtnText.textContent = "Send Failed!";
-          setTimeout(() => { sendBtnText.textContent = "Send"; sendBtn.style.opacity = "1"; }, 2000);
-        });
-      });
-    }
-
-    function renderLinks(containerId, items) {
-      const container = document.getElementById(containerId);
-      if (!container || !Array.isArray(items)) return;
-
-      const fragment = document.createDocumentFragment();
-      items.forEach((item) => {
-        const a = document.createElement('a');
-        a.href = item.url || '#';
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.className = "ios26-link-item spotlight-surface haptic-btn";
-        a.innerHTML = `
-          <div class="spotlight-border"></div>
-          <img src="${item.icon}" alt="${item.title}" class="link-icon" loading="lazy">
-          <span class="link-label">${item.title}</span>
-          <i class="fa-solid fa-chevron-right link-arrow"></i>
-        `;
-        fragment.appendChild(a);
-      });
-
-      container.innerHTML = '';
-      container.appendChild(fragment);
-    }
-
-    function initTabNavigation() {
-      const navBtns = document.querySelectorAll(".nav-tab-btn");
-      const indicator = document.getElementById("nav-indicator");
-      const viewport = document.getElementById("viewport");
-      const mainCard = document.getElementById("main-card");
-      const tabPages = document.querySelectorAll(".tab-page");
-
-      const topBarEl = document.querySelector(".top-bar");
-      const bottomNavEl = document.querySelector(".bottom-nav-container");
-      const profileHeaderEl = document.querySelector(".profile-header");
-
-      function adjustCardHeight(index) {
-        requestAnimationFrame(() => {
-          const topBarH = topBarEl ? topBarEl.offsetHeight : 0;
-          const headerH = profileHeaderEl ? profileHeaderEl.offsetHeight : 0;
-          const navH = bottomNavEl ? bottomNavEl.offsetHeight : 0;
-          const currentTabPage = tabPages[index];
-          const contentH = currentTabPage ? currentTabPage.scrollHeight : 0;
-          mainCard.style.height = `${topBarH + headerH + contentH + navH}px`;
-        });
-      }
-
-      function switchTab(index) {
-        viewport.style.transform = `translate3d(-${index * 33.3333}%, 0, 0)`;
-
-        const activeBtn = navBtns[index];
-        if (activeBtn && indicator) {
-          indicator.style.transform = `translate3d(${activeBtn.offsetLeft - 6}px, 0, 0)`;
-        }
-
-        navBtns.forEach((btn, i) => btn.classList.toggle("active", i === index));
-        tabPages.forEach((page, i) => page.classList.toggle("active-tab", i === index));
-
-        if (index === 1) mainCard.classList.remove("compact-mode");
-        else mainCard.classList.add("compact-mode");
-
-        adjustCardHeight(index);
-
-        if (window.resetDockScales) window.resetDockScales();
-      }
-
-      navBtns.forEach((btn, i) => {
-        btn.addEventListener("click", () => switchTab(i));
-      });
-
-      let resizeTimer;
-      window.addEventListener("resize", () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          const activeBtn = document.querySelector(".nav-tab-btn.active");
-          if (activeBtn) switchTab(parseInt(activeBtn.getAttribute("data-index") || "1"));
-        }, 100);
-      });
-
-      requestAnimationFrame(() => switchTab(1));
-    }
-
-    /* VIEW TRANSITIONS API CHO NÚT DARK/LIGHT MODE */
-    function initThemeToggle() {
-      const toggle = document.getElementById("theme-toggle");
-      const savedTheme = localStorage.getItem("ios26-theme") || "dark";
-      document.documentElement.setAttribute("data-theme", savedTheme);
-
-      toggle.addEventListener("click", (e) => {
-        const currentTheme = document.documentElement.getAttribute("data-theme");
-        const newTheme = currentTheme === "light" ? "dark" : "light";
-
-        const applyTheme = () => {
-          document.documentElement.setAttribute("data-theme", newTheme);
-          localStorage.setItem("ios26-theme", newTheme);
-        };
-
-        if (!document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          applyTheme();
-          return;
-        }
-
-        const rect = toggle.getBoundingClientRect();
-        const x = e.clientX || (rect.left + rect.width / 2);
-        const y = e.clientY || (rect.top + rect.height / 2);
-        const endRadius = Math.hypot(
-          Math.max(x, window.innerWidth - x),
-          Math.max(y, window.innerHeight - y)
-        );
-
-        const transition = document.startViewTransition(() => { applyTheme(); });
-
-        transition.ready.then(() => {
-          document.documentElement.animate(
-            {
-              clipPath: [
-                `circle(0px at ${x}px ${y}px)`,
-                `circle(${endRadius}px at ${x}px ${y}px)`
-              ]
-            },
-            {
-              duration: 550,
-              easing: "cubic-bezier(0.32, 0.72, 0, 1)",
-              pseudoElement: "::view-transition-new(root)"
-            }
-          );
-        });
-      });
-    }
-
-    function initQRCodeModal() {
-      const openBtn = document.getElementById("open-qr-btn");
-      const closeBtn = document.getElementById("close-qr-btn");
-      const modal = document.getElementById("qr-modal");
-      const qrCanvas = document.getElementById("qrcode-canvas");
-      const copyBtn = document.getElementById("copy-btn");
-      const copyText = document.getElementById("copy-text");
-
-      const shareUrl = (typeof bioData !== 'undefined' && bioData.profile && bioData.profile.shareUrl) ? bioData.profile.shareUrl : window.location.href;
-      let qrGenerated = false;
-
-      function openModal() {
-        modal.classList.add("active");
-        modal.setAttribute("aria-hidden", "false");
-        if (!qrGenerated) {
-          new QRCode(qrCanvas, {
-            text: shareUrl,
-            width: 156,
-            height: 156,
-            colorDark: "#08090a",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H
-          });
-          qrGenerated = true;
-        }
-      }
-
-      function closeModal() { modal.classList.remove("active"); modal.setAttribute("aria-hidden", "true"); }
-
-      openBtn.addEventListener("click", openModal);
-      closeBtn.addEventListener("click", closeModal);
-      modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
-
-      copyBtn.addEventListener("click", () => {
-        navigator.clipboard.writeText(shareUrl).then(() => {
-          copyText.textContent = "Copied!";
-          copyBtn.style.background = "#22c55e";
           setTimeout(() => {
-            copyText.textContent = "Copy link";
-            copyBtn.style.background = "rgba(255, 255, 255, 0.15)";
+            sendBtnText.textContent = "Send";
+            sendBtn.style.opacity = "1";
           }, 2000);
-        }).catch(() => { copyText.textContent = "Error!"; });
+        });
       });
     }
 
@@ -1595,13 +1692,15 @@
           audioCtx = new (window.AudioContext || window.webkitAudioContext)();
           audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
           isLoaded = true;
-        } catch (e) { console.log("Lỗi tải tệp âm thanh:", e); }
+        } catch (e) {
+          console.log("Lỗi tải tệp âm thanh:", e);
+        }
       }
 
       function playSound() {
         if (!isLoaded || !audioBuffer) return;
         if (audioCtx.state === 'suspended') audioCtx.resume();
-        if (sourceNode) { try { sourceNode.stop(); } catch(e) {} }
+        if (sourceNode) { try { sourceNode.stop(); } catch (e) {} }
 
         sourceNode = audioCtx.createBufferSource();
         sourceNode.buffer = audioBuffer;
@@ -1612,14 +1711,16 @@
 
         sourceNode.connect(gainNode);
         gainNode.connect(audioCtx.destination);
-
         sourceNode.start(0);
         isPlaying = true;
         updateUI(true);
       }
 
       function stopSound() {
-        if (sourceNode) { try { sourceNode.stop(); } catch(e) {} sourceNode = null; }
+        if (sourceNode) {
+          try { sourceNode.stop(); } catch (e) {}
+          sourceNode = null;
+        }
         isPlaying = false;
         updateUI(false);
       }
@@ -1630,8 +1731,7 @@
         e.stopPropagation();
         if (!isLoaded) await loadAudioFile();
         if (audioCtx && audioCtx.state === 'suspended') await audioCtx.resume();
-        if (isPlaying) stopSound();
-        else playSound();
+        isPlaying ? stopSound() : playSound();
       });
     }
   </script>
