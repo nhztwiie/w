@@ -47,6 +47,7 @@
        ========================================================== */
     :root {
       --spring-easing: cubic-bezier(0.32, 0.72, 0, 1);
+      --silky-ease: cubic-bezier(0.22, 1, 0.36, 1);
       --liquid-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
       --mouse-x: 50%;
       --mouse-y: 50%;
@@ -440,7 +441,7 @@
     }
 
     /* ==========================================================
-       PROFILE HEADER + AVATAR BREATHING & RIGHTWARD TILT (FLAT 2D)
+       PROFILE HEADER + SILKY RIGHTWARD AVATAR ROTATION
        ========================================================== */
     .profile-header {
       display: flex;
@@ -455,14 +456,13 @@
     }
 
     @keyframes avatarBreathe {
-      0%, 100% {
-        transform: translateY(0px) scale(1);
-        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28), 0 0 22px var(--glass-glow);
-      }
-      50% {
-        transform: translateY(-3px) scale(1.028);
-        box-shadow: 0 22px 44px rgba(0, 0, 0, 0.35), 0 0 34px var(--glass-glow);
-      }
+      0%, 100% { transform: translate3d(0, 0px, 0) scale(1); }
+      50% { transform: translate3d(0, -3px, 0) scale(1.026); }
+    }
+
+    .avatar-breathe-wrap {
+      animation: avatarBreathe 5.5s ease-in-out infinite;
+      will-change: transform;
     }
 
     .avatar-ring {
@@ -472,17 +472,19 @@
       padding: 4px;
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.08) 100%);
       border: 1.5px solid var(--glass-border);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28), 0 0 22px var(--glass-glow);
       transform-origin: center center;
-      animation: avatarBreathe 5.5s ease-in-out infinite;
-      transition: transform 0.45s var(--spring-easing), box-shadow 0.45s ease;
+      will-change: transform;
+      transition: 
+        transform 0.72s var(--silky-ease),
+        box-shadow 0.72s var(--silky-ease);
       cursor: pointer;
     }
 
-    /* NGHIÊNG NHẸ SANG PHẢI MƯỢT MÀ, KHÔNG CẦN NGHIÊNG 3D */
+    /* Xoay nghiêng nhẹ sang phải cực mượt mà cả lúc hover vào lẫn lúc rời chuột ra */
     .avatar-ring:hover {
-      animation: none;
-      transform: rotate(8deg) translateX(6px) scale(1.06);
-      box-shadow: 6px 14px 32px rgba(0, 0, 0, 0.3), 0 0 30px var(--glass-glow);
+      transform: translate3d(5px, -2px, 0) rotate(8.5deg) scale(1.055);
+      box-shadow: 6px 16px 34px rgba(0, 0, 0, 0.3), 0 0 32px var(--glass-glow);
     }
 
     .avatar-ring img {
@@ -490,7 +492,7 @@
       object-fit: cover;
       border-radius: 50%;
       filter: grayscale(100%);
-      transition: filter 0.45s ease, transform 0.45s var(--spring-easing);
+      transition: filter 0.65s var(--silky-ease), transform 0.72s var(--silky-ease);
     }
 
     .avatar-ring:hover img {
@@ -952,8 +954,10 @@
 
     <!-- PROFILE HEADER -->
     <header class="profile-header">
-      <div class="avatar-ring">
-        <img src="images/Huy.png" alt="Avatar Nhật Huy" loading="eager">
+      <div class="avatar-breathe-wrap">
+        <div class="avatar-ring">
+          <img src="images/Huy.png" alt="Avatar Nhật Huy" loading="eager">
+        </div>
       </div>
       <div class="profile-meta">
         <h1 class="profile-name">Nhật Huy</h1>
@@ -1188,7 +1192,7 @@
     }
 
     /* ==========================================================
-       3. INTERACTIVE AMBIENT CANVAS: FIREFLIES & FALLING LEAVES (MIXED GREEN & AUTUMN)
+       3. INTERACTIVE AMBIENT CANVAS: FIREFLIES & FALLING LEAVES
        ========================================================== */
     function initAmbientCanvas() {
       const canvas = document.getElementById("ambient-particles");
@@ -1221,7 +1225,6 @@
       window.addEventListener("mouseleave", () => { mouse.active = false; });
       window.addEventListener("touchend", () => { mouse.active = false; });
 
-      // Bảng màu lá cây tự nhiên xen lẫn lá thu (Xanh non, Xanh lục bảo, Xanh rêu, Vàng mật ong, Cam đất)
       const LEAF_PALETTES = [
         { main: "#4ade80", edge: "#15803d", vein: "#dcfce7" }, // Xanh lá non tươi
         { main: "#22c55e", edge: "#166534", vein: "#bbf7d0" }, // Xanh lục bảo
@@ -1242,7 +1245,6 @@
         rotSpeed: (Math.random() - 0.5) * 0.025,
         flipPhase: Math.random() * Math.PI * 2,
         flipSpeed: 0.02 + Math.random() * 0.025,
-        swayFreq: 0.015 + Math.random() * 0.015,
         swayAmp: 0.45 + Math.random() * 0.55,
         phase: Math.random() * Math.PI * 2,
         speed: 0.015 + Math.random() * 0.02,
@@ -1280,7 +1282,6 @@
 
         ctx.shadowColor = "transparent";
 
-        // Cuống lá
         ctx.strokeStyle = p.palette.edge;
         ctx.lineWidth = 1;
         ctx.beginPath();
@@ -1288,7 +1289,6 @@
         ctx.quadraticCurveTo(-s * 1.45, s * 0.15, -s * 1.6, s * 0.25);
         ctx.stroke();
 
-        // Gân lá
         ctx.strokeStyle = p.palette.vein;
         ctx.lineWidth = 0.65;
         ctx.globalAlpha = Math.min(0.75, alpha * 0.8);
