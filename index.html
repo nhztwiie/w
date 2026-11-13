@@ -127,7 +127,6 @@
       --orb-3: rgba(254, 243, 199, 0.45);
     }
 
-    /* CROSS-FADE & GLASS BLUR THEME TRANSITION */
     body {
       transition: background 0.6s ease;
     }
@@ -164,7 +163,6 @@
       padding: 24px 16px;
     }
 
-    /* INTERACTIVE AMBIENT CANVAS & LIQUID ORBS */
     .ios26-bg-canvas {
       position: fixed;
       inset: 0;
@@ -239,9 +237,6 @@
       opacity: 0.3;
     }
 
-    /* ==========================================================
-       MAIN CARD CONTAINER + SPOTLIGHT & WATER DROPLET PHYSICS
-       ========================================================== */
     .liquid-card-ios26 {
       position: relative;
       z-index: 10;
@@ -318,7 +313,6 @@
       100% { width: 220px; height: 220px; opacity: 0; }
     }
 
-    /* TOP BAR */
     .top-bar {
       padding: 20px 24px 6px;
       display: flex;
@@ -447,9 +441,6 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* ==========================================================
-       PROFILE HEADER + SILKY RIGHTWARD AVATAR ROTATION
-       ========================================================== */
     .profile-header {
       display: flex;
       flex-direction: column;
@@ -540,9 +531,6 @@
       pointer-events: none;
     }
 
-    /* ==========================================================
-       SPRING-BASED TAB VIEWPORT & BLUR TRANSITIONS
-       ========================================================== */
     .viewport-wrapper {
       width: 100%;
       overflow: hidden;
@@ -580,9 +568,6 @@
       filter: blur(0px);
     }
 
-    /* ==========================================================
-       QUOTE CARD: BLUR REVEAL & TEXT SHIMMER (FIXED NO-WRAP)
-       ========================================================== */
     @keyframes blurReveal {
       0% {
         opacity: 0;
@@ -651,7 +636,6 @@
       animation: blurReveal 0.95s var(--spring-easing) 0.22s forwards;
     }
 
-    /* LINKS LIST */
     .links-list {
       width: 100%;
       display: flex;
@@ -715,9 +699,6 @@
       transform: translateX(5px);
     }
 
-    /* ==========================================================
-       APPLE MACOS MAGNETIC MAGNIFICATION DOCK (<nav>)
-       ========================================================== */
     .bottom-nav-container {
       padding: 6px 22px 22px;
       z-index: 30;
@@ -778,9 +759,6 @@
     .nav-tab-btn.active i { color: var(--text-title); }
     [data-theme="light"] .nav-tab-btn.active i { color: #141f16; }
 
-    /* ==========================================================
-       SPRING-BASED MODAL SYSTEM
-       ========================================================== */
     .modal-backdrop {
       position: fixed;
       inset: 0;
