@@ -1235,7 +1235,7 @@
     }
 
     /* ==========================================================
-       3. INTERACTIVE AMBIENT CANVAS
+       3. INTERACTIVE AMBIENT CANVAS (FIREFLIES & FALLING LEAVES)
        ========================================================== */
     function initAmbientCanvas() {
       const canvas = document.getElementById("ambient-particles");
@@ -1446,14 +1446,12 @@
         const currentTheme = document.documentElement.getAttribute("data-theme");
         const newTheme = currentTheme === "light" ? "dark" : "light";
 
-        // Kích hoạt hiệu ứng mờ dần & thu nhỏ nhẹ (fade out & scale)
         mainCard.classList.add("theme-transitioning");
 
         setTimeout(() => {
           document.documentElement.setAttribute("data-theme", newTheme);
           localStorage.setItem("ios26-theme", newTheme);
 
-          // Gỡ hiệu ứng để thẻ kính hiện lên mượt mà với theme mới (fade in)
           setTimeout(() => {
             mainCard.classList.remove("theme-transitioning");
           }, 50);
@@ -1829,3 +1827,4 @@
   </script>
 </body>
 </html>
+```[cite: 1]
