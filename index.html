@@ -1,4 +1,4 @@
-html_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi" data-theme="dark">
 <head>
   <meta charset="UTF-8">
@@ -32,7 +32,7 @@ html_content = """<!DOCTYPE html>
   <!-- Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 
   <!-- Icons & QRCode JS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -88,11 +88,6 @@ html_content = """<!DOCTYPE html>
       --orb-1: rgba(255, 255, 255, 0.32);
       --orb-2: rgba(160, 170, 190, 0.35);
       --orb-3: rgba(210, 215, 225, 0.28);
-
-      --accent-color: #ffffff;
-      --slider-track: rgba(255, 255, 255, 0.16);
-      --slider-fill: #ffffff;
-      --vinyl-label-grad: linear-gradient(135deg, #4b5563 0%, #1f2937 100%);
     }
 
     :root[data-theme="light"] {
@@ -130,11 +125,6 @@ html_content = """<!DOCTYPE html>
       --orb-1: rgba(255, 255, 255, 0.92);
       --orb-2: rgba(187, 247, 208, 0.5);
       --orb-3: rgba(254, 243, 199, 0.45);
-
-      --accent-color: #16a34a;
-      --slider-track: rgba(20, 31, 22, 0.12);
-      --slider-fill: #16a34a;
-      --vinyl-label-grad: linear-gradient(135deg, #86efac 0%, #22c55e 100%);
     }
 
     body {
@@ -327,37 +317,16 @@ html_content = """<!DOCTYPE html>
       padding: 20px 24px 6px;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       z-index: 20;
       flex-shrink: 0;
     }
 
-    .theme-column {
+    .top-bar-left {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .realtime-clock {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--text-sub);
-      font-variant-numeric: tabular-nums;
-      opacity: 0.85;
-      padding: 2px 8px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    .top-bar-controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      align-items: flex-start;
+      gap: 4px;
     }
 
     .theme-toggle-track {
@@ -409,6 +378,21 @@ html_content = """<!DOCTYPE html>
     }
     [data-theme="light"] .icon-sun { opacity: 1; transform: scale(1) rotate(0deg); }
     [data-theme="light"] .icon-moon { opacity: 0; transform: scale(0.5) rotate(90deg); }
+
+    .realtime-clock {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      padding-left: 4px;
+      letter-spacing: 0.03em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .top-bar-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
     .glass-btn-ios26, .ios26-link-item, .btn-action-item, .btn-download-icon {
       --btn-x: 50%;
@@ -464,11 +448,11 @@ html_content = """<!DOCTYPE html>
     }
 
     .music-btn.playing i {
-      animation: spinMusic 4s linear infinite;
-      color: var(--accent-color);
+      animation: spinMusicBtn 3s linear infinite;
+      color: var(--text-sub);
     }
 
-    @keyframes spinMusic {
+    @keyframes spinMusicBtn {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
@@ -479,7 +463,7 @@ html_content = """<!DOCTYPE html>
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 6px 24px 8px;
+      padding: 12px 24px 8px;
       z-index: 15;
       flex-shrink: 0;
       transition: transform 0.5s var(--spring-easing), margin 0.5s var(--spring-easing);
@@ -919,7 +903,7 @@ html_content = """<!DOCTYPE html>
     }
 
     .btn-close-modal {
-      margin-top: 12px;
+      margin-top: 10px;
       width: 100%;
       padding: 8px;
       border: none;
@@ -963,13 +947,13 @@ html_content = """<!DOCTYPE html>
       -webkit-backdrop-filter: blur(32px) saturate(200%);
       border: 1.5px solid var(--glass-border-highlight);
       border-radius: 42px;
-      padding: 28px 24px 22px;
+      padding: 30px 24px;
       width: 90%;
-      max-width: 356px;
+      max-width: 360px;
       text-align: center;
       opacity: 0;
       transform: scale(0.92) translateY(16px);
-      transition: transform 0.5s var(--spring-easing), opacity 0.4s var(--spring-easing), background 0.4s ease, border-color 0.4s ease;
+      transition: transform 0.5s var(--spring-easing), opacity 0.4s var(--spring-easing);
       box-shadow: var(--glass-shadow);
       color: var(--text-title);
     }
@@ -981,9 +965,9 @@ html_content = """<!DOCTYPE html>
 
     .vinyl-container {
       position: relative;
-      width: 168px;
-      height: 168px;
-      margin: 4px auto 18px;
+      width: 180px;
+      height: 180px;
+      margin: 4px auto 16px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -993,26 +977,18 @@ html_content = """<!DOCTYPE html>
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      /* Tinh tế, có vệt ánh sáng nhẹ & rãnh đĩa để nhận biết chuyển động xoay mượt mà mà không gây rối mắt */
+      /* Đĩa than thực tế với các rãnh đĩa rõ nét nhưng tinh tế không rối mắt */
       background: 
-        conic-gradient(
-          from 0deg,
-          rgba(255, 255, 255, 0.14) 0deg,
-          transparent 45deg,
-          transparent 180deg,
-          rgba(255, 255, 255, 0.12) 225deg,
-          transparent 270deg,
-          rgba(255, 255, 255, 0.14) 360deg
-        ),
+        radial-gradient(circle at center, transparent 18%, rgba(255, 255, 255, 0.06) 19%, transparent 20%),
         repeating-radial-gradient(
           circle at center,
-          #141619 0px,
-          #141619 5px,
-          #1f2328 6px,
-          #141619 10px
+          #0b0d10 0px,
+          #0b0d10 3px,
+          #1f242d 4px,
+          #14171d 7px
         );
-      border: 2px solid var(--glass-border-highlight);
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35), inset 0 0 12px rgba(255, 255, 255, 0.12);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.08);
+      border: 2px solid rgba(255, 255, 255, 0.12);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1020,23 +996,8 @@ html_content = """<!DOCTYPE html>
       will-change: transform;
     }
 
-    /* Chấm nhỏ định vị trên đĩa than giúp mắt dễ nhận diện đĩa đang quay nhẹ nhàng */
-    .vinyl-record::after {
-      content: '';
-      position: absolute;
-      top: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent-color);
-      opacity: 0.75;
-      box-shadow: 0 0 6px var(--accent-color);
-    }
-
     .vinyl-record.spinning {
-      animation: spinVinyl 7.5s linear infinite;
+      animation: spinVinyl 8s linear infinite;
     }
 
     @keyframes spinVinyl {
@@ -1045,121 +1006,99 @@ html_content = """<!DOCTYPE html>
     }
 
     .vinyl-label {
-      width: 62px;
-      height: 62px;
+      width: 68px;
+      height: 68px;
       border-radius: 50%;
-      background: var(--vinyl-label-grad);
-      border: 2.5px solid rgba(255, 255, 255, 0.35);
+      /* Màu sắc nhãn đĩa hòa hợp với chủ đề theme hiện tại của page */
+      background: linear-gradient(135deg, var(--shimmer-highlight) 0%, var(--text-sub) 100%);
+      border: 3px solid #14171d;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.35);
-      position: relative;
-    }
-
-    /* Vạch chỉ báo nhỏ trên nhãn trung tâm để tăng độ rõ khi xoay */
-    .vinyl-label::before {
-      content: '';
-      position: absolute;
-      top: 6px;
-      width: 3px;
-      height: 8px;
-      border-radius: 2px;
-      background: rgba(255, 255, 255, 0.85);
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.35);
     }
 
     .vinyl-center-hole {
       width: 14px;
       height: 14px;
-      background: #111317;
+      background: var(--bg-gradient);
       border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.65);
+      border: 2px solid rgba(255,255,255,0.5);
     }
 
-    /* Tiêu đề bài hát trên 1 dòng + dòng phụ ALL-ROUNDER in nghiêng nhỏ hơn */
-    .music-title-group {
+    /* Tiêu đề nằm trọn 1 dòng, tên tác phẩm và nghệ sĩ rõ ràng */
+    .music-track-info-wrap {
       margin-bottom: 18px;
-      padding: 0 4px;
-    }
-
-    .music-track-title {
-      font-size: clamp(0.95rem, 3.8vw, 1.08rem);
-      font-weight: 800;
-      color: var(--text-title);
-      letter-spacing: -0.02em;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      line-height: 1.3;
     }
 
-    .music-track-subtitle {
-      font-size: 0.78rem;
-      font-style: italic;
+    .music-track-title {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--text-title);
+      letter-spacing: -0.01em;
+      margin-bottom: 2px;
+    }
+
+    .music-track-artist {
+      font-size: 0.82rem;
       font-weight: 500;
+      font-style: italic;
       color: var(--text-sub);
-      margin-top: 3px;
-      letter-spacing: 0.04em;
-      opacity: 0.85;
     }
 
-    /* Thanh thời lượng (00:00, không mút tròn) */
+    /* Thanh tua thời lượng (Không có mút tròn) */
     .player-slider-group {
-      margin-bottom: 16px;
+      margin-bottom: 14px;
+      text-align: left;
     }
 
     .player-time-row {
       display: flex;
       justify-content: space-between;
-      font-size: 0.74rem;
-      font-weight: 600;
+      font-size: 0.75rem;
       color: var(--text-sub);
-      margin-bottom: 7px;
+      margin-bottom: 6px;
       font-variant-numeric: tabular-nums;
     }
 
-    .ios27-bar-slider {
+    .ios27-slider {
       -webkit-appearance: none;
-      appearance: none;
       width: 100%;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--slider-track);
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.15);
       outline: none;
-      cursor: pointer;
-      overflow: hidden;
-      transition: height 0.2s ease;
+      transition: background 0.3s ease;
     }
 
-    .ios27-bar-slider:hover {
-      height: 8px;
+    [data-theme="light"] .ios27-slider {
+      background: rgba(0, 0, 0, 0.12);
     }
 
-    /* Ẩn hoàn toàn mút tròn trên Chrome/Safari/Edge */
-    .ios27-bar-slider::-webkit-slider-thumb {
+    /* Loại bỏ hoàn toàn mút tròn (thumb) trên thanh trượt theo yêu cầu */
+    .ios27-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
-      appearance: none;
       width: 0px;
       height: 0px;
-      box-shadow: -400px 0 0 400px var(--slider-fill);
-    }
-
-    /* Ẩn hoàn toàn mút tròn trên Firefox */
-    .ios27-bar-slider::-moz-range-thumb {
-      width: 0px;
-      height: 0px;
-      border: none;
       background: transparent;
-      box-shadow: -400px 0 0 400px var(--slider-fill);
     }
 
-    /* Hàng nút điều khiển: Tua lùi 5s | Phát/Dừng | Tua tới 5s | Nghe lại */
+    .ios27-slider::-moz-range-thumb {
+      width: 0px;
+      height: 0px;
+      background: transparent;
+      border: none;
+    }
+
     .player-controls-row {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 14px;
-      margin: 18px 0 16px;
+      gap: 16px;
+      margin: 16px 0 12px;
     }
 
     .player-ctrl-btn {
@@ -1175,31 +1114,20 @@ html_content = """<!DOCTYPE html>
       cursor: pointer;
       font-size: 0.9rem;
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      transition: transform 0.22s var(--spring-easing), background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-      position: relative;
-    }
-
-    .seek-step-label {
-      font-size: 0.62rem;
-      font-weight: 800;
-      margin-left: 1px;
+      transition: transform 0.2s var(--spring-easing), background 0.2s ease, border-color 0.2s ease;
     }
 
     .player-ctrl-btn.main-play {
-      width: 56px;
-      height: 56px;
+      width: 54px;
+      height: 54px;
       background: var(--text-title);
-      color: #111317;
-      border-color: var(--text-title);
+      color: var(--bg-gradient);
       font-size: 1.15rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
     }
 
     [data-theme="light"] .player-ctrl-btn.main-play {
-      background: #141f16;
       color: #ffffff;
-      border-color: #141f16;
+      background: #141f16;
     }
 
     .player-ctrl-btn:hover {
@@ -1207,34 +1135,25 @@ html_content = """<!DOCTYPE html>
       border-color: var(--glass-border-highlight);
     }
 
-    .player-ctrl-btn:active {
-      transform: scale(0.94);
-    }
-
     .player-ctrl-btn.active-mode {
-      color: var(--accent-color);
-      border-color: var(--accent-color);
-      background: var(--pill-hover-bg);
-      box-shadow: 0 0 14px var(--glass-glow);
+      color: #22c55e;
+      border-color: #86efac;
     }
 
-    /* Thanh âm lượng tinh giản: không chỉ số, không mút tròn */
     .volume-control-wrapper {
       display: flex;
       align-items: center;
       gap: 12px;
-      background: var(--pill-bg);
-      padding: 11px 16px;
-      border-radius: 22px;
-      border: 1.5px solid var(--glass-border);
-      margin-top: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 10px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--glass-border);
+      margin-top: 12px;
     }
 
     .volume-control-wrapper i {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       color: var(--text-sub);
-      width: 16px;
-      text-align: center;
     }
   </style>
 </head>
@@ -1255,7 +1174,7 @@ html_content = """<!DOCTYPE html>
 
     <!-- TOP BAR -->
     <div class="top-bar">
-      <div class="theme-column">
+      <div class="top-bar-left">
         <div class="theme-toggle-track" id="theme-toggle" role="button" aria-label="Toggle Theme">
           <div class="theme-orb-indicator">
             <i class="fa-solid fa-moon orb-icon icon-moon"></i>
@@ -1324,7 +1243,7 @@ html_content = """<!DOCTYPE html>
         <div class="nav-indicator-pill" id="nav-indicator"></div>
         
         <button class="nav-tab-btn" data-index="0" aria-label="Account">
-          <i class="fa-solid fa-user"></i>
+          <i class="fa-solid fa-user-shield"></i>
         </button>
 
         <button class="nav-tab-btn active" data-index="1" aria-label="Home">
@@ -1379,7 +1298,7 @@ html_content = """<!DOCTYPE html>
     </div>
   </div>
 
-  <!-- MODAL TRÌNH PHÁT NHẠC KIỂU SPOTIFY & GAINNODE -->
+  <!-- MODAL TRÌNH PHÁT NHẠC KIỂU SPOTIFY & GAINNODE TĂNG CƯỜNG ÂM LƯỢNG -->
   <div class="modal-backdrop" id="music-modal" role="dialog" aria-hidden="true">
     <div class="music-modal-card">
       <div class="vinyl-container">
@@ -1390,46 +1309,41 @@ html_content = """<!DOCTYPE html>
         </div>
       </div>
 
-      <div class="music-title-group">
+      <!-- Tên bài hát: Dòng trên Nếu Ngày Ấy - SOOBIN, dòng dưới ALL-ROUNDER in nghiêng nhỏ hơn -->
+      <div class="music-track-info-wrap">
         <div class="music-track-title">Nếu Ngày Ấy - SOOBIN</div>
-        <div class="music-track-subtitle">ALL-ROUNDER</div>
+        <div class="music-track-artist">ALL-ROUNDER</div>
       </div>
 
-      <!-- Thanh tua thời gian thực (00:00, không mút tròn) -->
+      <!-- Thanh tua thời gian thực (định dạng 00:00, 2 chữ số, không mút tròn) -->
       <div class="player-slider-group">
         <div class="player-time-row">
           <span id="current-time-lbl">00:00</span>
           <span id="duration-lbl">00:00</span>
         </div>
-        <input type="range" id="seek-slider" class="ios27-bar-slider" min="0" max="100" value="0" step="0.1">
+        <input type="range" id="seek-slider" class="ios27-slider" min="0" max="100" value="0" step="0.1">
       </div>
 
-      <!-- Nút điều khiển: Tua lùi 5s | Phát/Dừng | Tua tới 5s | Nghe lại -->
+      <!-- Nút điều khiển (Tua lùi 5s, Phát/Dừng, Tua tới 5s, Lặp lại) -->
       <div class="player-controls-row">
-        <button class="player-ctrl-btn" id="modal-rewind-btn" title="Tua lùi 5 giây" aria-label="Rewind 5 seconds">
-          <i class="fa-solid fa-backward"></i>
-          <span class="seek-step-label">5</span>
+        <button class="player-ctrl-btn" id="modal-rewind-btn" title="Tua lùi 5 giây">
+          <i class="fa-solid fa-backward-step"></i>
         </button>
-
-        <button class="player-ctrl-btn main-play" id="modal-play-btn" title="Phát / Dừng" aria-label="Play or Pause">
+        <button class="player-ctrl-btn main-play" id="modal-play-btn" title="Phát / Dừng">
           <i class="fa-solid fa-play" id="modal-play-icon"></i>
         </button>
-
-        <button class="player-ctrl-btn" id="modal-forward-btn" title="Tua tới 5 giây" aria-label="Forward 5 seconds">
-          <i class="fa-solid fa-forward"></i>
-          <span class="seek-step-label">5</span>
+        <button class="player-ctrl-btn" id="modal-forward-btn" title="Tua tới 5 giây">
+          <i class="fa-solid fa-forward-step"></i>
         </button>
-
-        <button class="player-ctrl-btn" id="modal-loop-btn" title="Nghe lại" aria-label="Repeat">
-          <i class="fa-solid fa-repeat"></i>
+        <button class="player-ctrl-btn" id="modal-loop-btn" title="Lặp lại">
+          <i class="fa-solid fa-rotate-right"></i>
         </button>
       </div>
 
-      <!-- Điều chỉnh âm lượng (không hiển thị chỉ số, không mút tròn, khuếch đại đến 250%) -->
+      <!-- Điều chỉnh âm lượng & GainNode tăng cường (Không hiển thị chỉ số âm lượng, không có mút tròn) -->
       <div class="volume-control-wrapper">
-        <i class="fa-solid fa-volume-low" id="vol-icon-low"></i>
-        <input type="range" id="volume-slider" class="ios27-bar-slider" min="0" max="2.5" step="0.02" value="1" aria-label="Volume">
         <i class="fa-solid fa-volume-high"></i>
+        <input type="range" id="volume-slider" class="ios27-slider" min="0" max="2.5" step="0.05" value="1">
       </div>
 
       <button class="btn-close-modal" id="close-music-modal-btn">Close</button>
@@ -1449,7 +1363,8 @@ html_content = """<!DOCTYPE html>
         renderLinks("work-links-list", bioData.tabs.work);
       }
 
-      initAutoThemeAndClock();
+      initAutoTheme();
+      initRealtimeClock();
       initMagneticDock();
       initSpotlightAndDroplets();
       initAmbientCanvas();
@@ -1462,29 +1377,26 @@ html_content = """<!DOCTYPE html>
     });
 
     /* ==========================================================
-       AUTO-THEME & REALTIME CLOCK DƯỚI NÚT THEME MODE
+       AUTO-THEME THEO THỜI GIAN THỰC & ĐỒNG HỒ THỜI GIAN THỰC
        ========================================================== */
-    function initAutoThemeAndClock() {
-      const clockEl = document.getElementById("realtime-clock");
-
-      function applyAutoThemeByHour(hour) {
-        if (!localStorage.getItem("ios26-user-overridden")) {
-          const autoTheme = (hour >= 6 && hour <= 17) ? "light" : "dark";
-          if (document.documentElement.getAttribute("data-theme") !== autoTheme) {
-            document.documentElement.setAttribute("data-theme", autoTheme);
-          }
-        }
+    function initAutoTheme() {
+      if (!localStorage.getItem("ios26-user-overridden")) {
+        const hour = new Date().getHours();
+        const autoTheme = (hour >= 6 && hour <= 17) ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", autoTheme);
       }
+    }
+
+    function initRealtimeClock() {
+      const clockEl = document.getElementById("realtime-clock");
+      if (!clockEl) return;
 
       function updateClock() {
         const now = new Date();
-        const hh = String(now.getHours()).padStart(2, "0");
-        const mm = String(now.getMinutes()).padStart(2, "0");
-        const ss = String(now.getSeconds()).padStart(2, "0");
-        if (clockEl) {
-          clockEl.textContent = `${hh}:${mm}:${ss}`;
-        }
-        applyAutoThemeByHour(now.getHours());
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        clockEl.textContent = `${hours}:${minutes}:${seconds}`;
       }
 
       updateClock();
@@ -2148,9 +2060,9 @@ html_content = """<!DOCTYPE html>
 
       const playBtn = document.getElementById("modal-play-btn");
       const playIcon = document.getElementById("modal-play-icon");
+      const loopBtn = document.getElementById("modal-loop-btn");
       const rewindBtn = document.getElementById("modal-rewind-btn");
       const forwardBtn = document.getElementById("modal-forward-btn");
-      const loopBtn = document.getElementById("modal-loop-btn");
       const vinylRecord = document.getElementById("vinyl-record");
 
       const seekSlider = document.getElementById("seek-slider");
@@ -2172,7 +2084,7 @@ html_content = """<!DOCTYPE html>
       let duration = 0;
       let animFrameId = null;
 
-      // Định dạng 00:00 (cả phút và giây 2 chữ số)
+      // Định dạng thời lượng 00:00 (cả phút và giây bao gồm 2 chữ số)
       function formatTime(seconds) {
         if (isNaN(seconds) || seconds < 0) return "00:00";
         const mins = Math.floor(seconds / 60);
@@ -2227,12 +2139,7 @@ html_content = """<!DOCTYPE html>
       function playSound(offset = 0) {
         if (!isLoaded || !audioBuffer) return;
         if (audioCtx.state === 'suspended') audioCtx.resume();
-        if (sourceNode) {
-          sourceNode.onended = null;
-          try { sourceNode.stop(); } catch(e) {}
-        }
-
-        const safeOffset = Math.max(0, Math.min(offset, duration));
+        if (sourceNode) { try { sourceNode.stop(); } catch(e) {} }
 
         sourceNode = audioCtx.createBufferSource();
         sourceNode.buffer = audioBuffer;
@@ -2245,31 +2152,25 @@ html_content = """<!DOCTYPE html>
         gainNode.connect(audioCtx.destination);
 
         sourceNode.onended = () => {
-          if (!isLooping && isPlaying) {
-            const elapsed = audioCtx.currentTime - startTime;
-            if (elapsed >= duration - 0.1) {
-              stopSound(false);
-              pauseOffset = 0;
-              seekSlider.value = 0;
-              currentTimeLbl.textContent = "00:00";
-            }
+          if (!isLooping && isPlaying && (audioCtx.currentTime - startTime >= duration)) {
+            stopSound();
+            pauseOffset = 0;
+            seekSlider.value = 0;
+            currentTimeLbl.textContent = "00:00";
           }
         };
 
-        sourceNode.start(0, safeOffset);
-        startTime = audioCtx.currentTime - safeOffset;
+        sourceNode.start(0, offset);
+        startTime = audioCtx.currentTime - offset;
         isPlaying = true;
         updateUIState(true);
         trackProgress();
       }
 
-      function stopSound(preserveOffset = true) {
+      function stopSound() {
         if (sourceNode) {
-          sourceNode.onended = null;
           try {
-            if (preserveOffset && duration > 0) {
-              pauseOffset = (audioCtx.currentTime - startTime) % duration;
-            }
+            pauseOffset = (audioCtx.currentTime - startTime) % duration;
             sourceNode.stop();
           } catch(e) {}
           sourceNode = null;
@@ -2280,26 +2181,11 @@ html_content = """<!DOCTYPE html>
       }
 
       function trackProgress() {
-        if (!isPlaying || duration <= 0) return;
+        if (!isPlaying) return;
         const currentPos = (audioCtx.currentTime - startTime) % duration;
         seekSlider.value = currentPos;
         currentTimeLbl.textContent = formatTime(currentPos);
         animFrameId = requestAnimationFrame(trackProgress);
-      }
-
-      function jumpTime(deltaSeconds) {
-        if (!isLoaded || duration <= 0) return;
-        const currentPos = isPlaying
-          ? (audioCtx.currentTime - startTime) % duration
-          : pauseOffset;
-        const targetPos = Math.max(0, Math.min(currentPos + deltaSeconds, duration));
-        pauseOffset = targetPos;
-        seekSlider.value = targetPos;
-        currentTimeLbl.textContent = formatTime(targetPos);
-
-        if (isPlaying) {
-          playSound(targetPos);
-        }
       }
 
       playBtn.addEventListener("click", async () => {
@@ -2307,20 +2193,35 @@ html_content = """<!DOCTYPE html>
         if (!isLoaded) return;
 
         if (isPlaying) {
-          stopSound(true);
+          stopSound();
         } else {
           playSound(pauseOffset);
         }
       });
 
-      rewindBtn.addEventListener("click", async () => {
-        if (!isLoaded) await loadAudioFile();
-        jumpTime(-5);
+      // Tua lùi và tua tới 5 giây mượt mà
+      rewindBtn.addEventListener("click", () => {
+        if (!isLoaded) return;
+        let currentPos = isPlaying ? (audioCtx.currentTime - startTime) % duration : pauseOffset;
+        currentPos = Math.max(0, currentPos - 5);
+        pauseOffset = currentPos;
+        seekSlider.value = currentPos;
+        currentTimeLbl.textContent = formatTime(currentPos);
+        if (isPlaying) {
+          playSound(pauseOffset);
+        }
       });
 
-      forwardBtn.addEventListener("click", async () => {
-        if (!isLoaded) await loadAudioFile();
-        jumpTime(5);
+      forwardBtn.addEventListener("click", () => {
+        if (!isLoaded) return;
+        let currentPos = isPlaying ? (audioCtx.currentTime - startTime) % duration : pauseOffset;
+        currentPos = Math.min(duration, currentPos + 5);
+        pauseOffset = currentPos;
+        seekSlider.value = currentPos;
+        currentTimeLbl.textContent = formatTime(currentPos);
+        if (isPlaying) {
+          playSound(pauseOffset);
+        }
       });
 
       loopBtn.addEventListener("click", () => {
@@ -2341,28 +2242,10 @@ html_content = """<!DOCTYPE html>
       volumeSlider.addEventListener("input", (e) => {
         const vol = parseFloat(e.target.value);
         if (gainNode) {
-          gainNode.gain.value = vol; // Khuếch đại lên đến 250% (2.5)
+          gainNode.gain.value = vol; // Hỗ trợ tăng cường âm lượng lên đến 200% - 250% (2.5x)
         }
       });
 
-      // Phím tắt tiện ích khi mở pop-up nhạc (Space: Play/Pause, Mũi tên Trái/Phải: Tua 5s)
-      document.addEventListener("keydown", (e) => {
-        if (!musicModal.classList.contains("active")) return;
-        if (e.code === "Space") {
-          e.preventDefault();
-          playBtn.click();
-        } else if (e.code === "ArrowLeft") {
-          e.preventDefault();
-          jumpTime(-5);
-        } else if (e.code === "ArrowRight") {
-          e.preventDefault();
-          jumpTime(5);
-        } else if (e.code === "Escape") {
-          closeModal();
-        }
-      });
-
-      // Tải ngầm file nhạc trước
       loadAudioFile();
     }
   </script>
