@@ -297,23 +297,41 @@
       opacity: 1;
     }
 
-    /* Hiệu ứng sóng nước cải tiến chân thực và wow hơn */
+    /* ==========================================================
+       HIỆU ỨNG SÓNG NƯỚC (RIPPLE) - 3 ĐỈNH SÓNG WOW & CHÂN THỰC
+       ========================================================== */
     .water-ripple {
       position: absolute;
       border-radius: 50%;
       transform: translate(-50%, -50%) scale(0);
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.25) 40%, rgba(255, 255, 255, 0.05) 70%, transparent 100%);
-      border: 2px solid rgba(255, 255, 255, 0.9);
       pointer-events: none;
-      animation: liquidSplash 0.95s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
       z-index: 50;
-      box-shadow: 0 0 35px rgba(255, 255, 255, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.6);
     }
 
-    @keyframes liquidSplash {
-      0% { width: 0; height: 0; opacity: 1; transform: translate(-50%, -50%) scale(0.1); filter: blur(0px); }
-      40% { opacity: 0.9; transform: translate(-50%, -50%) scale(0.9); filter: blur(0.5px); }
-      100% { width: 340px; height: 340px; opacity: 0; transform: translate(-50%, -50%) scale(1.8); filter: blur(2px); }
+    .water-ripple span {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.95);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.22) 50%, transparent 100%);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.55), inset 0 0 15px rgba(255, 255, 255, 0.7);
+      animation: tripleRippleWave 1.1s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+    }
+
+    .water-ripple span:nth-child(2) {
+      animation-delay: 0.15s;
+      border-color: rgba(255, 255, 255, 0.7);
+    }
+
+    .water-ripple span:nth-child(3) {
+      animation-delay: 0.3s;
+      border-color: rgba(255, 255, 255, 0.45);
+    }
+
+    @keyframes tripleRippleWave {
+      0% { width: 0; height: 0; opacity: 1; transform: scale(0.1); filter: blur(0px); }
+      50% { opacity: 0.85; transform: scale(1.12); filter: blur(0.3px); }
+      100% { width: 340px; height: 340px; opacity: 0; transform: scale(1.9); filter: blur(2px); }
     }
 
     .top-bar {
@@ -970,7 +988,7 @@
       transform: scale(1) translateY(0);
     }
 
-    /* Container hiệu ứng nốt nhạc & nhạc cụ bay bổng nghệ thuật khi nhạc phát */
+    /* Lớp hiệu ứng nốt nhạc, đàn violin, piano bay bổng cân đối đều khắp pop-up */
     .music-artistic-fx-layer {
       position: absolute;
       inset: 0;
@@ -985,30 +1003,32 @@
       opacity: 1;
     }
 
-    .floating-note-item {
+    .floating-artistic-item {
       position: absolute;
-      bottom: 20px;
-      font-size: 1.1rem;
+      bottom: 10px;
+      left: var(--pos-x);
+      font-size: var(--item-size);
       color: var(--shimmer-highlight);
-      text-shadow: 0 0 12px var(--glass-glow);
+      text-shadow: 0 0 14px var(--glass-glow), 0 0 25px rgba(255,255,255,0.4);
       opacity: 0;
       will-change: transform, opacity;
-      animation: floatArtisticNote 4.5s linear infinite;
+      animation: floatBalancedArtistic var(--anim-duration) ease-in-out infinite;
+      animation-delay: var(--anim-delay);
     }
 
-    @keyframes floatArtisticNote {
+    @keyframes floatBalancedArtistic {
       0% {
-        transform: translate3d(var(--start-x), 0, 0) scale(0.6) rotate(0deg);
+        transform: translate3d(0, 0, 0) scale(0.45) rotate(0deg);
         opacity: 0;
       }
       15% {
         opacity: 0.85;
       }
-      85% {
-        opacity: 0.85;
+      80% {
+        opacity: 0.78;
       }
       100% {
-        transform: translate3d(var(--end-x), -280px, 0) scale(1.3) rotate(var(--rot-deg));
+        transform: translate3d(var(--drift-x), -310px, 0) scale(1.25) rotate(var(--rot-deg));
         opacity: 0;
       }
     }
@@ -1390,7 +1410,7 @@
   <!-- MODAL TRÌNH PHÁT NHẠC KIỂU SPOTIFY & GAINNODE TĂNG CƯỜNG ÂM LƯỢNG -->
   <div class="modal-backdrop" id="music-modal" role="dialog" aria-hidden="true">
     <div class="music-modal-card" id="music-modal-card">
-      <!-- Lớp hiệu ứng nốt nhạc, đàn violin, piano bay bổng nghệ thuật -->
+      <!-- Lớp hiệu ứng nốt nhạc, violin, piano bay bổng cân đối đều khắp pop-up -->
       <div class="music-artistic-fx-layer" id="music-artistic-layer"></div>
 
       <div class="vinyl-container">
@@ -1592,7 +1612,7 @@
     }
 
     /* ==========================================================
-       2. CURSOR SPOTLIGHT, BORDER GLOW & LIQUID WATER DROPLETS
+       2. CURSOR SPOTLIGHT, BORDER GLOW & TRIPLE PEAK WATER RIPPLES
        ========================================================== */
     function initSpotlightAndDroplets() {
       const mainCard = document.getElementById("main-card");
@@ -1620,6 +1640,13 @@
         ripple.className = "water-ripple";
         ripple.style.left = `${e.clientX - rect.left}px`;
         ripple.style.top = `${e.clientY - rect.top}px`;
+        
+        // Tạo 3 đỉnh sóng lồng nhau tăng độ wow và chân thực
+        for (let i = 0; i < 3; i++) {
+          const ring = document.createElement("span");
+          ripple.appendChild(ring);
+        }
+
         mainCard.appendChild(ripple);
         ripple.addEventListener("animationend", () => ripple.remove());
       });
@@ -2184,28 +2211,36 @@
       let animFrameId = null;
       let artisticInterval = null;
 
-      const ARTISTIC_SYMBOLS = ["♪", "♫", "♩", "♬", "𝄞", "𝄢", "🎹", "🎻"];
+      // Danh sách nốt nhạc & biểu tượng đàn (piano, violin)
+      const ARTISTIC_SYMBOLS = ["♪", "♫", "♩", "♬", "𝄞", "🎹", "🎻"];
 
-      function spawnArtisticNotes() {
+      function spawnBalancedArtisticItems() {
         if (!isPlaying) return;
-        const note = document.createElement("div");
-        note.className = "floating-note-item";
-        note.textContent = ARTISTIC_SYMBOLS[Math.floor(Math.random() * ARTISTIC_SYMBOLS.length)];
         
-        const startX = (Math.random() * 280 - 140) + "px";
-        const endX = (Math.random() * 320 - 160) + "px";
-        const rotDeg = (Math.random() * 120 - 60) + "deg";
-        const durationAnim = (3.5 + Math.random() * 2) + "s";
-        const fontSize = (0.9 + Math.random() * 0.7) + "rem";
+        // Spawn đồng thời 2 item đối xứng (trái và phải) để phân bổ đều khắp pop-up
+        for (let i = 0; i < 2; i++) {
+          const item = document.createElement("div");
+          item.className = "floating-artistic-item";
+          item.textContent = ARTISTIC_SYMBOLS[Math.floor(Math.random() * ARTISTIC_SYMBOLS.length)];
+          
+          const isLeft = (i === 0);
+          const posX = isLeft ? (Math.random() * 32 + 8) + "%" : (Math.random() * 32 + 60) + "%";
+          const driftX = (isLeft ? (Math.random() * 50 + 15) : -(Math.random() * 50 + 15)) + "px";
+          const rotDeg = (Math.random() * 90 - 45) + "deg";
+          const animDuration = (4.0 + Math.random() * 2.2) + "s";
+          const animDelay = (Math.random() * 0.4) + "s";
+          const itemSize = (1.0 + Math.random() * 0.6) + "rem";
 
-        note.style.setProperty("--start-x", startX);
-        note.style.setProperty("--end-x", endX);
-        note.style.setProperty("--rot-deg", rotDeg);
-        note.style.animationDuration = durationAnim;
-        note.style.fontSize = fontSize;
+          item.style.setProperty("--pos-x", posX);
+          item.style.setProperty("--drift-x", driftX);
+          item.style.setProperty("--rot-deg", rotDeg);
+          item.style.setProperty("--anim-duration", animDuration);
+          item.style.setProperty("--anim-delay", animDelay);
+          item.style.setProperty("--item-size", itemSize);
 
-        artisticLayer.appendChild(note);
-        setTimeout(() => note.remove(), 5500);
+          artisticLayer.appendChild(item);
+          setTimeout(() => item.remove(), 6500);
+        }
       }
 
       function formatTime(seconds) {
@@ -2253,7 +2288,7 @@
           musicMainIcon.className = "fa-solid fa-compact-disc";
           musicModalCard.classList.add("playing-active");
           if (!artisticInterval) {
-            artisticInterval = setInterval(spawnArtisticNotes, 380);
+            artisticInterval = setInterval(spawnBalancedArtisticItems, 650);
           }
         } else {
           playIcon.className = "fa-solid fa-play";
