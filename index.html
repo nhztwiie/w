@@ -1200,38 +1200,40 @@
     }
 
     /* ==========================================================
-       NỐT NHẠC BAY BỔNG NHẸ NHÀNG TỪ DƯỚI POP-UP LÊN KHẮP POP-UP
+       NỐT NHẠC & KHÓA SOL BAY BỔNG UYỂN CHUYỂN, MƯỢT MÀ, NGHỆ THUẬT
        ========================================================== */
     .floating-music-note {
       position: absolute;
-      bottom: -24px;
-      font-size: 1.2rem;
+      bottom: -30px;
+      font-size: 1.35rem;
       pointer-events: none;
       z-index: 1;
       opacity: 0;
-      animation: floatUpModal var(--dur, 4.4s) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-      text-shadow: 0 0 12px var(--glass-glow), 0 0 6px rgba(255, 255, 255, 0.45);
+      animation: floatUpModal var(--dur, 5s) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      text-shadow: 0 0 16px var(--glass-glow), 0 0 8px rgba(255, 255, 255, 0.55);
       user-select: none;
       will-change: transform, opacity;
     }
 
     @keyframes floatUpModal {
       0% {
-        transform: translate3d(0px, 0px, 0) scale(0.65) rotate(0deg);
+        transform: translate3d(0px, 0px, 0) scale(0.5) rotate(0deg);
         opacity: 0;
       }
-      18% {
-        opacity: 0.88;
+      15% {
+        opacity: 0.92;
+        transform: translate3d(var(--sway1, -12px), -75px, 0) scale(1.05) rotate(var(--rot1, -10deg));
       }
       50% {
-        transform: translate3d(var(--sway1, 18px), -230px, 0) scale(1.02) rotate(var(--rot1, 14deg));
-        opacity: 0.72;
+        opacity: 0.78;
+        transform: translate3d(var(--sway2, 22px), -240px, 0) scale(1.2) rotate(var(--rot2, 18deg));
       }
-      85% {
-        opacity: 0.4;
+      82% {
+        opacity: 0.45;
+        transform: translate3d(var(--sway1, -15px), -410px, 0) scale(1.1) rotate(var(--rot1, -12deg));
       }
       100% {
-        transform: translate3d(var(--sway2, -16px), -490px, 0) scale(1.18) rotate(var(--rot2, -18deg));
+        transform: translate3d(var(--sway2, 18px), -520px, 0) scale(0.85) rotate(var(--rot2, 25deg));
         opacity: 0;
       }
     }
@@ -2190,22 +2192,24 @@
       closeModalBtn.addEventListener("click", closeModal);
       musicModal.addEventListener("click", (e) => { if (e.target === musicModal) closeModal(); });
 
-      // Các nốt nhạc và nhạc cụ bay bổng nhẹ nhàng từ bên dưới pop-up lên khắp pop-up
-      const symbols = ["♩", "♪", "♫", "♬", "🎹", "🎻"];
+      /* ==========================================================
+         BỔ SUNG NỐT KHÓA SOL (𝄞) VÀ CÁC NỐT NHẠC BAY BỔNG UYỂN CHUYỂN
+         ========================================================== */
+      const symbols = ["𝄞", "♩", "♪", "♫", "♬", "🎹", "🎻"];
       function spawnFloatingNote() {
         if (!isPlaying) return;
         const note = document.createElement("span");
         note.className = "floating-music-note";
         note.textContent = symbols[Math.floor(Math.random() * symbols.length)];
 
-        const startLeftPct = 8 + Math.random() * 84;
+        const startLeftPct = 6 + Math.random() * 88;
         note.style.left = `${startLeftPct}%`;
 
-        const sway1 = (Math.random() - 0.5) * 44;
-        const sway2 = (Math.random() - 0.5) * 64;
-        const rot1 = (Math.random() - 0.5) * 32;
-        const rot2 = (Math.random() - 0.5) * 52;
-        const dur = (3.8 + Math.random() * 1.4).toFixed(2);
+        const sway1 = (Math.random() - 0.5) * 55;
+        const sway2 = (Math.random() - 0.5) * 75;
+        const rot1 = (Math.random() - 0.5) * 35;
+        const rot2 = (Math.random() - 0.5) * 60;
+        const dur = (4.2 + Math.random() * 1.6).toFixed(2);
 
         note.style.setProperty("--sway1", `${sway1}px`);
         note.style.setProperty("--sway2", `${sway2}px`);
@@ -2242,7 +2246,7 @@
 
           if (!noteIntervalId) {
             spawnFloatingNote();
-            noteIntervalId = setInterval(spawnFloatingNote, 480);
+            noteIntervalId = setInterval(spawnFloatingNote, 420);
           }
         } else {
           playIcon.className = "fa-solid fa-play";
