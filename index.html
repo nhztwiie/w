@@ -301,16 +301,18 @@
       position: absolute;
       border-radius: 50%;
       transform: translate(-50%, -50%) scale(0);
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.05) 60%, transparent 100%);
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.6);
       pointer-events: none;
-      animation: dropletExpand 0.75s var(--spring-easing) forwards;
+      animation: liquidSplash 0.85s cubic-bezier(0.15, 0.85, 0.25, 1) forwards;
       z-index: 50;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
     }
 
-    @keyframes dropletExpand {
-      0% { width: 0; height: 0; opacity: 0.9; }
-      100% { width: 220px; height: 220px; opacity: 0; }
+    @keyframes liquidSplash {
+      0% { width: 0; height: 0; opacity: 1; transform: translate(-50%, -50%) scale(0.2); }
+      50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+      100% { width: 280px; height: 280px; opacity: 0; transform: translate(-50%, -50%) scale(1.6); }
     }
 
     .top-bar {
@@ -325,7 +327,7 @@
     .top-bar-left {
       display: flex;
       flex-direction: column;
-      align-items: center; /* Căn giữa hoàn toàn với theme mode */
+      align-items: center;
       gap: 5px;
       width: 78px;
     }
@@ -423,7 +425,7 @@
     .btn-action-item:active,
     .btn-download-icon:active,
     .nav-tab-btn:active {
-      transform: scale(0.96) !important;
+      transform: scale(0.94) !important;
       transition-duration: 0.08s;
     }
 
@@ -941,7 +943,7 @@
     }
 
     /* ==========================================================
-       SPOTIFY & IOS27 MUSIC PLAYER MODAL STYLING (REFINED & THEME HARMONIZED)
+       SPOTIFY & IOS27 MUSIC PLAYER MODAL STYLING (LIQUID WATER PHYSICS)
        ========================================================== */
     .music-modal-card {
       background: var(--glass-bg);
@@ -979,7 +981,6 @@
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      /* Đĩa than thực tế với các rãnh đĩa tinh tế, nhận thấy rõ bằng mắt mà không gây rối */
       background: 
         radial-gradient(circle at center, transparent 18%, rgba(255, 255, 255, 0.06) 19%, transparent 20%),
         repeating-radial-gradient(
@@ -1049,7 +1050,7 @@
       color: var(--text-sub);
     }
 
-    /* Thanh tua thời lượng (Không có mút tròn, định dạng 00:00) */
+    /* Thanh line thời lượng & âm lượng có màu sắc hiển thị (liquid fill) */
     .player-slider-group {
       margin-bottom: 14px;
       text-align: left;
@@ -1064,18 +1065,41 @@
       font-variant-numeric: tabular-nums;
     }
 
-    .ios27-slider {
-      -webkit-appearance: none;
+    .liquid-range-container {
+      position: relative;
       width: 100%;
-      height: 5px;
-      border-radius: 3px;
+      height: 6px;
       background: rgba(255, 255, 255, 0.15);
-      outline: none;
-      transition: background 0.3s ease;
+      border-radius: 3px;
+      overflow: hidden;
     }
 
-    [data-theme="light"] .ios27-slider {
-      background: rgba(0, 0, 0, 0.12);
+    [data-theme="light"] .liquid-range-container {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .liquid-range-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--shimmer-highlight), var(--text-title));
+      border-radius: 3px;
+      width: 0%;
+      pointer-events: none;
+      box-shadow: 0 0 10px var(--glass-glow);
+    }
+
+    .ios27-slider {
+      position: absolute;
+      inset: 0;
+      -webkit-appearance: none;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      outline: none;
+      cursor: pointer;
+      z-index: 2;
     }
 
     .ios27-slider::-webkit-slider-thumb {
@@ -1116,7 +1140,7 @@
       transition: transform 0.2s var(--spring-easing), background 0.2s ease, border-color 0.2s ease;
     }
 
-    /* Nút phát/dừng nhạc có màu sắc đồng bộ hoàn hảo với theme page */
+    /* Nút phát/dừng: icon tam giác cân xứng tuyệt đối với hình tròn */
     .player-ctrl-btn.main-play {
       width: 54px;
       height: 54px;
@@ -1125,6 +1149,21 @@
       color: var(--text-title);
       font-size: 1.15rem;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .player-ctrl-btn.main-play i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    #modal-play-icon.fa-play {
+      transform: translateX(2px); /* Cân chỉnh quang học hình tam giác nút Play */
     }
 
     .player-ctrl-btn:hover {
@@ -1145,8 +1184,10 @@
     }
 
     .volume-control-wrapper i {
-      font-size: 0.85rem;
-      color: var(--text-sub);
+      font-size: 0.88rem;
+      color: var(--text-title);
+      width: 20px;
+      text-align: center;
     }
   </style>
 </head>
@@ -1235,12 +1276,10 @@
       <nav class="ios26-nav-dock" id="nav-dock">
         <div class="nav-indicator-pill" id="nav-indicator"></div>
         
-        <!-- Icon social tab khôi phục giống file index.html gốc ban đầu -->
         <button class="nav-tab-btn" data-index="0" aria-label="Social">
           <i class="fa-solid fa-share-nodes"></i>
         </button>
 
-        <!-- Icon home tab chuyển thành account -->
         <button class="nav-tab-btn active" data-index="1" aria-label="Account">
           <i class="fa-solid fa-user"></i>
         </button>
@@ -1310,16 +1349,19 @@
         <div class="music-track-artist">ALL-ROUNDER</div>
       </div>
 
-      <!-- Thanh tua thời gian thực (định dạng 00:00, không mút tròn) -->
+      <!-- Thanh tua thời lượng với thanh line màu sắc hiển thị thời gian -->
       <div class="player-slider-group">
         <div class="player-time-row">
           <span id="current-time-lbl">00:00</span>
           <span id="duration-lbl">00:00</span>
         </div>
-        <input type="range" id="seek-slider" class="ios27-slider" min="0" max="100" value="0" step="0.1">
+        <div class="liquid-range-container">
+          <div class="liquid-range-fill" id="seek-fill"></div>
+          <input type="range" id="seek-slider" class="ios27-slider" min="0" max="100" value="0" step="0.1">
+        </div>
       </div>
 
-      <!-- Nút điều khiển (Tua lùi 5s, Phát/Dừng, Tua tới 5s - Đã bỏ nút lặp lại/phát lại) -->
+      <!-- Nút điều khiển (Tua lùi 5s, Phát/Dừng cân xứng, Tua tới 5s) -->
       <div class="player-controls-row">
         <button class="player-ctrl-btn" id="modal-rewind-btn" title="Tua lùi 5 giây">
           <i class="fa-solid fa-backward-step"></i>
@@ -1332,10 +1374,13 @@
         </button>
       </div>
 
-      <!-- Điều chỉnh âm lượng & GainNode tăng cường (Icon sóng loa thay đổi theo mức âm lượng, không có mút tròn) -->
+      <!-- Điều chỉnh âm lượng & GainNode tăng cường (Icon sóng loa tự đổi theo mức độ, có thanh line màu sắc) -->
       <div class="volume-control-wrapper">
         <i class="fa-solid fa-volume-high" id="volume-icon"></i>
-        <input type="range" id="volume-slider" class="ios27-slider" min="0" max="2.5" step="0.05" value="1">
+        <div class="liquid-range-container" style="flex: 1;">
+          <div class="liquid-range-fill" id="volume-fill" style="width: 40%;"></div>
+          <input type="range" id="volume-slider" class="ios27-slider" min="0" max="2.5" step="0.05" value="1">
+        </div>
       </div>
 
       <button class="btn-close-modal" id="close-music-modal-btn">Close</button>
@@ -1489,7 +1534,7 @@
     }
 
     /* ==========================================================
-       2. CURSOR SPOTLIGHT, BORDER GLOW & WATER DROPLET RIPPLES
+       2. CURSOR SPOTLIGHT, BORDER GLOW & LIQUID WATER DROPLETS
        ========================================================== */
     function initSpotlightAndDroplets() {
       const mainCard = document.getElementById("main-card");
@@ -1502,7 +1547,7 @@
       });
 
       document.addEventListener("mousemove", (e) => {
-        const target = e.target.closest(".glass-btn-ios26, .ios26-link-item, .btn-action-item, .btn-download-icon");
+        const target = e.target.closest(".glass-btn-ios26, .ios26-link-item, .btn-action-item, .btn-download-icon, .player-ctrl-btn");
         if (target) {
           const rect = target.getBoundingClientRect();
           target.style.setProperty("--btn-x", `${e.clientX - rect.left}px`);
@@ -2057,7 +2102,9 @@
       const vinylRecord = document.getElementById("vinyl-record");
 
       const seekSlider = document.getElementById("seek-slider");
+      const seekFill = document.getElementById("seek-fill");
       const volumeSlider = document.getElementById("volume-slider");
+      const volumeFill = document.getElementById("volume-fill");
       const volumeIcon = document.getElementById("volume-icon");
       const currentTimeLbl = document.getElementById("current-time-lbl");
       const durationLbl = document.getElementById("duration-lbl");
@@ -2069,7 +2116,7 @@
 
       let isPlaying = false;
       let isLoaded = false;
-      let isLooping = true; // Mặc định lặp lại liên tục vì đã bỏ nút phát lại
+      let isLooping = true;
 
       let startTime = 0;
       let pauseOffset = 0;
@@ -2128,6 +2175,7 @@
       }
 
       function updateVolumeIcon(vol) {
+        // Mức sóng âm theo âm lượng: 0 = muted/off, nhỏ <= 1.0, lớn > 1.0 (lên đến 2.5x)
         if (vol === 0) {
           volumeIcon.className = "fa-solid fa-volume-off";
         } else if (vol <= 1.0) {
@@ -2159,6 +2207,7 @@
             stopSound();
             pauseOffset = 0;
             seekSlider.value = 0;
+            seekFill.style.width = "0%";
             currentTimeLbl.textContent = "00:00";
           }
         };
@@ -2187,6 +2236,7 @@
         if (!isPlaying) return;
         const currentPos = (audioCtx.currentTime - startTime) % duration;
         seekSlider.value = currentPos;
+        seekFill.style.width = `${(currentPos / duration) * 100}%`;
         currentTimeLbl.textContent = formatTime(currentPos);
         animFrameId = requestAnimationFrame(trackProgress);
       }
@@ -2208,6 +2258,7 @@
         currentPos = Math.max(0, currentPos - 5);
         pauseOffset = currentPos;
         seekSlider.value = currentPos;
+        seekFill.style.width = `${(currentPos / duration) * 100}%`;
         currentTimeLbl.textContent = formatTime(currentPos);
         if (isPlaying) {
           playSound(pauseOffset);
@@ -2220,6 +2271,7 @@
         currentPos = Math.min(duration, currentPos + 5);
         pauseOffset = currentPos;
         seekSlider.value = currentPos;
+        seekFill.style.width = `${(currentPos / duration) * 100}%`;
         currentTimeLbl.textContent = formatTime(currentPos);
         if (isPlaying) {
           playSound(pauseOffset);
@@ -2228,6 +2280,7 @@
 
       seekSlider.addEventListener("input", (e) => {
         const val = parseFloat(e.target.value);
+        seekFill.style.width = `${(val / duration) * 100}%`;
         currentTimeLbl.textContent = formatTime(val);
         pauseOffset = val;
         if (isPlaying) {
@@ -2240,8 +2293,13 @@
         if (gainNode) {
           gainNode.gain.value = vol;
         }
+        // Thanh line màu sắc âm lượng tính theo max 2.5
+        volumeFill.style.width = `${(vol / 2.5) * 100}%`;
         updateVolumeIcon(vol);
       });
+
+      // Khởi tạo độ rộng fill ban đầu cho thanh âm lượng
+      volumeFill.style.width = `${(1.0 / 2.5) * 100}%`;
 
       loadAudioFile();
     }
