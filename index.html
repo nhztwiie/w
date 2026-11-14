@@ -1200,40 +1200,43 @@
     }
 
     /* ==========================================================
-       NỐT NHẠC & KHÓA SOL BAY BỔNG UYỂN CHUYỂN, MƯỢT MÀ, NGHỆ THUẬT
+       NỐT NHẠC & KHÓA SOL BAY BỔNG UYỂN CHUYỂN, MƯỢT MÀ (SILKY FLUID)
        ========================================================== */
     .floating-music-note {
       position: absolute;
-      bottom: -30px;
+      bottom: -35px;
       font-size: 1.35rem;
       pointer-events: none;
       z-index: 1;
       opacity: 0;
-      animation: floatUpModal var(--dur, 5s) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-      text-shadow: 0 0 16px var(--glass-glow), 0 0 8px rgba(255, 255, 255, 0.55);
+      /* Sử dụng cubic-bezier mượt mà, loại bỏ triệt để điểm khựng */
+      animation: floatUpModalSilky var(--dur, 6s) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      text-shadow: 0 0 16px var(--glass-glow), 0 0 8px rgba(255, 255, 255, 0.5);
       user-select: none;
       will-change: transform, opacity;
     }
 
-    @keyframes floatUpModal {
+    @keyframes floatUpModalSilky {
       0% {
-        transform: translate3d(0px, 0px, 0) scale(0.5) rotate(0deg);
+        transform: translate3d(0px, 0px, 0) scale(0.4) rotate(0deg);
         opacity: 0;
       }
-      15% {
-        opacity: 0.92;
-        transform: translate3d(var(--sway1, -12px), -75px, 0) scale(1.05) rotate(var(--rot1, -10deg));
+      10% {
+        opacity: 0.85;
       }
-      50% {
-        opacity: 0.78;
-        transform: translate3d(var(--sway2, 22px), -240px, 0) scale(1.2) rotate(var(--rot2, 18deg));
+      35% {
+        transform: translate3d(var(--sway1, -25px), -160px, 0) scale(1.05) rotate(var(--rot1, -14deg));
+        opacity: 0.95;
       }
-      82% {
-        opacity: 0.45;
-        transform: translate3d(var(--sway1, -15px), -410px, 0) scale(1.1) rotate(var(--rot1, -12deg));
+      70% {
+        transform: translate3d(var(--sway2, 30px), -360px, 0) scale(1.2) rotate(var(--rot2, 22deg));
+        opacity: 0.65;
+      }
+      90% {
+        opacity: 0.3;
       }
       100% {
-        transform: translate3d(var(--sway2, 18px), -520px, 0) scale(0.85) rotate(var(--rot2, 25deg));
+        transform: translate3d(var(--sway1, -10px), -500px, 0) scale(0.9) rotate(var(--rot1, 8deg));
         opacity: 0;
       }
     }
@@ -2193,7 +2196,7 @@
       musicModal.addEventListener("click", (e) => { if (e.target === musicModal) closeModal(); });
 
       /* ==========================================================
-         BỔ SUNG NỐT KHÓA SOL (𝄞) VÀ CÁC NỐT NHẠC BAY BỔNG UYỂN CHUYỂN
+         CÁC KÝ HIỆU NỐT NHẠC VÀ KHÓA SOL BAY BỔNG, MƯỢT MÀ, KHÔNG KHỰNG
          ========================================================== */
       const symbols = ["𝄞", "♩", "♪", "♫", "♬", "🎹", "🎻"];
       function spawnFloatingNote() {
@@ -2202,14 +2205,14 @@
         note.className = "floating-music-note";
         note.textContent = symbols[Math.floor(Math.random() * symbols.length)];
 
-        const startLeftPct = 6 + Math.random() * 88;
+        const startLeftPct = 5 + Math.random() * 90;
         note.style.left = `${startLeftPct}%`;
 
-        const sway1 = (Math.random() - 0.5) * 55;
-        const sway2 = (Math.random() - 0.5) * 75;
-        const rot1 = (Math.random() - 0.5) * 35;
-        const rot2 = (Math.random() - 0.5) * 60;
-        const dur = (4.2 + Math.random() * 1.6).toFixed(2);
+        const sway1 = (Math.random() - 0.5) * 60;
+        const sway2 = (Math.random() - 0.5) * 85;
+        const rot1 = (Math.random() - 0.5) * 40;
+        const rot2 = (Math.random() - 0.5) * 70;
+        const dur = (5.2 + Math.random() * 2.2).toFixed(2); // Thời gian dài hơn để chuyển động thư thả, mượt
 
         note.style.setProperty("--sway1", `${sway1}px`);
         note.style.setProperty("--sway2", `${sway2}px`);
@@ -2246,7 +2249,7 @@
 
           if (!noteIntervalId) {
             spawnFloatingNote();
-            noteIntervalId = setInterval(spawnFloatingNote, 420);
+            noteIntervalId = setInterval(spawnFloatingNote, 520);
           }
         } else {
           playIcon.className = "fa-solid fa-play";
