@@ -987,7 +987,7 @@
       pointer-events: none;
       z-index: 10;
       transform-origin: 82px 14px;
-      transform: rotate(-28deg); /* Mặc định: Vị trí nghỉ bên ngoài */
+      transform: rotate(-28deg); /* Vị trí nghỉ bên ngoài khi không phát */
       transition: transform 0.8s cubic-bezier(0.34, 1.2, 0.64, 1);
     }
 
@@ -1032,7 +1032,7 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.4);
     }
 
-    /* HIỆU ỨNG NỐT NHẠC & ĐÀN TỎA RA TỪ ĐĨA THAN */
+    /* HIỆU ỨNG NỐT NHẠC & NHẠC CỤ TỎA RA TỪ ĐĨA THAN */
     .music-note-particle {
       position: absolute;
       top: 50%;
@@ -1149,7 +1149,6 @@
       color: var(--text-sub);
     }
 
-    /* Thanh line thời lượng & âm lượng có màu sắc hiển thị (liquid fill) */
     .player-slider-group {
       margin-bottom: 14px;
       text-align: left;
@@ -1239,7 +1238,6 @@
       transition: transform 0.2s var(--spring-easing), background 0.2s ease, border-color 0.2s ease;
     }
 
-    /* Nút phát/dừng: icon tam giác cân xứng tuyệt đối với hình tròn */
     .player-ctrl-btn.main-play {
       width: 54px;
       height: 54px;
@@ -1262,7 +1260,7 @@
     }
 
     #modal-play-icon.fa-play {
-      transform: translateX(2px); /* Cân chỉnh quang học hình tam giác nút Play */
+      transform: translateX(2px);
     }
 
     .player-ctrl-btn:hover {
