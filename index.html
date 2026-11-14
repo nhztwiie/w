@@ -961,7 +961,7 @@
       box-shadow: var(--glass-shadow);
       color: var(--text-title);
       position: relative;
-      overflow: visible; /* Cho phép hiệu ứng nốt nhạc bay ra ngoài khung */
+      overflow: hidden;
     }
 
     .modal-backdrop.active .music-modal-card {
@@ -977,6 +977,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 2;
     }
 
     .vinyl-record {
@@ -1031,6 +1032,8 @@
     }
 
     .music-track-info-wrap {
+      position: relative;
+      z-index: 2;
       margin-bottom: 18px;
       white-space: nowrap;
       overflow: hidden;
@@ -1053,6 +1056,8 @@
     }
 
     .player-slider-group {
+      position: relative;
+      z-index: 2;
       margin-bottom: 14px;
       text-align: left;
     }
@@ -1118,6 +1123,8 @@
     }
 
     .player-controls-row {
+      position: relative;
+      z-index: 2;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1173,6 +1180,8 @@
     }
 
     .volume-control-wrapper {
+      position: relative;
+      z-index: 2;
       display: flex;
       align-items: center;
       gap: 12px;
@@ -1191,29 +1200,38 @@
     }
 
     /* ==========================================================
-       HIỆU ỨNG NỐT NHẠC, PIANO, VIOLIN TỎA RA KHI PHÁT NHẠC
+       NỐT NHẠC BAY BỔNG NHẸ NHÀNG TỪ DƯỚI POP-UP LÊN KHẮP POP-UP
        ========================================================== */
     .floating-music-note {
       position: absolute;
-      font-size: 1.25rem;
+      bottom: -24px;
+      font-size: 1.2rem;
       pointer-events: none;
-      z-index: 200;
+      z-index: 1;
       opacity: 0;
-      animation: floatNoteAnim 2.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      text-shadow: 0 0 12px var(--glass-glow), 0 0 4px rgba(255, 255, 255, 0.6);
+      animation: floatUpModal var(--dur, 4.4s) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      text-shadow: 0 0 12px var(--glass-glow), 0 0 6px rgba(255, 255, 255, 0.45);
       user-select: none;
+      will-change: transform, opacity;
     }
 
-    @keyframes floatNoteAnim {
+    @keyframes floatUpModal {
       0% {
-        transform: translate(0px, 0px) scale(0.6) rotate(0deg);
+        transform: translate3d(0px, 0px, 0) scale(0.65) rotate(0deg);
         opacity: 0;
       }
-      20% {
-        opacity: 0.95;
+      18% {
+        opacity: 0.88;
+      }
+      50% {
+        transform: translate3d(var(--sway1, 18px), -230px, 0) scale(1.02) rotate(var(--rot1, 14deg));
+        opacity: 0.72;
+      }
+      85% {
+        opacity: 0.4;
       }
       100% {
-        transform: translate(var(--tx), var(--ty)) scale(1.35) rotate(var(--trot));
+        transform: translate3d(var(--sway2, -16px), -490px, 0) scale(1.18) rotate(var(--rot2, -18deg));
         opacity: 0;
       }
     }
@@ -1243,7 +1261,7 @@
             <i class="fa-solid fa-sun orb-icon icon-sun"></i>
           </div>
         </div>
-        <div class="realtime-clock" id="realtime-clock">00:00:00</div>
+        <div class="realtime-clock" id="realtime-clock">--:--:--</div>
       </div>
 
       <div class="top-bar-controls">
@@ -1407,7 +1425,7 @@
         </div>
       </div>
 
-      <button class="btn-close-modal" id="close-music-modal-btn">Close</button>
+      <button class="btn-close-modal" id="close-music-modal-btn" style="position: relative; z-index: 2;">Close</button>
     </div>
   </div>
 
@@ -1425,7 +1443,7 @@
       }
 
       initAutoTheme();
-      initRealtimeClock();
+      initDeviceSyncClock();
       initMagneticDock();
       initSpotlightAndDroplets();
       initAmbientCanvas();
@@ -1438,7 +1456,7 @@
     });
 
     /* ==========================================================
-       AUTO-THEME THEO THỜI GIAN THỰC & ĐỒNG HỒ THỜI GIAN THỰC
+       AUTO-THEME & ĐỒNG HỒ ĐỒNG BỘ CHÍNH XÁC VỚI THỜI GIAN THIẾT BỊ
        ========================================================== */
     function initAutoTheme() {
       if (!localStorage.getItem("ios26-user-overridden")) {
@@ -1448,20 +1466,22 @@
       }
     }
 
-    function initRealtimeClock() {
+    function initDeviceSyncClock() {
       const clockEl = document.getElementById("realtime-clock");
       if (!clockEl) return;
 
-      function updateClock() {
+      function syncClock() {
         const now = new Date();
         const hours = String(now.getHours()).padStart(2, '0');
         const minutes = String(now.getMinutes()).padStart(2, '0');
         const seconds = String(now.getSeconds()).padStart(2, '0');
         clockEl.textContent = `${hours}:${minutes}:${seconds}`;
+
+        const msUntilNextSecond = 1000 - now.getMilliseconds();
+        setTimeout(syncClock, msUntilNextSecond);
       }
 
-      updateClock();
-      setInterval(updateClock, 1000);
+      syncClock();
     }
 
     /* ==========================================================
@@ -2170,7 +2190,7 @@
       closeModalBtn.addEventListener("click", closeModal);
       musicModal.addEventListener("click", (e) => { if (e.target === musicModal) closeModal(); });
 
-      // Hiệu ứng sinh nốt nhạc, piano, violin tỏa ra
+      // Các nốt nhạc và nhạc cụ bay bổng nhẹ nhàng từ bên dưới pop-up lên khắp pop-up
       const symbols = ["♩", "♪", "♫", "♬", "🎹", "🎻"];
       function spawnFloatingNote() {
         if (!isPlaying) return;
@@ -2178,20 +2198,20 @@
         note.className = "floating-music-note";
         note.textContent = symbols[Math.floor(Math.random() * symbols.length)];
 
-        // Đặt vị trí xuất phát ngẫu nhiên quanh đĩa nhạc
-        const startX = 140 + (Math.random() - 0.5) * 120;
-        const startY = 120 + (Math.random() - 0.5) * 60;
-        note.style.left = `${startX}px`;
-        note.style.top = `${startY}px`;
+        const startLeftPct = 8 + Math.random() * 84;
+        note.style.left = `${startLeftPct}%`;
 
-        // Hướng bay tỏa ra ngẫu nhiên
-        const tx = (Math.random() - 0.5) * 220;
-        const ty = -120 - Math.random() * 100;
-        const trot = (Math.random() - 0.5) * 90;
+        const sway1 = (Math.random() - 0.5) * 44;
+        const sway2 = (Math.random() - 0.5) * 64;
+        const rot1 = (Math.random() - 0.5) * 32;
+        const rot2 = (Math.random() - 0.5) * 52;
+        const dur = (3.8 + Math.random() * 1.4).toFixed(2);
 
-        note.style.setProperty("--tx", `${tx}px`);
-        note.style.setProperty("--ty", `${ty}px`);
-        note.style.setProperty("--trot", `${trot}deg`);
+        note.style.setProperty("--sway1", `${sway1}px`);
+        note.style.setProperty("--sway2", `${sway2}px`);
+        note.style.setProperty("--rot1", `${rot1}deg`);
+        note.style.setProperty("--rot2", `${rot2}deg`);
+        note.style.setProperty("--dur", `${dur}s`);
 
         musicModalCard.appendChild(note);
         note.addEventListener("animationend", () => note.remove());
@@ -2221,7 +2241,8 @@
           musicMainIcon.className = "fa-solid fa-compact-disc";
 
           if (!noteIntervalId) {
-            noteIntervalId = setInterval(spawnFloatingNote, 320);
+            spawnFloatingNote();
+            noteIntervalId = setInterval(spawnFloatingNote, 480);
           }
         } else {
           playIcon.className = "fa-solid fa-play";
