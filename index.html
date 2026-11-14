@@ -297,71 +297,23 @@
       opacity: 1;
     }
 
-    /* ==========================================================
-       REALISTIC MULTI-RING LIQUID WATER RIPPLE (WOW EFFECT)
-       ========================================================== */
-    .water-ripple-group {
+    /* Hiệu ứng sóng nước cải tiến chân thực và wow hơn */
+    .water-ripple {
       position: absolute;
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.25) 40%, rgba(255, 255, 255, 0.05) 70%, transparent 100%);
+      border: 2px solid rgba(255, 255, 255, 0.9);
       pointer-events: none;
+      animation: liquidSplash 0.95s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
       z-index: 50;
-      transform: translate(-50%, -50%);
+      box-shadow: 0 0 35px rgba(255, 255, 255, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.6);
     }
 
-    .water-core-flash {
-      position: absolute;
-      top: 0; left: 0;
-      width: 24px; height: 24px;
-      border-radius: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.25) 45%, transparent 75%);
-      animation: waterFlash 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .water-wave-ring {
-      position: absolute;
-      top: 0; left: 0;
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      border: 1.5px solid rgba(255, 255, 255, 0.65);
-      box-shadow: 
-        0 0 14px rgba(255, 255, 255, 0.35),
-        inset 0 0 10px rgba(255, 255, 255, 0.25);
-      background: radial-gradient(circle, transparent 58%, rgba(255, 255, 255, 0.14) 78%, rgba(255, 255, 255, 0.28) 92%, transparent 100%);
-      animation: waterWaveSpread var(--wave-dur, 1.15s) cubic-bezier(0.12, 0.78, 0.22, 1) var(--wave-delay, 0s) forwards;
-    }
-
-    [data-theme="light"] .water-wave-ring {
-      border-color: rgba(255, 255, 255, 0.95);
-      box-shadow: 
-        0 2px 14px rgba(22, 163, 74, 0.18),
-        inset 0 0 10px rgba(255, 255, 255, 0.75);
-      background: radial-gradient(circle, transparent 58%, rgba(34, 197, 94, 0.08) 78%, rgba(255, 255, 255, 0.55) 92%, transparent 100%);
-    }
-
-    @keyframes waterFlash {
-      0% { transform: translate(-50%, -50%) scale(0.2); opacity: 1; }
-      100% { transform: translate(-50%, -50%) scale(3.5); opacity: 0; }
-    }
-
-    @keyframes waterWaveSpread {
-      0% {
-        width: 12px;
-        height: 12px;
-        opacity: 0.95;
-        transform: translate(-50%, -50%) scale(0.3);
-        border-width: 2.2px;
-      }
-      40% {
-        opacity: 0.65;
-      }
-      100% {
-        width: var(--wave-size, 320px);
-        height: var(--wave-size, 320px);
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(1);
-        border-width: 0.5px;
-      }
+    @keyframes liquidSplash {
+      0% { width: 0; height: 0; opacity: 1; transform: translate(-50%, -50%) scale(0.1); filter: blur(0px); }
+      40% { opacity: 0.9; transform: translate(-50%, -50%) scale(0.9); filter: blur(0.5px); }
+      100% { width: 340px; height: 340px; opacity: 0; transform: translate(-50%, -50%) scale(1.8); filter: blur(2px); }
     }
 
     .top-bar {
@@ -992,11 +944,10 @@
     }
 
     /* ==========================================================
-       SPOTIFY & IOS27 MUSIC PLAYER MODAL STYLING + ARTISTIC STAGE CANVAS
+       SPOTIFY & IOS27 MUSIC PLAYER MODAL STYLING (LIQUID WATER PHYSICS)
        ========================================================== */
     .music-modal-card {
       position: relative;
-      overflow: hidden;
       background: var(--glass-bg);
       backdrop-filter: blur(32px) saturate(200%);
       -webkit-backdrop-filter: blur(32px) saturate(200%);
@@ -1011,32 +962,55 @@
       transition: transform 0.5s var(--spring-easing), opacity 0.4s var(--spring-easing);
       box-shadow: var(--glass-shadow);
       color: var(--text-title);
-    }
-
-    #music-ambient-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0;
-      filter: blur(0.6px);
-      transition: opacity 1.1s ease;
-    }
-
-    .music-modal-card.is-playing #music-ambient-canvas {
-      opacity: 1;
-    }
-
-    .music-modal-inner {
-      position: relative;
-      z-index: 2;
+      overflow: hidden;
     }
 
     .modal-backdrop.active .music-modal-card {
       opacity: 1;
       transform: scale(1) translateY(0);
+    }
+
+    /* Container hiệu ứng nốt nhạc & nhạc cụ bay bổng nghệ thuật khi nhạc phát */
+    .music-artistic-fx-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 5;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .music-modal-card.playing-active .music-artistic-fx-layer {
+      opacity: 1;
+    }
+
+    .floating-note-item {
+      position: absolute;
+      bottom: 20px;
+      font-size: 1.1rem;
+      color: var(--shimmer-highlight);
+      text-shadow: 0 0 12px var(--glass-glow);
+      opacity: 0;
+      will-change: transform, opacity;
+      animation: floatArtisticNote 4.5s linear infinite;
+    }
+
+    @keyframes floatArtisticNote {
+      0% {
+        transform: translate3d(var(--start-x), 0, 0) scale(0.6) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.85;
+      }
+      85% {
+        opacity: 0.85;
+      }
+      100% {
+        transform: translate3d(var(--end-x), -280px, 0) scale(1.3) rotate(var(--rot-deg));
+        opacity: 0;
+      }
     }
 
     .vinyl-container {
@@ -1047,6 +1021,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 6;
     }
 
     .vinyl-record {
@@ -1105,6 +1080,8 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      position: relative;
+      z-index: 6;
     }
 
     .music-track-title {
@@ -1122,9 +1099,12 @@
       color: var(--text-sub);
     }
 
+    /* Thanh line thời lượng & âm lượng có màu sắc hiển thị (liquid fill) */
     .player-slider-group {
       margin-bottom: 14px;
       text-align: left;
+      position: relative;
+      z-index: 6;
     }
 
     .player-time-row {
@@ -1193,6 +1173,8 @@
       justify-content: center;
       gap: 18px;
       margin: 16px 0 12px;
+      position: relative;
+      z-index: 6;
     }
 
     .player-ctrl-btn {
@@ -1211,6 +1193,7 @@
       transition: transform 0.2s var(--spring-easing), background 0.2s ease, border-color 0.2s ease;
     }
 
+    /* Nút phát/dừng: icon tam giác cân xứng tuyệt đối với hình tròn */
     .player-ctrl-btn.main-play {
       width: 54px;
       height: 54px;
@@ -1233,7 +1216,7 @@
     }
 
     #modal-play-icon.fa-play {
-      transform: translateX(2px);
+      transform: translateX(2px); /* Cân chỉnh quang học hình tam giác nút Play */
     }
 
     .player-ctrl-btn:hover {
@@ -1251,6 +1234,8 @@
       border-radius: 20px;
       border: 1px solid var(--glass-border);
       margin-top: 12px;
+      position: relative;
+      z-index: 6;
     }
 
     .volume-control-wrapper i {
@@ -1402,59 +1387,61 @@
     </div>
   </div>
 
-  <!-- MODAL TRÌNH PHÁT NHẠC KIỂU SPOTIFY + SÂN KHẤU MỜ ẢO VIOLIN & PIANO -->
+  <!-- MODAL TRÌNH PHÁT NHẠC KIỂU SPOTIFY & GAINNODE TĂNG CƯỜNG ÂM LƯỢNG -->
   <div class="modal-backdrop" id="music-modal" role="dialog" aria-hidden="true">
     <div class="music-modal-card" id="music-modal-card">
-      <!-- Canvas hiệu ứng nghệ thuật mờ ảo: Violin, Piano & Nốt nhạc bay -->
-      <canvas id="music-ambient-canvas"></canvas>
+      <!-- Lớp hiệu ứng nốt nhạc, đàn violin, piano bay bổng nghệ thuật -->
+      <div class="music-artistic-fx-layer" id="music-artistic-layer"></div>
 
-      <div class="music-modal-inner">
-        <div class="vinyl-container">
-          <div class="vinyl-record" id="vinyl-record">
-            <div class="vinyl-label">
-              <div class="vinyl-center-hole"></div>
-            </div>
+      <div class="vinyl-container">
+        <div class="vinyl-record" id="vinyl-record">
+          <div class="vinyl-label">
+            <div class="vinyl-center-hole"></div>
           </div>
         </div>
-
-        <div class="music-track-info-wrap">
-          <div class="music-track-title">Nếu Ngày Ấy - SOOBIN</div>
-          <div class="music-track-artist">ALL-ROUNDER</div>
-        </div>
-
-        <div class="player-slider-group">
-          <div class="player-time-row">
-            <span id="current-time-lbl">00:00</span>
-            <span id="duration-lbl">00:00</span>
-          </div>
-          <div class="liquid-range-container">
-            <div class="liquid-range-fill" id="seek-fill"></div>
-            <input type="range" id="seek-slider" class="ios27-slider" min="0" max="100" value="0" step="0.1">
-          </div>
-        </div>
-
-        <div class="player-controls-row">
-          <button class="player-ctrl-btn" id="modal-rewind-btn" title="Tua lùi 5 giây">
-            <i class="fa-solid fa-backward-step"></i>
-          </button>
-          <button class="player-ctrl-btn main-play" id="modal-play-btn" title="Phát / Dừng">
-            <i class="fa-solid fa-play" id="modal-play-icon"></i>
-          </button>
-          <button class="player-ctrl-btn" id="modal-forward-btn" title="Tua tới 5 giây">
-            <i class="fa-solid fa-forward-step"></i>
-          </button>
-        </div>
-
-        <div class="volume-control-wrapper">
-          <i class="fa-solid fa-volume-high" id="volume-icon"></i>
-          <div class="liquid-range-container" style="flex: 1;">
-            <div class="liquid-range-fill" id="volume-fill" style="width: 40%;"></div>
-            <input type="range" id="volume-slider" class="ios27-slider" min="0" max="2.5" step="0.05" value="1">
-          </div>
-        </div>
-
-        <button class="btn-close-modal" id="close-music-modal-btn">Close</button>
       </div>
+
+      <!-- Tên bài hát -->
+      <div class="music-track-info-wrap">
+        <div class="music-track-title">Nếu Ngày Ấy - SOOBIN</div>
+        <div class="music-track-artist">ALL-ROUNDER</div>
+      </div>
+
+      <!-- Thanh tua thời lượng -->
+      <div class="player-slider-group">
+        <div class="player-time-row">
+          <span id="current-time-lbl">00:00</span>
+          <span id="duration-lbl">00:00</span>
+        </div>
+        <div class="liquid-range-container">
+          <div class="liquid-range-fill" id="seek-fill"></div>
+          <input type="range" id="seek-slider" class="ios27-slider" min="0" max="100" value="0" step="0.1">
+        </div>
+      </div>
+
+      <!-- Nút điều khiển -->
+      <div class="player-controls-row">
+        <button class="player-ctrl-btn" id="modal-rewind-btn" title="Tua lùi 5 giây">
+          <i class="fa-solid fa-backward-step"></i>
+        </button>
+        <button class="player-ctrl-btn main-play" id="modal-play-btn" title="Phát / Dừng">
+          <i class="fa-solid fa-play" id="modal-play-icon"></i>
+        </button>
+        <button class="player-ctrl-btn" id="modal-forward-btn" title="Tua tới 5 giây">
+          <i class="fa-solid fa-forward-step"></i>
+        </button>
+      </div>
+
+      <!-- Điều chỉnh âm lượng & GainNode tăng cường -->
+      <div class="volume-control-wrapper">
+        <i class="fa-solid fa-volume-high" id="volume-icon"></i>
+        <div class="liquid-range-container" style="flex: 1;">
+          <div class="liquid-range-fill" id="volume-fill" style="width: 40%;"></div>
+          <input type="range" id="volume-slider" class="ios27-slider" min="0" max="2.5" step="0.05" value="1">
+        </div>
+      </div>
+
+      <button class="btn-close-modal" id="close-music-modal-btn">Close</button>
     </div>
   </div>
 
@@ -1485,7 +1472,7 @@
     });
 
     /* ==========================================================
-       AUTO-THEME & ĐỒNG HỒ THỜI GIAN THỰC ĐỒNG BỘ CHUẨN TỪNG GIÂY
+       AUTO-THEME THEO THỜI GIAN THỰC & ĐỒNG HỒ THỜI GIAN THỰC
        ========================================================== */
     function initAutoTheme() {
       if (!localStorage.getItem("ios26-user-overridden")) {
@@ -1499,18 +1486,16 @@
       const clockEl = document.getElementById("realtime-clock");
       if (!clockEl) return;
 
-      function tick() {
+      function updateClock() {
         const now = new Date();
         const hours = String(now.getHours()).padStart(2, '0');
         const minutes = String(now.getMinutes()).padStart(2, '0');
         const seconds = String(now.getSeconds()).padStart(2, '0');
         clockEl.textContent = `${hours}:${minutes}:${seconds}`;
-
-        const delayToNextSecond = 1000 - now.getMilliseconds();
-        setTimeout(tick, delayToNextSecond);
       }
 
-      tick();
+      updateClock();
+      setInterval(updateClock, 1000);
     }
 
     /* ==========================================================
@@ -1607,7 +1592,7 @@
     }
 
     /* ==========================================================
-       2. CURSOR SPOTLIGHT, BORDER GLOW & REALISTIC MULTI-RING WATER RIPPLES
+       2. CURSOR SPOTLIGHT, BORDER GLOW & LIQUID WATER DROPLETS
        ========================================================== */
     function initSpotlightAndDroplets() {
       const mainCard = document.getElementById("main-card");
@@ -1631,38 +1616,12 @@
       mainCard.addEventListener("pointerdown", (e) => {
         if (e.target.closest("textarea")) return;
         const rect = mainCard.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        const group = document.createElement("div");
-        group.className = "water-ripple-group";
-        group.style.left = `${x}px`;
-        group.style.top = `${y}px`;
-
-        const flash = document.createElement("span");
-        flash.className = "water-core-flash";
-        group.appendChild(flash);
-
-        const waves = [
-          { size: "330px", dur: "1.15s", delay: "0s" },
-          { size: "245px", dur: "1.05s", delay: "0.09s" },
-          { size: "155px", dur: "0.90s", delay: "0.18s" }
-        ];
-
-        waves.forEach((w, idx) => {
-          const ring = document.createElement("span");
-          ring.className = "water-wave-ring";
-          ring.style.setProperty("--wave-size", w.size);
-          ring.style.setProperty("--wave-dur", w.dur);
-          ring.style.setProperty("--wave-delay", w.delay);
-          group.appendChild(ring);
-
-          if (idx === 0) {
-            ring.addEventListener("animationend", () => group.remove());
-          }
-        });
-
-        mainCard.appendChild(group);
+        const ripple = document.createElement("span");
+        ripple.className = "water-ripple";
+        ripple.style.left = `${e.clientX - rect.left}px`;
+        ripple.style.top = `${e.clientY - rect.top}px`;
+        mainCard.appendChild(ripple);
+        ripple.addEventListener("animationend", () => ripple.remove());
       });
     }
 
@@ -2185,13 +2144,15 @@
     }
 
     /* ==========================================================
-       TRÌNH PHÁT NHẠC KIỂU SPOTIFY + SÂN KHẤU NGHỆ THUẬT VIOLIN, PIANO & NỐT NHẠC
+       TRÌNH PHÁT NHẠC KIỂU SPOTIFY & GAINNODE TĂNG CƯỜNG ÂM LƯỢNG (neungayay.mp3)
        ========================================================== */
     function initSpotifyAudioPlayer() {
       const openModalBtn = document.getElementById("open-music-modal-btn");
       const closeModalBtn = document.getElementById("close-music-modal-btn");
       const musicModal = document.getElementById("music-modal");
       const musicModalCard = document.getElementById("music-modal-card");
+      const artisticLayer = document.getElementById("music-artistic-layer");
+      const mainMusicBtn = document.getElementById("open-music-modal-btn");
       const musicMainIcon = document.getElementById("music-main-icon");
 
       const playBtn = document.getElementById("modal-play-btn");
@@ -2208,168 +2169,6 @@
       const currentTimeLbl = document.getElementById("current-time-lbl");
       const durationLbl = document.getElementById("duration-lbl");
 
-      /* --- SÂN KHẤU MỜ ẢO VIOLIN, PIANO & NỐT NHẠC --- */
-      const stageCanvas = document.getElementById("music-ambient-canvas");
-      const sCtx = stageCanvas ? stageCanvas.getContext("2d") : null;
-      let stageW = 360;
-      let stageH = 440;
-      let stageTime = 0;
-
-      const NOTE_SYMBOLS = ["♪", "♫", "♩", "♬"];
-      const floatingNotes = Array.from({ length: 16 }, (_, idx) => ({
-        x: 30 + Math.random() * 300,
-        y: 60 + Math.random() * 340,
-        vy: 0.35 + Math.random() * 0.45,
-        swayAmp: 12 + Math.random() * 16,
-        swayFreq: 0.015 + Math.random() * 0.015,
-        phase: Math.random() * Math.PI * 2,
-        size: 14 + Math.random() * 12,
-        symbol: NOTE_SYMBOLS[idx % NOTE_SYMBOLS.length],
-        alpha: 0.25 + Math.random() * 0.45
-      }));
-
-      function syncStageSize() {
-        if (!stageCanvas || !musicModalCard) return;
-        const rect = musicModalCard.getBoundingClientRect();
-        if (rect.width > 0 && rect.height > 0) {
-          stageW = stageCanvas.width = rect.width;
-          stageH = stageCanvas.height = rect.height;
-        }
-      }
-
-      function drawEtherealStage() {
-        if (!sCtx) return;
-        if (!isPlaying && parseFloat(getComputedStyle(stageCanvas).opacity) < 0.02) {
-          requestAnimationFrame(drawEtherealStage);
-          return;
-        }
-
-        stageTime += 0.028;
-        sCtx.clearRect(0, 0, stageW, stageH);
-
-        const isLight = document.documentElement.getAttribute("data-theme") === "light";
-        const strokeColor = isLight ? "rgba(22, 163, 74, " : "rgba(255, 255, 255, ";
-        const glowColor = isLight ? "rgba(34, 197, 94, 0.28)" : "rgba(255, 255, 255, 0.32)";
-
-        sCtx.save();
-        sCtx.shadowColor = glowColor;
-        sCtx.shadowBlur = 14;
-
-        /* 1. Vẽ cây đàn Violin nghệ thuật mờ ảo góc trên bên trái & cây vĩ kéo nhịp nhàng */
-        sCtx.save();
-        sCtx.translate(stageW * 0.21, stageH * 0.24);
-        const bodyTilt = -0.52 + Math.sin(stageTime * 0.7) * 0.045;
-        sCtx.rotate(bodyTilt);
-
-        sCtx.strokeStyle = strokeColor + "0.24)";
-        sCtx.fillStyle = strokeColor + "0.05)";
-        sCtx.lineWidth = 1.4;
-        sCtx.beginPath();
-        sCtx.moveTo(0, -34);
-        sCtx.bezierCurveTo(18, -34, 20, -14, 10, -4);
-        sCtx.bezierCurveTo(24, 6, 24, 34, 0, 34);
-        sCtx.bezierCurveTo(-24, 34, -24, 6, -10, -4);
-        sCtx.bezierCurveTo(-20, -14, -18, -34, 0, -34);
-        sCtx.fill();
-        sCtx.stroke();
-
-        sCtx.strokeStyle = strokeColor + "0.22)";
-        sCtx.lineWidth = 1;
-        sCtx.beginPath();
-        sCtx.moveTo(-7, 4); sCtx.quadraticCurveTo(-10, 11, -6, 17);
-        sCtx.moveTo(7, 4); sCtx.quadraticCurveTo(10, 11, 6, 17);
-        sCtx.stroke();
-
-        sCtx.beginPath();
-        sCtx.moveTo(0, -34);
-        sCtx.lineTo(0, -68);
-        sCtx.arc(0, -71, 3.2, 0, Math.PI * 2);
-        sCtx.stroke();
-
-        sCtx.strokeStyle = strokeColor + "0.14)";
-        sCtx.lineWidth = 0.6;
-        [-2, -0.7, 0.7, 2].forEach(dx => {
-          sCtx.beginPath();
-          sCtx.moveTo(dx, -66);
-          sCtx.lineTo(dx, 24);
-          sCtx.stroke();
-        });
-
-        const bowSlide = Math.sin(stageTime * 1.45) * 26;
-        const bowAngle = 0.16 + Math.cos(stageTime * 1.45) * 0.04;
-        sCtx.save();
-        sCtx.translate(bowSlide, 2);
-        sCtx.rotate(bowAngle);
-        sCtx.strokeStyle = strokeColor + "0.38)";
-        sCtx.lineWidth = 1.5;
-        sCtx.beginPath();
-        sCtx.moveTo(-46, 0);
-        sCtx.quadraticCurveTo(0, -3.5, 46, 0);
-        sCtx.stroke();
-        sCtx.strokeStyle = strokeColor + "0.18)";
-        sCtx.lineWidth = 0.7;
-        sCtx.beginPath();
-        sCtx.moveTo(-44, 1.5);
-        sCtx.lineTo(44, 1.5);
-        sCtx.stroke();
-        sCtx.restore();
-        sCtx.restore();
-
-        /* 2. Vẽ dải phím đàn Piano uốn lượn nghệ thuật ở góc dưới bên phải */
-        sCtx.save();
-        sCtx.translate(stageW * 0.56, stageH * 0.80);
-        sCtx.rotate(-0.22);
-        const keyCount = 11;
-        const keyW = 13;
-        const keyH = 38;
-        const activeKey = Math.floor((Math.sin(stageTime * 1.6) + 1) * 0.5 * keyCount);
-
-        for (let k = 0; k < keyCount; k++) {
-          const kx = k * keyW;
-          const isPressed = (k === activeKey || k === (activeKey + 3) % keyCount);
-          const pressOffset = isPressed ? 2.5 : 0;
-
-          sCtx.strokeStyle = strokeColor + (isPressed ? "0.34)" : "0.15)");
-          sCtx.fillStyle = strokeColor + (isPressed ? "0.14)" : "0.03)");
-          sCtx.lineWidth = 1;
-          sCtx.beginPath();
-          sCtx.roundRect(kx, pressOffset, keyW - 1.5, keyH, [0, 0, 4, 4]);
-          sCtx.fill();
-          sCtx.stroke();
-
-          if (k < keyCount - 1 && k % 7 !== 2 && k % 7 !== 6) {
-            sCtx.fillStyle = strokeColor + "0.22)";
-            sCtx.beginPath();
-            sCtx.roundRect(kx + keyW * 0.65, 0, keyW * 0.62, keyH * 0.58, [0, 0, 3, 3]);
-            sCtx.fill();
-          }
-        }
-        sCtx.restore();
-
-        /* 3. Các nốt nhạc bay lơ lửng mờ ảo tỏa sáng */
-        floatingNotes.forEach(n => {
-          n.y -= n.vy;
-          n.phase += n.swayFreq;
-          if (n.y < -24) {
-            n.y = stageH + 20;
-            n.x = 24 + Math.random() * (stageW - 48);
-          }
-
-          const currentX = n.x + Math.sin(n.phase) * n.swayAmp;
-          const edgeFade = Math.sin(Math.min(1, Math.max(0, n.y / stageH)) * Math.PI);
-          const noteAlpha = (n.alpha * edgeFade).toFixed(3);
-
-          sCtx.font = `500 ${n.size}px 'Plus Jakarta Sans', serif`;
-          sCtx.fillStyle = strokeColor + noteAlpha + ")";
-          sCtx.fillText(n.symbol, currentX, n.y);
-        });
-
-        sCtx.restore();
-        requestAnimationFrame(drawEtherealStage);
-      }
-
-      drawEtherealStage();
-
       let audioCtx = null;
       let audioBuffer = null;
       let sourceNode = null;
@@ -2383,6 +2182,31 @@
       let pauseOffset = 0;
       let duration = 0;
       let animFrameId = null;
+      let artisticInterval = null;
+
+      const ARTISTIC_SYMBOLS = ["♪", "♫", "♩", "♬", "𝄞", "𝄢", "🎹", "🎻"];
+
+      function spawnArtisticNotes() {
+        if (!isPlaying) return;
+        const note = document.createElement("div");
+        note.className = "floating-note-item";
+        note.textContent = ARTISTIC_SYMBOLS[Math.floor(Math.random() * ARTISTIC_SYMBOLS.length)];
+        
+        const startX = (Math.random() * 280 - 140) + "px";
+        const endX = (Math.random() * 320 - 160) + "px";
+        const rotDeg = (Math.random() * 120 - 60) + "deg";
+        const durationAnim = (3.5 + Math.random() * 2) + "s";
+        const fontSize = (0.9 + Math.random() * 0.7) + "rem";
+
+        note.style.setProperty("--start-x", startX);
+        note.style.setProperty("--end-x", endX);
+        note.style.setProperty("--rot-deg", rotDeg);
+        note.style.animationDuration = durationAnim;
+        note.style.fontSize = fontSize;
+
+        artisticLayer.appendChild(note);
+        setTimeout(() => note.remove(), 5500);
+      }
 
       function formatTime(seconds) {
         if (isNaN(seconds) || seconds < 0) return "00:00";
@@ -2392,41 +2216,23 @@
       }
 
       function openModal() {
-        if (!musicModal) return;
         musicModal.classList.add("active");
         musicModal.setAttribute("aria-hidden", "false");
-        requestAnimationFrame(syncStageSize);
       }
 
       function closeModal() {
-        if (!musicModal) return;
         musicModal.classList.remove("active");
         musicModal.setAttribute("aria-hidden", "true");
       }
 
-      /* Đảm bảo bấm vào nút nhạc là MỞ MODAL NGAY LẬP TỨC bất chấp file nhạc lỗi hay chưa tải */
-      if (openModalBtn) {
-        openModalBtn.addEventListener("click", (e) => {
-          e.preventDefault();
-          openModal();
-        });
-      }
-
-      if (closeModalBtn) {
-        closeModalBtn.addEventListener("click", closeModal);
-      }
-      if (musicModal) {
-        musicModal.addEventListener("click", (e) => { 
-          if (e.target === musicModal) closeModal(); 
-        });
-      }
-      window.addEventListener("resize", syncStageSize);
+      openModalBtn.addEventListener("click", openModal);
+      closeModalBtn.addEventListener("click", closeModal);
+      musicModal.addEventListener("click", (e) => { if (e.target === musicModal) closeModal(); });
 
       async function loadAudioFile() {
         if (isLoaded) return;
         try {
           const response = await fetch("audio/neungayay.mp3");
-          if (!response.ok) throw new Error("File audio không tồn tại");
           const arrayBuffer = await response.arrayBuffer();
           audioCtx = new (window.AudioContext || window.webkitAudioContext)();
           audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
@@ -2435,11 +2241,7 @@
           seekSlider.max = duration;
           isLoaded = true;
         } catch (e) {
-          console.warn("Chế độ mô phỏng âm thanh (Không tìm thấy tệp neungayay.mp3):", e);
-          isLoaded = false;
-          duration = 180; // Giả lập bài hát 3 phút nếu chưa có file
-          durationLbl.textContent = "03:00";
-          seekSlider.max = duration;
+          console.error("Lỗi tải tệp âm thanh neungayay.mp3:", e);
         }
       }
 
@@ -2447,19 +2249,21 @@
         if (playing) {
           playIcon.className = "fa-solid fa-pause";
           vinylRecord.classList.add("spinning");
-          if (openModalBtn) openModalBtn.classList.add("playing");
-          if (musicMainIcon) musicMainIcon.className = "fa-solid fa-compact-disc";
-          if (musicModalCard) {
-            syncStageSize();
-            musicModalCard.classList.add("is-playing");
+          mainMusicBtn.classList.add("playing");
+          musicMainIcon.className = "fa-solid fa-compact-disc";
+          musicModalCard.classList.add("playing-active");
+          if (!artisticInterval) {
+            artisticInterval = setInterval(spawnArtisticNotes, 380);
           }
         } else {
           playIcon.className = "fa-solid fa-play";
           vinylRecord.classList.remove("spinning");
-          if (openModalBtn) openModalBtn.classList.remove("playing");
-          if (musicMainIcon) musicMainIcon.className = "fa-solid fa-music";
-          if (musicModalCard) {
-            musicModalCard.classList.remove("is-playing");
+          mainMusicBtn.classList.remove("playing");
+          musicMainIcon.className = "fa-solid fa-music";
+          musicModalCard.classList.remove("playing-active");
+          if (artisticInterval) {
+            clearInterval(artisticInterval);
+            artisticInterval = null;
           }
         }
       }
@@ -2475,15 +2279,7 @@
       }
 
       function playSound(offset = 0) {
-        if (!isLoaded || !audioBuffer) {
-          // Mô phỏng hiệu ứng chạy đĩa nếu chưa có file nhạc thực tế trong thư mục audio/
-          isPlaying = true;
-          updateUIState(true);
-          startTime = Date.now() / 1000 - offset;
-          trackProgressMock();
-          return;
-        }
-
+        if (!isLoaded || !audioBuffer) return;
         if (audioCtx.state === 'suspended') audioCtx.resume();
         if (sourceNode) { try { sourceNode.stop(); } catch(e) {} }
 
@@ -2538,17 +2334,9 @@
         animFrameId = requestAnimationFrame(trackProgress);
       }
 
-      function trackProgressMock() {
-        if (!isPlaying) return;
-        const currentPos = (Date.now() / 1000 - startTime) % duration;
-        seekSlider.value = currentPos;
-        seekFill.style.width = `${(currentPos / duration) * 100}%`;
-        currentTimeLbl.textContent = formatTime(currentPos);
-        animFrameId = requestAnimationFrame(trackProgressMock);
-      }
-
       playBtn.addEventListener("click", async () => {
         if (!isLoaded) await loadAudioFile();
+        if (!isLoaded) return;
 
         if (isPlaying) {
           stopSound();
@@ -2558,7 +2346,8 @@
       });
 
       rewindBtn.addEventListener("click", () => {
-        let currentPos = isPlaying ? (audioCtx ? (audioCtx.currentTime - startTime) % duration : (Date.now()/1000 - startTime)%duration) : pauseOffset;
+        if (!isLoaded) return;
+        let currentPos = isPlaying ? (audioCtx.currentTime - startTime) % duration : pauseOffset;
         currentPos = Math.max(0, currentPos - 5);
         pauseOffset = currentPos;
         seekSlider.value = currentPos;
@@ -2570,7 +2359,8 @@
       });
 
       forwardBtn.addEventListener("click", () => {
-        let currentPos = isPlaying ? (audioCtx ? (audioCtx.currentTime - startTime) % duration : (Date.now()/1000 - startTime)%duration) : pauseOffset;
+        if (!isLoaded) return;
+        let currentPos = isPlaying ? (audioCtx.currentTime - startTime) % duration : pauseOffset;
         currentPos = Math.min(duration, currentPos + 5);
         pauseOffset = currentPos;
         seekSlider.value = currentPos;
