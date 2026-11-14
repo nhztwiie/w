@@ -2262,7 +2262,6 @@
         const bodyTilt = -0.52 + Math.sin(stageTime * 0.7) * 0.045;
         sCtx.rotate(bodyTilt);
 
-        // Thân đàn Violin (đường cong số 8 thanh mảnh)
         sCtx.strokeStyle = strokeColor + "0.24)";
         sCtx.fillStyle = strokeColor + "0.05)";
         sCtx.lineWidth = 1.4;
@@ -2275,7 +2274,6 @@
         sCtx.fill();
         sCtx.stroke();
 
-        // Hai lỗ chữ f cách điệu
         sCtx.strokeStyle = strokeColor + "0.22)";
         sCtx.lineWidth = 1;
         sCtx.beginPath();
@@ -2283,14 +2281,12 @@
         sCtx.moveTo(7, 4); sCtx.quadraticCurveTo(10, 11, 6, 17);
         sCtx.stroke();
 
-        // Cần đàn & đầu cuộn ốc
         sCtx.beginPath();
         sCtx.moveTo(0, -34);
         sCtx.lineTo(0, -68);
         sCtx.arc(0, -71, 3.2, 0, Math.PI * 2);
         sCtx.stroke();
 
-        // 4 dây đàn mảnh
         sCtx.strokeStyle = strokeColor + "0.14)";
         sCtx.lineWidth = 0.6;
         [-2, -0.7, 0.7, 2].forEach(dx => {
@@ -2300,7 +2296,6 @@
           sCtx.stroke();
         });
 
-        // Cây vĩ (Bow) kéo qua lại mềm mại trên dây đàn
         const bowSlide = Math.sin(stageTime * 1.45) * 26;
         const bowAngle = 0.16 + Math.cos(stageTime * 1.45) * 0.04;
         sCtx.save();
@@ -2312,7 +2307,6 @@
         sCtx.moveTo(-46, 0);
         sCtx.quadraticCurveTo(0, -3.5, 46, 0);
         sCtx.stroke();
-        // Lông vĩ
         sCtx.strokeStyle = strokeColor + "0.18)";
         sCtx.lineWidth = 0.7;
         sCtx.beginPath();
@@ -2344,7 +2338,6 @@
           sCtx.fill();
           sCtx.stroke();
 
-          // Phím đen xen kẽ
           if (k < keyCount - 1 && k % 7 !== 2 && k % 7 !== 6) {
             sCtx.fillStyle = strokeColor + "0.22)";
             sCtx.beginPath();
