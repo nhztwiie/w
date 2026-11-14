@@ -1,1807 +1,928 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="dark">
+<html lang="vi" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Nhật Huy | w.bio</title>
-
-  <!-- Primary Meta Tags -->
-  <meta name="title" content="Nhật Huy | w.bio">
-  <meta name="description" content="ung dung. — Contact me.">
-  <meta name="author" content="Nhật Huy">
-  <meta name="theme-color" content="#111317">
-
-  <!-- Open Graph / Facebook / Messenger / Zalo -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://nhztwiie.github.io/w/">
-  <meta property="og:site_name" content="Nhật Huy | w.bio">
-  <meta property="og:title" content="Nhật Huy | w.bio">
-  <meta property="og:description" content="ung dung. — Contact me.">
-  <meta property="og:image" content="https://nhztwiie.github.io/w/images/Huy.png">
-  <meta property="og:image:alt" content="Avatar Nhật Huy">
-  <meta property="og:locale" content="vi_VN">
-
-  <!-- Twitter / X Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://nhztwiie.github.io/w/">
-  <meta name="twitter:title" content="Nhật Huy | w.bio">
-  <meta name="twitter:description" content="ung dung. — Contact me.">
-  <meta name="twitter:image" content="https://nhztwiie.github.io/w/images/Huy.png">
-  <link rel="icon" type="image/png" href="images/email.png">
-
-  <!-- Fonts: Plus Jakarta Sans -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Profile | Glassmorphism & Music Player</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-
-  <!-- Icons & QRCode JS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-  <!-- EmailJS SDK -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
-    /* ==========================================================
-       TITANIUM & LIQUID GLASS SYSTEM - PHYSICS, SPOTLIGHT & SHIMMER
-       ========================================================== */
     :root {
-      --spring-easing: cubic-bezier(0.32, 0.72, 0, 1);
-      --silky-ease: cubic-bezier(0.22, 1, 0.36, 1);
-      --liquid-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
-      --mouse-x: 50%;
-      --mouse-y: 50%;
+      /* Light Theme Variables (Pastel Blue Glassmorphism) */
+      --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #e0e7ff 100%);
+      --glass-bg: rgba(255, 255, 255, 0.58);
+      --glass-border: rgba(255, 255, 255, 0.75);
+      --glass-shadow: 0 20px 40px -15px rgba(14, 165, 233, 0.18);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent-color: #0284c7;
+      --accent-glow: rgba(2, 132, 199, 0.25);
+      --spotify-green: #1db954;
+      --pill-bg: rgba(255, 255, 255, 0.7);
+      --track-bg: rgba(15, 23, 42, 0.12);
     }
 
-    :root[data-theme="dark"] {
-      --bg-gradient: radial-gradient(circle at 50% 0%, #2a2d32 0%, #111317 65%, #08090a 100%);
-      --glass-bg: rgba(255, 255, 255, 0.045);
-      --glass-border: rgba(255, 255, 255, 0.16);
-      --glass-border-highlight: rgba(255, 255, 255, 0.45);
-      --glass-shadow: 
-        0 30px 80px rgba(0, 0, 0, 0.8),
-        inset 0 1.5px 2px rgba(255, 255, 255, 0.35),
-        inset 0 -2px 4px rgba(0, 0, 0, 0.65);
-      --glass-glow: rgba(224, 224, 224, 0.15);
-
-      --spotlight-surface: rgba(255, 255, 255, 0.08);
-      --spotlight-border: rgba(255, 255, 255, 0.55);
-
-      --text-title: #ffffff;
-      --text-sub: #d1d5db;
-      --text-quote: #f3f4f6;
-      --text-author: #9ca3af;
-      --shimmer-highlight: #ffffff;
-      --shimmer-base: rgba(243, 244, 246, 0.55);
-
-      --pill-bg: rgba(255, 255, 255, 0.06);
-      --pill-border: rgba(255, 255, 255, 0.16);
-      --pill-hover-bg: rgba(255, 255, 255, 0.12);
-      --pill-hover-border: rgba(255, 255, 255, 0.5);
-      --pill-hover-glow: 0 12px 32px rgba(255, 255, 255, 0.12);
-
-      --dock-bg: rgba(20, 22, 26, 0.55);
-      --dock-border: rgba(255, 255, 255, 0.2);
-      --indicator-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, rgba(160, 160, 160, 0.16) 100%);
-      --indicator-border: rgba(255, 255, 255, 0.45);
-
-      --orb-1: rgba(255, 255, 255, 0.32);
-      --orb-2: rgba(160, 170, 190, 0.35);
-      --orb-3: rgba(210, 215, 225, 0.28);
-    }
-
-    :root[data-theme="light"] {
-      --bg-gradient: radial-gradient(circle at 50% 0%, #f6f8f5 0%, #e9efe7 60%, #d8e2d4 100%);
-      --glass-bg: rgba(255, 255, 255, 0.65);
-      --glass-border: rgba(255, 255, 255, 0.88);
-      --glass-border-highlight: rgba(255, 255, 255, 1);
-      --glass-shadow: 
-        0 25px 60px rgba(32, 45, 35, 0.08),
-        inset 0 2px 3px rgba(255, 255, 255, 0.95),
-        inset 0 -2px 4px rgba(32, 45, 35, 0.04);
-      --glass-glow: rgba(34, 197, 94, 0.12);
-
-      --spotlight-surface: rgba(34, 197, 94, 0.08);
-      --spotlight-border: rgba(22, 163, 74, 0.5);
-
-      --text-title: #141f16;
-      --text-sub: #4b5c4f;
-      --text-quote: #141f16;
-      --text-author: #657569;
-      --shimmer-highlight: #16a34a;
-      --shimmer-base: rgba(20, 31, 22, 0.72);
-
-      --pill-bg: rgba(255, 255, 255, 0.75);
-      --pill-border: rgba(255, 255, 255, 0.95);
-      --pill-hover-bg: rgba(255, 255, 255, 0.96);
-      --pill-hover-border: #86efac;
-      --pill-hover-glow: 0 12px 30px rgba(34, 197, 94, 0.12);
-
-      --dock-bg: rgba(255, 255, 255, 0.74);
-      --dock-border: rgba(255, 255, 255, 0.95);
-      --indicator-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(220, 252, 231, 0.85) 100%);
-      --indicator-border: rgba(134, 239, 172, 0.6);
-
-      --orb-1: rgba(255, 255, 255, 0.92);
-      --orb-2: rgba(187, 247, 208, 0.5);
-      --orb-3: rgba(254, 243, 199, 0.45);
-    }
-
-    body {
-      transition: background 0.6s ease;
-    }
-
-    .liquid-card-ios26 {
-      transition: height 0.52s var(--spring-easing), box-shadow 0.4s ease, background 0.5s ease, border-color 0.5s ease, transform 0.5s var(--silky-ease), opacity 0.5s var(--silky-ease);
-    }
-
-    .theme-transitioning {
-      opacity: 0 !important;
-      transform: scale(0.96) translateY(8px) !important;
-      filter: blur(8px);
+    [data-theme="dark"] {
+      /* Dark Theme Variables */
+      --bg-gradient: linear-gradient(135deg, #090d16 0%, #0f172a 50%, #162032 100%);
+      --glass-bg: rgba(15, 23, 42, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --glass-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-color: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.25);
+      --spotify-green: #1ed760;
+      --pill-bg: rgba(30, 41, 59, 0.75);
+      --track-bg: rgba(255, 255, 255, 0.15);
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
+      box-sizing: border-box;
+      transition: background 0.4s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     body {
-      min-height: 100vh;
-      min-height: 100dvh;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       background: var(--bg-gradient);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      overflow-x: hidden;
-      overflow-y: auto;
-      padding: 24px 16px;
-    }
-
-    .ios26-bg-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 1;
-      pointer-events: none;
-      overflow: hidden;
-      contain: strict;
-    }
-
-    #ambient-particles {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-    }
-
-    .liquid-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(28px);
-      mix-blend-mode: overlay;
-      will-change: transform;
-      opacity: 0.85;
-      z-index: 1;
-      transition: background 0.6s ease;
-    }
-
-    .orb-primary {
-      width: 420px; height: 420px;
-      top: -80px; left: -60px;
-      background: radial-gradient(circle at 35% 35%, var(--orb-1) 0%, rgba(255,255,255,0.1) 60%, transparent 80%);
-      animation: floatFluid1 14s infinite ease-in-out alternate;
-    }
-
-    .orb-secondary {
-      width: 380px; height: 380px;
-      bottom: -60px; right: -50px;
-      background: radial-gradient(circle at 35% 35%, var(--orb-2) 0%, rgba(255,255,255,0.08) 60%, transparent 80%);
-      animation: floatFluid2 16s infinite ease-in-out alternate;
-    }
-
-    .orb-accent {
-      width: 300px; height: 300px;
-      top: 40%; left: 30%;
-      background: radial-gradient(circle at 35% 35%, var(--orb-3) 0%, rgba(255,255,255,0.1) 60%, transparent 80%);
-      animation: floatFluid3 11s infinite ease-in-out alternate;
-    }
-
-    @keyframes floatFluid1 {
-      0% { transform: translate3d(0, 0, 0) scale(1); }
-      100% { transform: translate3d(90px, 110px, 0) scale(1.12); }
-    }
-    @keyframes floatFluid2 {
-      0% { transform: translate3d(0, 0, 0) scale(1); }
-      100% { transform: translate3d(-80px, -110px, 0) scale(1.15); }
-    }
-    @keyframes floatFluid3 {
-      0% { transform: translate3d(0, 0, 0) scale(0.92); }
-      100% { transform: translate3d(80px, -60px, 0) scale(1.18); }
-    }
-
-    .glass-mesh-overlay {
-      position: fixed;
-      inset: 0;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
-      background-size: 20px 20px;
-      z-index: 2;
-      pointer-events: none;
-      opacity: 0.3;
-    }
-
-    .liquid-card-ios26 {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      max-width: 414px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(28px) saturate(200%);
-      -webkit-backdrop-filter: blur(28px) saturate(200%);
-      border: 1.5px solid var(--glass-border);
-      border-radius: 44px;
-      box-shadow: var(--glass-shadow);
+      color: var(--text-primary);
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
-      transform: translateZ(0);
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    .liquid-card-ios26::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: radial-gradient(
-        420px circle at var(--mouse-x) var(--mouse-y),
-        var(--spotlight-surface),
-        transparent 65%
-      );
-      opacity: 0;
-      transition: opacity 0.35s ease;
-      pointer-events: none;
-      z-index: 4;
-    }
-
-    .liquid-card-ios26:hover::after {
-      opacity: 1;
-    }
-
-    .card-border-glow {
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 1.5px;
-      background: radial-gradient(
-        280px circle at var(--mouse-x) var(--mouse-y),
-        var(--spotlight-border),
-        transparent 70%
-      );
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.35s ease;
-      z-index: 25;
-    }
-
-    .liquid-card-ios26:hover .card-border-glow {
-      opacity: 1;
-    }
-
-    .water-ripple {
-      position: absolute;
+    /* Ambient Background Orbs */
+    .orb {
+      position: fixed;
       border-radius: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.05) 60%, transparent 100%);
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      filter: blur(80px);
+      z-index: 0;
       pointer-events: none;
-      animation: dropletExpand 0.75s var(--spring-easing) forwards;
-      z-index: 50;
+      opacity: 0.6;
+    }
+    .orb-1 {
+      width: 320px;
+      height: 320px;
+      background: #38bdf8;
+      top: -60px;
+      left: -60px;
+    }
+    .orb-2 {
+      width: 280px;
+      height: 280px;
+      background: #818cf8;
+      bottom: -40px;
+      right: -40px;
     }
 
-    @keyframes dropletExpand {
-      0% { width: 0; height: 0; opacity: 0.9; }
-      100% { width: 220px; height: 220px; opacity: 0; }
-    }
-
+    /* Top Control Bar */
     .top-bar {
-      padding: 20px 24px 6px;
+      position: fixed;
+      top: 20px;
+      width: 100%;
+      max-width: 520px;
+      padding: 0 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 20;
-      flex-shrink: 0;
+      z-index: 50;
     }
 
-    .top-bar-controls {
+    .glass-pill {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: 999px;
+      padding: 8px 16px;
       display: flex;
       align-items: center;
       gap: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
     }
 
-    .theme-toggle-track {
-      position: relative;
-      width: 78px;
-      height: 42px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1.5px solid var(--glass-border);
-      border-radius: 40px;
+    .clock-mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--accent-color);
+    }
+
+    .icon-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      cursor: pointer;
       display: flex;
       align-items: center;
-      padding: 3px;
-      cursor: pointer;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      transition: transform 0.25s var(--spring-easing);
-    }
-
-    .theme-toggle-track:hover { transform: scale(1.04); }
-    .theme-toggle-track:active { transform: scale(0.95); }
-
-    .theme-orb-indicator {
-      position: absolute;
-      top: 3px; left: 3px;
-      width: 33px; height: 33px;
+      justify-content: center;
+      padding: 6px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #e5e7eb 0%, #9ca3af 100%);
-      border: 1.5px solid #ffffff;
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.45s var(--liquid-bounce), background 0.4s ease;
+      transition: transform 0.2s ease, background 0.2s ease;
     }
 
-    .orb-icon {
-      font-size: 0.9rem;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      position: absolute;
-      color: #111827;
+    .icon-btn:hover {
+      background: var(--accent-glow);
+      transform: scale(1.08);
     }
 
-    .icon-sun { opacity: 0; transform: scale(0.5) rotate(-90deg); }
-    .icon-moon { opacity: 1; transform: scale(1) rotate(0deg); }
-
-    [data-theme="light"] .theme-orb-indicator {
-      transform: translate3d(36px, 0, 0);
-      background: linear-gradient(135deg, #ffffff 0%, #dcfce7 100%);
-    }
-    [data-theme="light"] .icon-sun { opacity: 1; transform: scale(1) rotate(0deg); }
-    [data-theme="light"] .icon-moon { opacity: 0; transform: scale(0.5) rotate(90deg); }
-
-    .glass-btn-ios26, .ios26-link-item, .btn-action-item, .btn-download-icon {
-      --btn-x: 50%;
-      --btn-y: 50%;
+    .music-trigger-btn {
       position: relative;
-      overflow: hidden;
-      transition: transform 0.28s var(--spring-easing), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .glass-btn-ios26::before, .ios26-link-item::before, .btn-action-item::before, .btn-download-icon::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(90px circle at var(--btn-x) var(--btn-y), rgba(255, 255, 255, 0.28), transparent 70%);
-      opacity: 0;
-      transition: opacity 0.25s ease;
-      pointer-events: none;
-    }
-
-    .glass-btn-ios26:hover::before, .ios26-link-item:hover::before, .btn-action-item:hover::before, .btn-download-icon:hover::before {
-      opacity: 1;
-    }
-
-    .glass-btn-ios26:active,
-    .ios26-link-item:active,
-    .btn-action-item:active,
-    .btn-download-icon:active,
-    .nav-tab-btn:active {
-      transform: scale(0.96) !important;
-      transition-duration: 0.08s;
-    }
-
-    .glass-btn-ios26 {
-      width: 42px; height: 42px;
-      border-radius: 18px;
-      background: var(--pill-bg);
-      border: 1.5px solid var(--pill-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-title);
-      font-size: 1.05rem;
+      gap: 8px;
+      padding: 8px 16px;
       cursor: pointer;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.3);
+      color: var(--text-primary);
+      font-family: inherit;
     }
 
-    .glass-btn-ios26:hover {
-      transform: translateY(-2px) scale(1.06);
-      border-color: var(--glass-border-highlight);
-      background: var(--pill-hover-bg);
+    .music-trigger-btn.playing {
+      border-color: var(--spotify-green);
+      box-shadow: 0 0 20px rgba(29, 185, 84, 0.25);
     }
 
-    .music-btn.playing i {
-      animation: spinMusic 3s linear infinite;
-      color: var(--text-sub);
-    }
-
-    @keyframes spinMusic {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .profile-header {
+    .equalizer {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-end;
+      gap: 2px;
+      height: 14px;
+    }
+
+    .equalizer span {
+      width: 3px;
+      height: 4px;
+      background: var(--spotify-green);
+      border-radius: 2px;
+      transition: height 0.2s ease;
+    }
+
+    .music-trigger-btn.playing .equalizer span:nth-child(1) { animation: eq 0.6s infinite alternate; }
+    .music-trigger-btn.playing .equalizer span:nth-child(2) { animation: eq 0.4s infinite alternate 0.2s; }
+    .music-trigger-btn.playing .equalizer span:nth-child(3) { animation: eq 0.7s infinite alternate 0.1s; }
+
+    @keyframes eq {
+      0% { height: 4px; }
+      100% { height: 14px; }
+    }
+
+    /* Main Glass Card */
+    .main-card {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 460px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: 28px;
+      padding: 36px 28px;
       text-align: center;
-      padding: 12px 24px 8px;
-      z-index: 15;
-      flex-shrink: 0;
-      transition: transform 0.5s var(--spring-easing), margin 0.5s var(--spring-easing);
-    }
-
-    @keyframes avatarBreathe {
-      0%, 100% { transform: translate3d(0, 0px, 0) scale(1); }
-      50% { transform: translate3d(0, -3px, 0) scale(1.026); }
-    }
-
-    .avatar-breathe-wrap {
-      animation: avatarBreathe 5.5s ease-in-out infinite;
-      will-change: transform;
+      margin-top: 40px;
     }
 
     .avatar-ring {
-      position: relative;
-      width: 104px; height: 104px;
+      width: 96px;
+      height: 96px;
+      margin: 0 auto 18px;
       border-radius: 50%;
       padding: 4px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.08) 100%);
-      border: 1.5px solid var(--glass-border);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28), 0 0 22px var(--glass-glow);
-      transform-origin: center center;
-      will-change: transform;
-      transition: 
-        transform 0.72s var(--silky-ease),
-        box-shadow 0.72s var(--silky-ease);
-      cursor: pointer;
-    }
-
-    .avatar-ring:hover {
-      transform: translate3d(5px, -2px, 0) rotate(8.5deg) scale(1.055);
-      box-shadow: 6px 16px 34px rgba(0, 0, 0, 0.3), 0 0 32px var(--glass-glow);
+      background: linear-gradient(135deg, var(--accent-color), #818cf8);
+      box-shadow: 0 10px 25px var(--accent-glow);
     }
 
     .avatar-ring img {
-      width: 100%; height: 100%;
-      object-fit: cover;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
-      filter: grayscale(100%);
-      transition: filter 0.65s var(--silky-ease), transform 0.72s var(--silky-ease);
+      object-fit: cover;
+      background: #fff;
     }
 
-    .avatar-ring:hover img {
-      filter: grayscale(0%);
-      transform: scale(1.02);
-    }
-
-    .profile-meta {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: opacity 0.35s var(--spring-easing), transform 0.35s var(--spring-easing);
-    }
-
-    .profile-name {
-      font-size: 1.75rem;
+    h1 {
+      font-size: 1.65rem;
       font-weight: 800;
-      color: var(--text-title);
-      margin-top: 12px;
       letter-spacing: -0.03em;
+      margin-bottom: 6px;
     }
 
-    .profile-tagline {
-      font-size: 0.95rem;
+    .subtitle {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 26px;
+    }
+
+    .badge {
+      background: var(--pill-bg);
+      border: 1px solid var(--glass-border);
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 0.78rem;
       font-weight: 600;
-      color: var(--text-sub);
-      margin-top: 2px;
-      letter-spacing: -0.01em;
-    }
-
-    .liquid-card-ios26.compact-mode .profile-header {
-      transform: scale(0.8);
-      margin-bottom: -58px;
-    }
-
-    .liquid-card-ios26.compact-mode .profile-meta {
-      opacity: 0;
-      transform: translate3d(0, -15px, 0);
-      pointer-events: none;
-    }
-
-    .viewport-wrapper {
-      width: 100%;
-      overflow: hidden;
-      flex: 1;
-      z-index: 10;
-    }
-
-    .viewport {
-      width: 300%;
+      color: var(--accent-color);
       display: flex;
-      align-items: flex-start;
-      transform: translate3d(-33.3333%, 0, 0);
-      transition: transform 0.56s var(--spring-easing);
-      will-change: transform;
-    }
-
-    .tab-page {
-      width: 33.3333%;
-      padding: 12px 24px 16px;
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      opacity: 0.45;
-      transform: scale(0.95);
-      filter: blur(6px);
-      transition: 
-        opacity 0.5s var(--spring-easing),
-        transform 0.55s var(--spring-easing),
-        filter 0.5s var(--spring-easing);
-    }
-
-    .tab-page.active-tab {
-      opacity: 1;
-      transform: scale(1);
-      filter: blur(0px);
-    }
-
-    @keyframes blurReveal {
-      0% {
-        opacity: 0;
-        filter: blur(12px);
-        transform: translateY(10px) scale(0.97);
-      }
-      100% {
-        opacity: 1;
-        filter: blur(0px);
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    @keyframes textShimmer {
-      0% { background-position: 200% center; }
-      100% { background-position: -200% center; }
-    }
-
-    .ios26-quote-card {
-      margin: 8px 0 16px;
-      padding: 24px 16px;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1.5px solid var(--glass-border);
-      border-radius: 30px;
-      width: 100%;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
-      transition: transform 0.35s var(--spring-easing), border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .ios26-quote-card:hover {
-      transform: translateY(-3px) scale(1.015);
-      border-color: var(--glass-border-highlight);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12), inset 0 1px 3px rgba(255, 255, 255, 0.4);
-    }
-
-    .quote-text {
-      font-size: 0.98rem;
-      font-weight: 700;
-      line-height: 1.8;
-      white-space: nowrap;
-      background: linear-gradient(
-        110deg,
-        var(--shimmer-base) 30%,
-        var(--shimmer-highlight) 50%,
-        var(--shimmer-base) 70%
-      );
-      background-size: 250% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: 
-        blurReveal 0.95s var(--spring-easing) forwards,
-        textShimmer 5.5s linear infinite;
-    }
-
-    .quote-author {
-      font-size: 0.88rem;
-      font-style: italic;
-      color: var(--text-author);
-      margin-top: 14px;
-      display: block;
-      opacity: 0;
-      animation: blurReveal 0.95s var(--spring-easing) 0.22s forwards;
+      gap: 5px;
     }
 
     .links-list {
-      width: 100%;
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
 
-    .ios26-link-item {
+    .link-item {
       display: flex;
       align-items: center;
-      padding: 14px 20px;
+      justify-content: space-between;
+      padding: 14px 18px;
       background: var(--pill-bg);
-      border: 1.5px solid var(--pill-border);
-      border-radius: 26px;
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
       text-decoration: none;
-      color: var(--text-title);
+      color: var(--text-primary);
       font-weight: 600;
       font-size: 0.95rem;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .ios26-link-item:hover {
-      transform: translateY(-4px) scale(1.02);
-      background: var(--pill-hover-bg);
-      border-color: var(--pill-hover-border);
-      box-shadow: var(--pill-hover-glow);
+    .link-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px -8px var(--accent-glow);
+      border-color: var(--accent-color);
     }
 
-    .link-icon {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      margin-right: 14px;
-      object-fit: cover;
-      transition: transform 0.35s var(--liquid-bounce);
-    }
-
-    .ios26-link-item:hover .link-icon {
-      transform: scale(1.14) rotate(6deg);
-    }
-
-    .link-label {
-      flex: 1;
-      text-align: left;
-      letter-spacing: -0.01em;
-      transition: transform 0.3s var(--spring-easing);
-    }
-
-    .ios26-link-item:hover .link-label {
-      transform: translateX(4px);
-    }
-
-    .link-arrow {
-      font-size: 0.85rem;
-      color: var(--text-sub);
-      transition: transform 0.3s var(--spring-easing);
-    }
-
-    .ios26-link-item:hover .link-arrow {
-      transform: translateX(5px);
-    }
-
-    .bottom-nav-container {
-      padding: 6px 22px 22px;
-      z-index: 30;
-      width: 100%;
-      flex-shrink: 0;
-    }
-
-    .ios26-nav-dock {
-      position: relative;
+    .link-left {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      background: var(--dock-bg);
-      border: 1.5px solid var(--dock-border);
-      border-radius: 40px;
-      padding: 6px;
+      gap: 12px;
+    }
+
+    /* Bottom Navigation Bar (Account Icon replacing Home) */
+    .bottom-nav {
+      position: fixed;
+      bottom: 22px;
+      z-index: 40;
+      background: var(--glass-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.3), 0 20px 40px rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: 999px;
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
     }
 
-    .nav-indicator-pill {
-      position: absolute;
-      top: 6px; left: 6px;
-      width: calc((100% - 12px) / 3);
-      height: calc(100% - 12px);
-      background: var(--indicator-bg);
-      border: 1.5px solid var(--indicator-border);
-      border-radius: 34px;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.7);
-      transition: transform 0.5s var(--spring-easing);
-      z-index: 1;
-      will-change: transform;
-    }
-
-    .nav-tab-btn {
-      flex: 1;
-      height: 46px;
+    .nav-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      background: none;
       border: none;
-      background: transparent;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 0.72rem;
+      font-weight: 600;
       cursor: pointer;
-      position: relative;
-      z-index: 2;
+      transition: color 0.2s ease, transform 0.2s ease;
     }
 
-    .nav-tab-btn i {
-      font-size: 1.25rem;
-      color: rgba(255, 255, 255, 0.45);
-      display: inline-block;
-      will-change: transform;
-      transition: color 0.3s ease;
+    .nav-tab.active {
+      color: var(--accent-color);
     }
 
-    [data-theme="light"] .nav-tab-btn i { color: #657569; }
-    .nav-tab-btn.active i { color: var(--text-title); }
-    [data-theme="light"] .nav-tab-btn.active i { color: #141f16; }
+    .nav-tab:hover {
+      transform: translateY(-2px);
+      color: var(--text-primary);
+    }
 
-    .modal-backdrop {
+    /* SPOTIFY-STYLE MUSIC POP-UP */
+    .spotify-popup {
       position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(0px);
-      -webkit-backdrop-filter: blur(0px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      top: 76px;
+      right: 50%;
+      transform: translateX(50%) translateY(-16px) scale(0.95);
+      width: 92%;
+      max-width: 390px;
+      background: rgba(18, 18, 18, 0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.65);
+      border-radius: 24px;
+      padding: 20px;
+      color: #ffffff;
       z-index: 100;
       opacity: 0;
       pointer-events: none;
-      transition: 
-        opacity 0.4s var(--spring-easing),
-        backdrop-filter 0.45s var(--spring-easing),
-        -webkit-backdrop-filter 0.45s var(--spring-easing);
+      transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .modal-backdrop.active {
+    .spotify-popup.open {
       opacity: 1;
       pointer-events: auto;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      transform: translateX(50%) translateY(0) scale(1);
     }
 
-    .qr-glass-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(28px) saturate(180%);
-      -webkit-backdrop-filter: blur(28px) saturate(180%);
-      border: 1.5px solid var(--glass-border-highlight);
-      border-radius: 40px;
-      padding: 28px 24px;
-      width: 88%;
-      max-width: 320px;
-      text-align: center;
-      opacity: 0;
-      transform: scale(0.95) translateY(10px);
-      transition: 
-        transform 0.5s var(--spring-easing),
-        opacity 0.4s var(--spring-easing);
-      will-change: transform, opacity;
-      box-shadow: var(--glass-shadow);
-    }
-
-    .modal-backdrop.active .qr-glass-card {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
-
-    .qr-title { font-size: 1.2rem; font-weight: 700; color: var(--text-title); margin-bottom: 18px; }
-
-    .qr-box-wrapper {
-      position: relative;
-      width: 180px; height: 180px;
-      margin: 0 auto;
-      padding: 12px;
-      background: #ffffff;
-      border-radius: 28px;
+    .sp-header {
       display: flex;
       align-items: center;
-      justify-content: center;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
-    }
-
-    #qrcode-canvas { width: 100% !important; height: 100% !important; display: flex; justify-content: center; align-items: center; }
-    #qrcode-canvas img { border-radius: 12px; }
-
-    .qr-avatar-center {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      border: 3px solid #ffffff;
-      object-fit: cover;
-    }
-
-    .qr-actions-row {
-      width: 180px;
-      margin: 18px auto 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-action-item {
-      flex: 1;
-      height: 44px;
-      padding: 0 12px;
-      border: 1px solid var(--glass-border-highlight);
-      background: rgba(255, 255, 255, 0.15);
-      color: var(--text-title);
+      justify-content: space-between;
+      margin-bottom: 14px;
+      font-size: 0.75rem;
       font-weight: 700;
-      font-size: 0.85rem;
-      border-radius: 18px;
-      cursor: pointer;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #a7a7a7;
+    }
+
+    .sp-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #1ed760;
+    }
+
+    .sp-track-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .sp-cover {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #1db954, #0f172a);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      flex-shrink: 0;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      position: relative;
     }
 
-    .btn-download-icon {
+    .sp-vinyl {
       width: 44px;
       height: 44px;
-      flex-shrink: 0;
-      border: 1px solid var(--glass-border-highlight);
-      background: rgba(255, 255, 255, 0.15);
-      color: var(--text-title);
-      border-radius: 18px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.25);
+      background: radial-gradient(circle, #1ed760 18%, #121212 20%, #282828 65%, #121212 100%);
+    }
+
+    .sp-vinyl.spinning {
+      animation: spin 6s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    .sp-meta {
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .sp-title {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 4px;
+    }
+
+    .sp-artist {
+      font-size: 0.8rem;
+      color: #b3b3b3;
+      font-weight: 500;
+    }
+
+    /* Progress Bar */
+    .sp-progress-wrap {
+      margin-bottom: 16px;
+    }
+
+    .sp-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.2);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .sp-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #ffffff;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(0,0,0,0.5);
+      transition: transform 0.15s ease;
+    }
+
+    .sp-slider:hover::-webkit-slider-thumb {
+      transform: scale(1.25);
+      background: #1ed760;
+    }
+
+    .sp-time-row {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: #a7a7a7;
+      margin-top: 6px;
+    }
+
+    /* Main Controls */
+    .sp-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding: 0 8px;
+    }
+
+    .sp-ctrl-btn {
+      background: none;
+      border: none;
+      color: #b3b3b3;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      transition: color 0.2s, transform 0.2s;
     }
 
-    .btn-action-item:hover,
-    .btn-download-icon:hover {
-      transform: translateY(-2px) scale(1.03);
-      background: rgba(255, 255, 255, 0.25);
-      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+    .sp-ctrl-btn:hover, .sp-ctrl-btn.active {
+      color: #1ed760;
+      transform: scale(1.1);
     }
 
-    .btn-close-modal {
-      margin-top: 10px;
-      width: 100%;
-      padding: 8px;
+    .sp-play-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #1ed760;
+      color: #000000;
       border: none;
-      background: transparent;
-      color: var(--text-title);
-      font-weight: 600;
-      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      opacity: 0.8;
-      transition: opacity 0.2s ease, transform 0.2s var(--spring-easing);
+      box-shadow: 0 6px 18px rgba(30, 215, 96, 0.4);
+      transition: transform 0.2s ease, background 0.2s ease;
     }
-    .btn-close-modal:hover { opacity: 1; transform: scale(1.04); }
-    .btn-close-modal:active { transform: scale(0.96); }
 
-    .email-textarea {
-      width: 100%;
-      height: 100px;
-      padding: 12px;
-      border-radius: 16px;
-      border: 1.5px solid var(--glass-border);
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--text-title);
-      font-size: 0.9rem;
-      resize: none;
-      outline: none;
-      margin-bottom: 12px;
-      user-select: text;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    .sp-play-btn:hover {
+      transform: scale(1.08);
+      background: #22e568;
     }
-    .email-textarea:focus {
-      border-color: var(--glass-border-highlight);
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+
+    /* Volume & Boost Control */
+    .sp-volume-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 10px 14px;
+      border-radius: 14px;
+    }
+
+    .boost-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #1ed760;
+      background: rgba(30, 215, 96, 0.15);
+      padding: 2px 6px;
+      border-radius: 6px;
+      min-width: 44px;
+      text-align: center;
+    }
+
+    /* Theme Status Toast */
+    .theme-status-chip {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
   </style>
 </head>
 <body>
 
-  <!-- BACKGROUND SPHERES & INTERACTIVE AMBIENT CANVAS -->
-  <div class="ios26-bg-canvas">
-    <div class="liquid-orb orb-primary"></div>
-    <div class="liquid-orb orb-secondary"></div>
-    <div class="liquid-orb orb-accent"></div>
-    <canvas id="ambient-particles"></canvas>
-  </div>
-  <div class="glass-mesh-overlay"></div>
+  <!-- Background Decorative Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
 
-  <!-- MAIN CARD CONTAINER -->
-  <main class="liquid-card-ios26" id="main-card">
-    <div class="card-border-glow"></div>
-
-    <!-- TOP BAR -->
-    <div class="top-bar">
-      <div class="theme-toggle-track" id="theme-toggle" role="button" aria-label="Toggle Theme">
-        <div class="theme-orb-indicator">
-          <i class="fa-solid fa-moon orb-icon icon-moon"></i>
-          <i class="fa-solid fa-sun orb-icon icon-sun"></i>
-        </div>
-      </div>
-
-      <div class="top-bar-controls">
-        <button class="glass-btn-ios26" id="open-email-modal-btn" aria-label="Quick Email">
-          <i class="fa-solid fa-envelope"></i>
-        </button>
-
-        <button class="glass-btn-ios26 music-btn" id="music-toggle-btn" aria-label="Toggle Music">
-          <i class="fa-solid fa-music" id="music-icon"></i>
-        </button>
-
-        <button class="glass-btn-ios26" id="open-qr-btn" aria-label="Open QR Code">
-          <i class="fa-solid fa-qrcode"></i>
-        </button>
+  <!-- Top Bar: Real-time Theme & Music Trigger -->
+  <header class="top-bar">
+    <!-- Real-Time Theme Pill -->
+    <div class="glass-pill">
+      <button class="icon-btn" id="themeToggleBtn" title="Chuyển đổi giao diện Sáng/Tối">
+        <i data-lucide="sun" id="themeIcon" size="18"></i>
+      </button>
+      <div>
+        <div class="clock-mono" id="liveClock">12:00:00</div>
+        <div class="theme-status-chip" id="themeModeLabel">Auto · Ban ngày</div>
       </div>
     </div>
 
-    <!-- PROFILE HEADER -->
-    <header class="profile-header">
-      <div class="avatar-breathe-wrap">
-        <div class="avatar-ring">
-          <img src="images/Huy.png" alt="Avatar Nhật Huy" loading="eager">
-        </div>
+    <!-- Music Trigger Pill -->
+    <button class="glass-pill music-trigger-btn" id="musicToggleBtn" title="Mở trình phát nhạc">
+      <div class="equalizer">
+        <span></span><span></span><span></span>
       </div>
-      <div class="profile-meta">
-        <h1 class="profile-name">Nhật Huy</h1>
-        <p class="profile-tagline">ung dung.</p>
+      <span>Nhạc</span>
+      <i data-lucide="disc-3" size="18"></i>
+    </button>
+  </header>
+
+  <!-- Spotify-style Pop-up Player -->
+  <aside class="spotify-popup" id="spotifyPopup" aria-label="Trình phát nhạc Spotify">
+    <div class="sp-header">
+      <span class="sp-badge">
+        <i data-lucide="radio" size="14"></i> Đang phát · Bass & Volume Boost
+      </span>
+      <button class="sp-ctrl-btn" id="closePopupBtn" title="Thu gọn">
+        <i data-lucide="chevron-up" size="18"></i>
+      </button>
+    </div>
+
+    <div class="sp-track-info">
+      <div class="sp-cover">
+        <div class="sp-vinyl" id="vinylDisc"></div>
       </div>
-    </header>
+      <div class="sp-meta">
+        <div class="sp-title" title="Nếu Ngày Ấy - SOOBIN | ALL-ROUNDER">Nếu Ngày Ấy - SOOBIN | ALL-ROUNDER</div>
+        <div class="sp-artist">SOOBIN · ALL-ROUNDER</div>
+      </div>
+      <button class="sp-ctrl-btn" id="likeBtn" title="Yêu thích">
+        <i data-lucide="heart" size="18"></i>
+      </button>
+    </div>
 
-    <!-- VIEWPORT SLIDER -->
-    <div class="viewport-wrapper">
-      <div class="viewport" id="viewport">
-
-        <!-- TAB 1: SOCIAL -->
-        <section class="tab-page" id="page-social">
-          <div class="links-list" id="social-links-list"></div>
-        </section>
-
-        <!-- TAB 2: HOME (QUOTE) -->
-        <section class="tab-page active-tab" id="page-home">
-          <div class="ios26-quote-card">
-            <p class="quote-text">“<br>Một lần gió thoảng qua song,<br>Mà nghe hoa đã động lòng vì xuân.</p>
-            <span class="quote-author">w.</span>
-          </div>
-        </section>
-
-        <!-- TAB 3: WORK -->
-        <section class="tab-page" id="page-work">
-          <div class="links-list" id="work-links-list"></div>
-        </section>
-
+    <!-- Seekable Timeline -->
+    <div class="sp-progress-wrap">
+      <input type="range" class="sp-slider" id="seekSlider" min="0" max="100" value="0" step="0.1">
+      <div class="sp-time-row">
+        <span id="currentTimeText">00:00</span>
+        <span id="durationTimeText">00:00</span>
       </div>
     </div>
 
-    <!-- NAVIGATION DOCK CAPSULE -->
-    <div class="bottom-nav-container">
-      <nav class="ios26-nav-dock" id="nav-dock">
-        <div class="nav-indicator-pill" id="nav-indicator"></div>
-        
-        <button class="nav-tab-btn" data-index="0" aria-label="Social">
-          <i class="fa-solid fa-share-nodes"></i>
-        </button>
-
-        <button class="nav-tab-btn active" data-index="1" aria-label="Home">
-          <i class="fa-solid fa-house"></i>
-        </button>
-
-        <button class="nav-tab-btn" data-index="2" aria-label="Work">
-          <i class="fa-solid fa-briefcase"></i>
-        </button>
-      </nav>
+    <!-- Playback Controls -->
+    <div class="sp-controls">
+      <button class="sp-ctrl-btn" id="replay10Btn" title="Lùi 10 giây">
+        <i data-lucide="rotate-ccw" size="18"></i>
+      </button>
+      <button class="sp-ctrl-btn" id="prevBtn" title="Phát lại từ đầu">
+        <i data-lucide="skip-back" size="20"></i>
+      </button>
+      <button class="sp-play-btn" id="playPauseBtn" title="Phát / Tạm dừng">
+        <i data-lucide="play" id="playPauseIcon" size="22"></i>
+      </button>
+      <button class="sp-ctrl-btn" id="forward10Btn" title="Tua nhanh 10 giây">
+        <i data-lucide="rotate-cw" size="18"></i>
+      </button>
+      <button class="sp-ctrl-btn active" id="loopBtn" title="Lặp lại bài hát">
+        <i data-lucide="repeat" size="18"></i>
+      </button>
     </div>
 
+    <!-- Amplified Volume Bar (Up to 200% Gain) -->
+    <div class="sp-volume-row">
+      <button class="sp-ctrl-btn" id="muteBtn" title="Tắt / Bật tiếng">
+        <i data-lucide="volume-2" id="volumeIcon" size="18"></i>
+      </button>
+      <input type="range" class="sp-slider" id="volumeSlider" min="0" max="2" value="1.6" step="0.05">
+      <span class="boost-tag" id="volumePercent">160%</span>
+    </div>
+  </aside>
+
+  <!-- Hidden Audio Source (Thay đường dẫn file nhạc đã upload của bạn vào src) -->
+  <audio id="audioPlayer" loop preload="metadata" crossorigin="anonymous">
+    <source src="neungayay.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Main Glassmorphism Profile Card -->
+  <main class="main-card">
+    <div class="avatar-ring">
+      <img src="https://api.dicebear.com/9.x/notionists/svg?seed=NhatHuy&backgroundColor=bae6fd" alt="Avatar">
+    </div>
+    <h1>Nhật Huy</h1>
+    <p class="subtitle">Sáng tạo nội dung số, Lịch sử & Phát triển Web.<br>Tận hưởng không gian âm nhạc và thiết kế tối giản.</p>
+
+    <div class="badge-row">
+      <span class="badge"><i data-lucide="sparkles" size="14"></i> Glassmorphism</span>
+      <span class="badge"><i data-lucide="clock" size="14"></i> Real-time Theme</span>
+      <span class="badge"><i data-lucide="headphones" size="14"></i> Hi-Fi Boost</span>
+    </div>
+
+    <div class="links-list">
+      <a href="#" class="link-item">
+        <span class="link-left"><i data-lucide="user-circle" size="20"></i> Hồ sơ cá nhân & Dự án</span>
+        <i data-lucide="arrow-up-right" size="18"></i>
+      </a>
+      <a href="#" class="link-item">
+        <span class="link-left"><i data-lucide="github" size="20"></i> GitHub Repository</span>
+        <i data-lucide="arrow-up-right" size="18"></i>
+      </a>
+      <a href="#" class="link-item">
+        <span class="link-left"><i data-lucide="mail" size="20"></i> Liên hệ công việc</span>
+        <i data-lucide="arrow-up-right" size="18"></i>
+      </a>
+    </div>
   </main>
 
-  <!-- MODAL QR CODE -->
-  <div class="modal-backdrop" id="qr-modal" role="dialog" aria-hidden="true">
-    <div class="qr-glass-card">
-      <h3 class="qr-title">Scan QR Code</h3>
-      <div class="qr-box-wrapper">
-        <div id="qrcode-canvas"></div>
-        <img src="images/Huy.png" alt="Avatar" class="qr-avatar-center">
-      </div>
-      
-      <div class="qr-actions-row">
-        <button class="btn-action-item" id="copy-btn">
-          <i class="fa-regular fa-copy"></i>
-          <span id="copy-text">Copy link</span>
-        </button>
-        <button class="btn-download-icon" id="download-qr-btn" aria-label="Download QR" title="Download QR">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 3v12"/>
-            <path d="m7 10 5 5 5-5"/>
-            <path d="M5 19h14"/>
-          </svg>
-        </button>
-      </div>
-
-      <button class="btn-close-modal" id="close-qr-btn">Close</button>
-    </div>
-  </div>
-
-  <!-- MODAL POP-UP GỬI TIN NHẮN TỨC THÌ -->
-  <div class="modal-backdrop" id="email-modal" role="dialog" aria-hidden="true">
-    <div class="qr-glass-card">
-      <h3 class="qr-title">Instant Message</h3>
-      <textarea id="visitor-message" class="email-textarea" placeholder="Type your message to Nhat Huy..."></textarea>
-      <button class="btn-action-item" id="send-instant-email-btn" style="width: 100%;">
-        <i class="fa-solid fa-paper-plane"></i>
-        <span id="send-btn-text">Send</span>
-      </button>
-      <button class="btn-close-modal" id="close-email-modal-btn">Close</button>
-    </div>
-  </div>
-
-  <script src="data.js"></script>
+  <!-- Bottom Navigation Bar (Account Icon instead of Home) -->
+  <nav class="bottom-nav" aria-label="Điều hướng chính">
+    <button class="nav-tab active" title="Tài khoản">
+      <i data-lucide="user-round" size="20"></i>
+      <span>Account</span>
+    </button>
+    <button class="nav-tab" id="navMusicShortcut" title="Trình phát nhạc">
+      <i data-lucide="music" size="20"></i>
+      <span>Music</span>
+    </button>
+    <button class="nav-tab" id="navThemeShortcut" title="Chế độ thời gian thực">
+      <i data-lucide="sun-moon" size="20"></i>
+      <span>Theme</span>
+    </button>
+  </nav>
 
   <script>
-    const PUBLIC_KEY = "rnOWqMh55RZYvY_WA";
-    const SERVICE_ID = "service_040502w";
-    const TEMPLATE_ID = "template_dc22zks";
+    // Khởi tạo icons Lucide
+    lucide.createIcons();
 
-    document.addEventListener("DOMContentLoaded", () => {
-      if (typeof bioData !== 'undefined' && bioData.tabs) {
-        renderLinks("social-links-list", bioData.tabs.social);
-        renderLinks("work-links-list", bioData.tabs.work);
+    /* =========================================================
+       1. REAL-TIME THEME MODE (LIGHT BAN NGÀY / DARK BAN ĐÊM)
+    ========================================================= */
+    const htmlEl = document.documentElement;
+    const liveClock = document.getElementById('liveClock');
+    const themeModeLabel = document.getElementById('themeModeLabel');
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const navThemeShortcut = document.getElementById('navThemeShortcut');
+    let isManualTheme = false;
+
+    function applyTheme(theme, isAuto = true) {
+      htmlEl.setAttribute('data-theme', theme);
+      const iconName = theme === 'dark' ? 'moon' : 'sun';
+      themeToggleBtn.innerHTML = `<i data-lucide="${iconName}" size="18"></i>`;
+      lucide.createIcons();
+
+      if (isAuto) {
+        themeModeLabel.textContent = theme === 'dark' ? 'Auto · Ban đêm' : 'Auto · Ban ngày';
+      } else {
+        themeModeLabel.textContent = theme === 'dark' ? 'Thủ công · Tối' : 'Thủ công · Sáng';
       }
+    }
 
-      initMagneticDock();
-      initSpotlightAndDroplets();
-      initAmbientCanvas();
-      initTabNavigation();
-      initThemeToggle();
-      initQRCodeModal();
-      initEmailModal();
-      initAudioPlayer();
-      initEmailJSNotifier();
+    function updateRealTimeClockAndTheme() {
+      const now = new Date();
+      const hours = now.getHours();
+      const mins = String(now.getMinutes()).padStart(2, '0');
+      const secs = String(now.getSeconds()).padStart(2, '0');
+      liveClock.textContent = `${String(hours).padStart(2, '0')}:${mins}:${secs}`;
+
+      // Ban ngày: 06:00 -> 17:59 (Light), Ban đêm: 18:00 -> 05:59 (Dark)
+      if (!isManualTheme) {
+        const autoTheme = (hours >= 6 && hours < 18) ? 'light' : 'dark';
+        if (htmlEl.getAttribute('data-theme') !== autoTheme) {
+          applyTheme(autoTheme, true);
+        }
+      }
+    }
+
+    // Chuyển đổi thủ công hoặc reset về tự động khi double-click
+    function toggleThemeManual() {
+      isManualTheme = true;
+      const current = htmlEl.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      applyTheme(next, false);
+    }
+
+    themeToggleBtn.addEventListener('click', toggleThemeManual);
+    navThemeShortcut.addEventListener('click', () => {
+      isManualTheme = false;
+      updateRealTimeClockAndTheme();
     });
 
-    /* ==========================================================
-       1. APPLE MACOS DOCK (MAGNETIC SPRING MAGNIFICATION)
-       ========================================================== */
-    function initMagneticDock() {
-      const dock = document.getElementById("nav-dock");
-      const btns = Array.from(dock.querySelectorAll(".nav-tab-btn"));
-      if (!dock || !btns.length) return;
-
-      const items = btns.map(btn => ({
-        btn,
-        icon: btn.querySelector("i"),
-        scale: 1,
-        targetScale: 1,
-        x: 0,
-        targetX: 0,
-        vScale: 0,
-        vX: 0
-      }));
-
-      let isHovering = false;
-      let animId = null;
-
-      function updatePhysics() {
-        let moving = false;
-        const stiffness = 0.22;
-        const damping = 0.68;
-
-        items.forEach(item => {
-          const fScale = (item.targetScale - item.scale) * stiffness;
-          item.vScale = (item.vScale + fScale) * damping;
-          item.scale += item.vScale;
-
-          const fX = (item.targetX - item.x) * stiffness;
-          item.vX = (item.vX + fX) * damping;
-          item.x += item.vX;
-
-          if (Math.abs(item.targetScale - item.scale) > 0.001 || Math.abs(item.vScale) > 0.001 ||
-              Math.abs(item.targetX - item.x) > 0.01 || Math.abs(item.vX) > 0.01) {
-            moving = true;
-          } else {
-            item.scale = item.targetScale;
-            item.x = item.targetX;
-          }
-
-          const liftY = -(item.scale - 1) * 14;
-          item.icon.style.transform = `translate3d(${item.x.toFixed(2)}px, ${liftY.toFixed(2)}px, 0) scale(${item.scale.toFixed(3)})`;
-        });
-
-        if (moving || isHovering) {
-          animId = requestAnimationFrame(updatePhysics);
-        } else {
-          animId = null;
-        }
-      }
-
-      function resetTargets() {
-        isHovering = false;
-        items.forEach(item => {
-          item.targetScale = 1;
-          item.targetX = 0;
-        });
-        if (!animId) animId = requestAnimationFrame(updatePhysics);
-      }
-
-      dock.addEventListener("mousemove", (e) => {
-        isHovering = true;
-        const maxRange = 135;
-        const maxScale = 1.48;
-
-        items.forEach(item => {
-          const rect = item.btn.getBoundingClientRect();
-          const center = rect.left + rect.width / 2;
-          const dist = e.clientX - center;
-          const absDist = Math.abs(dist);
-
-          if (absDist < maxRange) {
-            const norm = 1 - absDist / maxRange;
-            const ease = Math.cos((1 - norm) * (Math.PI / 2));
-            item.targetScale = 1 + (maxScale - 1) * ease;
-            item.targetX = -Math.sign(dist) * Math.sin(norm * Math.PI) * 9;
-          } else {
-            item.targetScale = 1;
-            item.targetX = 0;
-          }
-        });
-
-        if (!animId) animId = requestAnimationFrame(updatePhysics);
-      });
-
-      dock.addEventListener("mouseleave", resetTargets);
-      btns.forEach(btn => btn.addEventListener("click", resetTargets));
-    }
-
-    /* ==========================================================
-       2. CURSOR SPOTLIGHT, BORDER GLOW & WATER DROPLET RIPPLES
-       ========================================================== */
-    function initSpotlightAndDroplets() {
-      const mainCard = document.getElementById("main-card");
-      if (!mainCard) return;
-
-      mainCard.addEventListener("mousemove", (e) => {
-        const rect = mainCard.getBoundingClientRect();
-        mainCard.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
-        mainCard.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
-      });
-
-      document.addEventListener("mousemove", (e) => {
-        const target = e.target.closest(".glass-btn-ios26, .ios26-link-item, .btn-action-item, .btn-download-icon");
-        if (target) {
-          const rect = target.getBoundingClientRect();
-          target.style.setProperty("--btn-x", `${e.clientX - rect.left}px`);
-          target.style.setProperty("--btn-y", `${e.clientY - rect.top}px`);
-        }
-      });
-
-      mainCard.addEventListener("pointerdown", (e) => {
-        if (e.target.closest("textarea")) return;
-        const rect = mainCard.getBoundingClientRect();
-        const ripple = document.createElement("span");
-        ripple.className = "water-ripple";
-        ripple.style.left = `${e.clientX - rect.left}px`;
-        ripple.style.top = `${e.clientY - rect.top}px`;
-        mainCard.appendChild(ripple);
-        ripple.addEventListener("animationend", () => ripple.remove());
-      });
-    }
-
-    /* ==========================================================
-       3. INTERACTIVE AMBIENT CANVAS (FIREFLIES & FALLING LEAVES)
-       ========================================================== */
-    function initAmbientCanvas() {
-      const canvas = document.getElementById("ambient-particles");
-      if (!canvas) return;
-      const ctx = canvas.getContext("2d");
-
-      let width = canvas.width = window.innerWidth;
-      let height = canvas.height = window.innerHeight;
-      const mouse = { x: -9999, y: -9999, active: false };
-
-      window.addEventListener("resize", () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-      });
-
-      window.addEventListener("mousemove", (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-        mouse.active = true;
-      });
-
-      window.addEventListener("touchmove", (e) => {
-        if (e.touches[0]) {
-          mouse.x = e.touches[0].clientX;
-          mouse.y = e.touches[0].clientY;
-          mouse.active = true;
-        }
-      }, { passive: true });
-
-      window.addEventListener("mouseleave", () => { mouse.active = false; });
-      window.addEventListener("touchend", () => { mouse.active = false; });
-
-      const LEAF_PALETTES = [
-        { main: "#4ade80", edge: "#15803d", vein: "#dcfce7" },
-        { main: "#22c55e", edge: "#166534", vein: "#bbf7d0" },
-        { main: "#84cc16", edge: "#4d7c0f", vein: "#ecfccb" },
-        { main: "#e09f3e", edge: "#b45309", vein: "#fef3c7" },
-        { main: "#ea580c", edge: "#9a3412", vein: "#ffedd5" }
-      ];
-
-      const PARTICLE_COUNT = 54;
-      const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45,
-        radius: Math.random() * 2.3 + 1.5,
-        leafSize: Math.random() * 5 + 6.5,
-        rotation: Math.random() * Math.PI * 2,
-        rotSpeed: (Math.random() - 0.5) * 0.025,
-        flipPhase: Math.random() * Math.PI * 2,
-        flipSpeed: 0.02 + Math.random() * 0.025,
-        swayAmp: 0.45 + Math.random() * 0.55,
-        phase: Math.random() * Math.PI * 2,
-        speed: 0.015 + Math.random() * 0.02,
-        swirlDir: Math.random() > 0.5 ? 1 : -1,
-        orbitRadius: 28 + Math.random() * 54,
-        palette: LEAF_PALETTES[Math.floor(Math.random() * LEAF_PALETTES.length)]
-      }));
-
-      function drawNaturalLeaf(p, alpha) {
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.rotation);
-
-        const tiltScale = 0.55 + 0.45 * Math.abs(Math.cos(p.flipPhase));
-        ctx.scale(1, tiltScale);
-
-        const s = p.leafSize;
-        ctx.globalAlpha = Math.min(0.95, alpha + 0.25);
-
-        ctx.shadowColor = "rgba(20, 31, 22, 0.16)";
-        ctx.shadowBlur = 6;
-        ctx.shadowOffsetY = 3;
-
-        const grad = ctx.createLinearGradient(-s, -s * 0.5, s, s * 0.5);
-        grad.addColorStop(0, p.palette.main);
-        grad.addColorStop(1, p.palette.edge);
-        ctx.fillStyle = grad;
-
-        ctx.beginPath();
-        ctx.moveTo(-s * 1.15, 0);
-        ctx.bezierCurveTo(-s * 0.45, -s * 0.85, s * 0.45, -s * 0.75, s * 1.2, 0);
-        ctx.bezierCurveTo(s * 0.45, s * 0.75, -s * 0.45, s * 0.85, -s * 1.15, 0);
-        ctx.closePath();
-        ctx.fill();
-
-        ctx.shadowColor = "transparent";
-
-        ctx.strokeStyle = p.palette.edge;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(-s * 1.15, 0);
-        ctx.quadraticCurveTo(-s * 1.45, s * 0.15, -s * 1.6, s * 0.25);
-        ctx.stroke();
-
-        ctx.strokeStyle = p.palette.vein;
-        ctx.lineWidth = 0.65;
-        ctx.globalAlpha = Math.min(0.75, alpha * 0.8);
-        ctx.beginPath();
-        ctx.moveTo(-s * 1.05, 0);
-        ctx.lineTo(s * 1.0, 0);
-        ctx.moveTo(-s * 0.3, 0);
-        ctx.lineTo(s * 0.1, -s * 0.35);
-        ctx.moveTo(-s * 0.3, 0);
-        ctx.lineTo(s * 0.1, s * 0.35);
-        ctx.moveTo(s * 0.2, 0);
-        ctx.lineTo(s * 0.55, -s * 0.28);
-        ctx.moveTo(s * 0.2, 0);
-        ctx.lineTo(s * 0.55, s * 0.28);
-        ctx.stroke();
-
-        ctx.restore();
-      }
-
-      function animate() {
-        ctx.clearRect(0, 0, width, height);
-        const isLight = document.documentElement.getAttribute("data-theme") === "light";
-
-        for (let i = 0; i < particles.length; i++) {
-          const p = particles[i];
-          p.phase += p.speed;
-          p.flipPhase += p.flipSpeed;
-          let proximityBoost = 0;
-
-          if (mouse.active) {
-            const dx = mouse.x - p.x;
-            const dy = mouse.y - p.y;
-            const dist = Math.hypot(dx, dy);
-            const influenceRadius = 250;
-
-            if (dist < influenceRadius && dist > 1) {
-              const norm = 1 - dist / influenceRadius;
-              proximityBoost = norm * 0.5;
-              const nx = dx / dist;
-              const ny = dy / dist;
-
-              if (dist > p.orbitRadius) {
-                const pull = norm * norm * 0.085;
-                p.vx += nx * pull;
-                p.vy += ny * pull;
-              } else {
-                const repel = (1 - dist / p.orbitRadius) * 0.038;
-                p.vx -= nx * repel;
-                p.vy -= ny * repel;
-              }
-
-              const swirl = norm * 0.045 * p.swirlDir;
-              p.vx += -ny * swirl;
-              p.vy += nx * swirl;
-              p.rotation += p.rotSpeed * (1 + norm * 2.2);
-            }
-          }
-
-          p.vx *= 0.965;
-          p.vy *= 0.965;
-
-          if (isLight) {
-            const windSway = Math.sin(p.phase * 1.2) * p.swayAmp;
-            p.x += p.vx + windSway;
-            p.y += p.vy + 0.55 + Math.cos(p.phase) * 0.15;
-            p.rotation += p.rotSpeed + windSway * 0.02;
-          } else {
-            p.x += p.vx + Math.sin(p.phase) * 0.28;
-            p.y += p.vy - 0.16 + Math.cos(p.phase * 0.8) * 0.14;
-          }
-
-          if (p.x < -30) p.x = width + 30;
-          if (p.x > width + 30) p.x = -30;
-          if (p.y < -30) p.y = height + 30;
-          if (p.y > height + 30) p.y = -30;
-
-          const basePulse = 0.55 + Math.sin(p.phase * 1.4) * 0.3;
-          const finalAlpha = Math.min(1, basePulse + proximityBoost);
-
-          if (isLight) {
-            drawNaturalLeaf(p, finalAlpha);
-          } else {
-            const dynamicRadius = p.radius * (1 + proximityBoost * 0.35);
-            const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, dynamicRadius * 4.2);
-            glow.addColorStop(0, `rgba(255, 252, 225, ${finalAlpha})`);
-            glow.addColorStop(0.4, `rgba(253, 224, 71, ${finalAlpha * 0.45})`);
-            glow.addColorStop(1, "rgba(255, 255, 255, 0)");
-
-            ctx.fillStyle = glow;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, dynamicRadius * 4.2, 0, Math.PI * 2);
-            ctx.fill();
-          }
-        }
-
-        requestAnimationFrame(animate);
-      }
-
-      animate();
-    }
-
-    /* ==========================================================
-       4. CROSS-FADE & GLASS BLUR THEME TOGGLE
-       ========================================================== */
-    function initThemeToggle() {
-      const toggle = document.getElementById("theme-toggle");
-      const mainCard = document.getElementById("main-card");
-      const savedTheme = localStorage.getItem("ios26-theme") || "dark";
-      document.documentElement.setAttribute("data-theme", savedTheme);
-
-      toggle.addEventListener("click", () => {
-        const currentTheme = document.documentElement.getAttribute("data-theme");
-        const newTheme = currentTheme === "light" ? "dark" : "light";
-
-        mainCard.classList.add("theme-transitioning");
-
-        setTimeout(() => {
-          document.documentElement.setAttribute("data-theme", newTheme);
-          localStorage.setItem("ios26-theme", newTheme);
-
-          setTimeout(() => {
-            mainCard.classList.remove("theme-transitioning");
-          }, 50);
-        }, 250);
-      });
-    }
-
-    /* ==========================================================
-       5. SPRING TAB NAVIGATION & STATE SYNC
-       ========================================================== */
-    function initTabNavigation() {
-      const navBtns = document.querySelectorAll(".nav-tab-btn");
-      const indicator = document.getElementById("nav-indicator");
-      const viewport = document.getElementById("viewport");
-      const mainCard = document.getElementById("main-card");
-      const tabPages = document.querySelectorAll(".tab-page");
-
-      const topBarEl = document.querySelector(".top-bar");
-      const bottomNavEl = document.querySelector(".bottom-nav-container");
-      const profileHeaderEl = document.querySelector(".profile-header");
-
-      function adjustCardHeight(index) {
-        requestAnimationFrame(() => {
-          const topBarH = topBarEl ? topBarEl.offsetHeight : 0;
-          const headerH = profileHeaderEl ? profileHeaderEl.offsetHeight : 0;
-          const navH = bottomNavEl ? bottomNavEl.offsetHeight : 0;
-          const currentTabPage = tabPages[index];
-          const contentH = currentTabPage ? currentTabPage.scrollHeight : 0;
-
-          mainCard.style.height = `${topBarH + headerH + contentH + navH}px`;
-        });
-      }
-
-      function switchTab(index) {
-        viewport.style.transform = `translate3d(-${index * 33.3333}%, 0, 0)`;
-
-        const activeBtn = navBtns[index];
-        if (activeBtn && indicator) {
-          indicator.style.transform = `translate3d(${activeBtn.offsetLeft - 6}px, 0, 0)`;
-        }
-
-        navBtns.forEach((btn, i) => btn.classList.toggle("active", i === index));
-        tabPages.forEach((page, i) => page.classList.toggle("active-tab", i === index));
-
-        if (index === 1) {
-          mainCard.classList.remove("compact-mode");
-        } else {
-          mainCard.classList.add("compact-mode");
-        }
-
-        adjustCardHeight(index);
-      }
-
-      navBtns.forEach((btn, i) => {
-        btn.addEventListener("click", () => switchTab(i));
-      });
-
-      let resizeTimer;
-      window.addEventListener("resize", () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          const activeBtn = document.querySelector(".nav-tab-btn.active");
-          if (activeBtn) {
-            switchTab(parseInt(activeBtn.getAttribute("data-index") || "1", 10));
-          }
-        }, 100);
-      });
-
-      requestAnimationFrame(() => switchTab(1));
-    }
-
-    function renderLinks(containerId, items) {
-      const container = document.getElementById(containerId);
-      if (!container || !Array.isArray(items)) return;
-
-      const fragment = document.createDocumentFragment();
-      items.forEach((item) => {
-        const a = document.createElement('a');
-        a.href = item.url || '#';
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.className = "ios26-link-item";
-        a.innerHTML = `
-          <img src="${item.icon}" alt="${item.title}" class="link-icon" loading="lazy">
-          <span class="link-label">${item.title}</span>
-          <i class="fa-solid fa-chevron-right link-arrow"></i>
-        `;
-        fragment.appendChild(a);
-      });
-
-      container.innerHTML = '';
-      container.appendChild(fragment);
-    }
-
-    /* ==========================================================
-       6. MODALS, EMAILJS & AUDIO PLAYER
-       ========================================================== */
-    function initQRCodeModal() {
-      const openBtn = document.getElementById("open-qr-btn");
-      const closeBtn = document.getElementById("close-qr-btn");
-      const modal = document.getElementById("qr-modal");
-      const qrCanvas = document.getElementById("qrcode-canvas");
-      const copyBtn = document.getElementById("copy-btn");
-      const copyText = document.getElementById("copy-text");
-      const downloadBtn = document.getElementById("download-qr-btn");
-
-      const shareUrl = (typeof bioData !== 'undefined' && bioData.profile && bioData.profile.shareUrl)
-        ? bioData.profile.shareUrl
-        : window.location.href;
-      let qrGenerated = false;
-
-      function openModal() {
-        modal.classList.add("active");
-        modal.setAttribute("aria-hidden", "false");
-        if (!qrGenerated) {
-          new QRCode(qrCanvas, {
-            text: shareUrl,
-            width: 156,
-            height: 156,
-            colorDark: "#08090a",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H
-          });
-          qrGenerated = true;
-        }
-      }
-
-      function closeModal() {
-        modal.classList.remove("active");
-        modal.setAttribute("aria-hidden", "true");
-      }
-
-      openBtn.addEventListener("click", openModal);
-      closeBtn.addEventListener("click", closeModal);
-      modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
-
-      copyBtn.addEventListener("click", () => {
-        navigator.clipboard.writeText(shareUrl).then(() => {
-          copyText.textContent = "Copied!";
-          copyBtn.style.background = "#22c55e";
-          setTimeout(() => {
-            copyText.textContent = "Copy link";
-            copyBtn.style.background = "rgba(255, 255, 255, 0.15)";
-          }, 2000);
-        }).catch(() => {
-          copyText.textContent = "Error!";
-        });
-      });
-
-      downloadBtn.addEventListener("click", () => {
-        const link = document.createElement('a');
-        link.download = 'w.bio_qr';
-        link.href = 'images/w.bio_qr.png';
-
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      });
-    }
-
-    function getDeviceAndLocationInfo() {
-      const ua = navigator.userAgent;
-      let vendor = "Chưa xác định hãng";
-      let model = "Thiết bị không xác định";
-      let os = "Hệ điều hành không xác định";
-      let deviceType = "Desktop/Laptop";
-
-      const isMobile = /mobile/i.test(ua);
-      const isTablet = /tablet|ipad|playbook|silk/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-      if (isTablet) deviceType = "Tablet";
-      else if (isMobile) deviceType = "Mobile";
-
-      if (/android/i.test(ua)) {
-        const osMatch = ua.match(/Android\s+([\d.]+)/i);
-        os = `Android ${osMatch ? osMatch[1] : ''}`;
-      } else if (/iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
-        const osMatch = ua.match(/OS\s+([\d_]+)/i);
-        os = `iOS / iPadOS ${osMatch ? osMatch[1].replace(/_/g, '.') : ''}`;
-      } else if (/windows nt/i.test(ua)) {
-        os = /windows nt 10.0/i.test(ua) ? "Windows 10 / 11" : "Windows PC";
-      } else if (/macintosh|mac os x/i.test(ua)) {
-        const osMatch = ua.match(/Mac OS X\s+([\d_]+)/i);
-        os = `macOS ${osMatch ? osMatch[1].replace(/_/g, '.') : ''}`;
-      } else if (/cros/i.test(ua)) os = "ChromeOS";
-      else if (/linux/i.test(ua)) os = "Linux";
-
-      if (/android/i.test(ua)) {
-        if (/samsung|SM-/i.test(ua)) {
-          vendor = "Samsung";
-          const match = ua.match(/SM-[A-Z0-9]+/i);
-          model = match ? match[0] : "Samsung Galaxy";
-        } else if (/xiaomi|redmi|poco/i.test(ua)) {
-          vendor = "Xiaomi";
-          model = "Xiaomi Device";
-        } else if (/oppo|CPH\d+/i.test(ua)) {
-          vendor = "OPPO";
-          model = "OPPO Device";
-        } else if (/vivo|V2\d+/i.test(ua)) {
-          vendor = "Vivo";
-          model = "Vivo Device";
-        }
-      } else if (/iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
-        vendor = "Apple";
-        model = (/ipad/i.test(ua) || navigator.maxTouchPoints > 1) ? "iPad" : "iPhone";
-      } else if (/macintosh/i.test(ua)) {
-        vendor = "Apple";
-        model = "Mac / MacBook";
-      }
-
-      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Ho_Chi_Minh";
-      const language = navigator.language || "vi-VN";
-      const location = (timeZone.includes("Ho_Chi_Minh") || timeZone.includes("Bangkok"))
-        ? `Việt Nam (${timeZone})`
-        : `Timezone: ${timeZone} | Ngôn ngữ: ${language}`;
-
-      return {
-        device: `Mã/Tên: ${model} | Hãng: ${vendor} | Hệ điều hành: ${os} (${deviceType})`,
-        location
-      };
-    }
-
-    function initEmailJSNotifier() {
-      if (PUBLIC_KEY === "THAY_PUBLIC_KEY_CUA_BAN" || typeof emailjs === "undefined") return;
-      emailjs.init(PUBLIC_KEY);
-
-      if (!sessionStorage.getItem("email_notified")) {
-        setTimeout(() => {
-          if (sessionStorage.getItem("email_notified")) return;
-          const { device, location } = getDeviceAndLocationInfo();
-          emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-            time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
-            device,
-            location,
-            message: "[System] New visitor access on your personal web page w.bio (No message left).",
-            referrer: document.referrer || "Direct Access"
-          }).then(() => sessionStorage.setItem("email_notified", "true"))
-            .catch(err => console.error("Error sending email:", err));
-        }, 3000);
-      }
-    }
-
-    function initEmailModal() {
-      const openBtn = document.getElementById("open-email-modal-btn");
-      const closeBtn = document.getElementById("close-email-modal-btn");
-      const modal = document.getElementById("email-modal");
-      const sendBtn = document.getElementById("send-instant-email-btn");
-      const sendBtnText = document.getElementById("send-btn-text");
-      const messageInput = document.getElementById("visitor-message");
-
-      function openModal() {
-        modal.classList.add("active");
-        modal.setAttribute("aria-hidden", "false");
-      }
-
-      function closeModal() {
-        modal.classList.remove("active");
-        modal.setAttribute("aria-hidden", "true");
-        messageInput.value = "";
-      }
-
-      openBtn.addEventListener("click", openModal);
-      closeBtn.addEventListener("click", closeModal);
-      modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
-
-      sendBtn.addEventListener("click", () => {
-        const userMsg = messageInput.value.trim();
-        if (!userMsg) {
-          alert("Please enter your message!");
-          return;
-        }
-
-        sendBtnText.textContent = "Sending...";
-        sendBtn.style.opacity = "0.7";
-        sessionStorage.setItem("email_notified", "true");
-
-        const { device, location } = getDeviceAndLocationInfo();
-        emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-          time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
-          device,
-          location,
-          message: userMsg,
-          referrer: "Instant Message Pop-up (Web Form)"
-        }).then(() => {
-          sendBtnText.textContent = "Sent Successfully!";
-          sendBtn.style.background = "#22c55e";
-          setTimeout(() => {
-            closeModal();
-            sendBtnText.textContent = "Send";
-            sendBtn.style.background = "rgba(255, 255, 255, 0.15)";
-            sendBtn.style.opacity = "1";
-          }, 1500);
-        }).catch(() => {
-          sendBtnText.textContent = "Send Failed!";
-          setTimeout(() => {
-            sendBtnText.textContent = "Send";
-            sendBtn.style.opacity = "1";
-          }, 2000);
-        });
-      });
-    }
-
-    function initAudioPlayer() {
-      const musicBtn = document.getElementById("music-toggle-btn");
-      const musicIcon = document.getElementById("music-icon");
-      if (!musicBtn) return;
-
-      let audioCtx = null;
-      let audioBuffer = null;
-      let sourceNode = null;
-      let gainNode = null;
-      let isPlaying = false;
-      let isLoaded = false;
-
-      function updateUI(playing) {
-        if (playing) {
-          musicBtn.classList.add("playing");
-          musicIcon.className = "fa-solid fa-compact-disc";
-        } else {
-          musicBtn.classList.remove("playing");
-          musicIcon.className = "fa-solid fa-music";
-        }
-      }
-
-      async function loadAudioFile() {
-        try {
-          const response = await fetch("audio/neungayay.mp3");
-          const arrayBuffer = await response.arrayBuffer();
-          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-          audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
-          isLoaded = true;
-        } catch (e) {
-          console.log("Lỗi tải tệp âm thanh:", e);
-        }
-      }
-
-      function playSound() {
-        if (!isLoaded || !audioBuffer) return;
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        if (sourceNode) { try { sourceNode.stop(); } catch (e) {} }
-
-        sourceNode = audioCtx.createBufferSource();
-        sourceNode.buffer = audioBuffer;
-        sourceNode.loop = true;
-
+    updateRealTimeClockAndTheme();
+    setInterval(updateRealTimeClockAndTheme, 1000);
+
+    /* =========================================================
+       2. SPOTIFY POP-UP & WEB AUDIO API VOLUME BOOSTER
+    ========================================================= */
+    const musicToggleBtn = document.getElementById('musicToggleBtn');
+    const navMusicShortcut = document.getElementById('navMusicShortcut');
+    const spotifyPopup = document.getElementById('spotifyPopup');
+    const closePopupBtn = document.getElementById('closePopupBtn');
+    const audioPlayer = document.getElementById('audioPlayer');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const vinylDisc = document.getElementById('vinylDisc');
+    const seekSlider = document.getElementById('seekSlider');
+    const currentTimeText = document.getElementById('currentTimeText');
+    const durationTimeText = document.getElementById('durationTimeText');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumePercent = document.getElementById('volumePercent');
+    const muteBtn = document.getElementById('muteBtn');
+    const loopBtn = document.getElementById('loopBtn');
+    const likeBtn = document.getElementById('likeBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const replay10Btn = document.getElementById('replay10Btn');
+    const forward10Btn = document.getElementById('forward10Btn');
+
+    // Web Audio API để khuếch đại âm lượng file nhạc lớn hơn mức 100% mặc định
+    let audioCtx = null;
+    let gainNode = null;
+    let isAudioBoostInitialized = false;
+
+    function initAudioBooster() {
+      if (isAudioBoostInitialized) return;
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+        const source = audioCtx.createMediaElementSource(audioPlayer);
         gainNode = audioCtx.createGain();
-        gainNode.gain.value = 0.4;
-
-        sourceNode.connect(gainNode);
+        // Mặc định khuếch đại âm lượng lên 1.6x (160%) khi bật nhạc
+        gainNode.gain.value = parseFloat(volumeSlider.value);
+        source.connect(gainNode);
         gainNode.connect(audioCtx.destination);
-        sourceNode.start(0);
-        isPlaying = true;
-        updateUI(true);
+        isAudioBoostInitialized = true;
+      } catch (e) {
+        // Fallback nếu trình duyệt chặn CORS trên file local
+        audioPlayer.volume = 1.0;
       }
-
-      function stopSound() {
-        if (sourceNode) {
-          try { sourceNode.stop(); } catch (e) {}
-          sourceNode = null;
-        }
-        isPlaying = false;
-        updateUI(false);
-      }
-
-      loadAudioFile();
-
-      musicBtn.addEventListener("click", async (e) => {
-        e.stopPropagation();
-        if (!isLoaded) await loadAudioFile();
-        if (audioCtx && audioCtx.state === 'suspended') await audioCtx.resume();
-        isPlaying ? stopSound() : playSound();
-      });
     }
+
+    function formatTime(seconds) {
+      if (isNaN(seconds) || !isFinite(seconds)) return "00:00";
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    function updatePlayStateUI(isPlaying) {
+      const icon = isPlaying ? 'pause' : 'play';
+      playPauseBtn.innerHTML = `<i data-lucide="${icon}" size="22"></i>`;
+      lucide.createIcons();
+
+      if (isPlaying) {
+        musicToggleBtn.classList.add('playing');
+        vinylDisc.classList.add('spinning');
+      } else {
+        musicToggleBtn.classList.remove('playing');
+        vinylDisc.classList.remove('spinning');
+      }
+    }
+
+    async function togglePlayMusic() {
+      initAudioBooster();
+      if (audioCtx && audioCtx.state === 'suspended') {
+        await audioCtx.resume();
+      }
+
+      if (audioPlayer.paused) {
+        audioPlayer.play().then(() => {
+          updatePlayStateUI(true);
+        }).catch(err => {
+          console.warn("Vui lòng kiểm tra file nhạc .mp3 đã được tải lên đúng đường dẫn:", err);
+        });
+      } else {
+        audioPlayer.pause();
+        updatePlayStateUI(false);
+      }
+    }
+
+    // Khi ấn vào nút Nhạc: Mở Pop-up Spotify + Tự động phát với âm lượng khuếch đại
+    musicToggleBtn.addEventListener('click', () => {
+      const isOpening = !spotifyPopup.classList.contains('open');
+      spotifyPopup.classList.toggle('open');
+      if (isOpening && audioPlayer.paused) {
+        togglePlayMusic();
+      }
+    });
+
+    navMusicShortcut.addEventListener('click', () => {
+      spotifyPopup.classList.toggle('open');
+    });
+
+    closePopupBtn.addEventListener('click', () => {
+      spotifyPopup.classList.remove('open');
+    });
+
+    playPauseBtn.addEventListener('click', togglePlayMusic);
+
+    // Cập nhật thanh thời lượng & tua nhạc mượt mà
+    audioPlayer.addEventListener('loadedmetadata', () => {
+      seekSlider.max = audioPlayer.duration;
+      durationTimeText.textContent = formatTime(audioPlayer.duration);
+    });
+
+    audioPlayer.addEventListener('timeupdate', () => {
+      if (!seekSlider.matches(':active')) {
+        seekSlider.value = audioPlayer.currentTime;
+      }
+      currentTimeText.textContent = formatTime(audioPlayer.currentTime);
+      if (audioPlayer.duration) {
+        durationTimeText.textContent = formatTime(audioPlayer.duration);
+      }
+    });
+
+    seekSlider.addEventListener('input', () => {
+      currentTimeText.textContent = formatTime(seekSlider.value);
+    });
+
+    seekSlider.addEventListener('change', () => {
+      audioPlayer.currentTime = seekSlider.value;
+    });
+
+    // Điều chỉnh âm lượng khuếch đại (0% -> 200%)
+    let lastVolume = 1.6;
+    volumeSlider.addEventListener('input', () => {
+      const val = parseFloat(volumeSlider.value);
+      if (gainNode) {
+        gainNode.gain.value = val;
+      } else {
+        audioPlayer.volume = Math.min(1, val);
+      }
+      volumePercent.textContent = `${Math.round(val * 100)}%`;
+
+      const volIcon = val === 0 ? 'volume-x' : (val < 0.8 ? 'volume-1' : 'volume-2');
+      muteBtn.innerHTML = `<i data-lucide="${volIcon}" size="18"></i>`;
+      lucide.createIcons();
+    });
+
+    muteBtn.addEventListener('click', () => {
+      const currentVal = parseFloat(volumeSlider.value);
+      if (currentVal > 0) {
+        lastVolume = currentVal;
+        volumeSlider.value = 0;
+      } else {
+        volumeSlider.value = lastVolume || 1.6;
+      }
+      volumeSlider.dispatchEvent(new Event('input'));
+    });
+
+    // Các tiện ích bổ sung trên Pop-up
+    prevBtn.addEventListener('click', () => {
+      audioPlayer.currentTime = 0;
+    });
+
+    replay10Btn.addEventListener('click', () => {
+      audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 10);
+    });
+
+    forward10Btn.addEventListener('click', () => {
+      audioPlayer.currentTime = Math.min(audioPlayer.duration || 0, audioPlayer.currentTime + 10);
+    });
+
+    loopBtn.addEventListener('click', () => {
+      audioPlayer.loop = !audioPlayer.loop;
+      loopBtn.classList.toggle('active', audioPlayer.loop);
+    });
+
+    likeBtn.addEventListener('click', () => {
+      likeBtn.classList.toggle('active');
+    });
   </script>
 </body>
 </html>
