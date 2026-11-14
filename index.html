@@ -2192,7 +2192,6 @@
       const closeModalBtn = document.getElementById("close-music-modal-btn");
       const musicModal = document.getElementById("music-modal");
       const musicModalCard = document.getElementById("music-modal-card");
-      const mainMusicBtn = document.getElementById("open-music-modal-btn");
       const musicMainIcon = document.getElementById("music-main-icon");
 
       const playBtn = document.getElementById("modal-play-btn");
@@ -2393,19 +2392,29 @@
       }
 
       function openModal() {
+        if (!musicModal) return;
         musicModal.classList.add("active");
         musicModal.setAttribute("aria-hidden", "false");
         requestAnimationFrame(syncStageSize);
       }
 
       function closeModal() {
+        if (!musicModal) return;
         musicModal.classList.remove("active");
         musicModal.setAttribute("aria-hidden", "true");
       }
 
-      openModalBtn.addEventListener("click", openModal);
-      closeModalBtn.addEventListener("click", closeModal);
-      musicModal.addEventListener("click", (e) => { if (e.target === musicModal) closeModal(); });
+      if (openModalBtn) {
+        openModalBtn.addEventListener("click", openModal);
+      }
+      if (closeModalBtn) {
+        closeModalBtn.addEventListener("click", closeModal);
+      }
+      if (musicModal) {
+        musicModal.addEventListener("click", (e) => { 
+          if (e.target === musicModal) closeModal(); 
+        });
+      }
       window.addEventListener("resize", syncStageSize);
 
       async function loadAudioFile() {
@@ -2428,8 +2437,8 @@
         if (playing) {
           playIcon.className = "fa-solid fa-pause";
           vinylRecord.classList.add("spinning");
-          mainMusicBtn.classList.add("playing");
-          musicMainIcon.className = "fa-solid fa-compact-disc";
+          if (openModalBtn) openModalBtn.classList.add("playing");
+          if (musicMainIcon) musicMainIcon.className = "fa-solid fa-compact-disc";
           if (musicModalCard) {
             syncStageSize();
             musicModalCard.classList.add("is-playing");
@@ -2437,8 +2446,8 @@
         } else {
           playIcon.className = "fa-solid fa-play";
           vinylRecord.classList.remove("spinning");
-          mainMusicBtn.classList.remove("playing");
-          musicMainIcon.className = "fa-solid fa-music";
+          if (openModalBtn) openModalBtn.classList.remove("playing");
+          if (musicMainIcon) musicMainIcon.className = "fa-solid fa-music";
           if (musicModalCard) {
             musicModalCard.classList.remove("is-playing");
           }
