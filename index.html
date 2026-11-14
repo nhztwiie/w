@@ -297,44 +297,52 @@
       opacity: 1;
     }
 
-    /* HIỆU ỨNG 3 VÒNG SÓNG KHI CLICK CHUỘT */
+    /* HIỆU ỨNG 3 VÒNG SÓNG RIÊNG BIỆT (KHÔNG LỒNG NHAU) */
     .water-ripple {
       position: absolute;
       border-radius: 50%;
       transform: translate(-50%, -50%) scale(0);
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
-      border: 1.5px solid rgba(255, 255, 255, 0.6);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.55);
       pointer-events: none;
-      animation: liquidSplash 0.85s cubic-bezier(0.15, 0.85, 0.25, 1) forwards;
+      animation: liquidSplash 0.9s cubic-bezier(0.15, 0.85, 0.25, 1) forwards;
       z-index: 50;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
     }
 
-    .water-ripple::before,
-    .water-ripple::after {
-      content: '';
+    .water-ripple-2 {
       position: absolute;
-      inset: -8px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      animation: rippleRing 0.85s cubic-bezier(0.15, 0.85, 0.25, 1) forwards;
+      transform: translate(-50%, -50%) scale(0);
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      pointer-events: none;
+      animation: liquidSplash2 0.9s cubic-bezier(0.15, 0.85, 0.25, 1) 0.12s forwards;
+      z-index: 50;
     }
 
-    .water-ripple::after {
-      inset: -16px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      animation-delay: 0.1s;
+    .water-ripple-3 {
+      position: absolute;
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      pointer-events: none;
+      animation: liquidSplash3 0.9s cubic-bezier(0.15, 0.85, 0.25, 1) 0.24s forwards;
+      z-index: 50;
     }
 
     @keyframes liquidSplash {
       0% { width: 0; height: 0; opacity: 1; transform: translate(-50%, -50%) scale(0.2); }
-      50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
-      100% { width: 280px; height: 280px; opacity: 0; transform: translate(-50%, -50%) scale(1.6); }
+      100% { width: 240px; height: 240px; opacity: 0; transform: translate(-50%, -50%) scale(1.4); }
     }
-
-    @keyframes rippleRing {
-      0% { opacity: 1; transform: scale(0.4); }
-      100% { opacity: 0; transform: scale(1.4); }
+    @keyframes liquidSplash2 {
+      0% { width: 0; height: 0; opacity: 1; transform: translate(-50%, -50%) scale(0.2); }
+      100% { width: 200px; height: 200px; opacity: 0; transform: translate(-50%, -50%) scale(1.3); }
+    }
+    @keyframes liquidSplash3 {
+      0% { width: 0; height: 0; opacity: 1; transform: translate(-50%, -50%) scale(0.2); }
+      100% { width: 160px; height: 160px; opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
     }
 
     .top-bar {
@@ -965,7 +973,7 @@
     }
 
     /* ==========================================================
-       SPOTIFY & IOS27 MUSIC PLAYER MODAL STYLING (LIQUID WATER PHYSICS)
+       SPOTIFY & MUSIC PLAYER MODAL STYLING (CLEAN TONEARM & NOTES)
        ========================================================== */
     .music-modal-card {
       background: var(--glass-bg);
@@ -999,7 +1007,7 @@
       justify-content: center;
     }
 
-    /* ĐẦU KIM ĐỌC ĐĨA (TONEARM) CHUẨN MÁY ĐĨA THAN THẬT */
+    /* ĐẦU KIM ĐỌC ĐĨA (TONEARM): CHỈ VÀO ĐĨA KHI PHÁT NHẠC, RA NGOÀI KHI DỪNG */
     .vinyl-tonearm {
       position: absolute;
       top: -12px;
@@ -1014,7 +1022,7 @@
     }
 
     .vinyl-container.playing .vinyl-tonearm {
-      transform: rotate(4deg); /* Tự động gạt VÀO rãnh đĩa khi đang phát nhạc */
+      transform: rotate(4deg); /* Gạt vào rãnh đĩa khi đang phát nhạc */
     }
 
     .tonearm-base {
@@ -1054,7 +1062,7 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.4);
     }
 
-    /* HIỆU ỨNG NỐT NHẠC & ĐÀN TỎA RA TỪ ĐĨA THAN */
+    /* NỐT NHẠC & NHẠC CỤ TỎA RA MỜ ẢO TỰ NHIÊN KHI NHẠC CHẠY */
     .music-note-particle {
       position: absolute;
       top: 50%;
@@ -1063,38 +1071,38 @@
       pointer-events: none;
       z-index: 8;
       opacity: 0;
-      transform: translate(-50%, -50%) scale(0.4);
+      transform: translate(-50%, -50%) scale(0.3);
       will-change: transform, opacity;
     }
 
     .vinyl-container.playing .music-note-particle {
-      animation: floatMusicNote 3.2s infinite ease-out;
+      animation: floatMusicNote 3.5s infinite ease-out;
     }
 
     .vinyl-container.playing .music-note-particle:nth-child(1) { animation-delay: 0s; }
-    .vinyl-container.playing .music-note-particle:nth-child(2) { animation-delay: 0.45s; }
-    .vinyl-container.playing .music-note-particle:nth-child(3) { animation-delay: 0.9s; }
-    .vinyl-container.playing .music-note-particle:nth-child(4) { animation-delay: 1.35s; }
-    .vinyl-container.playing .music-note-particle:nth-child(5) { animation-delay: 1.8s; }
-    .vinyl-container.playing .music-note-particle:nth-child(6) { animation-delay: 2.25s; }
-    .vinyl-container.playing .music-note-particle:nth-child(7) { animation-delay: 2.7s; }
+    .vinyl-container.playing .music-note-particle:nth-child(2) { animation-delay: 0.5s; }
+    .vinyl-container.playing .music-note-particle:nth-child(3) { animation-delay: 1.0s; }
+    .vinyl-container.playing .music-note-particle:nth-child(4) { animation-delay: 1.5s; }
+    .vinyl-container.playing .music-note-particle:nth-child(5) { animation-delay: 2.0s; }
+    .vinyl-container.playing .music-note-particle:nth-child(6) { animation-delay: 2.5s; }
+    .vinyl-container.playing .music-note-particle:nth-child(7) { animation-delay: 3.0s; }
 
     @keyframes floatMusicNote {
       0% {
         opacity: 0;
         transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
       }
-      25% {
-        opacity: 0.85;
-        transform: translate(calc(-50% + var(--tx, 45px)), calc(-50% + var(--ty, -55px))) scale(1.1) rotate(15deg);
+      20% {
+        opacity: 0.8;
+        transform: translate(calc(-50% + var(--tx, 45px)), calc(-50% + var(--ty, -50px))) scale(1.05) rotate(12deg);
       }
-      75% {
-        opacity: 0.6;
-        transform: translate(calc(-50% + var(--tx, 90px)), calc(-50% + var(--ty, -110px))) scale(1) rotate(-10deg);
+      70% {
+        opacity: 0.5;
+        transform: translate(calc(-50% + var(--tx, 90px)), calc(-50% + var(--ty, -100px))) scale(0.95) rotate(-8deg);
       }
       100% {
         opacity: 0;
-        transform: translate(calc(-50% + var(--tx, 120px)), calc(-50% + var(--ty, -145px))) scale(0.65) rotate(25deg);
+        transform: translate(calc(-50% + var(--tx, 125px)), calc(-50% + var(--ty, -140px))) scale(0.6) rotate(20deg);
       }
     }
 
@@ -1455,21 +1463,21 @@
   <div class="modal-backdrop" id="music-modal" role="dialog" aria-hidden="true">
     <div class="music-modal-card">
       <div class="vinyl-container" id="vinyl-container-box">
-        <!-- ĐẦU KIM ĐỌC ĐĨA (TONEARM) CHUẨN MÁY ĐĨA THAN THẬT -->
+        <!-- ĐẦU KIM ĐỌC ĐĨA (TONEARM) CHUẨN MÁY ĐĨA THAN -->
         <div class="vinyl-tonearm">
           <div class="tonearm-base"></div>
           <div class="tonearm-rod"></div>
           <div class="tonearm-head"></div>
         </div>
 
-        <!-- HIỆU ỨNG NỐT NHẠC & ĐÀN TỎA RA TỪ ĐĨA THAN -->
-        <div class="music-note-particle" style="--tx: -75px; --ty: -65px;">♫</div>
-        <div class="music-note-particle" style="--tx: 80px; --ty: -50px;">♪</div>
-        <div class="music-note-particle" style="--tx: -55px; --ty: -110px;">♩</div>
-        <div class="music-note-particle" style="--tx: 65px; --ty: -100px;">♬</div>
-        <div class="music-note-particle" style="--tx: 0px; --ty: -130px;">𝄞</div>
-        <div class="music-note-particle" style="--tx: -95px; --ty: -25px;">🎹</div>
-        <div class="music-note-particle" style="--tx: 100px; --ty: -35px;">🎻</div>
+        <!-- HIỆU ỨNG NỐT NHẠC & NHẠC CỤ TỎA RA MỜ ẢO -->
+        <div class="music-note-particle" style="--tx: -70px; --ty: -60px;">♫</div>
+        <div class="music-note-particle" style="--tx: 75px; --ty: -45px;">♪</div>
+        <div class="music-note-particle" style="--tx: -50px; --ty: -105px;">♩</div>
+        <div class="music-note-particle" style="--tx: 60px; --ty: -95px;">♬</div>
+        <div class="music-note-particle" style="--tx: 0px; --ty: -125px;">𝄞</div>
+        <div class="music-note-particle" style="--tx: -90px; --ty: -20px;">🎹</div>
+        <div class="music-note-particle" style="--tx: 95px; --ty: -30px;">🎻</div>
 
         <div class="vinyl-record" id="vinyl-record">
           <div class="vinyl-label">
@@ -1478,13 +1486,13 @@
         </div>
       </div>
 
-      <!-- Tên bài hát: Dòng trên Nếu Ngày Ấy - SOOBIN, dòng dưới ALL-ROUNDER in nghiêng nhỏ hơn -->
+      <!-- Tên bài hát -->
       <div class="music-track-info-wrap">
         <div class="music-track-title">Nếu Ngày Ấy - SOOBIN</div>
         <div class="music-track-artist">ALL-ROUNDER</div>
       </div>
 
-      <!-- Thanh tua thời lượng với thanh line màu sắc hiển thị thời gian -->
+      <!-- Thanh tua thời lượng -->
       <div class="player-slider-group">
         <div class="player-time-row">
           <span id="current-time-lbl">00:00</span>
@@ -1496,7 +1504,7 @@
         </div>
       </div>
 
-      <!-- Nút điều khiển (Tua lùi 5s, Phát/Dừng cân xứng, Tua tới 5s) -->
+      <!-- Nút điều khiển -->
       <div class="player-controls-row">
         <button class="player-ctrl-btn" id="modal-rewind-btn" title="Tua lùi 5 giây">
           <i class="fa-solid fa-backward-step"></i>
@@ -1509,7 +1517,7 @@
         </button>
       </div>
 
-      <!-- Điều chỉnh âm lượng & GainNode tăng cường (Icon sóng loa tự đổi theo mức độ, có thanh line màu sắc) -->
+      <!-- Điều chỉnh âm lượng -->
       <div class="volume-control-wrapper">
         <i class="fa-solid fa-volume-high" id="volume-icon"></i>
         <div class="liquid-range-container" style="flex: 1;">
@@ -1549,7 +1557,7 @@
     });
 
     /* ==========================================================
-       AUTO-THEME THEO THỜI GIAN THỰC & ĐỒNG HỒ THỜI GIAN THỰC
+       AUTO-THEME & ĐỒNG HỒ ĐỒNG BỘ THỜI GIAN THỰC THIẾT BỊ
        ========================================================== */
     function initAutoTheme() {
       if (!localStorage.getItem("ios26-user-overridden")) {
@@ -1576,7 +1584,7 @@
     }
 
     /* ==========================================================
-       1. APPLE MACOS DOCK (MAGNETIC SPRING MAGNIFICATION)
+       1. APPLE MACOS DOCK
        ========================================================== */
     function initMagneticDock() {
       const dock = document.getElementById("nav-dock");
@@ -1669,7 +1677,7 @@
     }
 
     /* ==========================================================
-       2. CURSOR SPOTLIGHT, BORDER GLOW & LIQUID WATER DROPLETS (3 VÒNG SÓNG)
+       2. CURSOR SPOTLIGHT & HIỆU ỨNG 3 VÒNG SÓNG KHI CLICK
        ========================================================== */
     function initSpotlightAndDroplets() {
       const mainCard = document.getElementById("main-card");
@@ -1693,17 +1701,35 @@
       mainCard.addEventListener("pointerdown", (e) => {
         if (e.target.closest("textarea")) return;
         const rect = mainCard.getBoundingClientRect();
-        const ripple = document.createElement("span");
-        ripple.className = "water-ripple";
-        ripple.style.left = `${e.clientX - rect.left}px`;
-        ripple.style.top = `${e.clientY - rect.top}px`;
-        mainCard.appendChild(ripple);
-        ripple.addEventListener("animationend", () => ripple.remove());
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        // Tạo 3 vòng sóng riêng biệt (không lồng nhau trong cùng 1 DOM element)
+        const ripple1 = document.createElement("span");
+        ripple1.className = "water-ripple";
+        ripple1.style.left = `${x}px`;
+        ripple1.style.top = `${y}px`;
+        mainCard.appendChild(ripple1);
+        ripple1.addEventListener("animationend", () => ripple1.remove());
+
+        const ripple2 = document.createElement("span");
+        ripple2.className = "water-ripple-2";
+        ripple2.style.left = `${x}px`;
+        ripple2.style.top = `${y}px`;
+        mainCard.appendChild(ripple2);
+        ripple2.addEventListener("animationend", () => ripple2.remove());
+
+        const ripple3 = document.createElement("span");
+        ripple3.className = "water-ripple-3";
+        ripple3.style.left = `${x}px`;
+        ripple3.style.top = `${y}px`;
+        mainCard.appendChild(ripple3);
+        ripple3.addEventListener("animationend", () => ripple3.remove());
       });
     }
 
     /* ==========================================================
-       3. INTERACTIVE AMBIENT CANVAS (FIREFLIES & FALLING LEAVES)
+       3. INTERACTIVE AMBIENT CANVAS
        ========================================================== */
     function initAmbientCanvas() {
       const canvas = document.getElementById("ambient-particles");
@@ -1902,7 +1928,7 @@
     }
 
     /* ==========================================================
-       4. CROSS-FADE & GLASS BLUR THEME TOGGLE
+       4. THEME TOGGLE
        ========================================================== */
     function initThemeToggle() {
       const toggle = document.getElementById("theme-toggle");
@@ -1927,7 +1953,7 @@
     }
 
     /* ==========================================================
-       5. SPRING TAB NAVIGATION & STATE SYNC
+       5. TAB NAVIGATION
        ========================================================== */
     function initTabNavigation() {
       const navBtns = document.querySelectorAll(".nav-tab-btn");
@@ -2014,7 +2040,7 @@
     }
 
     /* ==========================================================
-       6. MODALS, EMAILJS & SPOTIFY / GAINNODE MUSIC PLAYER
+       6. MODALS, EMAILJS & SPOTIFY MUSIC PLAYER
        ========================================================== */
     function initQRCodeModal() {
       const openBtn = document.getElementById("open-qr-btn");
@@ -2221,7 +2247,7 @@
     }
 
     /* ==========================================================
-       TRÌNH PHÁT NHẠC KIỂU SPOTIFY & GAINNODE TĂNG CƯỜNG ÂM LƯỢNG (neungayay.mp3)
+       TRÌNH PHÁT NHẠC (neungayay.mp3)
        ========================================================== */
     function initSpotifyAudioPlayer() {
       const openModalBtn = document.getElementById("open-music-modal-btn");
