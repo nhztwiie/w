@@ -294,7 +294,7 @@
       opacity: 1;
     }
 
-    /* 3 VÒNG SÓNG RIÊNG BIỆT KHI CLICK CHUỘT */
+    /* HIỆU ỨNG SÓNG NƯỚC KHI CLICK */
     .water-ripple-1 {
       position: absolute;
       border-radius: 50%;
@@ -967,7 +967,7 @@
     }
 
     /* ==========================================================
-       SPOTIFY & MUSIC PLAYER MODAL STYLING (CORRECT TONEARM & NOTES)
+       TRÌNH PHÁT NHẠC (ĐÃ CÂN BẰNG TIÊU CHUẨN)
        ========================================================== */
     .music-modal-card {
       background: var(--glass-bg);
@@ -1001,7 +1001,6 @@
       justify-content: center;
     }
 
-    /* ĐẦU KIM ĐỌC ĐĨA (TONEARM): NGHỈ NGOÀI KHI DỪNG (-28deg), GẠT VÀO ĐĨA KHI PHÁT (4deg) */
     .vinyl-tonearm {
       position: absolute;
       top: -12px;
@@ -1056,7 +1055,6 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.4);
     }
 
-    /* NỐT NHẠC & NHẠC CỤ TỎA RA MỜ ẢO TỰ NHIÊN KHI CHẠY */
     .music-note-particle {
       position: absolute;
       top: 50%;
@@ -1457,14 +1455,14 @@
   <div class="modal-backdrop" id="music-modal" role="dialog" aria-hidden="true">
     <div class="music-modal-card">
       <div class="vinyl-container" id="vinyl-container-box">
-        <!-- KIM ĐỌC ĐĨA (TONEARM): NGHỈ NGOÀI KHI DỪNG, GẠT VÀO ĐĨA KHI PHÁT -->
+        <!-- KIM ĐỌC ĐĨA -->
         <div class="vinyl-tonearm">
           <div class="tonearm-base"></div>
           <div class="tonearm-rod"></div>
           <div class="tonearm-head"></div>
         </div>
 
-        <!-- NỐT NHẠC & NHẠC CỤ TỎA RA MỜ ẢO TỰ NHIÊN -->
+        <!-- NỐT NHẠC -->
         <div class="music-note-particle" style="--tx: -70px; --ty: -60px;">♫</div>
         <div class="music-note-particle" style="--tx: 75px; --ty: -45px;">♪</div>
         <div class="music-note-particle" style="--tx: -50px; --ty: -105px;">♩</div>
@@ -1550,9 +1548,6 @@
       initEmailJSNotifier();
     });
 
-    /* ==========================================================
-       AUTO-THEME & ĐỒNG HỒ ĐỒNG BỘ THỜI GIAN THỰC THIẾT BỊ
-       ========================================================== */
     function initAutoTheme() {
       if (!localStorage.getItem("ios26-user-overridden")) {
         const hour = new Date().getHours();
@@ -1577,9 +1572,6 @@
       setInterval(updateClock, 1000);
     }
 
-    /* ==========================================================
-       1. APPLE MACOS DOCK
-       ========================================================== */
     function initMagneticDock() {
       const dock = document.getElementById("nav-dock");
       const btns = Array.from(dock.querySelectorAll(".nav-tab-btn"));
@@ -1670,9 +1662,6 @@
       btns.forEach(btn => btn.addEventListener("click", resetTargets));
     }
 
-    /* ==========================================================
-       2. CURSOR SPOTLIGHT & HIỆU ỨNG 3 VÒNG SÓNG RIÊNG BIỆT KHI CLICK
-       ========================================================== */
     function initSpotlightAndDroplets() {
       const mainCard = document.getElementById("main-card");
       if (!mainCard) return;
@@ -1698,7 +1687,6 @@
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
-        // Tạo chính xác 3 vòng sóng độc lập liên tiếp nhau
         ['water-ripple-1', 'water-ripple-2', 'water-ripple-3'].forEach((className) => {
           const ripple = document.createElement("span");
           ripple.className = className;
@@ -1710,9 +1698,6 @@
       });
     }
 
-    /* ==========================================================
-       3. INTERACTIVE AMBIENT CANVAS
-       ========================================================== */
     function initAmbientCanvas() {
       const canvas = document.getElementById("ambient-particles");
       if (!canvas) return;
@@ -1909,9 +1894,6 @@
       animate();
     }
 
-    /* ==========================================================
-       4. THEME TOGGLE
-       ========================================================== */
     function initThemeToggle() {
       const toggle = document.getElementById("theme-toggle");
       const mainCard = document.getElementById("main-card");
@@ -1934,9 +1916,6 @@
       });
     }
 
-    /* ==========================================================
-       5. TAB NAVIGATION
-       ========================================================== */
     function initTabNavigation() {
       const navBtns = document.querySelectorAll(".nav-tab-btn");
       const indicator = document.getElementById("nav-indicator");
@@ -2021,9 +2000,6 @@
       container.appendChild(fragment);
     }
 
-    /* ==========================================================
-       6. MODALS, EMAILJS & SPOTIFY MUSIC PLAYER
-       ========================================================== */
     function initQRCodeModal() {
       const openBtn = document.getElementById("open-qr-btn");
       const closeBtn = document.getElementById("close-qr-btn");
@@ -2228,9 +2204,6 @@
       });
     }
 
-    /* ==========================================================
-       TRÌNH PHÁT NHẠC (neungayay.mp3)
-       ========================================================== */
     function initSpotifyAudioPlayer() {
       const openModalBtn = document.getElementById("open-music-modal-btn");
       const closeModalBtn = document.getElementById("close-music-modal-btn");
