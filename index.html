@@ -298,7 +298,7 @@
     }
 
     /* ==========================================================
-       HIỆU ỨNG SÓNG NƯỚC (RIPPLE) - 3 ĐỈNH SÓNG WOW & CHÂN THỰC
+       HIỆU ỨNG SÓNG NƯỚC (RIPPLE) - 3 ĐỈNH SÓNG MƯỢT MÀ & WOW
        ========================================================== */
     .water-ripple {
       position: absolute;
@@ -962,7 +962,7 @@
     }
 
     /* ==========================================================
-       SPOTIFY & IOS27 MUSIC PLAYER MODAL STYLING (LIQUID WATER PHYSICS)
+       VINTAGE PHONOGRAPH & VINYL PLAYER (THEO ẢNH MẪU ĐĨA THAN GỖ)
        ========================================================== */
     .music-modal-card {
       position: relative;
@@ -971,9 +971,9 @@
       -webkit-backdrop-filter: blur(32px) saturate(200%);
       border: 1.5px solid var(--glass-border-highlight);
       border-radius: 42px;
-      padding: 30px 24px;
-      width: 90%;
-      max-width: 360px;
+      padding: 26px 20px;
+      width: 92%;
+      max-width: 370px;
       text-align: center;
       opacity: 0;
       transform: scale(0.92) translateY(16px);
@@ -988,56 +988,31 @@
       transform: scale(1) translateY(0);
     }
 
-    /* Lớp hiệu ứng nốt nhạc, đàn violin, piano bay bổng cân đối đều khắp pop-up */
-    .music-artistic-fx-layer {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 5;
-      opacity: 0;
-      transition: opacity 0.4s ease;
+    /* Khung hộp gỗ đĩa than vintage bên trong pop-up phù hợp theme page */
+    .phonograph-wooden-box {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      margin: 4px auto 14px;
+      background: rgba(80, 48, 28, 0.22);
+      border: 3px solid rgba(139, 94, 60, 0.45);
+      border-radius: 20px;
+      padding: 14px;
+      box-shadow: inset 0 6px 16px rgba(0,0,0,0.4), 0 10px 25px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .music-modal-card.playing-active .music-artistic-fx-layer {
-      opacity: 1;
-    }
-
-    .floating-artistic-item {
-      position: absolute;
-      bottom: 10px;
-      left: var(--pos-x);
-      font-size: var(--item-size);
-      color: var(--shimmer-highlight);
-      text-shadow: 0 0 14px var(--glass-glow), 0 0 25px rgba(255,255,255,0.4);
-      opacity: 0;
-      will-change: transform, opacity;
-      animation: floatBalancedArtistic var(--anim-duration) ease-in-out infinite;
-      animation-delay: var(--anim-delay);
-    }
-
-    @keyframes floatBalancedArtistic {
-      0% {
-        transform: translate3d(0, 0, 0) scale(0.45) rotate(0deg);
-        opacity: 0;
-      }
-      15% {
-        opacity: 0.85;
-      }
-      80% {
-        opacity: 0.78;
-      }
-      100% {
-        transform: translate3d(var(--drift-x), -310px, 0) scale(1.25) rotate(var(--rot-deg));
-        opacity: 0;
-      }
+    [data-theme="light"] .phonograph-wooden-box {
+      background: rgba(140, 95, 60, 0.12);
+      border-color: rgba(120, 75, 45, 0.3);
     }
 
     .vinyl-container {
       position: relative;
-      width: 180px;
-      height: 180px;
-      margin: 4px auto 16px;
+      width: 176px;
+      height: 176px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1057,8 +1032,8 @@
           #1f242d 4px,
           #14171d 7px
         );
-      box-shadow: 0 18px 40px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.08);
-      border: 2px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6), inset 0 0 15px rgba(255,255,255,0.08);
+      border: 2px solid rgba(255, 255, 255, 0.15);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1076,8 +1051,8 @@
     }
 
     .vinyl-label {
-      width: 68px;
-      height: 68px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--shimmer-highlight) 0%, var(--text-sub) 100%);
       border: 3px solid #14171d;
@@ -1088,15 +1063,110 @@
     }
 
     .vinyl-center-hole {
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       background: var(--bg-gradient);
       border-radius: 50%;
       border: 2px solid rgba(255,255,255,0.5);
     }
 
+    /* Kim đọc đĩa (Tonearm) chuẩn thiết kế máy đĩa than thực tế: gắn góc phải, xoay di chuyển vào/ra */
+    .phonograph-tonearm {
+      position: absolute;
+      top: 14px;
+      right: 12px;
+      width: 60px;
+      height: 110px;
+      z-index: 8;
+      pointer-events: none;
+      transform-origin: 48px 16px;
+      transform: rotate(28deg); /* Vị trí nghỉ: gạt ra ngoài */
+      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .music-modal-card.playing-active .phonograph-tonearm {
+      transform: rotate(0deg); /* Vị trí đọc: di chuyển kim vào rãnh đĩa */
+    }
+
+    .tonearm-base {
+      position: absolute;
+      top: 8px; right: 8px;
+      width: 24px; height: 24px;
+      background: linear-gradient(135deg, #d4d4d4, #737373);
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+
+    .tonearm-rod {
+      position: absolute;
+      top: 18px; right: 18px;
+      width: 6px; height: 85px;
+      background: linear-gradient(90deg, #e5e5e5, #a3a3a3, #525252);
+      border-radius: 3px;
+      transform-origin: top center;
+      transform: rotate(-18deg);
+      box-shadow: 2px 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .tonearm-head {
+      position: absolute;
+      bottom: 2px; left: -10px;
+      width: 18px; height: 26px;
+      background: linear-gradient(135deg, #dc2626, #991b1b);
+      border-radius: 4px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+      transform: rotate(-12deg);
+    }
+
+    /* Lớp hiệu ứng nốt nhạc & nhạc cụ tỏa ra từ đĩa than khi phát nhạc */
+    .music-artistic-fx-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 7;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .music-modal-card.playing-active .music-artistic-fx-layer {
+      opacity: 1;
+    }
+
+    .floating-artistic-item {
+      position: absolute;
+      top: 130px;
+      left: 175px;
+      font-size: var(--item-size);
+      color: var(--shimmer-highlight);
+      text-shadow: 0 0 14px var(--glass-glow), 0 0 25px rgba(255,255,255,0.4);
+      opacity: 0;
+      will-change: transform, opacity;
+      animation: floatRadiateFromVinyl var(--anim-duration) ease-out infinite;
+      animation-delay: var(--anim-delay);
+    }
+
+    @keyframes floatRadiateFromVinyl {
+      0% {
+        transform: translate3d(0, 0, 0) scale(0.3) rotate(0deg);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.9;
+        transform: translate3d(var(--dir-x1), var(--dir-y1), 0) scale(0.9) rotate(15deg);
+      }
+      75% {
+        opacity: 0.75;
+        transform: translate3d(var(--dir-x2), var(--dir-y2), 0) scale(1.2) rotate(var(--rot-deg));
+      }
+      100% {
+        transform: translate3d(var(--dir-endx), var(--dir-endy), 0) scale(1.35) rotate(var(--rot-deg));
+        opacity: 0;
+      }
+    }
+
     .music-track-info-wrap {
-      margin-bottom: 18px;
+      margin-bottom: 14px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -1105,7 +1175,7 @@
     }
 
     .music-track-title {
-      font-size: 0.98rem;
+      font-size: 0.96rem;
       font-weight: 700;
       color: var(--text-title);
       letter-spacing: -0.01em;
@@ -1113,7 +1183,7 @@
     }
 
     .music-track-artist {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 500;
       font-style: italic;
       color: var(--text-sub);
@@ -1121,7 +1191,7 @@
 
     /* Thanh line thời lượng & âm lượng có màu sắc hiển thị (liquid fill) */
     .player-slider-group {
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       text-align: left;
       position: relative;
       z-index: 6;
@@ -1130,9 +1200,9 @@
     .player-time-row {
       display: flex;
       justify-content: space-between;
-      font-size: 0.75rem;
+      font-size: 0.73rem;
       color: var(--text-sub);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       font-variant-numeric: tabular-nums;
     }
 
@@ -1191,15 +1261,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 18px;
-      margin: 16px 0 12px;
+      gap: 16px;
+      margin: 14px 0 10px;
       position: relative;
       z-index: 6;
     }
 
     .player-ctrl-btn {
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       border: 1.5px solid var(--glass-border);
       background: var(--pill-bg);
@@ -1208,19 +1278,19 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       backdrop-filter: blur(12px);
       transition: transform 0.2s var(--spring-easing), background 0.2s ease, border-color 0.2s ease;
     }
 
     /* Nút phát/dừng: icon tam giác cân xứng tuyệt đối với hình tròn */
     .player-ctrl-btn.main-play {
-      width: 54px;
-      height: 54px;
+      width: 50px;
+      height: 50px;
       background: var(--pill-hover-bg);
       border-color: var(--glass-border-highlight);
       color: var(--text-title);
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
       display: flex;
       align-items: center;
@@ -1250,16 +1320,16 @@
       align-items: center;
       gap: 12px;
       background: rgba(255, 255, 255, 0.05);
-      padding: 10px 16px;
+      padding: 8px 14px;
       border-radius: 20px;
       border: 1px solid var(--glass-border);
-      margin-top: 12px;
+      margin-top: 10px;
       position: relative;
       z-index: 6;
     }
 
     .volume-control-wrapper i {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       color: var(--text-title);
       width: 20px;
       text-align: center;
@@ -1407,17 +1477,27 @@
     </div>
   </div>
 
-  <!-- MODAL TRÌNH PHÁT NHẠC KIỂU SPOTIFY & GAINNODE TĂNG CƯỜNG ÂM LƯỢNG -->
+  <!-- MODAL TRÌNH PHÁT NHẠC MÁY ĐĨA THAN VINTAGE -->
   <div class="modal-backdrop" id="music-modal" role="dialog" aria-hidden="true">
     <div class="music-modal-card" id="music-modal-card">
-      <!-- Lớp hiệu ứng nốt nhạc, violin, piano bay bổng cân đối đều khắp pop-up -->
+      <!-- Lớp hiệu ứng nốt nhạc & nhạc cụ tỏa ra từ tâm đĩa than -->
       <div class="music-artistic-fx-layer" id="music-artistic-layer"></div>
 
-      <div class="vinyl-container">
-        <div class="vinyl-record" id="vinyl-record">
-          <div class="vinyl-label">
-            <div class="vinyl-center-hole"></div>
+      <!-- Khung máy đĩa than phong cách vintage -->
+      <div class="phonograph-wooden-box">
+        <div class="vinyl-container">
+          <div class="vinyl-record" id="vinyl-record">
+            <div class="vinyl-label">
+              <div class="vinyl-center-hole"></div>
+            </div>
           </div>
+        </div>
+
+        <!-- Cần gạt kim đọc (Tonearm) tự động gạt vào đọc đĩa khi phát nhạc -->
+        <div class="phonograph-tonearm">
+          <div class="tonearm-base"></div>
+          <div class="tonearm-rod"></div>
+          <div class="tonearm-head"></div>
         </div>
       </div>
 
@@ -1641,7 +1721,7 @@
         ripple.style.left = `${e.clientX - rect.left}px`;
         ripple.style.top = `${e.clientY - rect.top}px`;
         
-        // Tạo 3 đỉnh sóng lồng nhau tăng độ wow và chân thực
+        // Tạo 3 đỉnh sóng lan tỏa mượt mà & wow
         for (let i = 0; i < 3; i++) {
           const ring = document.createElement("span");
           ripple.appendChild(ring);
@@ -1964,7 +2044,7 @@
     }
 
     /* ==========================================================
-       6. MODALS, EMAILJS & SPOTIFY / GAINNODE MUSIC PLAYER
+       6. MODALS, EMAILJS & PHONOGRAPH MUSIC PLAYER
        ========================================================== */
     function initQRCodeModal() {
       const openBtn = document.getElementById("open-qr-btn");
@@ -2171,7 +2251,7 @@
     }
 
     /* ==========================================================
-       TRÌNH PHÁT NHẠC KIỂU SPOTIFY & GAINNODE TĂNG CƯỜNG ÂM LƯỢNG (neungayay.mp3)
+       TRÌNH PHÁT NHẠC MÁY ĐĨA THAN VINTAGE & HIỆU ỨNG TỎA RA TỪ ĐĨA
        ========================================================== */
     function initSpotifyAudioPlayer() {
       const openModalBtn = document.getElementById("open-music-modal-btn");
@@ -2214,32 +2294,45 @@
       // Danh sách nốt nhạc & biểu tượng đàn (piano, violin)
       const ARTISTIC_SYMBOLS = ["♪", "♫", "♩", "♬", "𝄞", "🎹", "🎻"];
 
-      function spawnBalancedArtisticItems() {
+      function spawnRadiatingArtisticItems() {
         if (!isPlaying) return;
         
-        // Spawn đồng thời 2 item đối xứng (trái và phải) để phân bổ đều khắp pop-up
+        // Tạo các nốt nhạc & nhạc cụ tỏa ra từ tâm đĩa than
         for (let i = 0; i < 2; i++) {
           const item = document.createElement("div");
           item.className = "floating-artistic-item";
           item.textContent = ARTISTIC_SYMBOLS[Math.floor(Math.random() * ARTISTIC_SYMBOLS.length)];
           
-          const isLeft = (i === 0);
-          const posX = isLeft ? (Math.random() * 32 + 8) + "%" : (Math.random() * 32 + 60) + "%";
-          const driftX = (isLeft ? (Math.random() * 50 + 15) : -(Math.random() * 50 + 15)) + "px";
-          const rotDeg = (Math.random() * 90 - 45) + "deg";
-          const animDuration = (4.0 + Math.random() * 2.2) + "s";
-          const animDelay = (Math.random() * 0.4) + "s";
-          const itemSize = (1.0 + Math.random() * 0.6) + "rem";
+          const angle = Math.random() * Math.PI * 2;
+          const dist1 = 30 + Math.random() * 40;
+          const dist2 = 90 + Math.random() * 70;
+          const distEnd = 160 + Math.random() * 70;
 
-          item.style.setProperty("--pos-x", posX);
-          item.style.setProperty("--drift-x", driftX);
+          const dx1 = Math.cos(angle) * dist1 + "px";
+          const dy1 = Math.sin(angle) * dist1 + "px";
+          const dx2 = Math.cos(angle + 0.2) * dist2 + "px";
+          const dy2 = Math.sin(angle + 0.2) * dist2 + "px";
+          const dxEnd = Math.cos(angle + 0.4) * distEnd + "px";
+          const dyEnd = Math.sin(angle + 0.4) * distEnd + "px";
+
+          const rotDeg = (Math.random() * 140 - 70) + "deg";
+          const animDuration = (3.5 + Math.random() * 2.0) + "s";
+          const animDelay = (Math.random() * 0.3) + "s";
+          const itemSize = (0.9 + Math.random() * 0.6) + "rem";
+
+          item.style.setProperty("--dir-x1", dx1);
+          item.style.setProperty("--dir-y1", dy1);
+          item.style.setProperty("--dir-x2", dx2);
+          item.style.setProperty("--dir-y2", dy2);
+          item.style.setProperty("--dir-endx", dxEnd);
+          item.style.setProperty("--dir-endy", dyEnd);
           item.style.setProperty("--rot-deg", rotDeg);
           item.style.setProperty("--anim-duration", animDuration);
           item.style.setProperty("--anim-delay", animDelay);
           item.style.setProperty("--item-size", itemSize);
 
           artisticLayer.appendChild(item);
-          setTimeout(() => item.remove(), 6500);
+          setTimeout(() => item.remove(), 5800);
         }
       }
 
@@ -2288,7 +2381,7 @@
           musicMainIcon.className = "fa-solid fa-compact-disc";
           musicModalCard.classList.add("playing-active");
           if (!artisticInterval) {
-            artisticInterval = setInterval(spawnBalancedArtisticItems, 650);
+            artisticInterval = setInterval(spawnRadiatingArtisticItems, 600);
           }
         } else {
           playIcon.className = "fa-solid fa-play";
