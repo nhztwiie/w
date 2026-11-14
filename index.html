@@ -2404,9 +2404,14 @@
         musicModal.setAttribute("aria-hidden", "true");
       }
 
+      /* Đảm bảo bấm vào nút nhạc là MỞ MODAL NGAY LẬP TỨC bất chấp file nhạc lỗi hay chưa tải */
       if (openModalBtn) {
-        openModalBtn.addEventListener("click", openModal);
+        openModalBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          openModal();
+        });
       }
+
       if (closeModalBtn) {
         closeModalBtn.addEventListener("click", closeModal);
       }
@@ -2421,6 +2426,7 @@
         if (isLoaded) return;
         try {
           const response = await fetch("audio/neungayay.mp3");
+          if (!response.ok) throw new Error("File audio không tồn tại");
           const arrayBuffer = await response.arrayBuffer();
           audioCtx = new (window.AudioContext || window.webkitAudioContext)();
           audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
@@ -2429,7 +2435,11 @@
           seekSlider.max = duration;
           isLoaded = true;
         } catch (e) {
-          console.error("Lỗi tải tệp âm thanh neungayay.mp3:", e);
+          console.warn("Chế độ mô phỏng âm thanh (Không tìm thấy tệp neungayay.mp3):", e);
+          isLoaded = false;
+          duration = 180; // Giả lập bài hát 3 phút nếu chưa có file
+          durationLbl.textContent = "03:00";
+          seekSlider.max = duration;
         }
       }
 
@@ -2465,7 +2475,15 @@
       }
 
       function playSound(offset = 0) {
-        if (!isLoaded || !audioBuffer) return;
+        if (!isLoaded || !audioBuffer) {
+          // Mô phỏng hiệu ứng chạy đĩa nếu chưa có file nhạc thực tế trong thư mục audio/
+          isPlaying = true;
+          updateUIState(true);
+          startTime = Date.now() / 1000 - offset;
+          trackProgressMock();
+          return;
+        }
+
         if (audioCtx.state === 'suspended') audioCtx.resume();
         if (sourceNode) { try { sourceNode.stop(); } catch(e) {} }
 
@@ -2520,9 +2538,17 @@
         animFrameId = requestAnimationFrame(trackProgress);
       }
 
+      function trackProgressMock() {
+        if (!isPlaying) return;
+        const currentPos = (Date.now() / 1000 - startTime) % duration;
+        seekSlider.value = currentPos;
+        seekFill.style.width = `${(currentPos / duration) * 100}%`;
+        currentTimeLbl.textContent = formatTime(currentPos);
+        animFrameId = requestAnimationFrame(trackProgressMock);
+      }
+
       playBtn.addEventListener("click", async () => {
         if (!isLoaded) await loadAudioFile();
-        if (!isLoaded) return;
 
         if (isPlaying) {
           stopSound();
@@ -2532,8 +2558,7 @@
       });
 
       rewindBtn.addEventListener("click", () => {
-        if (!isLoaded) return;
-        let currentPos = isPlaying ? (audioCtx.currentTime - startTime) % duration : pauseOffset;
+        let currentPos = isPlaying ? (audioCtx ? (audioCtx.currentTime - startTime) % duration : (Date.now()/1000 - startTime)%duration) : pauseOffset;
         currentPos = Math.max(0, currentPos - 5);
         pauseOffset = currentPos;
         seekSlider.value = currentPos;
@@ -2545,8 +2570,7 @@
       });
 
       forwardBtn.addEventListener("click", () => {
-        if (!isLoaded) return;
-        let currentPos = isPlaying ? (audioCtx.currentTime - startTime) % duration : pauseOffset;
+        let currentPos = isPlaying ? (audioCtx ? (audioCtx.currentTime - startTime) % duration : (Date.now()/1000 - startTime)%duration) : pauseOffset;
         currentPos = Math.min(duration, currentPos + 5);
         pauseOffset = currentPos;
         seekSlider.value = currentPos;
