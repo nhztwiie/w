@@ -297,52 +297,49 @@
       opacity: 1;
     }
 
-    /* HIỆU ỨNG 3 VÒNG SÓNG RIÊNG BIỆT (KHÔNG LỒNG NHAU) */
-    .water-ripple {
+    /* 3 VÒNG SÓNG RIÊNG BIỆT (KHÔNG LỒNG NHAU) */
+    .water-ripple-1 {
       position: absolute;
       border-radius: 50%;
       transform: translate(-50%, -50%) scale(0);
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.08) 60%, transparent 100%);
-      border: 1.5px solid rgba(255, 255, 255, 0.55);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.1) 60%, transparent 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.6);
       pointer-events: none;
-      animation: liquidSplash 0.9s cubic-bezier(0.15, 0.85, 0.25, 1) forwards;
+      animation: waterSplash1 0.85s cubic-bezier(0.15, 0.85, 0.25, 1) forwards;
       z-index: 50;
-      box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
     }
-
     .water-ripple-2 {
       position: absolute;
       border-radius: 50%;
       transform: translate(-50%, -50%) scale(0);
       background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.45);
+      border: 1.5px solid rgba(255, 255, 255, 0.45);
       pointer-events: none;
-      animation: liquidSplash2 0.9s cubic-bezier(0.15, 0.85, 0.25, 1) 0.12s forwards;
+      animation: waterSplash2 0.85s cubic-bezier(0.15, 0.85, 0.25, 1) 0.12s forwards;
       z-index: 50;
     }
-
     .water-ripple-3 {
       position: absolute;
       border-radius: 50%;
       transform: translate(-50%, -50%) scale(0);
       background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
       pointer-events: none;
-      animation: liquidSplash3 0.9s cubic-bezier(0.15, 0.85, 0.25, 1) 0.24s forwards;
+      animation: waterSplash3 0.85s cubic-bezier(0.15, 0.85, 0.25, 1) 0.24s forwards;
       z-index: 50;
     }
 
-    @keyframes liquidSplash {
+    @keyframes waterSplash1 {
       0% { width: 0; height: 0; opacity: 1; transform: translate(-50%, -50%) scale(0.2); }
-      100% { width: 240px; height: 240px; opacity: 0; transform: translate(-50%, -50%) scale(1.4); }
+      100% { width: 220px; height: 220px; opacity: 0; transform: translate(-50%, -50%) scale(1.3); }
     }
-    @keyframes liquidSplash2 {
+    @keyframes waterSplash2 {
       0% { width: 0; height: 0; opacity: 1; transform: translate(-50%, -50%) scale(0.2); }
-      100% { width: 200px; height: 200px; opacity: 0; transform: translate(-50%, -50%) scale(1.3); }
+      100% { width: 170px; height: 170px; opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
     }
-    @keyframes liquidSplash3 {
+    @keyframes waterSplash3 {
       0% { width: 0; height: 0; opacity: 1; transform: translate(-50%, -50%) scale(0.2); }
-      100% { width: 160px; height: 160px; opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+      100% { width: 120px; height: 120px; opacity: 0; transform: translate(-50%, -50%) scale(1.1); }
     }
 
     .top-bar {
@@ -1007,7 +1004,7 @@
       justify-content: center;
     }
 
-    /* ĐẦU KIM ĐỌC ĐĨA (TONEARM): CHỈ VÀO ĐĨA KHI PHÁT NHẠC, RA NGOÀI KHI DỪNG */
+    /* ĐẦU KIM ĐỌC ĐĨA (TONEARM): CHỈ VÀO RÃNH ĐĨA KHI PHÁT, NGHỈ NGOÀI KHI DỪNG */
     .vinyl-tonearm {
       position: absolute;
       top: -12px;
@@ -1017,12 +1014,12 @@
       pointer-events: none;
       z-index: 10;
       transform-origin: 82px 14px;
-      transform: rotate(-28deg); /* Vị trí nghỉ bên ngoài khi dừng/không phát */
+      transform: rotate(-28deg); /* Vị trí nghỉ bên ngoài khi dừng */
       transition: transform 0.8s cubic-bezier(0.34, 1.2, 0.64, 1);
     }
 
     .vinyl-container.playing .vinyl-tonearm {
-      transform: rotate(4deg); /* Gạt vào rãnh đĩa khi đang phát nhạc */
+      transform: rotate(4deg); /* Gạt vào rãnh đĩa khi phát */
     }
 
     .tonearm-base {
@@ -1062,7 +1059,7 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.4);
     }
 
-    /* NỐT NHẠC & NHẠC CỤ TỎA RA MỜ ẢO TỰ NHIÊN KHI NHẠC CHẠY */
+    /* NỐT NHẠC & NHẠC CỤ TỎA RA MỜ ẢO TỰ NHIÊN */
     .music-note-particle {
       position: absolute;
       top: 50%;
@@ -1320,7 +1317,7 @@
 </head>
 <body>
 
-  <!-- BACKGROUND SPHERES & INTERACTIVE AMBIENT CANVAS -->
+  <!-- BACKGROUND SPHERES & AMBIENT CANVAS -->
   <div class="ios26-bg-canvas">
     <div class="liquid-orb orb-primary"></div>
     <div class="liquid-orb orb-secondary"></div>
@@ -1446,7 +1443,7 @@
     </div>
   </div>
 
-  <!-- MODAL POP-UP GỬI TIN NHẮN TỨC THÌ -->
+  <!-- MODAL GỬI TIN NHẮN TỨC THÌ -->
   <div class="modal-backdrop" id="email-modal" role="dialog" aria-hidden="true">
     <div class="qr-glass-card">
       <h3 class="qr-title">Instant Message</h3>
@@ -1459,18 +1456,18 @@
     </div>
   </div>
 
-  <!-- MODAL TRÌNH PHÁT NHẠC KIỂU SPOTIFY & GAINNODE TĂNG CƯỜNG ÂM LƯỢNG -->
+  <!-- MODAL TRÌNH PHÁT NHẠC ĐĨA THAN -->
   <div class="modal-backdrop" id="music-modal" role="dialog" aria-hidden="true">
     <div class="music-modal-card">
       <div class="vinyl-container" id="vinyl-container-box">
-        <!-- ĐẦU KIM ĐỌC ĐĨA (TONEARM) CHUẨN MÁY ĐĨA THAN -->
+        <!-- KIM ĐỌC ĐĨA (TONEARM): CHỈ VÀO KHI PHÁT, RA NGOÀI KHI DỪNG -->
         <div class="vinyl-tonearm">
           <div class="tonearm-base"></div>
           <div class="tonearm-rod"></div>
           <div class="tonearm-head"></div>
         </div>
 
-        <!-- HIỆU ỨNG NỐT NHẠC & NHẠC CỤ TỎA RA MỜ ẢO -->
+        <!-- NỐT NHẠC & NHẠC CỤ TỎA RA MỜ ẢO TỰ NHIÊN -->
         <div class="music-note-particle" style="--tx: -70px; --ty: -60px;">♫</div>
         <div class="music-note-particle" style="--tx: 75px; --ty: -45px;">♪</div>
         <div class="music-note-particle" style="--tx: -50px; --ty: -105px;">♩</div>
@@ -1677,7 +1674,7 @@
     }
 
     /* ==========================================================
-       2. CURSOR SPOTLIGHT & HIỆU ỨNG 3 VÒNG SÓNG KHI CLICK
+       2. CURSOR SPOTLIGHT & HIỆU ỨNG 3 VÒNG SÓNG RIÊNG BIỆT KHI CLICK
        ========================================================== */
     function initSpotlightAndDroplets() {
       const mainCard = document.getElementById("main-card");
@@ -1704,27 +1701,15 @@
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
-        // Tạo 3 vòng sóng riêng biệt (không lồng nhau trong cùng 1 DOM element)
-        const ripple1 = document.createElement("span");
-        ripple1.className = "water-ripple";
-        ripple1.style.left = `${x}px`;
-        ripple1.style.top = `${y}px`;
-        mainCard.appendChild(ripple1);
-        ripple1.addEventListener("animationend", () => ripple1.remove());
-
-        const ripple2 = document.createElement("span");
-        ripple2.className = "water-ripple-2";
-        ripple2.style.left = `${x}px`;
-        ripple2.style.top = `${y}px`;
-        mainCard.appendChild(ripple2);
-        ripple2.addEventListener("animationend", () => ripple2.remove());
-
-        const ripple3 = document.createElement("span");
-        ripple3.className = "water-ripple-3";
-        ripple3.style.left = `${x}px`;
-        ripple3.style.top = `${y}px`;
-        mainCard.appendChild(ripple3);
-        ripple3.addEventListener("animationend", () => ripple3.remove());
+        // Tạo chính xác 3 vòng sóng độc lập
+        ['water-ripple-1', 'water-ripple-2', 'water-ripple-3'].forEach((className) => {
+          const ripple = document.createElement("span");
+          ripple.className = className;
+          ripple.style.left = `${x}px`;
+          ripple.style.top = `${y}px`;
+          mainCard.appendChild(ripple);
+          ripple.addEventListener("animationend", () => ripple.remove());
+        });
       });
     }
 
