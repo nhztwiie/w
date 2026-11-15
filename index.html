@@ -1200,42 +1200,19 @@
     }
 
     /* ==========================================================
-       NỐT NHẠC & KHÓA SOL BAY BỔNG UYỂN CHUYỂN, MƯỢT MÀ & TAN DẦN TỰ NHIÊN
+       NỐT NHẠC & KHÓA SOL BAY BỔNG - SILKY JS PHYSICS LOOP (MƯỢT TUYỆT ĐỐI)
        ========================================================== */
     .floating-music-note {
       position: absolute;
-      bottom: -45px;
+      bottom: 20px;
       font-size: 1.35rem;
       pointer-events: none;
       z-index: 1;
       opacity: 0;
-      /* Dùng cubic-bezier mượt mà thuần túy, loại bỏ hoàn toàn các mốc giật khúc */
-      animation: floatUpOrganic var(--dur, 6.5s) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
       text-shadow: 0 0 16px var(--glass-glow), 0 0 8px rgba(255, 255, 255, 0.5);
       user-select: none;
       will-change: transform, opacity;
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    @keyframes floatUpOrganic {
-      0% {
-        transform: translate3d(0px, 0px, 0) scale(0.3) rotate(0deg);
-        opacity: 0;
-      }
-      15% {
-        opacity: 0.9;
-      }
-      50% {
-        transform: translate3d(var(--swayX, 30px), -240px, 0) scale(1.15) rotate(var(--rot, 15deg));
-        opacity: 0.95;
-      }
-      85% {
-        opacity: 0.5;
-      }
-      100% {
-        transform: translate3d(var(--swayXEnd, -20px), -480px, 0) scale(0.9) rotate(var(--rotEnd, -10deg));
-        opacity: 0;
-      }
+      transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
     }
   </style>
 </head>
@@ -2171,6 +2148,10 @@
       let animFrameId = null;
       let noteIntervalId = null;
 
+      // Quản lý danh sách các nốt nhạc đang bay bằng JS vật lý mượt mà
+      let activeFloatingNotes = [];
+      let notesAnimFrameId = null;
+
       function formatTime(seconds) {
         if (isNaN(seconds) || seconds < 0) return "00:00";
         const mins = Math.floor(seconds / 60);
@@ -2193,32 +2174,95 @@
       musicModal.addEventListener("click", (e) => { if (e.target === musicModal) closeModal(); });
 
       /* ==========================================================
-         CÁC KÝ HIỆU NỐT NHẠC VÀ KHÓA SOL BAY BỔNG UYỂN CHUYỂN, TAN DẦN MƯỢT MÀ
+         HỆ THỐNG VẬT LÝ JS CHO NỐT NHẠC BAY BỔNG VÀ FADE OUT TỪ TỪ
          ========================================================== */
       const symbols = ["𝄞", "♩", "♪", "♫", "♬", "🎹", "🎻"];
+
       function spawnFloatingNote() {
         if (!isPlaying) return;
-        const note = document.createElement("span");
-        note.className = "floating-music-note";
-        note.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        const el = document.createElement("span");
+        el.className = "floating-music-note";
+        el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
 
-        const startLeftPct = 10 + Math.random() * 80;
-        note.style.left = `${startLeftPct}%`;
+        const startX = 15 + Math.random() * 70; // % chiều rộng card
+        const startY = 20; // px từ đáy lên
+        el.style.left = `${startX}%`;
+        el.style.bottom = `${startY}px`;
 
-        const swayX = (Math.random() - 0.5) * 50;
-        const swayXEnd = (Math.random() - 0.5) * 70;
-        const rot = (Math.random() - 0.5) * 35;
-        const rotEnd = (Math.random() - 0.5) * 60;
-        const dur = (5.5 + Math.random() * 2.5).toFixed(2); // Thời gian bay dài hơn để chuyển động thư thả
+        musicModalCard.appendChild(el);
 
-        note.style.setProperty("--swayX", `${swayX}px`);
-        note.style.setProperty("--swayXEnd", `${swayXEnd}px`);
-        note.style.setProperty("--rot", `${rot}deg`);
-        note.style.setProperty("--rotEnd", `${rotEnd}deg`);
-        note.style.setProperty("--dur", `${dur}s`);
+        const noteObj = {
+          element: el,
+          x: startX,
+          y: startY,
+          vy: 0.8 + Math.random() * 0.6, // Tốc độ bay lên nhẹ nhàng, thư thả
+          amplitude: 15 + Math.random() * 25, // Biên độ lượn sóng ngang
+          frequency: 0.015 + Math.random() * 0.015, // Tần số lượn sóng
+          phase: Math.random() * Math.PI * 2,
+          rotation: (Math.random() - 0.5) * 30,
+          rotSpeed: (Math.random() - 0.5) * 0.4,
+          opacity: 0,
+          maxOpacity: 0.85 + Math.random() * 0.15,
+          scale: 0.4,
+          maxScale: 1.0 + Math.random() * 0.2,
+          life: 0,
+          maxLife: 350 + Math.random() * 120, // Số khung hình tồn tại
+          isFadingOut: false
+        };
 
-        musicModalCard.appendChild(note);
-        note.addEventListener("animationend", () => note.remove());
+        activeFloatingNotes.push(noteObj);
+      }
+
+      function updateFloatingNotesLoop() {
+        for (let i = activeFloatingNotes.length - 1; i >= 0; i--) {
+          const n = activeFloatingNotes[i];
+          n.life++;
+          n.phase += n.frequency;
+          n.y += n.vy;
+          n.rotation += n.rotSpeed;
+
+          // Tính toán độ mờ và kích thước khi xuất hiện / mất dần
+          if (!n.isFadingOut) {
+            if (n.life < 40) {
+              // Fade in từ từ mượt mà lúc đầu
+              n.opacity = (n.life / 40) * n.maxOpacity;
+              n.scale = 0.4 + (n.life / 40) * (n.maxScale - 0.4);
+            } else if (n.life > n.maxLife - 60) {
+              // Tự động mờ dần khi gần hết chu kỳ sống
+              n.opacity = ((n.maxLife - n.life) / 60) * n.maxOpacity;
+            } else {
+              n.opacity = n.maxOpacity;
+              n.scale = n.maxScale;
+            }
+
+            if (n.life >= n.maxLife) {
+              n.element.remove();
+              activeFloatingNotes.splice(i, 1);
+              continue;
+            }
+          } else {
+            // Khi nhạc dừng: Kích hoạt hiệu ứng Fade out từ từ (giảm opacity và scale đều đặn trong 60 frames)
+            n.opacity -= 0.018;
+            n.scale *= 0.98;
+            if (n.opacity <= 0) {
+              n.element.remove();
+              activeFloatingNotes.splice(i, 1);
+              continue;
+            }
+          }
+
+          // Hiệu ứng lượn sóng sin ngang tự nhiên
+          const swayX = Math.sin(n.phase) * n.amplitude;
+          
+          n.element.style.opacity = Math.max(0, n.opacity);
+          n.element.style.transform = `translate3d(${swayX}px, -${n.y}px, 0) scale(${n.scale}) rotate(${n.rotation}deg)`;
+        }
+
+        if (isPlaying || activeFloatingNotes.length > 0) {
+          notesAnimFrameId = requestAnimationFrame(updateFloatingNotesLoop);
+        } else {
+          notesAnimFrameId = null;
+        }
       }
 
       async function loadAudioFile() {
@@ -2246,7 +2290,10 @@
 
           if (!noteIntervalId) {
             spawnFloatingNote();
-            noteIntervalId = setInterval(spawnFloatingNote, 520);
+            noteIntervalId = setInterval(spawnFloatingNote, 420);
+          }
+          if (!notesAnimFrameId) {
+            notesAnimFrameId = requestAnimationFrame(updateFloatingNotesLoop);
           }
         } else {
           playIcon.className = "fa-solid fa-play";
@@ -2259,12 +2306,9 @@
             noteIntervalId = null;
           }
 
-          // HIỆU ỨNG TAN BIẾN DẦN DẦN (FADE OUT) KHI NHẠC DỪNG
-          const activeNotes = musicModalCard.querySelectorAll(".floating-music-note");
-          activeNotes.forEach(n => {
-            n.style.opacity = "0";
-            n.style.transform += " scale(0.4)";
-            setTimeout(() => n.remove(), 800); // Khớp với thời gian transition 0.8s
+          // KÍCH HOẠT HIỆU ỨNG TAN DẦN TỪ TỪ (FADE OUT) CHO CÁC NỐT ĐANG BAY
+          activeFloatingNotes.forEach(n => {
+            n.isFadingOut = true;
           });
         }
       }
