@@ -1440,15 +1440,19 @@
        ========================================================== */
     function getAutoThemeByTime(date = new Date()) {
       const hour = date.getHours();
+      // Từ 06:00 đến 17:59 là light theme, từ 18:00 đến 05:59 là dark theme
       return (hour >= 6 && hour <= 17) ? "light" : "dark";
     }
 
     function initAutoTheme() {
+      // Ưu tiên kiểm tra xem trình duyệt đã lưu trạng thái ép buộc thủ công hay chưa
       const overridden = localStorage.getItem("ios26-user-overridden");
       const savedTheme = localStorage.getItem("ios26-theme");
-      if (overridden && (savedTheme === "light" || savedTheme === "dark")) {
+      
+      if (overridden === "true" && (savedTheme === "light" || savedTheme === "dark")) {
         document.documentElement.setAttribute("data-theme", savedTheme);
       } else {
+        // Mặc định tự động hoàn toàn theo thời gian thực khi truy cập
         document.documentElement.setAttribute("data-theme", getAutoThemeByTime());
       }
     }
@@ -1464,7 +1468,8 @@
         const seconds = String(now.getSeconds()).padStart(2, '0');
         clockEl.textContent = `${hours}:${minutes}:${seconds}`;
 
-        if (!localStorage.getItem("ios26-user-overridden")) {
+        // Nếu người dùng chưa từng chủ động đổi tay, tự động cập nhật theme theo mốc giờ mới
+        if (localStorage.getItem("ios26-user-overridden") !== "true") {
           const targetTheme = getAutoThemeByTime(now);
           if (document.documentElement.getAttribute("data-theme") !== targetTheme) {
             document.documentElement.setAttribute("data-theme", targetTheme);
