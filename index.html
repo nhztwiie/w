@@ -1200,43 +1200,42 @@
     }
 
     /* ==========================================================
-       NỐT NHẠC & KHÓA SOL BAY BỔNG UYỂN CHUYỂN, MƯỢT MÀ (SILKY FLUID)
+       NỐT NHẠC & KHÓA SOL BAY BỔNG UYỂN CHUYỂN, TỰ NHIÊN (ARTISTIC MUSIC NOTES)
        ========================================================== */
     .floating-music-note {
       position: absolute;
-      bottom: -35px;
+      bottom: -40px;
       font-size: 1.35rem;
       pointer-events: none;
       z-index: 1;
       opacity: 0;
-      /* Sử dụng cubic-bezier mượt mà, loại bỏ triệt để điểm khựng */
-      animation: floatUpModalSilky var(--dur, 6s) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      animation: floatUpArtistic var(--dur, 6s) cubic-bezier(0.22, 1, 0.36, 1) forwards;
       text-shadow: 0 0 16px var(--glass-glow), 0 0 8px rgba(255, 255, 255, 0.5);
       user-select: none;
       will-change: transform, opacity;
     }
 
-    @keyframes floatUpModalSilky {
+    @keyframes floatUpArtistic {
       0% {
-        transform: translate3d(0px, 0px, 0) scale(0.4) rotate(0deg);
+        transform: translate3d(0px, 0px, 0) scale(0.3) rotate(0deg);
         opacity: 0;
       }
-      10% {
-        opacity: 0.85;
+      12% {
+        opacity: 0.9;
       }
-      35% {
-        transform: translate3d(var(--sway1, -25px), -160px, 0) scale(1.05) rotate(var(--rot1, -14deg));
+      40% {
+        transform: translate3d(var(--sway1, -30px), -180px, 0) scale(1.1) rotate(var(--rot1, -15deg));
         opacity: 0.95;
       }
-      70% {
-        transform: translate3d(var(--sway2, 30px), -360px, 0) scale(1.2) rotate(var(--rot2, 22deg));
-        opacity: 0.65;
+      75% {
+        transform: translate3d(var(--sway2, 35px), -380px, 0) scale(1.25) rotate(var(--rot2, 25deg));
+        opacity: 0.7;
       }
-      90% {
+      92% {
         opacity: 0.3;
       }
       100% {
-        transform: translate3d(var(--sway1, -10px), -500px, 0) scale(0.9) rotate(var(--rot1, 8deg));
+        transform: translate3d(var(--sway1, -15px), -520px, 0) scale(0.85) rotate(var(--rot1, 10deg));
         opacity: 0;
       }
     }
@@ -2196,7 +2195,7 @@
       musicModal.addEventListener("click", (e) => { if (e.target === musicModal) closeModal(); });
 
       /* ==========================================================
-         CÁC KÝ HIỆU NỐT NHẠC VÀ KHÓA SOL BAY BỔNG, MƯỢT MÀ, KHÔNG KHỰNG
+         CÁC KÝ HIỆU NỐT NHẠC VÀ KHÓA SOL BAY BỔNG, NGHỆ THUẬT & TAN BIẾN NGAY KHI DỪNG
          ========================================================== */
       const symbols = ["𝄞", "♩", "♪", "♫", "♬", "🎹", "🎻"];
       function spawnFloatingNote() {
@@ -2205,14 +2204,14 @@
         note.className = "floating-music-note";
         note.textContent = symbols[Math.floor(Math.random() * symbols.length)];
 
-        const startLeftPct = 5 + Math.random() * 90;
+        const startLeftPct = 8 + Math.random() * 84;
         note.style.left = `${startLeftPct}%`;
 
-        const sway1 = (Math.random() - 0.5) * 60;
-        const sway2 = (Math.random() - 0.5) * 85;
-        const rot1 = (Math.random() - 0.5) * 40;
-        const rot2 = (Math.random() - 0.5) * 70;
-        const dur = (5.2 + Math.random() * 2.2).toFixed(2); // Thời gian dài hơn để chuyển động thư thả, mượt
+        const sway1 = (Math.random() - 0.5) * 55;
+        const sway2 = (Math.random() - 0.5) * 80;
+        const rot1 = (Math.random() - 0.5) * 45;
+        const rot2 = (Math.random() - 0.5) * 75;
+        const dur = (5.0 + Math.random() * 2.0).toFixed(2);
 
         note.style.setProperty("--sway1", `${sway1}px`);
         note.style.setProperty("--sway2", `${sway2}px`);
@@ -2249,7 +2248,7 @@
 
           if (!noteIntervalId) {
             spawnFloatingNote();
-            noteIntervalId = setInterval(spawnFloatingNote, 520);
+            noteIntervalId = setInterval(spawnFloatingNote, 480);
           }
         } else {
           playIcon.className = "fa-solid fa-play";
@@ -2261,6 +2260,14 @@
             clearInterval(noteIntervalId);
             noteIntervalId = null;
           }
+          // Tan biến ngay lập tức các nốt nhạc đang bay khi nhạc dừng
+          const activeNotes = musicModalCard.querySelectorAll(".floating-music-note");
+          activeNotes.forEach(n => {
+            n.style.transition = "opacity 0.25s ease, transform 0.25s ease";
+            n.style.opacity = "0";
+            n.style.transform += " scale(0.2)";
+            setTimeout(() => n.remove(), 250);
+          });
         }
       }
 
