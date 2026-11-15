@@ -1200,16 +1200,16 @@
     }
 
     /* ==========================================================
-       NỐT NHẠC & KHÓA SOL BAY BỔNG - SILKY JS PHYSICS LOOP (MƯỢT TUYỆT ĐỐI)
+       NỐT NHẠC MỜ ẢO, KÍCH THƯỚC NGẪU NHIÊN & BAY BỔNG MƯỢT MÀ
        ========================================================== */
     .floating-music-note {
       position: absolute;
       bottom: 20px;
-      font-size: 1.35rem;
       pointer-events: none;
       z-index: 1;
       opacity: 0;
-      text-shadow: 0 0 16px var(--glass-glow), 0 0 8px rgba(255, 255, 255, 0.5);
+      filter: blur(0.6px); /* Tạo độ mờ ảo nghệ thuật */
+      text-shadow: 0 0 18px var(--glass-glow), 0 0 10px rgba(255, 255, 255, 0.6);
       user-select: none;
       will-change: transform, opacity;
       transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
@@ -2148,7 +2148,6 @@
       let animFrameId = null;
       let noteIntervalId = null;
 
-      // Quản lý danh sách các nốt nhạc đang bay bằng JS vật lý mượt mà
       let activeFloatingNotes = [];
       let notesAnimFrameId = null;
 
@@ -2174,7 +2173,7 @@
       musicModal.addEventListener("click", (e) => { if (e.target === musicModal) closeModal(); });
 
       /* ==========================================================
-         HỆ THỐNG VẬT LÝ JS CHO NỐT NHẠC BAY BỔNG VÀ FADE OUT TỪ TỪ
+         HỆ THỐNG NỐT NHẠC MỜ ẢO, KÍCH THƯỚC NGẪU NHIÊN & VẬT LÝ MƯỢT MÀ
          ========================================================== */
       const symbols = ["𝄞", "♩", "♪", "♫", "♬", "🎹", "🎻"];
 
@@ -2184,8 +2183,8 @@
         el.className = "floating-music-note";
         el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
 
-        const startX = 15 + Math.random() * 70; // % chiều rộng card
-        const startY = 20; // px từ đáy lên
+        const startX = 12 + Math.random() * 76; // % chiều rộng card
+        const startY = 15; // px từ đáy lên
         el.style.left = `${startX}%`;
         el.style.bottom = `${startY}px`;
 
@@ -2195,18 +2194,18 @@
           element: el,
           x: startX,
           y: startY,
-          vy: 0.8 + Math.random() * 0.6, // Tốc độ bay lên nhẹ nhàng, thư thả
-          amplitude: 15 + Math.random() * 25, // Biên độ lượn sóng ngang
-          frequency: 0.015 + Math.random() * 0.015, // Tần số lượn sóng
+          vy: 0.65 + Math.random() * 0.55, // Tốc độ bay uyển chuyển
+          amplitude: 18 + Math.random() * 22, // Biên độ lượn sóng
+          frequency: 0.012 + Math.random() * 0.012, // Tần số lượn sóng
           phase: Math.random() * Math.PI * 2,
-          rotation: (Math.random() - 0.5) * 30,
-          rotSpeed: (Math.random() - 0.5) * 0.4,
+          rotation: (Math.random() - 0.5) * 40,
+          rotSpeed: (Math.random() - 0.5) * 0.35,
           opacity: 0,
-          maxOpacity: 0.85 + Math.random() * 0.15,
-          scale: 0.4,
-          maxScale: 1.0 + Math.random() * 0.2,
+          maxOpacity: 0.7 + Math.random() * 0.25, // Độ mờ ảo nghệ thuật
+          scale: 0.3,
+          maxScale: 0.75 + Math.random() * 0.65, // Kích thước ngẫu nhiên đa dạng (nhỏ to sinh động)
           life: 0,
-          maxLife: 350 + Math.random() * 120, // Số khung hình tồn tại
+          maxLife: 380 + Math.random() * 100,
           isFadingOut: false
         };
 
@@ -2221,15 +2220,12 @@
           n.y += n.vy;
           n.rotation += n.rotSpeed;
 
-          // Tính toán độ mờ và kích thước khi xuất hiện / mất dần
           if (!n.isFadingOut) {
-            if (n.life < 40) {
-              // Fade in từ từ mượt mà lúc đầu
-              n.opacity = (n.life / 40) * n.maxOpacity;
-              n.scale = 0.4 + (n.life / 40) * (n.maxScale - 0.4);
-            } else if (n.life > n.maxLife - 60) {
-              // Tự động mờ dần khi gần hết chu kỳ sống
-              n.opacity = ((n.maxLife - n.life) / 60) * n.maxOpacity;
+            if (n.life < 50) {
+              n.opacity = (n.life / 50) * n.maxOpacity;
+              n.scale = 0.3 + (n.life / 50) * (n.maxScale - 0.3);
+            } else if (n.life > n.maxLife - 70) {
+              n.opacity = ((n.maxLife - n.life) / 70) * n.maxOpacity;
             } else {
               n.opacity = n.maxOpacity;
               n.scale = n.maxScale;
@@ -2241,9 +2237,9 @@
               continue;
             }
           } else {
-            // Khi nhạc dừng: Kích hoạt hiệu ứng Fade out từ từ (giảm opacity và scale đều đặn trong 60 frames)
-            n.opacity -= 0.018;
-            n.scale *= 0.98;
+            // Hiệu ứng tan biến từ từ uyển chuyển khi dừng nhạc
+            n.opacity -= 0.015;
+            n.scale *= 0.985;
             if (n.opacity <= 0) {
               n.element.remove();
               activeFloatingNotes.splice(i, 1);
@@ -2251,7 +2247,6 @@
             }
           }
 
-          // Hiệu ứng lượn sóng sin ngang tự nhiên
           const swayX = Math.sin(n.phase) * n.amplitude;
           
           n.element.style.opacity = Math.max(0, n.opacity);
@@ -2290,7 +2285,7 @@
 
           if (!noteIntervalId) {
             spawnFloatingNote();
-            noteIntervalId = setInterval(spawnFloatingNote, 420);
+            noteIntervalId = setInterval(spawnFloatingNote, 460);
           }
           if (!notesAnimFrameId) {
             notesAnimFrameId = requestAnimationFrame(updateFloatingNotesLoop);
@@ -2306,7 +2301,7 @@
             noteIntervalId = null;
           }
 
-          // KÍCH HOẠT HIỆU ỨNG TAN DẦN TỪ TỪ (FADE OUT) CHO CÁC NỐT ĐANG BAY
+          // Kích hoạt fade out mờ dần từ từ cho các nốt đang bay
           activeFloatingNotes.forEach(n => {
             n.isFadingOut = true;
           });
