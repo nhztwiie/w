@@ -1213,11 +1213,11 @@
     }
 
     /* ==========================================================
-       NỐT NHẠC, PIANO & VIOLIN MỜ ẢO, PHÂN BỔ HÀI HÒA & BAY BỔNG MƯỢT MÀ
+       NỐT NHẠC, PIANO & VIOLIN BAY TỪ DƯỚI POP-UP LÊN ĐĨA THAN
        ========================================================== */
     .floating-music-note {
       position: absolute;
-      bottom: 20px;
+      bottom: -24px;
       font-size: 1.15rem;
       pointer-events: none;
       z-index: 1;
@@ -2210,7 +2210,7 @@
       musicModal.addEventListener("click", (e) => { if (e.target === musicModal) closeModal(); });
 
       /* ==========================================================
-         HỆ THỐNG NỐT NHẠC, PIANO & VIOLIN LIÊN TỤC, PHÂN BỔ HÀI HÒA
+         HỆ THỐNG NỐT NHẠC, PIANO & VIOLIN XUẤT HIỆN TỪ DƯỚI POP-UP VÀ BAY LÊN ĐĨA THAN
          ========================================================== */
       const symbols = ["𝄞", "♩", "♪", "♫", "♬", "🎹", "🎻"];
       const spawnLanes = [
@@ -2235,17 +2235,22 @@
         noteLaneIndex++;
 
         const startX = lane[0] + Math.random() * (lane[1] - lane[0]);
-        const startY = 18;
+        const startY = -24;
         el.style.left = `${startX}%`;
         el.style.bottom = `${startY}px`;
 
         musicModalCard.appendChild(el);
 
+        const cardHeight = musicModalCard.offsetHeight || 480;
+        const targetTravelY = cardHeight - 95;
+        const vy = 0.72 + Math.random() * 0.25;
+        const maxLife = Math.round(targetTravelY / vy);
+
         const noteObj = {
           element: el,
           x: startX,
-          y: startY,
-          vy: 0.62 + Math.random() * 0.25,
+          y: 0,
+          vy,
           amplitude: 10 + Math.random() * 12,
           frequency: 0.012 + Math.random() * 0.008,
           phase: Math.random() * Math.PI * 2,
@@ -2256,7 +2261,7 @@
           scale: 0.35,
           maxScale: 0.68 + Math.random() * 0.34,
           life: 0,
-          maxLife: 330 + Math.random() * 50,
+          maxLife,
           isFadingOut: false
         };
 
@@ -2271,12 +2276,17 @@
           n.y += n.vy;
           n.rotation += n.rotSpeed;
 
+          const progress = n.life / n.maxLife;
+          const convergeFactor = progress > 0.5 ? Math.max(0.18, 1 - (progress - 0.5) * 1.4) : 1;
+
           if (!n.isFadingOut) {
             if (n.life < 55) {
               n.opacity = (n.life / 55) * n.maxOpacity;
               n.scale = 0.35 + (n.life / 55) * (n.maxScale - 0.35);
-            } else if (n.life > n.maxLife - 80) {
-              n.opacity = ((n.maxLife - n.life) / 80) * n.maxOpacity;
+            } else if (n.life > n.maxLife - 85) {
+              const fadeRatio = Math.max(0, (n.maxLife - n.life) / 85);
+              n.opacity = fadeRatio * n.maxOpacity;
+              n.scale = n.maxScale * (0.45 + 0.55 * fadeRatio);
             } else {
               n.opacity = n.maxOpacity;
               n.scale = n.maxScale;
@@ -2297,9 +2307,12 @@
             }
           }
 
-          const swayX = Math.sin(n.phase) * n.amplitude;
+          const swayX = Math.sin(n.phase) * n.amplitude * convergeFactor;
+          const centerPullX = progress > 0.5 ? ((50 - n.x) * 2.4 * ((progress - 0.5) * 2)) : 0;
+          const totalX = swayX + centerPullX;
+
           n.element.style.opacity = Math.max(0, n.opacity).toFixed(3);
-          n.element.style.transform = `translate3d(${swayX.toFixed(1)}px, -${n.y.toFixed(1)}px, 0) scale(${n.scale.toFixed(3)}) rotate(${n.rotation.toFixed(1)}deg)`;
+          n.element.style.transform = `translate3d(${totalX.toFixed(1)}px, -${n.y.toFixed(1)}px, 0) scale(${n.scale.toFixed(3)}) rotate(${n.rotation.toFixed(1)}deg)`;
         }
 
         if (isPlaying || activeFloatingNotes.length > 0) {
