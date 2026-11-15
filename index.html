@@ -9,7 +9,20 @@
   <meta name="title" content="Nhật Huy | w.bio">
   <meta name="description" content="ung dung. — Contact me.">
   <meta name="author" content="Nhật Huy">
-  <meta name="theme-color" content="#111317">
+  <meta name="theme-color" id="meta-theme-color" content="#111317">
+
+  <!-- Áp dụng giao diện Sáng/Tối tức thì theo thời gian thực ngay trước khi render -->
+  <script>
+    (function () {
+      const hour = new Date().getHours();
+      const autoTheme = (hour >= 6 && hour < 18) ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", autoTheme);
+      const metaTheme = document.getElementById("meta-theme-color");
+      if (metaTheme) {
+        metaTheme.setAttribute("content", autoTheme === "light" ? "#e9efe7" : "#111317");
+      }
+    })();
+  </script>
 
   <!-- Open Graph / Facebook / Messenger / Zalo -->
   <meta property="og:type" content="website">
@@ -1200,20 +1213,20 @@
     }
 
     /* ==========================================================
-       NỐT NHẠC MỜ ẢO, KÍCH THƯỚC NGẪU NHIÊN & BAY BỔNG MƯỢT MÀ
+       NỐT NHẠC MỜ ẢO, PHÂN BỔ HÀI HÒA & BAY BỔNG MƯỢT MÀ
        ========================================================== */
     .floating-music-note {
       position: absolute;
       bottom: 20px;
+      font-size: 1.15rem;
       pointer-events: none;
       z-index: 1;
       opacity: 0;
-      filter: blur(0.8px);
-      text-shadow: 0 0 14px var(--glass-glow);
+      filter: blur(0.6px);
+      text-shadow: 0 0 12px var(--glass-glow);
       color: var(--text-title);
       user-select: none;
       will-change: transform, opacity;
-      transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
     }
   </style>
 </head>
@@ -1416,6 +1429,8 @@
     const SERVICE_ID = "service_040502w";
     const TEMPLATE_ID = "template_dc22zks";
 
+    let manualThemePeriod = null;
+
     document.addEventListener("DOMContentLoaded", () => {
       if (typeof bioData !== 'undefined' && bioData.tabs) {
         renderLinks("social-links-list", bioData.tabs.social);
@@ -1440,21 +1455,24 @@
        ========================================================== */
     function getAutoThemeByTime(date = new Date()) {
       const hour = date.getHours();
-      // Từ 06:00 đến 17:59 là light theme, từ 18:00 đến 05:59 là dark theme
-      return (hour >= 6 && hour <= 17) ? "light" : "dark";
+      // Ban ngày: 06:00 -> 17:59 (light), Ban tối: 18:00 -> 05:59 (dark)
+      return (hour >= 6 && hour < 18) ? "light" : "dark";
+    }
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      const metaTheme = document.getElementById("meta-theme-color");
+      if (metaTheme) {
+        metaTheme.setAttribute("content", theme === "light" ? "#e9efe7" : "#111317");
+      }
     }
 
     function initAutoTheme() {
-      // Ưu tiên kiểm tra xem trình duyệt đã lưu trạng thái ép buộc thủ công hay chưa
-      const overridden = localStorage.getItem("ios26-user-overridden");
-      const savedTheme = localStorage.getItem("ios26-theme");
-      
-      if (overridden === "true" && (savedTheme === "light" || savedTheme === "dark")) {
-        document.documentElement.setAttribute("data-theme", savedTheme);
-      } else {
-        // Mặc định tự động hoàn toàn theo thời gian thực khi truy cập
-        document.documentElement.setAttribute("data-theme", getAutoThemeByTime());
-      }
+      // Luôn ưu tiên giờ thực tế khi truy cập web
+      localStorage.removeItem("ios26-user-overridden");
+      localStorage.removeItem("ios26-theme");
+      manualThemePeriod = null;
+      applyTheme(getAutoThemeByTime(new Date()));
     }
 
     function initDeviceSyncClock() {
@@ -1468,12 +1486,14 @@
         const seconds = String(now.getSeconds()).padStart(2, '0');
         clockEl.textContent = `${hours}:${minutes}:${seconds}`;
 
-        // Nếu người dùng chưa từng chủ động đổi tay, tự động cập nhật theme theo mốc giờ mới
-        if (localStorage.getItem("ios26-user-overridden") !== "true") {
-          const targetTheme = getAutoThemeByTime(now);
-          if (document.documentElement.getAttribute("data-theme") !== targetTheme) {
-            document.documentElement.setAttribute("data-theme", targetTheme);
-          }
+        const currentAutoTheme = getAutoThemeByTime(now);
+        // Khi bước sang khung giờ ngày/tối mới, tự động cập nhật lại theo thời gian thực
+        if (manualThemePeriod && manualThemePeriod !== currentAutoTheme) {
+          manualThemePeriod = null;
+        }
+
+        if (!manualThemePeriod && document.documentElement.getAttribute("data-theme") !== currentAutoTheme) {
+          applyTheme(currentAutoTheme);
         }
 
         const msUntilNextSecond = 1000 - now.getMilliseconds();
@@ -1820,12 +1840,12 @@
         const currentTheme = document.documentElement.getAttribute("data-theme");
         const newTheme = currentTheme === "light" ? "dark" : "light";
 
-        localStorage.setItem("ios26-user-overridden", "true");
-        localStorage.setItem("ios26-theme", newTheme);
+        // Ghi nhận chuyển đổi thủ công trong khung giờ hiện tại; lần truy cập sau sẽ tự động đồng bộ lại theo giờ thực tế
+        manualThemePeriod = getAutoThemeByTime(new Date());
         mainCard.classList.add("theme-transitioning");
 
         setTimeout(() => {
-          document.documentElement.setAttribute("data-theme", newTheme);
+          applyTheme(newTheme);
 
           setTimeout(() => {
             mainCard.classList.remove("theme-transitioning");
@@ -2170,6 +2190,7 @@
 
       let activeFloatingNotes = [];
       let notesAnimFrameId = null;
+      let noteLaneIndex = 0;
 
       function formatTime(seconds) {
         if (isNaN(seconds) || seconds < 0) return "00:00";
@@ -2193,18 +2214,34 @@
       musicModal.addEventListener("click", (e) => { if (e.target === musicModal) closeModal(); });
 
       /* ==========================================================
-         HỆ THỐNG NỐT NHẠC MỜ ẢO, KÍCH THƯỚC NGẪU NHIÊN & VẬT LÝ MƯỢT MÀ
+         HỆ THỐNG NỐT NHẠC LIÊN TỤC & PHÂN BỔ SỐ LƯỢNG HÀI HÒA
          ========================================================== */
       const symbols = ["𝄞", "♩", "♪", "♫", "♬", "🎹", "🎻"];
+      // 3 luồng phân bổ đều ngang card để các nốt bay liên tục mà không đè lên nhau
+      const spawnLanes = [
+        [14, 32],
+        [42, 58],
+        [68, 86]
+      ];
 
       function spawnFloatingNote() {
-        if (!isPlaying || activeFloatingNotes.length >= 9) return;
+        if (!isPlaying) return;
+
+        // Giữ tối đa 6 nốt hiển thị cùng lúc trên màn hình; nếu đạt ngưỡng thì làm mờ dần nốt cũ nhất để nhường chỗ
+        const activeVisible = activeFloatingNotes.filter(n => !n.isFadingOut);
+        if (activeVisible.length >= 6) {
+          activeVisible[0].isFadingOut = true;
+        }
+
         const el = document.createElement("span");
         el.className = "floating-music-note";
         el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
 
-        const startX = 14 + Math.random() * 72; // % chiều rộng card
-        const startY = 18; // px từ đáy lên
+        const lane = spawnLanes[noteLaneIndex % spawnLanes.length];
+        noteLaneIndex++;
+
+        const startX = lane[0] + Math.random() * (lane[1] - lane[0]);
+        const startY = 18;
         el.style.left = `${startX}%`;
         el.style.bottom = `${startY}px`;
 
@@ -2214,18 +2251,18 @@
           element: el,
           x: startX,
           y: startY,
-          vy: 0.55 + Math.random() * 0.45, // Tốc độ bay uyển chuyển, thư thái
-          amplitude: 16 + Math.random() * 20, // Biên độ lượn sóng
-          frequency: 0.011 + Math.random() * 0.011, // Tần số lượn sóng
+          vy: 0.62 + Math.random() * 0.25,
+          amplitude: 10 + Math.random() * 12,
+          frequency: 0.012 + Math.random() * 0.008,
           phase: Math.random() * Math.PI * 2,
-          rotation: (Math.random() - 0.5) * 35,
-          rotSpeed: (Math.random() - 0.5) * 0.3,
+          rotation: (Math.random() - 0.5) * 24,
+          rotSpeed: (Math.random() - 0.5) * 0.22,
           opacity: 0,
-          maxOpacity: 0.35 + Math.random() * 0.23, // Độ mờ ảo nhẹ nhàng, không quá đậm
-          scale: 0.3,
-          maxScale: 0.65 + Math.random() * 0.6, // Kích thước ngẫu nhiên đa dạng (nhỏ to sinh động)
+          maxOpacity: 0.28 + Math.random() * 0.16,
+          scale: 0.35,
+          maxScale: 0.68 + Math.random() * 0.34,
           life: 0,
-          maxLife: 380 + Math.random() * 90,
+          maxLife: 330 + Math.random() * 50,
           isFadingOut: false
         };
 
@@ -2241,9 +2278,9 @@
           n.rotation += n.rotSpeed;
 
           if (!n.isFadingOut) {
-            if (n.life < 60) {
-              n.opacity = (n.life / 60) * n.maxOpacity;
-              n.scale = 0.3 + (n.life / 60) * (n.maxScale - 0.3);
+            if (n.life < 55) {
+              n.opacity = (n.life / 55) * n.maxOpacity;
+              n.scale = 0.35 + (n.life / 55) * (n.maxScale - 0.35);
             } else if (n.life > n.maxLife - 80) {
               n.opacity = ((n.maxLife - n.life) / 80) * n.maxOpacity;
             } else {
@@ -2257,9 +2294,8 @@
               continue;
             }
           } else {
-            // Hiệu ứng tan biến từ từ uyển chuyển khi dừng nhạc
             n.opacity -= 0.012;
-            n.scale *= 0.988;
+            n.scale *= 0.99;
             if (n.opacity <= 0) {
               n.element.remove();
               activeFloatingNotes.splice(i, 1);
@@ -2268,9 +2304,8 @@
           }
 
           const swayX = Math.sin(n.phase) * n.amplitude;
-          
-          n.element.style.opacity = Math.max(0, n.opacity);
-          n.element.style.transform = `translate3d(${swayX}px, -${n.y}px, 0) scale(${n.scale}) rotate(${n.rotation}deg)`;
+          n.element.style.opacity = Math.max(0, n.opacity).toFixed(3);
+          n.element.style.transform = `translate3d(${swayX.toFixed(1)}px, -${n.y.toFixed(1)}px, 0) scale(${n.scale.toFixed(3)}) rotate(${n.rotation.toFixed(1)}deg)`;
         }
 
         if (isPlaying || activeFloatingNotes.length > 0) {
@@ -2305,7 +2340,8 @@
 
           if (!noteIntervalId) {
             spawnFloatingNote();
-            noteIntervalId = setInterval(spawnFloatingNote, 680);
+            // Nhịp 950ms/nốt kết hợp vòng đời ~5.5s -> duy trì đều 5-6 nốt thoáng mắt, bay liên tục
+            noteIntervalId = setInterval(spawnFloatingNote, 950);
           }
           if (!notesAnimFrameId) {
             notesAnimFrameId = requestAnimationFrame(updateFloatingNotesLoop);
@@ -2321,7 +2357,6 @@
             noteIntervalId = null;
           }
 
-          // Kích hoạt fade out mờ dần từ từ cho các nốt đang bay
           activeFloatingNotes.forEach(n => {
             n.isFadingOut = true;
           });
