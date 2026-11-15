@@ -1213,20 +1213,22 @@
     }
 
     /* ==========================================================
-       NỐT NHẠC, PIANO & VIOLIN BAY TỪ DƯỚI POP-UP LÊN ĐĨA THAN
+       NỐT NHẠC, PIANO & VIOLIN XUẤT HIỆN TỪ DƯỚI POP-UP, BAY LÊN VÀ BỊ HÚT VÀO ĐĨA THAN
        ========================================================== */
     .floating-music-note {
       position: absolute;
-      bottom: -24px;
+      left: 0;
+      top: 0;
       font-size: 1.15rem;
       pointer-events: none;
-      z-index: 1;
+      z-index: 3;
       opacity: 0;
-      filter: blur(0.6px);
+      filter: blur(0.4px);
       text-shadow: 0 0 12px var(--glass-glow);
       color: var(--text-title);
       user-select: none;
       will-change: transform, opacity;
+      transform-origin: center center;
     }
   </style>
 </head>
@@ -2210,22 +2212,28 @@
       musicModal.addEventListener("click", (e) => { if (e.target === musicModal) closeModal(); });
 
       /* ==========================================================
-         HỆ THỐNG NỐT NHẠC, PIANO & VIOLIN XUẤT HIỆN TỪ DƯỚI POP-UP VÀ BAY LÊN ĐĨA THAN
+         HỆ THỐNG NỐT NHẠC, PIANO & VIOLIN BAY TỪ DƯỚI POP-UP VÀ BỊ HÚT VÀO ĐĨA THAN
          ========================================================== */
       const symbols = ["𝄞", "♩", "♪", "♫", "♬", "🎹", "🎻"];
       const spawnLanes = [
-        [14, 32],
-        [42, 58],
-        [68, 86]
+        [0.14, 0.32],
+        [0.42, 0.58],
+        [0.68, 0.86]
       ];
 
       function spawnFloatingNote() {
         if (!isPlaying) return;
 
-        const activeVisible = activeFloatingNotes.filter(n => !n.isFadingOut);
-        if (activeVisible.length >= 6) {
-          activeVisible[0].isFadingOut = true;
-        }
+        const cardW = musicModalCard.offsetWidth || 360;
+        const cardH = musicModalCard.offsetHeight || 520;
+
+        // Xác định tâm đĩa than bên trong popup
+        const targetX = vinylRecord.offsetParent
+          ? (vinylRecord.offsetParent.offsetLeft + vinylRecord.offsetLeft + vinylRecord.offsetWidth / 2)
+          : (cardW / 2);
+        const targetY = vinylRecord.offsetParent
+          ? (vinylRecord.offsetParent.offsetTop + vinylRecord.offsetTop + vinylRecord.offsetHeight / 2)
+          : 120;
 
         const el = document.createElement("span");
         el.className = "floating-music-note";
@@ -2234,34 +2242,34 @@
         const lane = spawnLanes[noteLaneIndex % spawnLanes.length];
         noteLaneIndex++;
 
-        const startX = lane[0] + Math.random() * (lane[1] - lane[0]);
-        const startY = -24;
-        el.style.left = `${startX}%`;
-        el.style.bottom = `${startY}px`;
+        const startX = (lane[0] + Math.random() * (lane[1] - lane[0])) * cardW;
+        const startY = cardH + 14; // Xuất phát ngay dưới đáy pop-up
+
+        // Vector hướng lên trên & xoáy nhẹ ra hai bên trước khi bị lực hút đĩa than kéo vào tâm
+        const sideDir = startX < targetX ? -1 : (startX > targetX ? 1 : (Math.random() > 0.5 ? 1 : -1));
+        const initVx = sideDir * (0.35 + Math.random() * 0.55);
+        const initVy = -(1.55 + Math.random() * 0.45);
 
         musicModalCard.appendChild(el);
-
-        const cardHeight = musicModalCard.offsetHeight || 480;
-        const targetTravelY = cardHeight - 95;
-        const vy = 0.72 + Math.random() * 0.25;
-        const maxLife = Math.round(targetTravelY / vy);
 
         const noteObj = {
           element: el,
           x: startX,
-          y: 0,
-          vy,
-          amplitude: 10 + Math.random() * 12,
-          frequency: 0.012 + Math.random() * 0.008,
-          phase: Math.random() * Math.PI * 2,
-          rotation: (Math.random() - 0.5) * 24,
-          rotSpeed: (Math.random() - 0.5) * 0.22,
+          y: startY,
+          vx: initVx,
+          vy: initVy,
+          targetX,
+          targetY,
+          swirlDir: sideDir,
+          swayPhase: Math.random() * Math.PI * 2,
+          swaySpeed: 0.045 + Math.random() * 0.025,
+          rotation: (Math.random() - 0.5) * 28,
+          rotSpeed: (Math.random() - 0.5) * 1.4,
           opacity: 0,
-          maxOpacity: 0.28 + Math.random() * 0.16,
-          scale: 0.35,
-          maxScale: 0.68 + Math.random() * 0.34,
+          maxOpacity: 0.48 + Math.random() * 0.22,
+          scale: 0.45,
+          baseScale: 0.85 + Math.random() * 0.3,
           life: 0,
-          maxLife,
           isFadingOut: false
         };
 
@@ -2272,34 +2280,70 @@
         for (let i = activeFloatingNotes.length - 1; i >= 0; i--) {
           const n = activeFloatingNotes[i];
           n.life++;
-          n.phase += n.frequency;
-          n.y += n.vy;
-          n.rotation += n.rotSpeed;
+          n.swayPhase += n.swaySpeed;
 
-          const progress = n.life / n.maxLife;
-          const convergeFactor = progress > 0.5 ? Math.max(0.18, 1 - (progress - 0.5) * 1.4) : 1;
+          const dx = n.targetX - n.x;
+          const dy = n.targetY - n.y;
+          const dist = Math.hypot(dx, dy);
 
           if (!n.isFadingOut) {
-            if (n.life < 55) {
-              n.opacity = (n.life / 55) * n.maxOpacity;
-              n.scale = 0.35 + (n.life / 55) * (n.maxScale - 0.35);
-            } else if (n.life > n.maxLife - 85) {
-              const fadeRatio = Math.max(0, (n.maxLife - n.life) / 85);
-              n.opacity = fadeRatio * n.maxOpacity;
-              n.scale = n.maxScale * (0.45 + 0.55 * fadeRatio);
-            } else {
-              n.opacity = n.maxOpacity;
-              n.scale = n.maxScale;
+            // Càng tiến gần lên vùng đĩa than, lực hút hướng tâm và lực xoáy hút càng mạnh
+            const pullZone = 270;
+            const pullStrength = dist < pullZone ? Math.pow(1 - dist / pullZone, 1.45) : 0;
+
+            if (dist > 1) {
+              const nx = dx / dist;
+              const ny = dy / dist;
+
+              // Lực hút kéo thẳng về tâm đĩa than
+              const suctionForce = 0.045 + pullStrength * 0.34;
+              n.vx += nx * suctionForce;
+              n.vy += ny * suctionForce;
+
+              // Lực xoáy nhẹ theo chiều quay đĩa than khi bị hút vào tâm
+              const vortexForce = pullStrength * 0.14;
+              n.vx += -ny * vortexForce;
+              n.vy += nx * vortexForce;
             }
 
-            if (n.life >= n.maxLife) {
+            // Ma sát không khí giúp quỹ đạo uốn cong mượt mà
+            const drag = 0.962 - pullStrength * 0.045;
+            n.vx *= drag;
+            n.vy *= drag;
+
+            // Gợn sóng nhẹ khi đang bay lên ở phần dưới
+            const waveX = Math.cos(n.swayPhase) * 0.35 * (1 - pullStrength);
+            n.x += n.vx + waveX;
+            n.y += n.vy;
+
+            // Xoay nhanh dần như bị cuốn vào vòng xoáy đĩa than
+            n.rotation += n.rotSpeed + pullStrength * 5.2;
+
+            // Hiệu ứng hiện dần khi từ dưới pop-up trồi lên và thu nhỏ dần khi bị hút vào tâm đĩa than
+            if (n.life < 28) {
+              const fadeIn = n.life / 28;
+              n.opacity = fadeIn * n.maxOpacity;
+              n.scale = 0.45 + fadeIn * (n.baseScale - 0.45);
+            } else if (dist < 95) {
+              const absorbRatio = Math.max(0, (dist - 12) / 83);
+              n.opacity = absorbRatio * n.maxOpacity;
+              n.scale = Math.max(0.08, absorbRatio * n.baseScale);
+            } else {
+              n.opacity = n.maxOpacity;
+              n.scale = n.baseScale;
+            }
+
+            // Khi chạm vào tâm đĩa than -> hoàn tất chu kì & biến mất
+            if (dist <= 14 || n.life > 420) {
               n.element.remove();
               activeFloatingNotes.splice(i, 1);
               continue;
             }
           } else {
-            n.opacity -= 0.012;
-            n.scale *= 0.99;
+            n.x += n.vx;
+            n.y += n.vy;
+            n.opacity -= 0.025;
+            n.scale *= 0.96;
             if (n.opacity <= 0) {
               n.element.remove();
               activeFloatingNotes.splice(i, 1);
@@ -2307,12 +2351,8 @@
             }
           }
 
-          const swayX = Math.sin(n.phase) * n.amplitude * convergeFactor;
-          const centerPullX = progress > 0.5 ? ((50 - n.x) * 2.4 * ((progress - 0.5) * 2)) : 0;
-          const totalX = swayX + centerPullX;
-
           n.element.style.opacity = Math.max(0, n.opacity).toFixed(3);
-          n.element.style.transform = `translate3d(${totalX.toFixed(1)}px, -${n.y.toFixed(1)}px, 0) scale(${n.scale.toFixed(3)}) rotate(${n.rotation.toFixed(1)}deg)`;
+          n.element.style.transform = `translate3d(${n.x.toFixed(1)}px, ${n.y.toFixed(1)}px, 0) translate(-50%, -50%) scale(${n.scale.toFixed(3)}) rotate(${n.rotation.toFixed(1)}deg)`;
         }
 
         if (isPlaying || activeFloatingNotes.length > 0) {
@@ -2347,7 +2387,7 @@
 
           if (!noteIntervalId) {
             spawnFloatingNote();
-            noteIntervalId = setInterval(spawnFloatingNote, 950);
+            noteIntervalId = setInterval(spawnFloatingNote, 780);
           }
           if (!notesAnimFrameId) {
             notesAnimFrameId = requestAnimationFrame(updateFloatingNotesLoop);
