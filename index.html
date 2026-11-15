@@ -1208,8 +1208,9 @@
       pointer-events: none;
       z-index: 1;
       opacity: 0;
-      filter: blur(0.6px); /* Tạo độ mờ ảo nghệ thuật */
-      text-shadow: 0 0 18px var(--glass-glow), 0 0 10px rgba(255, 255, 255, 0.6);
+      filter: blur(0.8px);
+      text-shadow: 0 0 14px var(--glass-glow);
+      color: var(--text-title);
       user-select: none;
       will-change: transform, opacity;
       transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
@@ -1437,11 +1438,18 @@
     /* ==========================================================
        AUTO-THEME & ĐỒNG HỒ ĐỒNG BỘ CHÍNH XÁC VỚI THỜI GIAN THIẾT BỊ
        ========================================================== */
+    function getAutoThemeByTime(date = new Date()) {
+      const hour = date.getHours();
+      return (hour >= 6 && hour <= 17) ? "light" : "dark";
+    }
+
     function initAutoTheme() {
-      if (!localStorage.getItem("ios26-user-overridden")) {
-        const hour = new Date().getHours();
-        const autoTheme = (hour >= 6 && hour <= 17) ? "light" : "dark";
-        document.documentElement.setAttribute("data-theme", autoTheme);
+      const overridden = localStorage.getItem("ios26-user-overridden");
+      const savedTheme = localStorage.getItem("ios26-theme");
+      if (overridden && (savedTheme === "light" || savedTheme === "dark")) {
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      } else {
+        document.documentElement.setAttribute("data-theme", getAutoThemeByTime());
       }
     }
 
@@ -1455,6 +1463,13 @@
         const minutes = String(now.getMinutes()).padStart(2, '0');
         const seconds = String(now.getSeconds()).padStart(2, '0');
         clockEl.textContent = `${hours}:${minutes}:${seconds}`;
+
+        if (!localStorage.getItem("ios26-user-overridden")) {
+          const targetTheme = getAutoThemeByTime(now);
+          if (document.documentElement.getAttribute("data-theme") !== targetTheme) {
+            document.documentElement.setAttribute("data-theme", targetTheme);
+          }
+        }
 
         const msUntilNextSecond = 1000 - now.getMilliseconds();
         setTimeout(syncClock, msUntilNextSecond);
@@ -2178,13 +2193,13 @@
       const symbols = ["𝄞", "♩", "♪", "♫", "♬", "🎹", "🎻"];
 
       function spawnFloatingNote() {
-        if (!isPlaying) return;
+        if (!isPlaying || activeFloatingNotes.length >= 9) return;
         const el = document.createElement("span");
         el.className = "floating-music-note";
         el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
 
-        const startX = 12 + Math.random() * 76; // % chiều rộng card
-        const startY = 15; // px từ đáy lên
+        const startX = 14 + Math.random() * 72; // % chiều rộng card
+        const startY = 18; // px từ đáy lên
         el.style.left = `${startX}%`;
         el.style.bottom = `${startY}px`;
 
@@ -2194,18 +2209,18 @@
           element: el,
           x: startX,
           y: startY,
-          vy: 0.65 + Math.random() * 0.55, // Tốc độ bay uyển chuyển
-          amplitude: 18 + Math.random() * 22, // Biên độ lượn sóng
-          frequency: 0.012 + Math.random() * 0.012, // Tần số lượn sóng
+          vy: 0.55 + Math.random() * 0.45, // Tốc độ bay uyển chuyển, thư thái
+          amplitude: 16 + Math.random() * 20, // Biên độ lượn sóng
+          frequency: 0.011 + Math.random() * 0.011, // Tần số lượn sóng
           phase: Math.random() * Math.PI * 2,
-          rotation: (Math.random() - 0.5) * 40,
-          rotSpeed: (Math.random() - 0.5) * 0.35,
+          rotation: (Math.random() - 0.5) * 35,
+          rotSpeed: (Math.random() - 0.5) * 0.3,
           opacity: 0,
-          maxOpacity: 0.7 + Math.random() * 0.25, // Độ mờ ảo nghệ thuật
+          maxOpacity: 0.35 + Math.random() * 0.23, // Độ mờ ảo nhẹ nhàng, không quá đậm
           scale: 0.3,
-          maxScale: 0.75 + Math.random() * 0.65, // Kích thước ngẫu nhiên đa dạng (nhỏ to sinh động)
+          maxScale: 0.65 + Math.random() * 0.6, // Kích thước ngẫu nhiên đa dạng (nhỏ to sinh động)
           life: 0,
-          maxLife: 380 + Math.random() * 100,
+          maxLife: 380 + Math.random() * 90,
           isFadingOut: false
         };
 
@@ -2221,11 +2236,11 @@
           n.rotation += n.rotSpeed;
 
           if (!n.isFadingOut) {
-            if (n.life < 50) {
-              n.opacity = (n.life / 50) * n.maxOpacity;
-              n.scale = 0.3 + (n.life / 50) * (n.maxScale - 0.3);
-            } else if (n.life > n.maxLife - 70) {
-              n.opacity = ((n.maxLife - n.life) / 70) * n.maxOpacity;
+            if (n.life < 60) {
+              n.opacity = (n.life / 60) * n.maxOpacity;
+              n.scale = 0.3 + (n.life / 60) * (n.maxScale - 0.3);
+            } else if (n.life > n.maxLife - 80) {
+              n.opacity = ((n.maxLife - n.life) / 80) * n.maxOpacity;
             } else {
               n.opacity = n.maxOpacity;
               n.scale = n.maxScale;
@@ -2238,8 +2253,8 @@
             }
           } else {
             // Hiệu ứng tan biến từ từ uyển chuyển khi dừng nhạc
-            n.opacity -= 0.015;
-            n.scale *= 0.985;
+            n.opacity -= 0.012;
+            n.scale *= 0.988;
             if (n.opacity <= 0) {
               n.element.remove();
               activeFloatingNotes.splice(i, 1);
@@ -2285,7 +2300,7 @@
 
           if (!noteIntervalId) {
             spawnFloatingNote();
-            noteIntervalId = setInterval(spawnFloatingNote, 460);
+            noteIntervalId = setInterval(spawnFloatingNote, 680);
           }
           if (!notesAnimFrameId) {
             notesAnimFrameId = requestAnimationFrame(updateFloatingNotesLoop);
