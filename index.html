@@ -1816,11 +1816,11 @@
         const newTheme = currentTheme === "light" ? "dark" : "light";
 
         localStorage.setItem("ios26-user-overridden", "true");
+        localStorage.setItem("ios26-theme", newTheme);
         mainCard.classList.add("theme-transitioning");
 
         setTimeout(() => {
           document.documentElement.setAttribute("data-theme", newTheme);
-          localStorage.setItem("ios26-theme", newTheme);
 
           setTimeout(() => {
             mainCard.classList.remove("theme-transitioning");
