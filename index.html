@@ -198,12 +198,13 @@
     .liquid-orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(28px);
+      filter: blur(24px);
       mix-blend-mode: overlay;
       will-change: transform;
       opacity: 0.85;
       z-index: 1;
       transition: background 0.6s ease;
+      transform: translateZ(0);
     }
 
     .orb-primary {
@@ -256,8 +257,8 @@
       width: 100%;
       max-width: 414px;
       background: var(--glass-bg);
-      backdrop-filter: blur(28px) saturate(200%);
-      -webkit-backdrop-filter: blur(28px) saturate(200%);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
       border: 1.5px solid var(--glass-border);
       border-radius: 44px;
       box-shadow: var(--glass-shadow);
@@ -265,6 +266,7 @@
       flex-direction: column;
       overflow: hidden;
       transform: translateZ(0);
+      contain: layout style;
     }
 
     .liquid-card-ios26::after {
@@ -283,8 +285,10 @@
       z-index: 4;
     }
 
-    .liquid-card-ios26:hover::after {
-      opacity: 1;
+    @media (hover: hover) and (pointer: fine) {
+      .liquid-card-ios26:hover::after {
+        opacity: 1;
+      }
     }
 
     .card-border-glow {
@@ -306,8 +310,10 @@
       z-index: 25;
     }
 
-    .liquid-card-ios26:hover .card-border-glow {
-      opacity: 1;
+    @media (hover: hover) and (pointer: fine) {
+      .liquid-card-ios26:hover .card-border-glow {
+        opacity: 1;
+      }
     }
 
     .water-ripple {
@@ -317,15 +323,16 @@
       background: radial-gradient(circle, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
       border: 1.5px solid rgba(255, 255, 255, 0.6);
       pointer-events: none;
-      animation: liquidSplash 0.85s cubic-bezier(0.15, 0.85, 0.25, 1) forwards;
+      animation: liquidSplash 0.8s cubic-bezier(0.15, 0.85, 0.25, 1) forwards;
       z-index: 50;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      will-change: transform, opacity;
     }
 
     @keyframes liquidSplash {
       0% { width: 0; height: 0; opacity: 1; transform: translate(-50%, -50%) scale(0.2); }
       50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
-      100% { width: 280px; height: 280px; opacity: 0; transform: translate(-50%, -50%) scale(1.6); }
+      100% { width: 260px; height: 260px; opacity: 0; transform: translate(-50%, -50%) scale(1.55); }
     }
 
     .top-bar {
@@ -356,8 +363,8 @@
       align-items: center;
       padding: 3px;
       cursor: pointer;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       transition: transform 0.25s var(--spring-easing);
     }
 
@@ -376,6 +383,7 @@
       align-items: center;
       justify-content: center;
       transition: transform 0.45s var(--liquid-bounce), background 0.4s ease;
+      will-change: transform;
     }
 
     .orb-icon {
@@ -429,8 +437,10 @@
       pointer-events: none;
     }
 
-    .glass-btn-ios26:hover::before, .ios26-link-item:hover::before, .btn-action-item:hover::before, .btn-download-icon:hover::before {
-      opacity: 1;
+    @media (hover: hover) and (pointer: fine) {
+      .glass-btn-ios26:hover::before, .ios26-link-item:hover::before, .btn-action-item:hover::before, .btn-download-icon:hover::before {
+        opacity: 1;
+      }
     }
 
     .glass-btn-ios26:active,
@@ -453,8 +463,8 @@
       color: var(--text-title);
       font-size: 1.05rem;
       cursor: pointer;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.3);
     }
 
@@ -587,30 +597,26 @@
       flex-direction: column;
       align-items: center;
       opacity: 0.45;
-      transform: scale(0.95);
-      filter: blur(6px);
+      transform: scale(0.95) translateZ(0);
       transition: 
         opacity 0.5s var(--spring-easing),
-        transform 0.55s var(--spring-easing),
-        filter 0.5s var(--spring-easing);
+        transform 0.55s var(--spring-easing);
+      will-change: transform, opacity;
     }
 
     .tab-page.active-tab {
       opacity: 1;
-      transform: scale(1);
-      filter: blur(0px);
+      transform: scale(1) translateZ(0);
     }
 
     @keyframes blurReveal {
       0% {
         opacity: 0;
-        filter: blur(12px);
-        transform: translateY(10px) scale(0.97);
+        transform: translate3d(0, 10px, 0) scale(0.97);
       }
       100% {
         opacity: 1;
-        filter: blur(0px);
-        transform: translateY(0) scale(1);
+        transform: translate3d(0, 0, 0) scale(1);
       }
     }
 
@@ -627,8 +633,8 @@
       border: 1.5px solid var(--glass-border);
       border-radius: 30px;
       width: 100%;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
       transition: transform 0.35s var(--spring-easing), border-color 0.3s ease, box-shadow 0.3s ease;
     }
@@ -657,6 +663,7 @@
       animation: 
         blurReveal 0.95s var(--spring-easing) forwards,
         textShimmer 5.5s linear infinite;
+      will-change: background-position, transform, opacity;
     }
 
     .quote-author {
@@ -687,8 +694,8 @@
       color: var(--text-title);
       font-weight: 600;
       font-size: 0.95rem;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.2);
     }
 
@@ -748,8 +755,8 @@
       border: 1.5px solid var(--dock-border);
       border-radius: 40px;
       padding: 6px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.3), 0 20px 40px rgba(0, 0, 0, 0.35);
     }
 
@@ -813,14 +820,14 @@
     .modal-backdrop.active {
       opacity: 1;
       pointer-events: auto;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .qr-glass-card {
       background: var(--glass-bg);
-      backdrop-filter: blur(28px) saturate(180%);
-      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      backdrop-filter: blur(22px) saturate(170%);
+      -webkit-backdrop-filter: blur(22px) saturate(170%);
       border: 1.5px solid var(--glass-border-highlight);
       border-radius: 40px;
       padding: 28px 24px;
@@ -892,8 +899,8 @@
       align-items: center;
       justify-content: center;
       gap: 7px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .btn-download-icon {
@@ -908,8 +915,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .btn-action-item:hover,
@@ -960,8 +967,8 @@
        ========================================================== */
     .music-modal-card {
       background: var(--glass-bg);
-      backdrop-filter: blur(32px) saturate(200%);
-      -webkit-backdrop-filter: blur(32px) saturate(200%);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
       border: 1.5px solid var(--glass-border-highlight);
       border-radius: 42px;
       padding: 30px 24px;
@@ -1157,7 +1164,7 @@
       justify-content: center;
       cursor: pointer;
       font-size: 0.9rem;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
       transition: transform 0.2s var(--spring-easing), background 0.2s ease, border-color 0.2s ease;
     }
 
@@ -1223,12 +1230,87 @@
       pointer-events: none;
       z-index: 3;
       opacity: 0;
-      filter: blur(0.4px);
       text-shadow: 0 0 12px var(--glass-glow);
       color: var(--text-title);
       user-select: none;
       will-change: transform, opacity;
       transform-origin: center center;
+    }
+
+    /* ==========================================================
+       MOBILE PERFORMANCE TUNING (GIẢM TẢI GPU & COMPOSITOR TRÊN ĐIỆN THOẠI)
+       ========================================================== */
+    @media (max-width: 768px) {
+      .liquid-orb {
+        filter: blur(14px);
+        opacity: 0.65;
+      }
+
+      .orb-primary {
+        width: 280px;
+        height: 280px;
+      }
+
+      .orb-secondary {
+        width: 250px;
+        height: 250px;
+      }
+
+      .orb-accent {
+        width: 210px;
+        height: 210px;
+      }
+
+      .liquid-card-ios26 {
+        backdrop-filter: blur(14px) saturate(150%);
+        -webkit-backdrop-filter: blur(14px) saturate(150%);
+        box-shadow:
+          0 20px 50px rgba(0, 0, 0, 0.65),
+          inset 0 1px 1.5px rgba(255, 255, 255, 0.25);
+      }
+
+      .ios26-quote-card,
+      .ios26-link-item,
+      .glass-btn-ios26,
+      .theme-toggle-track,
+      .btn-action-item,
+      .btn-download-icon,
+      .player-ctrl-btn {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      .ios26-nav-dock {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .qr-glass-card,
+      .music-modal-card {
+        backdrop-filter: blur(14px) saturate(150%);
+        -webkit-backdrop-filter: blur(14px) saturate(150%);
+      }
+
+      .quote-text {
+        animation: textShimmer 6.5s linear infinite;
+        opacity: 1;
+      }
+
+      .quote-author {
+        opacity: 1;
+        animation: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .liquid-orb,
+      .avatar-breathe-wrap,
+      .quote-text,
+      .quote-author,
+      .vinyl-record.spinning,
+      .music-btn.playing i {
+        animation: none !important;
+      }
     }
   </style>
 </head>
@@ -1278,7 +1360,7 @@
     <header class="profile-header">
       <div class="avatar-breathe-wrap">
         <div class="avatar-ring">
-          <img src="images/Huy.png" alt="Avatar Nhật Huy" loading="eager">
+          <img src="images/Huy.png" alt="Avatar Nhật Huy" loading="eager" decoding="async">
         </div>
       </div>
       <div class="profile-meta">
@@ -1339,7 +1421,7 @@
       <h3 class="qr-title">Scan QR Code</h3>
       <div class="qr-box-wrapper">
         <div id="qrcode-canvas"></div>
-        <img src="images/Huy.png" alt="Avatar" class="qr-avatar-center">
+        <img src="images/Huy.png" alt="Avatar" class="qr-avatar-center" decoding="async">
       </div>
       
       <div class="qr-actions-row">
@@ -1567,6 +1649,7 @@
       }
 
       dock.addEventListener("mousemove", (e) => {
+        if (window.matchMedia("(pointer: coarse)").matches) return;
         isHovering = true;
         const maxRange = 135;
         const maxScale = 1.48;
@@ -1602,20 +1685,24 @@
       const mainCard = document.getElementById("main-card");
       if (!mainCard) return;
 
-      mainCard.addEventListener("mousemove", (e) => {
-        const rect = mainCard.getBoundingClientRect();
-        mainCard.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
-        mainCard.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
-      });
+      const isFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-      document.addEventListener("mousemove", (e) => {
-        const target = e.target.closest(".glass-btn-ios26, .ios26-link-item, .btn-action-item, .btn-download-icon, .player-ctrl-btn");
-        if (target) {
-          const rect = target.getBoundingClientRect();
-          target.style.setProperty("--btn-x", `${e.clientX - rect.left}px`);
-          target.style.setProperty("--btn-y", `${e.clientY - rect.top}px`);
-        }
-      });
+      if (isFinePointer) {
+        mainCard.addEventListener("mousemove", (e) => {
+          const rect = mainCard.getBoundingClientRect();
+          mainCard.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+          mainCard.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+        });
+
+        document.addEventListener("mousemove", (e) => {
+          const target = e.target.closest(".glass-btn-ios26, .ios26-link-item, .btn-action-item, .btn-download-icon, .player-ctrl-btn");
+          if (target) {
+            const rect = target.getBoundingClientRect();
+            target.style.setProperty("--btn-x", `${e.clientX - rect.left}px`);
+            target.style.setProperty("--btn-y", `${e.clientY - rect.top}px`);
+          }
+        });
+      }
 
       mainCard.addEventListener("pointerdown", (e) => {
         if (e.target.closest("textarea")) return;
@@ -1635,24 +1722,40 @@
     function initAmbientCanvas() {
       const canvas = document.getElementById("ambient-particles");
       if (!canvas) return;
-      const ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext("2d", { alpha: true });
 
-      let width = canvas.width = window.innerWidth;
-      let height = canvas.height = window.innerHeight;
+      let cssWidth = window.innerWidth;
+      let cssHeight = window.innerHeight;
+      let isMobileViewport = cssWidth < 768;
+      let dpr = Math.min(window.devicePixelRatio || 1, isMobileViewport ? 1.5 : 2);
+
+      function resizeCanvas() {
+        cssWidth = window.innerWidth;
+        cssHeight = window.innerHeight;
+        isMobileViewport = cssWidth < 768;
+        dpr = Math.min(window.devicePixelRatio || 1, isMobileViewport ? 1.5 : 2);
+        canvas.width = Math.floor(cssWidth * dpr);
+        canvas.height = Math.floor(cssHeight * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      resizeCanvas();
+
       const mouse = { x: -9999, y: -9999, active: false };
+      let lastTouchMoveTime = 0;
 
-      window.addEventListener("resize", () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-      });
+      window.addEventListener("resize", resizeCanvas, { passive: true });
 
       window.addEventListener("mousemove", (e) => {
         mouse.x = e.clientX;
         mouse.y = e.clientY;
         mouse.active = true;
-      });
+      }, { passive: true });
 
       window.addEventListener("touchmove", (e) => {
+        const now = performance.now();
+        if (now - lastTouchMoveTime < 24) return;
+        lastTouchMoveTime = now;
         if (e.touches[0]) {
           mouse.x = e.touches[0].clientX;
           mouse.y = e.touches[0].clientY;
@@ -1671,10 +1774,10 @@
         { main: "#ea580c", edge: "#9a3412", vein: "#ffedd5" }
       ];
 
-      const PARTICLE_COUNT = 54;
+      const PARTICLE_COUNT = isMobileViewport ? 26 : 54;
       const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
+        x: Math.random() * cssWidth,
+        y: Math.random() * cssHeight,
         vx: (Math.random() - 0.5) * 0.45,
         vy: (Math.random() - 0.5) * 0.45,
         radius: Math.random() * 2.3 + 1.5,
@@ -1702,9 +1805,11 @@
         const s = p.leafSize;
         ctx.globalAlpha = Math.min(0.95, alpha + 0.25);
 
-        ctx.shadowColor = "rgba(20, 31, 22, 0.16)";
-        ctx.shadowBlur = 6;
-        ctx.shadowOffsetY = 3;
+        if (!isMobileViewport) {
+          ctx.shadowColor = "rgba(20, 31, 22, 0.16)";
+          ctx.shadowBlur = 6;
+          ctx.shadowOffsetY = 3;
+        }
 
         const grad = ctx.createLinearGradient(-s, -s * 0.5, s, s * 0.5);
         grad.addColorStop(0, p.palette.main);
@@ -1718,7 +1823,9 @@
         ctx.closePath();
         ctx.fill();
 
-        ctx.shadowColor = "transparent";
+        if (!isMobileViewport) {
+          ctx.shadowColor = "transparent";
+        }
 
         ctx.strokeStyle = p.palette.edge;
         ctx.lineWidth = 1;
@@ -1746,8 +1853,15 @@
         ctx.restore();
       }
 
+      let rafId = null;
+
       function animate() {
-        ctx.clearRect(0, 0, width, height);
+        if (document.hidden) {
+          rafId = null;
+          return;
+        }
+
+        ctx.clearRect(0, 0, cssWidth, cssHeight);
         const isLight = document.documentElement.getAttribute("data-theme") === "light";
 
         for (let i = 0; i < particles.length; i++) {
@@ -1798,10 +1912,10 @@
             p.y += p.vy - 0.16 + Math.cos(p.phase * 0.8) * 0.14;
           }
 
-          if (p.x < -30) p.x = width + 30;
-          if (p.x > width + 30) p.x = -30;
-          if (p.y < -30) p.y = height + 30;
-          if (p.y > height + 30) p.y = -30;
+          if (p.x < -30) p.x = cssWidth + 30;
+          if (p.x > cssWidth + 30) p.x = -30;
+          if (p.y < -30) p.y = cssHeight + 30;
+          if (p.y > cssHeight + 30) p.y = -30;
 
           const basePulse = 0.55 + Math.sin(p.phase * 1.4) * 0.3;
           const finalAlpha = Math.min(1, basePulse + proximityBoost);
@@ -1822,10 +1936,16 @@
           }
         }
 
-        requestAnimationFrame(animate);
+        rafId = requestAnimationFrame(animate);
       }
 
-      animate();
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden && !rafId) {
+          rafId = requestAnimationFrame(animate);
+        }
+      });
+
+      rafId = requestAnimationFrame(animate);
     }
 
     /* ==========================================================
@@ -1928,7 +2048,7 @@
         a.rel = "noopener noreferrer";
         a.className = "ios26-link-item";
         a.innerHTML = `
-          <img src="${item.icon}" alt="${item.title}" class="link-icon" loading="lazy">
+          <img src="${item.icon}" alt="${item.title}" class="link-icon" loading="lazy" decoding="async">
           <span class="link-label">${item.title}</span>
           <i class="fa-solid fa-chevron-right link-arrow"></i>
         `;
@@ -2222,12 +2342,12 @@
       ];
 
       function spawnFloatingNote() {
-        if (!isPlaying) return;
+        if (!isPlaying || document.hidden) return;
+        if (activeFloatingNotes.length >= (window.innerWidth < 768 ? 6 : 12)) return;
 
         const cardW = musicModalCard.offsetWidth || 360;
         const cardH = musicModalCard.offsetHeight || 520;
 
-        // Xác định tâm đĩa than bên trong popup
         const targetX = vinylRecord.offsetParent
           ? (vinylRecord.offsetParent.offsetLeft + vinylRecord.offsetLeft + vinylRecord.offsetWidth / 2)
           : (cardW / 2);
@@ -2243,9 +2363,8 @@
         noteLaneIndex++;
 
         const startX = (lane[0] + Math.random() * (lane[1] - lane[0])) * cardW;
-        const startY = cardH + 14; // Xuất phát ngay dưới đáy pop-up
+        const startY = cardH + 14;
 
-        // Vector hướng lên trên & xoáy nhẹ ra hai bên trước khi bị lực hút đĩa than kéo vào tâm
         const sideDir = startX < targetX ? -1 : (startX > targetX ? 1 : (Math.random() > 0.5 ? 1 : -1));
         const initVx = sideDir * (0.35 + Math.random() * 0.55);
         const initVy = -(1.55 + Math.random() * 0.45);
@@ -2287,7 +2406,6 @@
           const dist = Math.hypot(dx, dy);
 
           if (!n.isFadingOut) {
-            // Càng tiến gần lên vùng đĩa than, lực hút hướng tâm và lực xoáy hút càng mạnh
             const pullZone = 270;
             const pullStrength = dist < pullZone ? Math.pow(1 - dist / pullZone, 1.45) : 0;
 
@@ -2295,31 +2413,25 @@
               const nx = dx / dist;
               const ny = dy / dist;
 
-              // Lực hút kéo thẳng về tâm đĩa than
               const suctionForce = 0.045 + pullStrength * 0.34;
               n.vx += nx * suctionForce;
               n.vy += ny * suctionForce;
 
-              // Lực xoáy nhẹ theo chiều quay đĩa than khi bị hút vào tâm
               const vortexForce = pullStrength * 0.14;
               n.vx += -ny * vortexForce;
               n.vy += nx * vortexForce;
             }
 
-            // Ma sát không khí giúp quỹ đạo uốn cong mượt mà
             const drag = 0.962 - pullStrength * 0.045;
             n.vx *= drag;
             n.vy *= drag;
 
-            // Gợn sóng nhẹ khi đang bay lên ở phần dưới
             const waveX = Math.cos(n.swayPhase) * 0.35 * (1 - pullStrength);
             n.x += n.vx + waveX;
             n.y += n.vy;
 
-            // Xoay nhanh dần như bị cuốn vào vòng xoáy đĩa than
             n.rotation += n.rotSpeed + pullStrength * 5.2;
 
-            // Hiệu ứng hiện dần khi từ dưới pop-up trồi lên và thu nhỏ dần khi bị hút vào tâm đĩa than
             if (n.life < 28) {
               const fadeIn = n.life / 28;
               n.opacity = fadeIn * n.maxOpacity;
@@ -2333,7 +2445,6 @@
               n.scale = n.baseScale;
             }
 
-            // Khi chạm vào tâm đĩa than -> hoàn tất chu kì & biến mất
             if (dist <= 14 || n.life > 420) {
               n.element.remove();
               activeFloatingNotes.splice(i, 1);
@@ -2385,9 +2496,10 @@
           mainMusicBtn.classList.add("playing");
           musicMainIcon.className = "fa-solid fa-compact-disc";
 
+          const noteIntervalMs = window.innerWidth < 768 ? 980 : 780;
           if (!noteIntervalId) {
             spawnFloatingNote();
-            noteIntervalId = setInterval(spawnFloatingNote, 780);
+            noteIntervalId = setInterval(spawnFloatingNote, noteIntervalMs);
           }
           if (!notesAnimFrameId) {
             notesAnimFrameId = requestAnimationFrame(updateFloatingNotesLoop);
