@@ -242,7 +242,8 @@ function initAmbientCanvas() {
     { main: "#ea580c", edge: "#9a3412", vein: "#ffedd5" }
   ];
 
-  const PARTICLE_COUNT = 54;
+  const isTouchOrMobile = window.matchMedia("(pointer: coarse)").matches || window.innerWidth <= 768;
+  const PARTICLE_COUNT = isTouchOrMobile ? 18 : 54;
   const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
     x: Math.random() * width,
     y: Math.random() * height,
@@ -273,9 +274,11 @@ function initAmbientCanvas() {
     const s = p.leafSize;
     ctx.globalAlpha = Math.min(0.95, alpha + 0.25);
 
-    ctx.shadowColor = "rgba(20, 31, 22, 0.16)";
-    ctx.shadowBlur = 6;
-    ctx.shadowOffsetY = 3;
+    if (!isTouchOrMobile) {
+      ctx.shadowColor = "rgba(20, 31, 22, 0.16)";
+      ctx.shadowBlur = 6;
+      ctx.shadowOffsetY = 3;
+    }
 
     const grad = ctx.createLinearGradient(-s, -s * 0.5, s, s * 0.5);
     grad.addColorStop(0, p.palette.main);
@@ -317,7 +320,16 @@ function initAmbientCanvas() {
     ctx.restore();
   }
 
-  function animate() {
+  let lastFrameTime = 0;
+  const frameInterval = isTouchOrMobile ? (1000 / 30) : 0;
+
+  function animate(now = 0) {
+    requestAnimationFrame(animate);
+
+    if (document.hidden) return;
+    if (frameInterval && (now - lastFrameTime) < frameInterval) return;
+    lastFrameTime = now;
+
     ctx.clearRect(0, 0, width, height);
     const isLight = document.documentElement.getAttribute("data-theme") === "light";
 
@@ -392,8 +404,6 @@ function initAmbientCanvas() {
         ctx.fill();
       }
     }
-
-    requestAnimationFrame(animate);
   }
 
   animate();
@@ -798,7 +808,6 @@ function initSpotifyAudioPlayer() {
     const cardW = musicModalCard.offsetWidth || 360;
     const cardH = musicModalCard.offsetHeight || 520;
 
-    // Xác định tâm đĩa than bên trong popup
     const targetX = vinylRecord.offsetParent
       ? (vinylRecord.offsetParent.offsetLeft + vinylRecord.offsetLeft + vinylRecord.offsetWidth / 2)
       : (cardW / 2);
@@ -814,9 +823,8 @@ function initSpotifyAudioPlayer() {
     noteLaneIndex++;
 
     const startX = (lane[0] + Math.random() * (lane[1] - lane[0])) * cardW;
-    const startY = cardH + 14; // Xuất phát ngay dưới đáy pop-up
+    const startY = cardH + 14;
 
-    // Vector hướng lên trên & xoáy nhẹ ra hai bên trước khi bị lực hút đĩa than kéo vào tâm
     const sideDir = startX < targetX ? -1 : (startX > targetX ? 1 : (Math.random() > 0.5 ? 1 : -1));
     const initVx = sideDir * (0.35 + Math.random() * 0.55);
     const initVy = -(1.55 + Math.random() * 0.45);
@@ -858,7 +866,6 @@ function initSpotifyAudioPlayer() {
       const dist = Math.hypot(dx, dy);
 
       if (!n.isFadingOut) {
-        // Càng tiến gần lên vùng đĩa than, lực hút hướng tâm và lực xoáy hút càng mạnh
         const pullZone = 270;
         const pullStrength = dist < pullZone ? Math.pow(1 - dist / pullZone, 1.45) : 0;
 
@@ -866,31 +873,25 @@ function initSpotifyAudioPlayer() {
           const nx = dx / dist;
           const ny = dy / dist;
 
-          // Lực hút kéo thẳng về tâm đĩa than
           const suctionForce = 0.045 + pullStrength * 0.34;
           n.vx += nx * suctionForce;
           n.vy += ny * suctionForce;
 
-          // Lực xoáy nhẹ theo chiều quay đĩa than khi bị hút vào tâm
           const vortexForce = pullStrength * 0.14;
           n.vx += -ny * vortexForce;
           n.vy += nx * vortexForce;
         }
 
-        // Ma sát không khí giúp quỹ đạo uốn cong mượt mà
         const drag = 0.962 - pullStrength * 0.045;
         n.vx *= drag;
         n.vy *= drag;
 
-        // Gợn sóng nhẹ khi đang bay lên ở phần dưới
         const waveX = Math.cos(n.swayPhase) * 0.35 * (1 - pullStrength);
         n.x += n.vx + waveX;
         n.y += n.vy;
 
-        // Xoay nhanh dần như bị cuốn vào vòng xoáy đĩa than
         n.rotation += n.rotSpeed + pullStrength * 5.2;
 
-        // Hiệu ứng hiện dần khi từ dưới pop-up trồi lên và thu nhỏ dần khi bị hút vào tâm đĩa than
         if (n.life < 28) {
           const fadeIn = n.life / 28;
           n.opacity = fadeIn * n.maxOpacity;
@@ -904,7 +905,6 @@ function initSpotifyAudioPlayer() {
           n.scale = n.baseScale;
         }
 
-        // Khi chạm vào tâm đĩa than -> hoàn tất chu kì & biến mất
         if (dist <= 14 || n.life > 420) {
           n.element.remove();
           activeFloatingNotes.splice(i, 1);
