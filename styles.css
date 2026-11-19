@@ -1173,6 +1173,7 @@ body {
   will-change: transform, opacity;
   transform-origin: center center;
 }
+
 /* ==========================================================
    MOBILE & TOUCH DEVICE GPU PERFORMANCE OPTIMIZATION
    ========================================================== */
@@ -1218,7 +1219,6 @@ body {
     opacity: 0.55;
   }
 
-  /* Tắt các lớp hiệu ứng chỉ hoạt động khi hover chuột trên PC */
   .liquid-card-ios26::after,
   .card-border-glow,
   .glass-btn-ios26::before,
