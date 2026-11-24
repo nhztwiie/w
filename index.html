@@ -1219,6 +1219,9 @@
       text-align: center;
     }
 
+    /* ==========================================================
+       NỐT NHẠC, PIANO & VIOLIN XUẤT HIỆN TỪ DƯỚI POP-UP, BAY LÊN VÀ BỊ HÚT VÀO ĐĨA THAN
+       ========================================================== */
     .floating-music-note {
       position: absolute;
       left: 0;
@@ -1235,125 +1238,57 @@
     }
 
     /* ==========================================================
-       MOBILE PERFORMANCE + LIQUID GLASS TRANSPARENCY TUNING
-       Giữ trọn độ trong suốt xuyên thấu (liquid glass) trên điện thoại
-       nhưng tối ưu GPU bằng cách:
-       - Tắt backdrop-filter lồng nhau ở phần tử con (chỉ giữ 1 lớp blur ở card chính)
-       - Giữ nền bán trong suốt (alpha thấp) thay vì đặc màu đen/trắng
-       - Giảm bán kính blur vừa đủ mượt 60fps trên GPU di động
+       MOBILE PERFORMANCE TUNING (GIẢM TẢI GPU & COMPOSITOR TRÊN ĐIỆN THOẠI)
        ========================================================== */
     @media (max-width: 768px) {
       .liquid-orb {
-        filter: blur(16px);
-        opacity: 0.72;
+        filter: blur(14px);
+        opacity: 0.65;
       }
 
       .orb-primary {
-        width: 260px;
-        height: 260px;
+        width: 280px;
+        height: 280px;
       }
 
       .orb-secondary {
-        width: 240px;
-        height: 240px;
+        width: 250px;
+        height: 250px;
       }
 
       .orb-accent {
-        width: 200px;
-        height: 200px;
+        width: 210px;
+        height: 210px;
       }
 
-      .glass-mesh-overlay {
-        display: none;
-      }
-
-      /* Giữ 1 lớp backdrop-filter duy nhất trên card chính để nhìn xuyên nền mượt mà */
       .liquid-card-ios26 {
-        backdrop-filter: blur(14px) saturate(155%);
-        -webkit-backdrop-filter: blur(14px) saturate(155%);
+        backdrop-filter: blur(14px) saturate(150%);
+        -webkit-backdrop-filter: blur(14px) saturate(150%);
         box-shadow:
-          0 20px 44px rgba(0, 0, 0, 0.55),
-          inset 0 1.5px 2px rgba(255, 255, 255, 0.28),
-          inset 0 -2px 4px rgba(0, 0, 0, 0.35);
+          0 20px 50px rgba(0, 0, 0, 0.65),
+          inset 0 1px 1.5px rgba(255, 255, 255, 0.25);
       }
 
-      /* Tắt nested backdrop-filter trên các thành phần bên trong card (nguyên nhân chính gây lag)
-         nhưng vẫn giữ nguyên độ trong suốt (--glass-bg, --pill-bg) */
       .ios26-quote-card,
       .ios26-link-item,
       .glass-btn-ios26,
       .theme-toggle-track,
       .btn-action-item,
       .btn-download-icon,
-      .player-ctrl-btn,
-      .ios26-nav-dock {
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-      }
-
-      /* Giữ nền kính trong suốt nhẹ nhàng cho Dark & Light theme trên mobile */
-      [data-theme="dark"] .liquid-card-ios26 {
-        background: rgba(255, 255, 255, 0.055);
-      }
-
-      [data-theme="dark"] .ios26-quote-card {
-        background: rgba(255, 255, 255, 0.04);
-      }
-
-      [data-theme="dark"] .ios26-link-item,
-      [data-theme="dark"] .glass-btn-ios26,
-      [data-theme="dark"] .theme-toggle-track,
-      [data-theme="dark"] .btn-action-item,
-      [data-theme="dark"] .btn-download-icon,
-      [data-theme="dark"] .player-ctrl-btn {
-        background: rgba(255, 255, 255, 0.07);
-      }
-
-      [data-theme="dark"] .ios26-nav-dock {
-        background: rgba(20, 22, 26, 0.52);
-      }
-
-      [data-theme="light"] .liquid-card-ios26 {
-        background: rgba(255, 255, 255, 0.58);
-      }
-
-      [data-theme="light"] .ios26-quote-card {
-        background: rgba(255, 255, 255, 0.42);
-      }
-
-      [data-theme="light"] .ios26-link-item,
-      [data-theme="light"] .glass-btn-ios26,
-      [data-theme="light"] .theme-toggle-track,
-      [data-theme="light"] .btn-action-item,
-      [data-theme="light"] .btn-download-icon,
-      [data-theme="light"] .player-ctrl-btn {
-        background: rgba(255, 255, 255, 0.68);
-      }
-
-      [data-theme="light"] .ios26-nav-dock {
-        background: rgba(255, 255, 255, 0.68);
-      }
-
-      /* Modal giữ kính mờ trong suốt đẹp mắt */
-      .modal-backdrop.active {
+      .player-ctrl-btn {
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
       }
 
+      .ios26-nav-dock {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
       .qr-glass-card,
       .music-modal-card {
-        backdrop-filter: blur(14px) saturate(155%);
-        -webkit-backdrop-filter: blur(14px) saturate(155%);
-      }
-
-      [data-theme="dark"] .qr-glass-card,
-      [data-theme="dark"] .music-modal-card {
-        background: rgba(24, 27, 33, 0.62);
-      }
-
-      [data-theme="light"] .qr-glass-card,
-      [data-theme="light"] .music-modal-card {
-        background: rgba(255, 255, 255, 0.72);
+        backdrop-filter: blur(14px) saturate(150%);
+        -webkit-backdrop-filter: blur(14px) saturate(150%);
       }
 
       .quote-text {
@@ -1792,14 +1727,14 @@
 
       let cssWidth = window.innerWidth;
       let cssHeight = window.innerHeight;
-      let isMobileViewport = cssWidth < 768 || window.matchMedia("(pointer: coarse)").matches;
-      let dpr = Math.min(window.devicePixelRatio || 1, isMobileViewport ? 1 : 2);
+      let isMobileViewport = cssWidth < 768;
+      let dpr = Math.min(window.devicePixelRatio || 1, isMobileViewport ? 1.5 : 2);
 
       function resizeCanvas() {
         cssWidth = window.innerWidth;
         cssHeight = window.innerHeight;
-        isMobileViewport = cssWidth < 768 || window.matchMedia("(pointer: coarse)").matches;
-        dpr = Math.min(window.devicePixelRatio || 1, isMobileViewport ? 1 : 2);
+        isMobileViewport = cssWidth < 768;
+        dpr = Math.min(window.devicePixelRatio || 1, isMobileViewport ? 1.5 : 2);
         canvas.width = Math.floor(cssWidth * dpr);
         canvas.height = Math.floor(cssHeight * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -1820,7 +1755,7 @@
 
       window.addEventListener("touchmove", (e) => {
         const now = performance.now();
-        if (now - lastTouchMoveTime < 36) return;
+        if (now - lastTouchMoveTime < 24) return;
         lastTouchMoveTime = now;
         if (e.touches[0]) {
           mouse.x = e.touches[0].clientX;
@@ -1840,7 +1775,7 @@
         { main: "#ea580c", edge: "#9a3412", vein: "#ffedd5" }
       ];
 
-      const PARTICLE_COUNT = isMobileViewport ? 16 : 54;
+      const PARTICLE_COUNT = isMobileViewport ? 26 : 54;
       const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
         x: Math.random() * cssWidth,
         y: Math.random() * cssHeight,
@@ -1900,23 +1835,21 @@
         ctx.quadraticCurveTo(-s * 1.45, s * 0.15, -s * 1.6, s * 0.25);
         ctx.stroke();
 
-        if (!isMobileViewport) {
-          ctx.strokeStyle = p.palette.vein;
-          ctx.lineWidth = 0.65;
-          ctx.globalAlpha = Math.min(0.75, alpha * 0.8);
-          ctx.beginPath();
-          ctx.moveTo(-s * 1.05, 0);
-          ctx.lineTo(s * 1.0, 0);
-          ctx.moveTo(-s * 0.3, 0);
-          ctx.lineTo(s * 0.1, -s * 0.35);
-          ctx.moveTo(-s * 0.3, 0);
-          ctx.lineTo(s * 0.1, s * 0.35);
-          ctx.moveTo(s * 0.2, 0);
-          ctx.lineTo(s * 0.55, -s * 0.28);
-          ctx.moveTo(s * 0.2, 0);
-          ctx.lineTo(s * 0.55, s * 0.28);
-          ctx.stroke();
-        }
+        ctx.strokeStyle = p.palette.vein;
+        ctx.lineWidth = 0.65;
+        ctx.globalAlpha = Math.min(0.75, alpha * 0.8);
+        ctx.beginPath();
+        ctx.moveTo(-s * 1.05, 0);
+        ctx.lineTo(s * 1.0, 0);
+        ctx.moveTo(-s * 0.3, 0);
+        ctx.lineTo(s * 0.1, -s * 0.35);
+        ctx.moveTo(-s * 0.3, 0);
+        ctx.lineTo(s * 0.1, s * 0.35);
+        ctx.moveTo(s * 0.2, 0);
+        ctx.lineTo(s * 0.55, -s * 0.28);
+        ctx.moveTo(s * 0.2, 0);
+        ctx.lineTo(s * 0.55, s * 0.28);
+        ctx.stroke();
 
         ctx.restore();
       }
@@ -1992,31 +1925,15 @@
             drawNaturalLeaf(p, finalAlpha);
           } else {
             const dynamicRadius = p.radius * (1 + proximityBoost * 0.35);
-            if (isMobileViewport) {
-              ctx.save();
-              ctx.globalAlpha = Math.min(0.28, finalAlpha * 0.3);
-              ctx.fillStyle = "#fde047";
-              ctx.beginPath();
-              ctx.arc(p.x, p.y, dynamicRadius * 3.2, 0, Math.PI * 2);
-              ctx.fill();
+            const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, dynamicRadius * 4.2);
+            glow.addColorStop(0, `rgba(255, 252, 225, ${finalAlpha})`);
+            glow.addColorStop(0.4, `rgba(253, 224, 71, ${finalAlpha * 0.45})`);
+            glow.addColorStop(1, "rgba(255, 255, 255, 0)");
 
-              ctx.globalAlpha = Math.min(0.95, finalAlpha);
-              ctx.fillStyle = "#fffce1";
-              ctx.beginPath();
-              ctx.arc(p.x, p.y, dynamicRadius * 1.3, 0, Math.PI * 2);
-              ctx.fill();
-              ctx.restore();
-            } else {
-              const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, dynamicRadius * 4.2);
-              glow.addColorStop(0, `rgba(255, 252, 225, ${finalAlpha})`);
-              glow.addColorStop(0.4, `rgba(253, 224, 71, ${finalAlpha * 0.45})`);
-              glow.addColorStop(1, "rgba(255, 255, 255, 0)");
-
-              ctx.fillStyle = glow;
-              ctx.beginPath();
-              ctx.arc(p.x, p.y, dynamicRadius * 4.2, 0, Math.PI * 2);
-              ctx.fill();
-            }
+            ctx.fillStyle = glow;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, dynamicRadius * 4.2, 0, Math.PI * 2);
+            ctx.fill();
           }
         }
 
@@ -2135,7 +2052,7 @@
           a.setAttribute("data-mail-id", item.id);
         }
         a.innerHTML = `
-          <img src="${item.icon}" alt="${item.title}" class="link-icon" loading="eager" decoding="async">
+          <img src="${item.icon}" alt="${item.title}" class="link-icon" loading="lazy" decoding="async">
           <span class="link-label">${item.title}</span>
           <i class="fa-solid fa-chevron-right link-arrow"></i>
         `;
@@ -2277,53 +2194,20 @@
       if (PUBLIC_KEY === "THAY_PUBLIC_KEY_CUA_BAN" || typeof emailjs === "undefined") return;
       emailjs.init(PUBLIC_KEY);
 
-      const VISIT_COOLDOWN_MS = 30 * 60 * 1000;
-      const STORAGE_KEY = "w_bio_visit_notify_ts";
-      const isBot = /bot|crawler|spider|headless|preview|facebookexternalhit|whatsapp|telegrambot/i.test(navigator.userAgent || "");
-
-      if (isBot) return;
-
-      let lastSentTs = 0;
-      try {
-        lastSentTs = parseInt(localStorage.getItem(STORAGE_KEY) || "0", 10) || 0;
-      } catch (e) {}
-
-      const now = Date.now();
-      if (now - lastSentTs < VISIT_COOLDOWN_MS) return;
-
-      let isSendingVisitNotify = false;
-
-      setTimeout(() => {
-        if (isSendingVisitNotify || document.hidden) return;
-        const latestTs = (() => {
-          try {
-            return parseInt(localStorage.getItem(STORAGE_KEY) || "0", 10) || 0;
-          } catch (e) {
-            return 0;
-          }
-        })();
-        if (Date.now() - latestTs < VISIT_COOLDOWN_MS) return;
-
-        isSendingVisitNotify = true;
-        try {
-          localStorage.setItem(STORAGE_KEY, String(Date.now()));
-        } catch (e) {}
-
-        const { device, location } = getDeviceAndLocationInfo();
-        emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-          time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
-          device,
-          location,
-          message: "[System] New visitor access on your personal web page w.bio (No message left).",
-          referrer: document.referrer || "Direct Access"
-        }).then(() => {
-          sessionStorage.setItem("email_notified", "true");
-        }).catch(err => {
-          console.error("Error sending email:", err);
-        }).finally(() => {
-          isSendingVisitNotify = false;
-        });
-      }, 4500);
+      if (!sessionStorage.getItem("email_notified")) {
+        setTimeout(() => {
+          if (sessionStorage.getItem("email_notified")) return;
+          const { device, location } = getDeviceAndLocationInfo();
+          emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+            time: new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }),
+            device,
+            location,
+            message: "[System] New visitor access on your personal web page w.bio (No message left).",
+            referrer: document.referrer || "Direct Access"
+          }).then(() => sessionStorage.setItem("email_notified", "true"))
+            .catch(err => console.error("Error sending email:", err));
+        }, 3000);
+      }
     }
 
     function initEmailModal() {
