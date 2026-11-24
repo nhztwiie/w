@@ -1530,6 +1530,7 @@
       initThemeToggle();
       initQRCodeModal();
       initEmailModal();
+      initSmartEmailRouting();
       initSpotifyAudioPlayer();
       initEmailJSNotifier();
     });
@@ -2047,6 +2048,9 @@
         a.target = "_blank";
         a.rel = "noopener noreferrer";
         a.className = "ios26-link-item";
+        if (item.id) {
+          a.setAttribute("data-mail-id", item.id);
+        }
         a.innerHTML = `
           <img src="${item.icon}" alt="${item.title}" class="link-icon" loading="lazy" decoding="async">
           <span class="link-label">${item.title}</span>
@@ -2263,6 +2267,44 @@
             sendBtn.style.opacity = "1";
           }, 2000);
         });
+      });
+    }
+
+    function initSmartEmailRouting() {
+      const defaultGmailUrl = "https://mail.google.com/mail/?view=cm&fs=1&to=lnh.quii@gmail.com";
+      const defaultMailto = "mailto:lnh.quii@gmail.com";
+
+      document.addEventListener("click", (e) => {
+        const mailItem = e.target.closest('a[data-mail-id="email"], a[href^="mailto:"]');
+        if (!mailItem) return;
+
+        const emailConfig =
+          typeof bioData !== "undefined" && Array.isArray(bioData.tabs?.work)
+            ? bioData.tabs.work.find((item) => item.id === "email")
+            : null;
+
+        const mailtoHref =
+          (emailConfig && typeof emailConfig.url === "string" && emailConfig.url.startsWith("mailto:"))
+            ? emailConfig.url
+            : (mailItem.getAttribute("href")?.startsWith("mailto:") ? mailItem.getAttribute("href") : defaultMailto);
+
+        const gmailComposeUrl =
+          (emailConfig && typeof emailConfig.gmailUrl === "string" && emailConfig.gmailUrl)
+            ? emailConfig.gmailUrl
+            : defaultGmailUrl;
+
+        const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+        if (isMobile) {
+          mailItem.removeAttribute("target");
+          mailItem.setAttribute("href", mailtoHref);
+          return;
+        }
+
+        e.preventDefault();
+        const openedTab = window.open(gmailComposeUrl, "_blank", "noopener,noreferrer");
+        if (!openedTab) {
+          window.location.href = mailtoHref;
+        }
       });
     }
 
