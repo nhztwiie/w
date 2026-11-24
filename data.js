@@ -3,7 +3,7 @@ const bioData = {
     name: "Nhật Huy",
     bio: "ungdung.",
     avatar: "images/Huy.png",
-    shareUrl: "https://nhztwiie.github.io/w/"
+    shareUrl: "https://nhztwiie.github.io/w"
   },
   tabs: {
     social: [
