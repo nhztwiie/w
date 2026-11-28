@@ -1,7 +1,7 @@
 const bioData = {
   profile: {
     name: "Nhật Huy",
-    bio: "ungdung.",
+    bio: "cậu bạn ngại ngùng.",
     avatar: "images/Huy.png",
     shareUrl: "https://nhztwiie.github.io/w"
   },
